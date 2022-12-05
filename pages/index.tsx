@@ -18,15 +18,15 @@ export default function Home() {
 
     const handleChangeTheme = () => {
         if (theme === "light") {
-            document.documentElement.classList.add('dark')
             setTheme("dark");
             setTeeshirt(shirt_black);
             setSvgTheme(dark_svg);
+            document.documentElement.classList.add('dark')
         } else {
             setTheme("light");
-            document.documentElement.classList.remove('dark')
             setTeeshirt(shirt_white);
             setSvgTheme(light_svg);
+            document.documentElement.classList.remove('dark')
         }
     }
     return (
