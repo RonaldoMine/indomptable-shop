@@ -41,7 +41,7 @@ export default function Home() {
                 <div className="flex justify-between">
                     <Image src={logo} alt="BeleFirst" className='mb-3'/>
                     <button
-                        className="rounded-full bg-white transition ease-in dark:bg-neutral-900 dark:border-2 font-medium p-4"
+                        className="rounded-full bg-white transition ease-in dark:bg-neutral-900 dark:border-2 font-medium w-14 h-14 flex justify-center"
                         onClick={handleChangeTheme}>
                         <Image alt={"Thème"} src={theme_svg}/></button>
                 </div>
