@@ -1,10 +1,15 @@
-.wrapper{
-    background-image: url(../public/assets/images/unsplash.jpg);
+.wrapper {
+    background-image: url(../public/assets/images/bg-light.webp);
 }
 
-.item{
+.wrapperDark {
+    background-image: url(../public/assets/images/bg-dark.webp);
+}
+
+.item {
     background-color: rgba(255, 255, 255, 0.3);
 }
+/*
 
 .rippleWhite {
     background-color: #fff;
@@ -27,4 +32,4 @@
         transform: scale(1);
         opacity: 0;
     }
-}
+}*/
