@@ -16,8 +16,8 @@ export default function Home() {
     const [theme_svg, setSvgTheme] = useState(light_svg);
     const [teeShirt, setTeeshirt] = useState(shirt_white);
 
-    const handleChangeTheme = (val_theme: String) => {
-        if (val_theme === "light") {
+    const handleChangeTheme = () => {
+        if (theme == 'dark') {
             setTheme("light");
             setTeeshirt(shirt_white);
             setSvgTheme(light_svg);
@@ -37,37 +37,42 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
 
-            <main className='px-7 py-6 relative z-10'>
-                <div className="flex justify-between">
-                    <Image src={logo} alt="BeleFirst" className='mb-3'/>
-                </div>
-                <div className='relative'>
-                    <Image src={teeShirt} alt="Indomptable t-shirt" className='mt-8 sm:mt-0 w-96 sm:w-[26rem] mx-auto'/>
-                    <div className="md:absolute right-0 top-1/2 md:grid flex justify-around md:w-96 w-full md:justify-items-end left-2/3"
-                         style={{borderRadius: '100%', height: 200}}>
-                        <button onClick={() => handleChangeTheme("light")}
-                                className={`w-10 h-10 rounded-full bg-white flex justify-center items-center mb-5`}>
-                            {theme === 'light' && <div
-                                className={`bg-neutral-900 rounded-full w-5 h-5 opacity-0 ${styles.rippleBlack}`}></div>}
-                        </button>
-                        <button onClick={() => handleChangeTheme("dark")}
-                                className="w-10 h-10 rounded-full bg-neutral-900 flex justify-center items-center">
-                            {theme === 'dark' &&
-                                <div className={`bg-white rounded-full w-5 h-5 opacity-0 ${styles.rippleWhite}`}></div>}
-                        </button>
+            <main className='md:px-32 px-10 py-6 relative z-10'>
+                <div className="grid justify-items-center mx-auto sm:flex">
+                    <Image src={logo} alt="BeleFirst" className='mb-6'/>
+                    <div className='flex w-full justify-center items-center'>
+                        <a href="https://www.facebook.com/belefirst1" className='text-white ml-8'>Facebook</a>
+                        <a href="https://www.instagram.com/belefirst1" className='text-white ml-8'>Instagram</a>
                     </div>
                 </div>
-                <footer className='w-full justify-center flex items-center bottom-16 mt-5'>
-                    <h3 className='text-4xl font-futura text-white dark:text-black'>Follow us</h3>
-                    <a href="https://www.facebook.com/belefirst1"><Image src={facebook} alt="Facebook"
-                                                                         className='w-12 ml-8'/></a>
-                    <a href="https://www.instagram.com/belefirst1"><Image src={instagram} alt="Instagram"
-                                                                          className='w-14 ml-2'/></a>
-                </footer>
+                <div className='sm:flex justify-center items-center mt-8 sm:mt-0 mx-auto'>
+                    <div className="md:grid flex justify-around md:w-40 md:justify-items-start rounded-full mr-5 mb-4">
+                        <button className={`w-10 h-10 rounded-full flex justify-center items-center mb-2`}>
+                            <div className={`bg-white rounded-full w-2 h-2`}></div>
+                        </button>
+                        <button className={`w-10 h-10 rounded-full flex justify-center items-center mb-2`}>
+                            <div className={`bg-white rounded-full w-2 h-2`}></div>
+                        </button>
+                        <button onClick={handleChangeTheme}
+                                className={`w-10 h-10 rounded-full flex justify-center items-center ${styles.item}`}>
+                            <div className={`bg-white rounded-full w-2 h-2`}></div>
+                        </button>
+                        <button className={`w-10 h-10 rounded-full flex justify-center items-center mb-2`}>
+                            <div className={`bg-white rounded-full w-2 h-2`}></div>
+                        </button>
+                        <button className={`w-10 h-10 rounded-full flex justify-center items-center mb-2`}>
+                            <div className={`bg-white rounded-full w-2 h-2`}></div>
+                        </button>
+                    </div>
+                    <Image src={teeShirt} alt="Indomptable t-shirt" className='w-96 sm:w-[26rem]'/>
+                    <div className="my-auto text-white md:ml-20 ml-5  text-center md:text-left">
+                        <h1 className='text-8xl font-futura font-bold text-white mb-4 md:text-9xl'>THE <br/> MBOA</h1>
+                        <h2 className='text-1xl font-bold'>INDOMPTABLE THE WHITE TEE</h2>
+                        <p>Wear proundly our colors, show your identity, <br/> show your worth, show your continetal
+                            attitude</p>
+                    </div>
+                </div>
             </main>
-            <h1 className='sm:opacity-100 md:text-9xl opacity-0 italic font-black mix-blend-overlay absolute z-0 top-1/2 left-0 text-center right-0'>
-                INDOMPTABLE
-            </h1>
         </div>
     )
 }
