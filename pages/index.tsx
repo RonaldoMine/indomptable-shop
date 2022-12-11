@@ -41,7 +41,7 @@ export default function Home() {
                         <a href="https://www.instagram.com/belefirst1" className='text-white ml-8'>Instagram</a>
                     </div>
                     <button
-                        className="bg-white transition ease-in dark:bg-neutral-900 dark:border-2 font-medium w-12 h-12 flex justify-center"
+                        className="bg-white transition ease-in dark:bg-neutral-900 dark:border-2 font-medium w-12 h-12 flex justify-center items-center"
                         onClick={handleChangeTheme} style={{borderRadius: "100%"}}>
                         <Image alt={"Thème"} src={theme_svg} width={24} height={24}/></button>
                 </div>
