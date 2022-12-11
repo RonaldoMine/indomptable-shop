@@ -37,7 +37,7 @@ export default function Home() {
                 <div className="grid justify-items-center mx-auto sm:flex">
                     <Image src={logo} alt="BeleFirst" className='mb-6'/>
                     <div className='flex w-full justify-center items-center mb-6'>
-                        <a href="https://www.facebook.com/belefirst1" className='text-white ml-8'>Facebook</a>
+                        <a href="https://www.facebook.com/belefirst1" className='text-white'>Facebook</a>
                         <a href="https://www.instagram.com/belefirst1" className='text-white ml-8'>Instagram</a>
                     </div>
                     <button
@@ -54,24 +54,21 @@ export default function Home() {
                             <div className={`bg-white rounded-full w-2 h-2`}></div>
                         </button>
                     </div>
-                    <div className={"flex"}>
-                        <div className='slide flex' id="#slide-1">
-                            <Image src={shirt_white} alt="Indomptable t-shirt" className='w-96 sm:w-[26rem]'/>
-                            <div className="my-auto text-white md:ml-20 ml-5  text-center md:text-left">
-                                <h1 className='text-8xl font-futura font-bold text-white mb-4 md:text-9xl'>THE <br/> MBOA</h1>
-                                <h2 className='text-1xl font-bold'>INDOMPTABLE THE WHITE TEE</h2>
-                                <p>Wear proundly our colors, show your identity, <br/> show your worth, show your continetal
-                                    attitude</p>
-                            </div>
-                        </div>
-                        <div className='slide flex hidden' id="#slide-2">
-                            <Image src={shirt_black} alt="Indomptable t-shirt" className='w-96 sm:w-[26rem]'/>
-                            <div className="my-auto text-white md:ml-20 ml-5  text-center md:text-left">
-                                <h1 className='text-8xl font-futura font-bold text-white mb-4 md:text-9xl'>THE <br/> MBOA</h1>
-                                <h2 className='text-1xl font-bold'>INDOMPTABLE THE WHITE TEE</h2>
-                                <p>Wear proundly our colors, show your identity, <br/> show your worth, show your continetal
-                                    attitude</p>
-                            </div>
+                    <Image src={shirt_white} alt="Indomptable t-shirt" className='w-96 sm:w-[26rem]'/>
+                    <div className="my-auto text-white md:ml-20 ml-0  text-center md:text-left">
+                        <h1 className='text-8xl font-futura font-bold text-white mb-4 md:text-9xl'>THE <br/> MBOA</h1>
+                        <h2 className='text-1xl font-bold'>INDOMPTABLE THE WHITE TEE</h2>
+                        <p>Wear proundly our colors, show your identity, <br/> show your worth, show your continetal
+                            attitude</p>
+                    </div>
+                    <div className="hidden">
+                        <Image src={shirt_black} alt="Indomptable t-shirt" className='w-96 sm:w-[26rem]'/>
+                        <div className="my-auto text-white md:ml-20 ml-5  text-center md:text-left">
+                            <h1 className='text-8xl font-futura font-bold text-white mb-4 md:text-9xl'>THE <br/> MBOA
+                            </h1>
+                            <h2 className='text-1xl font-bold'>INDOMPTABLE THE WHITE TEE</h2>
+                            <p>Wear proundly our colors, show your identity, <br/> show your worth, show your continetal
+                                attitude</p>
                         </div>
                     </div>
                 </div>
