@@ -16,17 +16,17 @@ export default function Home() {
     const [theme_svg, setSvgTheme] = useState(light_svg);
     const [teeShirt, setTeeshirt] = useState(shirt_white);
 
-    const handleChangeTheme = () => {
-        if (theme === "light") {
-            setTheme("dark");
-            setTeeshirt(shirt_black);
-            setSvgTheme(dark_svg);
-            document.documentElement.classList.add('dark')
-        } else {
+    const handleChangeTheme = (val_theme: String) => {
+        if (val_theme === "light") {
             setTheme("light");
             setTeeshirt(shirt_white);
             setSvgTheme(light_svg);
             document.documentElement.classList.remove('dark')
+        } else {
+            setTheme("dark");
+            setTeeshirt(shirt_black);
+            setSvgTheme(dark_svg);
+            document.documentElement.classList.add('dark')
         }
     }
     return (
@@ -40,13 +40,22 @@ export default function Home() {
             <main className='px-7 py-6 relative z-10'>
                 <div className="flex justify-between">
                     <Image src={logo} alt="BeleFirst" className='mb-3'/>
-                    <button
-                        className="rounded-full bg-white transition ease-in dark:bg-neutral-900 dark:border-2 font-medium w-14 h-14 flex justify-center items-center"
-                        onClick={handleChangeTheme}>
-                        <Image alt={"Thème"} src={theme_svg}/></button>
                 </div>
-                <div>
+                <div className='relative'>
                     <Image src={teeShirt} alt="Indomptable t-shirt" className='mt-8 sm:mt-0 w-96 sm:w-[26rem] mx-auto'/>
+                    <div className="md:absolute right-0 top-1/2 md:grid flex justify-around md:w-96 w-full md:justify-items-end left-2/3"
+                         style={{borderRadius: '100%', height: 200}}>
+                        <button onClick={() => handleChangeTheme("light")}
+                                className={`w-10 h-10 rounded-full bg-white flex justify-center items-center mb-5`}>
+                            {theme === 'light' && <div
+                                className={`bg-neutral-900 rounded-full w-5 h-5 opacity-0 ${styles.rippleBlack}`}></div>}
+                        </button>
+                        <button onClick={() => handleChangeTheme("dark")}
+                                className="w-10 h-10 rounded-full bg-neutral-900 flex justify-center items-center">
+                            {theme === 'dark' &&
+                                <div className={`bg-white rounded-full w-5 h-5 opacity-0 ${styles.rippleWhite}`}></div>}
+                        </button>
+                    </div>
                 </div>
                 <footer className='w-full justify-center flex items-center bottom-16 mt-5'>
                     <h3 className='text-4xl font-futura text-white dark:text-black'>Follow us</h3>
