@@ -70,7 +70,7 @@ export default function Home() {
                             <div className={`bg-white rounded-full w-2 h-2`}></div>
                         </button>
                     </div>
-                    <div className={"flex relative w-full h-96"}>
+                    <div className={"flex relative w-full h-96 justify-center"}>
                         <div className={'absolute sm:flex transition transition-all duration-500'} style={{transform: `scale(${scaleWhite})`}}>
                             <Image src={shirt_white} alt="Indomptable t-shirt"
                                    className='w-96 sm:w-[26rem] '
