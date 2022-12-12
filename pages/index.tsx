@@ -87,7 +87,7 @@ export default function Home() {
                             <Image src={shirt_black} id={"img-2"} alt="Indomptable t-shirt"
                                    className='w-96 sm:w-[26rem]'
                                    />
-                            <div className="my-auto text-white md:ml-20 ml-5 text-center md:text-left">
+                            <div className="my-auto text-white md:ml-20 ml-0 text-center md:text-left">
                                 <h1 className='text-8xl font-futura font-bold text-white mb-4 md:text-9xl'>THE <br/> HEMLE
                                 </h1>
                                 <h2 className='text-1xl font-bold'>INDOMPTABLE THE WHITE TEE</h2>
