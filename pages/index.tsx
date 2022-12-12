@@ -71,7 +71,7 @@ export default function Home() {
                         </button>
                     </div>
                     <div className={"flex relative w-[100vh] h-96 justify-center sm:order-2 order-1 sm:w-full"}>
-                        <div className={'absolute sm:flex transition transition-all duration-500'} style={{transform: `scale(${scaleWhite})`}}>
+                        <div className={'absolute sm:flex transition transition-opacity duration-500'} style={{opacity: `${scaleWhite}`}}>
                             <Image src={shirt_white} alt="Indomptable t-shirt"
                                    className='w-96 sm:w-[26rem] '
                                    />
@@ -83,7 +83,7 @@ export default function Home() {
                                     attitude</p>
                             </div>
                         </div>
-                        <div className={'absolute sm:flex transition transition-all duration-500'} style={{transform: `scale(${scaleDark})`}}>
+                        <div className={'absolute sm:flex transition transition-opacity duration-500'} style={{opacity: `${scaleDark}`}}>
                             <Image src={shirt_black} id={"img-2"} alt="Indomptable t-shirt"
                                    className='w-96 sm:w-[26rem]'
                                    />
