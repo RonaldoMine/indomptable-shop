@@ -7,7 +7,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        futura: 'Futura'
+        futura: 'Futura',
+        space: 'Space Grostek',
       }
     },
   },

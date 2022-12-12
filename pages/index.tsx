@@ -59,8 +59,8 @@ export default function Home() {
                         onClick={handleChangeTheme} style={{borderRadius: "100%"}}>
                         <Image alt={"Thème"} src={theme_svg} width={24} height={24}/></button>
                 </div>
-                <div className='sm:flex justify-center items-center mt-4 sm:mt-0 mx-auto w-full h-screen mb-6'>
-                    <div className="md:grid flex justify-around md:w-40 md:justify-items-start rounded-full mr-5 mb-4">
+                <div className='sm:flex grid justify-center items-center sm:mt-0 mx-auto w-full h-full'>
+                    <div className="md:grid flex justify-center md:w-40 md:justify-items-start md:mt-0 rounded-full mr-5 mb-4 sm:order-1 order-2 mt-[550px]">
                         <button onClick={() => handleChangeTShirt('white')}
                                 className={`w-10 h-10 rounded-full flex justify-center items-center ${colorTShirt === 'white' && styles.item}`}>
                             <div className={`bg-white rounded-full w-2 h-2`}></div>
@@ -70,7 +70,7 @@ export default function Home() {
                             <div className={`bg-white rounded-full w-2 h-2`}></div>
                         </button>
                     </div>
-                    <div className={"flex relative w-full h-96 justify-center"}>
+                    <div className={"flex relative w-[100vh] h-96 justify-center sm:order-2 order-1 sm:w-full"}>
                         <div className={'absolute sm:flex transition transition-all duration-500'} style={{transform: `scale(${scaleWhite})`}}>
                             <Image src={shirt_white} alt="Indomptable t-shirt"
                                    className='w-96 sm:w-[26rem] '
@@ -78,7 +78,7 @@ export default function Home() {
                             <div className="my-auto text-white md:ml-20 ml-0  text-center md:text-left">
                                 <h1 className='text-8xl font-futura font-bold text-white mb-4 md:text-9xl'>THE <br/> MBOA
                                 </h1>
-                                <h2 className='text-1xl font-bold'>INDOMPTABLE THE WHITE TEE</h2>
+                                <h2 className='text-1xl font-space font-bold'>INDOMPTABLE THE WHITE TEE</h2>
                                 <p>Wear proundly our colors, show your identity, <br/> show your worth, show your continetal
                                     attitude</p>
                             </div>
@@ -90,7 +90,7 @@ export default function Home() {
                             <div className="my-auto text-white md:ml-20 ml-0 text-center md:text-left">
                                 <h1 className='text-8xl font-futura font-bold text-white mb-4 md:text-9xl'>THE <br/> HEMLE
                                 </h1>
-                                <h2 className='text-1xl font-bold'>INDOMPTABLE THE WHITE TEE</h2>
+                                <h2 className='text-1xl font-space font-bold'>INDOMPTABLE THE WHITE TEE</h2>
                                 <p>Wear proundly our colors, show your identity, <br/> show your worth, show your continetal
                                     attitude</p>
                             </div>
