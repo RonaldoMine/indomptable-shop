@@ -59,7 +59,7 @@ export default function Home() {
                         onClick={handleChangeTheme} style={{borderRadius: "100%"}}>
                         <Image alt={"Thème"} src={theme_svg} width={24} height={24}/></button>
                 </div>
-                <div className='sm:flex justify-center items-center mt-4 sm:mt-0 mx-auto h-screen mb-6'>
+                <div className='sm:flex justify-center items-center mt-4 sm:mt-0 mx-auto w-full h-screen mb-6'>
                     <div className="md:grid flex justify-around md:w-40 md:justify-items-start rounded-full mr-5 mb-4">
                         <button onClick={() => handleChangeTShirt('white')}
                                 className={`w-10 h-10 rounded-full flex justify-center items-center ${colorTShirt === 'white' && styles.item}`}>
