@@ -60,7 +60,7 @@ export default function Home() {
                         <Image alt={"Thème"} src={theme_svg} width={24} height={24}/></button>
                 </div>
                 <div className='sm:flex grid justify-center items-center sm:mt-0 mx-auto h-full'>
-                    <div className={"grid sm:flex relative justify-center sm:w-screen"}>
+                    <div className={"grid sm:flex relative justify-center items-center sm:w-screen"}>
                         <div
                             className="md:grid md:mt-0 md:order-1 flex justify-center md:content-center rounded-full mr-5 mb-4 order-2">
                             <button onClick={() => handleChangeTShirt('white')}
@@ -86,7 +86,7 @@ export default function Home() {
                                    }}
                             />
                         </div>
-                        <div className="my-auto text-white text-center md:text-left order-3 mb-4">
+                        <div className="text-white text-center md:text-left order-3 mb-4">
                             <div
                                 style={{
                                     opacity: `${whiteOptionsView.opacity}`,
