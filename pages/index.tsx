@@ -86,7 +86,7 @@ export default function Home() {
                                    }}
                             />
                         </div>
-                        <div className="my-auto text-white text-center md:text-left order-3">
+                        <div className="my-auto text-white text-center md:text-left order-3 mb-4">
                             <div
                                 style={{
                                     opacity: `${whiteOptionsView.opacity}`,
