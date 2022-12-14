@@ -13,8 +13,8 @@ export default function Home() {
     const [theme, setTheme] = useState("light");
     const [theme_svg, setSvgTheme] = useState(light_svg);
     const [colorTShirt, setColorTShirt] = useState('white');
-    const [scaleWhite, setScaleWhite] = useState(1);
-    const [scaleDark, setScaleDark] = useState(0);
+    const [whiteOptionsView, setWhiteOptionView] = useState({opacity: 1, display: "block"});
+    const [blackOptionsView, setBlackOptionView] = useState({opacity: 0, display: "none"});
 
     const handleChangeTheme = () => {
         if (theme == 'dark') {
@@ -29,12 +29,12 @@ export default function Home() {
     }
     const handleChangeTShirt = (color: string) => {
         if (color === 'white') {
-            setScaleDark(0)
-            setScaleWhite(1)
+            setWhiteOptionView({display: 'block', opacity: 1})
+            setBlackOptionView({display: 'none', opacity: 0})
             setColorTShirt('white')
         } else {
-            setScaleDark(1);
-            setScaleWhite(0)
+            setWhiteOptionView({display: 'none', opacity: 0})
+            setBlackOptionView({display: 'block', opacity: 1})
             setColorTShirt('black')
         }
     }
@@ -59,39 +59,56 @@ export default function Home() {
                         onClick={handleChangeTheme} style={{borderRadius: "100%"}}>
                         <Image alt={"Thème"} src={theme_svg} width={24} height={24}/></button>
                 </div>
-                <div className='sm:flex grid justify-center items-center sm:mt-0 mx-auto w-full h-full'>
-                    <div className="md:grid flex justify-center md:w-40 md:justify-items-start md:mt-0 rounded-full mr-5 mb-4 sm:order-1 order-2 mt-[550px]">
-                        <button onClick={() => handleChangeTShirt('white')}
-                                className={`w-10 h-10 rounded-full flex justify-center items-center ${colorTShirt === 'white' && styles.item}`}>
-                            <div className={`bg-white rounded-full w-2 h-2`}></div>
-                        </button>
-                        <button onClick={() => handleChangeTShirt('black')}
-                                className={`w-10 h-10 rounded-full flex justify-center items-center mb-2 ${colorTShirt === 'black' && styles.item}`}>
-                            <div className={`bg-white rounded-full w-2 h-2`}></div>
-                        </button>
-                    </div>
-                    <div className={"flex relative w-[100vh] h-96 justify-center sm:order-2 order-1 sm:w-full"}>
-                        <div className={'absolute sm:flex transition transition-opacity duration-500'} style={{opacity: `${scaleWhite}`}}>
+                <div className='sm:flex grid justify-center items-center sm:mt-0 mx-auto h-full'>
+                    <div className={"grid sm:flex relative justify-center sm:w-screen"}>
+                        <div
+                            className="md:grid md:mt-0 md:order-1 flex justify-center md:content-center rounded-full mr-5 mb-4 order-2">
+                            <button onClick={() => handleChangeTShirt('white')}
+                                    className={`w-10 h-10 rounded-full flex justify-center items-center ${colorTShirt === 'white' && styles.item}`}>
+                                <div className={`bg-white rounded-full w-2 h-2`}></div>
+                            </button>
+                            <button onClick={() => handleChangeTShirt('black')}
+                                    className={`w-10 h-10 rounded-full flex justify-center items-center mb-2 ${colorTShirt === 'black' && styles.item}`}>
+                                <div className={`bg-white rounded-full w-2 h-2`}></div>
+                            </button>
+                        </div>
+                        <div className={"md:order-2 order-1"}>
                             <Image src={shirt_white} alt="Indomptable t-shirt"
-                                   className='w-96 sm:w-[26rem] '
-                                   />
-                            <div className="my-auto text-white md:ml-20 ml-0  text-center md:text-left">
-                                <h1 className='text-8xl font-futura font-bold text-white mb-4 md:text-9xl'>THE <br/> MBOA
+                                   className='w-96 sm:w-[26rem] transition transition-all duration-500'
+                                   style={{
+                                       opacity: `${whiteOptionsView.opacity}`
+                                   }}
+                            />
+                            <Image src={shirt_black} id={"img-2"} alt="Indomptable t-shirt"
+                                   className='w-96 sm:w-[26rem] transition transition-all duration-500 md:mt-[-570px] mt-[-500px]'
+                                   style={{
+                                       opacity: `${blackOptionsView.opacity}`
+                                   }}
+                            />
+                        </div>
+                        <div className="my-auto text-white text-center md:text-left order-3">
+                            <div
+                                style={{
+                                    opacity: `${whiteOptionsView.opacity}`,
+                                    display: `${whiteOptionsView.display}`
+                                }}>
+                                <h1 className='text-8xl font-futura font-bold text-white mb-4 md:text-9xl block'>THE <br/> MBOA
                                 </h1>
                                 <h2 className='text-1xl font-space font-bold'>INDOMPTABLE THE WHITE TEE</h2>
-                                <p>Wear proundly our colors, show your identity, <br/> show your worth, show your continetal
+                                <p>Wear proundly our colors, show your identity, <br/> show your worth, show your
+                                    continetal
                                     attitude</p>
                             </div>
-                        </div>
-                        <div className={'absolute sm:flex transition transition-opacity duration-500'} style={{opacity: `${scaleDark}`}}>
-                            <Image src={shirt_black} id={"img-2"} alt="Indomptable t-shirt"
-                                   className='w-96 sm:w-[26rem]'
-                                   />
-                            <div className="my-auto text-white md:ml-20 ml-0 text-center md:text-left">
+                            <div
+                                style={{
+                                    opacity: `${blackOptionsView.opacity}`,
+                                    display: `${blackOptionsView.display}`
+                                }}>
                                 <h1 className='text-8xl font-futura font-bold text-white mb-4 md:text-9xl'>THE <br/> HEMLE
                                 </h1>
-                                <h2 className='text-1xl font-space font-bold'>INDOMPTABLE THE WHITE TEE</h2>
-                                <p>Wear proundly our colors, show your identity, <br/> show your worth, show your continetal
+                                <h2 className='text-1xl font-space font-bold'>INDOMPTABLE THE BLACK TEE</h2>
+                                <p>Wear proundly our colors, show your identity, <br/> show your worth, show your
+                                    continetal
                                     attitude</p>
                             </div>
                         </div>
