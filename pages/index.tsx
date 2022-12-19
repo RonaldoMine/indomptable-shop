@@ -62,7 +62,7 @@ export default function Home() {
                 <div className='sm:flex grid justify-center items-center sm:mt-0 mx-auto h-full'>
                     <div className={"grid sm:flex relative justify-center items-center sm:w-screen"}>
                         <div
-                            className="md:grid md:mt-0 md:order-1 flex justify-center md:content-center rounded-full mr-5 mb-4 order-2">
+                            className="md:grid md:mt-0 md:order-1 flex justify-center md:content-center rounded-full mr-5 mb-4 order-2 z-10">
                             <button onClick={() => handleChangeTShirt('white')}
                                     className={`w-10 h-10 rounded-full flex justify-center items-center ${colorTShirt === 'white' && styles.item}`}>
                                 <div className={`bg-white rounded-full w-2 h-2`}></div>
@@ -79,8 +79,8 @@ export default function Home() {
                                        opacity: `${whiteOptionsView.opacity}`
                                    }}
                             />
-                            <Image src={shirt_black} id={"img-2"} alt="Indomptable t-shirt"
-                                   className='w-96 sm:w-[26rem] transition transition-all duration-500 md:mt-[-570px] mt-[-500px]'
+                            <Image src={shirt_black} alt="Indomptable t-shirt"
+                                   className='w-96 sm:w-[26rem] transition transition-all duration-500 md:mt-[-570px] mt-[-500px] z-0'
                                    style={{
                                        opacity: `${blackOptionsView.opacity}`
                                    }}
