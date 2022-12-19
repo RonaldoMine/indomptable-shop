@@ -40,7 +40,7 @@ export default function Home() {
     }
     return (
         <div
-            className={`${theme == 'light' ? styles.wrapper : styles.wrapperDark} w-screen h-screen bg-cover bg-center overflow-x-hidden`}>
+            className={`${theme == 'light' ? styles.wrapper : styles.wrapperDark} w-full h-screen bg-cover bg-center overflow-x-hidden`}>
             <Head>
                 <title>Coming Soon - Indomptable Shop</title>
                 <meta name="description" content="Boutique en ligne des indomptables"/>
