@@ -64,11 +64,11 @@ export default function Home() {
                         <div
                             className="md:grid md:mt-0 md:order-1 flex justify-center md:content-center rounded-full mr-5 mb-4 order-2 z-10">
                             <button onClick={() => handleChangeTShirt('white')}
-                                    className={`w-10 h-10 rounded-full flex justify-center items-center ${colorTShirt === 'white' && styles.item}`}>
+                                    className={`w-10 h-10 rounded-full flex justify-center items-center ml-2 mr-2 ${colorTShirt === 'white' && styles.item}`}>
                                 <div className={`bg-white rounded-full w-2 h-2`}></div>
                             </button>
                             <button onClick={() => handleChangeTShirt('black')}
-                                    className={`w-10 h-10 rounded-full flex justify-center items-center mb-2 ${colorTShirt === 'black' && styles.item}`}>
+                                    className={`w-10 h-10 rounded-full flex justify-center items-center ml-2 mr-2 mb-2 ${colorTShirt === 'black' && styles.item}`}>
                                 <div className={`bg-white rounded-full w-2 h-2`}></div>
                             </button>
                         </div>
