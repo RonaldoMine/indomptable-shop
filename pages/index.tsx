@@ -80,7 +80,7 @@ export default function Home() {
                                    }}
                             />
                             <Image src={shirt_black} alt="Indomptable t-shirt"
-                                   className='w-96 sm:w-[26rem] transition transition-all duration-500 md:mt-[-570px] mt-[-500px] z-0'
+                                   className='w-96 sm:w-[26rem] transition transition-all duration-500 md:mt-[-570px] mt-[-160%] z-0'
                                    style={{
                                        opacity: `${blackOptionsView.opacity}`
                                    }}
