@@ -2,10 +2,10 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Landing.module.css'
 import logo from '../public/assets/images/logo.svg'
-import shirt_black from '../public/assets/images/tshirt-black-deesktop.webp'
-import shirt_white from '../public/assets/images/tshirt-white-desktop.webp'
-import light_svg from '../public/assets/images/light.svg'
-import dark_svg from '../public/assets/images/dark.svg'
+import shirt_black from '../public/assets/images/tshirt-black-desktop.png'
+import shirt_white from '../public/assets/images/tshirt-white-desktop.png'
+import light_svg from '../public/assets/images/icones/light.svg'
+import dark_svg from '../public/assets/images/icones/dark.svg'
 import {useState} from "react";
 
 
@@ -40,7 +40,7 @@ export default function Home() {
     }
     return (
         <div
-            className={`${theme == 'light' ? styles.wrapper : styles.wrapperDark} w-screen h-full bg-cover bg-center overflow-x-hidden`}>
+            className={`${theme == 'light' ? styles.wrapper : styles.wrapperDark} w-screen sm:h-screen h-full bg-cover bg-center overflow-x-hidden`}>
             <Head>
                 <title>Coming Soon - Indomptable Shop</title>
                 <meta name="description" content="Boutique en ligne des indomptables"/>
@@ -80,7 +80,7 @@ export default function Home() {
                                    }}
                             />
                             <Image src={shirt_black} alt="Indomptable t-shirt"
-                                   className='w-96 sm:w-[26rem] transition transition-all duration-500 md:mt-[-570px] mt-[-160%] z-0'
+                                   className='w-96 sm:w-[26rem] transition transition-all duration-500 mt-[-160%] z-0'
                                    style={{
                                        opacity: `${blackOptionsView.opacity}`
                                    }}
