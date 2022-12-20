@@ -48,21 +48,20 @@ export default function Home() {
             </Head>
 
             <main className='md:px-32 px-10 py-6 relative z-10'>
-                <div className="grid justify-items-center mx-auto sm:flex">
+                <div className="grid sm:justify-items-end justify-items-center mx-auto sm:flex">
                     <Image src={logo} alt="BeleFirst" className='mb-6'/>
-                    <div className='flex w-full justify-center items-center mb-6'>
+                    <div className='flex w-full lg:justify-center sm:justify-end justify-center items-center mb-6'>
                         <a href="https://www.facebook.com/belefirst1" className='text-white'>Facebook</a>
                         <a href="https://www.instagram.com/belefirst1" className='text-white ml-8'>Instagram</a>
                     </div>
-                    <button
+                    {/*<button
                         className="hidden bg-white transition ease-in dark:bg-neutral-900 dark:border-2 font-medium w-12 h-12 flex justify-center items-center"
                         onClick={handleChangeTheme} style={{borderRadius: "100%"}}>
-                        <Image alt={"Thème"} src={theme_svg} width={24} height={24}/></button>
+                        <Image alt={"Thème"} src={theme_svg} width={24} height={24}/></button>*/}
                 </div>
                 <div className='sm:flex grid justify-center items-center sm:mt-0 mx-auto h-full'>
-                    <div className={"grid sm:flex relative justify-center items-center sm:w-screen"}>
-                        <div
-                            className="md:grid md:mt-0 md:order-1 flex justify-center md:content-center rounded-full mr-5 mb-4 order-2 z-10">
+                    <div className={"grid md:flex relative justify-center items-center sm:w-screen"}>
+                        <div className="md:grid md:mt-0 md:order-1 flex justify-center md:content-center rounded-full mr-5 mb-4 order-2 z-10">
                             <button onClick={() => handleChangeTShirt('white')}
                                     className={`w-10 h-10 rounded-full flex justify-center items-center ml-2 mr-2 ${colorTShirt === 'white' && styles.item}`}>
                                 <div className={`bg-white rounded-full w-2 h-2`}></div>
@@ -80,7 +79,7 @@ export default function Home() {
                                    }}
                             />
                             <Image src={shirt_black} alt="Indomptable t-shirt"
-                                   className='w-96 sm:w-[26rem] transition transition-all duration-500 mt-[-160%] z-0'
+                                   className='w-96 sm:w-[26rem] transition transition-all duration-500 mt-[-165%] z-0'
                                    style={{
                                        opacity: `${blackOptionsView.opacity}`
                                    }}
@@ -92,7 +91,7 @@ export default function Home() {
                                     opacity: `${whiteOptionsView.opacity}`,
                                     display: `${whiteOptionsView.display}`
                                 }}>
-                                <h1 className='text-8xl font-futura font-bold text-white mb-4 md:text-9xl block'>THE <br/> MBOA
+                                <h1 className='text-8xl font-futura font-bold text-white mb-4 md:text-7xl lg:text-9xl block'>THE <br/> MBOA
                                 </h1>
                                 <h2 className='text-1xl font-space font-bold'>INDOMPTABLE THE WHITE TEE</h2>
                                 <p>Wear proundly our colors, show your identity, <br/> show your worth, show your
