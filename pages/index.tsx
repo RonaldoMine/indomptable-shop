@@ -95,7 +95,7 @@ export default function Home() {
                                 </h1>
                                 <h2 className='text-1xl font-space font-bold'>INDOMPTABLE THE WHITE TEE</h2>
                                 <p>Wear proundly our colors, show your identity, <br/> show your worth, show your
-                                    continetal
+                                    continental
                                     attitude</p>
                             </div>
                             <div
@@ -107,7 +107,7 @@ export default function Home() {
                                 </h1>
                                 <h2 className='text-1xl font-space font-bold'>INDOMPTABLE THE BLACK TEE</h2>
                                 <p>Wear proundly our colors, show your identity, <br/> show your worth, show your
-                                    continetal
+                                    continental
                                     attitude</p>
                             </div>
                         </div>
