@@ -103,7 +103,7 @@ export default function Home() {
                                     opacity: `${blackOptionsView.opacity}`,
                                     display: `${blackOptionsView.display}`
                                 }}>
-                                <h1 className='text-8xl font-futura font-bold text-white mb-4 md:text-9xl'>THE <br/> HEMLE
+                                <h1 className='text-8xl font-futura font-bold text-white mb-4 md:text-7xl lg:text-9xl'>THE <br/> HEMLE
                                 </h1>
                                 <h2 className='text-1xl font-space font-bold'>INDOMPTABLE THE BLACK TEE</h2>
                                 <p>Wear proundly our colors, show your identity, <br/> show your worth, show your
