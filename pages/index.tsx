@@ -75,7 +75,7 @@ export default function Home() {
                                 <h1 className='text-8xl font-futura font-bold text-white mb-4 md:text-7xl lg:text-9xl block'>THE <br/> MBOA
                                 </h1>
                                 <h2 className='text-1xl font-space font-bold'>INDOMPTABLE THE WHITE TEE</h2>
-                                <p className={"font-space"}>Show them who you are with this vibrant colorful shirt. <br/>Soft cotton and a light
+                                <p className={"font-space font-medium"}>Show them who you are with this vibrant colorful shirt. <br/>Soft cotton and a light
                                     fabric keeps you comfortable day and night. <br/> Ethnical graphics walk you through
                                     beauty, africanity and success.</p>
                             </div>
@@ -87,7 +87,7 @@ export default function Home() {
                                 <h1 className='text-8xl font-futura font-bold text-white mb-4 md:text-7xl lg:text-9xl'>THE <br/> HEMLE
                                 </h1>
                                 <h2 className='text-1xl font-space font-bold'>INDOMPTABLE THE BLACK TEE</h2>
-                                <p className={"font-space"}>We make our dreams come true, we write our story. <br/> HEMLE is the word of those
+                                <p className={"font-space font-medium"}>We make our dreams come true, we write our story. <br/> HEMLE is the word of those
                                     who make history. <br/> You can pull on this premium quality cotton tee <br/> with golden
                                     graphics to remember what you capable of. Be limitless.</p>
                             </div>
