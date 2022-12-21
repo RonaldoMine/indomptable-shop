@@ -44,7 +44,7 @@ export default function Home() {
             <Head>
                 <title>Coming Soon - Indomptable Shop</title>
                 <meta name="description" content="Boutique en ligne des indomptables"/>
-                <link rel="icon" href="/favicon.ico"/>
+                <link rel="icon" href="/assets/images/logo.svg"/>
             </Head>
 
             <main className='md:px-32 px-10 py-6 relative z-10'>
