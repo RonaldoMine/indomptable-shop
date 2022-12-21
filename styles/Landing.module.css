@@ -2,9 +2,12 @@
     background-image: url(../public/assets/images/bg-light.webp);
 }
 
-.wrapperDark {
-    background-image: url(../public/assets/images/bg-dark.webp);
+@media (max-width: 600px) {
+    .wrapper{
+        background-image: url(../public/assets/images/bg-light-mobile.webp);
+    }
 }
+
 
 .item {
     background-color: rgba(255, 255, 255, 0.3);
