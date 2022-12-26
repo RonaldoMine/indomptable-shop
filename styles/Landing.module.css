@@ -7,6 +7,14 @@
         background-image: url(../public/assets/images/bg-light-mobile.webp);
     }
 }
+/*
+
+@media (width: 710px) and (width: 800px) {
+    .imgResponsive{
+        margin-top: -130px;
+    }
+}
+*/
 
 
 .item {

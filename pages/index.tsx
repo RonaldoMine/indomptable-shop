@@ -52,7 +52,7 @@ export default function Home() {
                                 <div className={`bg-white rounded-full w-2 h-2`}></div>
                             </button>
                         </div>
-                        <div className={"md:order-2 order-1"}>
+                        <div className={"md:order-2 order-1 mx-auto"}>
                             <Image src={shirt_white} alt="Indomptable t-shirt"
                                    className='w-96 sm:w-[26rem] transition transition-all duration-500'
                                    style={{
@@ -60,7 +60,7 @@ export default function Home() {
                                    }}
                             />
                             <Image src={shirt_black} alt="Indomptable t-shirt"
-                                   className='w-96 sm:w-[26rem] transition transition-all duration-500 mt-[-165%] z-0'
+                                   className={`w-96 sm:w-[26rem] transition transition-all duration-500 mt-[-165%] z-0`}
                                    style={{
                                        opacity: `${blackOptionsView.opacity}`
                                    }}
