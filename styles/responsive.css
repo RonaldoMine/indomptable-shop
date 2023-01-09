@@ -1,0 +1,9 @@
+/* Sm Size */
+@media (min-width: 640px) {
+    .item-card.right span {
+        right: auto;
+    }
+    .item-card.left span {
+        left: auto;
+    }
+}

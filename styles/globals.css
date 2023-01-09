@@ -2,15 +2,127 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base{
-    @font-face{
+@layer base {
+    @font-face {
         font-family: 'Futura';
         src: url('../public/assets/fonts/Futura.woff2') format('woff2');
         font-display: swap;
     }
-    @font-face{
+    @font-face {
         font-family: 'Space Grostek';
         src: url('../public/assets/fonts/Space Grostek.ttf') format('truetype');
         font-display: swap;
     }
+}
+:root {
+    --border-color-gray: #E9E9E9;
+    --color-gray: #7C7C7CFF;
+    --color-red: rgba(238, 20, 19, 1);
+    --gradient-color: linear-gradient(90deg, rgba(237, 114, 13, 1) 0%, rgba(238, 20, 19, 1) 53%, rgba(237, 114, 13, 1) 100%);
+    font-family: 'Space Grostek', serif;
+    --input-border-radius: .075rem;
+    --button-border-radius: .075rem
+}
+
+#contact-us {
+    padding: 100px 10px;
+    border-top: 1px solid var(--border-color-gray);
+}
+
+#contact-us input, #contact-us textarea {
+    font-size: 18px;
+    border-radius: var(--input-border-radius);
+    margin-bottom: 12px;
+    border: 1px solid var(--border-color-gray);
+    padding: 20px 10px;
+    color: var(--color-gray);
+    width: 100%;
+    display: block;
+}
+
+#contact-us input {
+    height: 60px;
+}
+
+#contact-us textarea {
+    height: 150px;
+}
+
+#contact-us input:focus {
+    border: 1px solid var(--border-color-gray);
+}
+
+#contact-us textarea {
+    display: block;
+}
+
+#contact-us button, button.bg-gradient {
+    border-radius: var(--button-border-radius);
+    background: var(--gradient-color);
+}
+.modal{
+    background: rgb(107 114 128);
+    opacity: 1;
+}
+.modal {
+    animation: show-modal .2s ease-in;
+    transition-property: opacity;
+}
+
+@keyframes show-modal {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.loader {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: inline-block;
+    border-top: 4px solid #FFF;
+    border-right: 4px solid transparent;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+.loader::after {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border-bottom: 4px solid var(--color-red);
+    border-left: 4px solid transparent;
+}
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.item-card.left{
+    background: rgb(255 255 255);
+}
+.item-card.right{
+    background: rgb(64 64 64);
+}
+
+.item-card.left span{
+    transform: rotate(-90deg);
+    color: rgb(38 38 38 / 0.1);
+    left: 2rem;
+}
+.item-card.right span{
+    transform: rotate(90deg);
+    color: rgb(255 255 255 / 0.1);
+    right: 2rem;
 }

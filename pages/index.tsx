@@ -1,99 +1,81 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Landing.module.css'
-import logo from '../public/assets/images/logo.svg'
+import Header from "./components/Header";
 import shirt_black from '../public/assets/images/tshirt-black-desktop.png'
 import shirt_white from '../public/assets/images/tshirt-white-desktop.png'
-import {useState} from "react";
-
+import HomeCardItem, {HomeCardType} from "./components/HomeCardItem";
+import React, {useState} from "react";
+import {useForm} from 'react-hook-form';
+import Alert from './components/Alert';
 
 export default function Home() {
-    const [colorTShirt, setColorTShirt] = useState('white');
-    const [whiteOptionsView, setWhiteOptionView] = useState({opacity: 1, display: "block"});
-    const [blackOptionsView, setBlackOptionView] = useState({opacity: 0, display: "none"});
-
-    const handleChangeTShirt = (color: string) => {
-        if (color === 'white') {
-            setWhiteOptionView({display: 'block', opacity: 1})
-            setBlackOptionView({display: 'none', opacity: 0})
-            setColorTShirt('white')
-        } else {
-            setWhiteOptionView({display: 'none', opacity: 0})
-            setBlackOptionView({display: 'block', opacity: 1})
-            setColorTShirt('black')
+    const {register, reset, handleSubmit} = useForm();
+    const [showAlert, setShowAlert] = useState(false);
+    const [onLoading, setOnLoading] = useState(false);
+    const [configAlert, setConfigAlert] = useState({title: "", text: "", status: ""})
+    const handleSubmitContactForm = async (data: any) => {
+        setOnLoading(true);
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
         }
+        const response = await fetch("/api/contact", options);
+        const result = await response.json();
+        const status = response.status
+        if (status == 200) {
+            reset();
+            setConfigAlert({title: "Success", text: result.message, status: "success"})
+        } else {
+            setConfigAlert({title: "Erreur", text: result.message, status: status === 400 ? "warning" : "danger"})
+        }
+        setShowAlert(true);
+        setOnLoading(false);
     }
     return (
         <div
-            className={`${styles.wrapper} w-screen md:h-screen h-full bg-cover bg-center overflow-x-hidden`}>
+            className={`w-screen md:h-screen h-full bg-cover bg-center overflow-x-hidden`}>
             <Head>
-                <title>Coming Soon - Indomptable Shop</title>
+                <title>Indomptable Shop</title>
                 <meta name="description" content="Boutique en ligne des indomptables"/>
                 <link rel="icon" href="/assets/images/logo.svg"/>
             </Head>
-            <main className='md:px-32 px-10 py-6 relative z-10'>
-                <div className="grid sm:justify-items-end justify-items-center mx-auto sm:flex">
-                    <Image src={logo} alt="BeleFirst" className='mb-6'/>
-                    <div className='flex w-full lg:justify-center sm:justify-end justify-center items-center mb-6'>
-                        <a href="https://www.facebook.com/belefirst1" className='text-white'>Facebook</a>
-                        <a href="https://www.instagram.com/belefirst1" className='text-white ml-8'>Instagram</a>
+            <main>
+                <Header/>
+                <div className="relative grid sm:grid-cols-2 grid-cols-1">
+                    <HomeCardItem title={"white"} typeClass={HomeCardType.left} alt={"White TeeShrit"}
+                                  src={shirt_white}/>
+                    <HomeCardItem title={"black"} typeClass={HomeCardType.right} alt={"Black TeeShrit"}
+                                  src={shirt_black}/>
+                </div>
+                <div id="contact-us">
+                    <div className={"md:w-2/6 sm:w-2/2 w-full mx-auto"}>
+                        <h1 className={"text-center text-6xl font-bold mb-4"}>Contact us</h1>
+                        <form onSubmit={handleSubmit(handleSubmitContactForm)} method={"post"}>
+                            <input type="text" className={"ring:border-red-500"} placeholder={"Name"} {...register("name", {
+                                required: true
+                            })}/>
+                            <input type="email" placeholder={"Email"}  {...register("email", {
+                                required: true
+                            })}/>
+                            <textarea cols={50} placeholder={"Message"}
+                                      className={"resize-none"}  {...register("message", {
+                                required: true
+                            })}>
+                            </textarea>
+                            <div className={"w-full text-center mt-5"}>
+                                {onLoading ? <span className="loader"></span> :
+                                    <button className={"mx-auto px-10 py-3 hover:bg-opacity-20 text-white"}>
+                                        Send
+                                    </button>
+                                }
+                            </div>
+                        </form>
                     </div>
                 </div>
-                <div className='sm:flex grid justify-center items-center sm:mt-0 mx-auto h-full'>
-                    <div className={"grid md:flex relative justify-center items-center sm:w-screen"}>
-                        <div
-                            className="md:grid md:mt-0 md:order-1 flex justify-center md:content-center rounded-full mr-5 mb-4 order-2 z-10">
-                            <button onClick={() => handleChangeTShirt('white')}
-                                    className={`w-10 h-10 rounded-full flex justify-center items-center ml-2 mr-2 ${colorTShirt === 'white' && styles.item}`}>
-                                <div className={`bg-white rounded-full w-2 h-2`}></div>
-                            </button>
-                            <button onClick={() => handleChangeTShirt('black')}
-                                    className={`w-10 h-10 rounded-full flex justify-center items-center ml-2 mr-2 mb-2 ${colorTShirt === 'black' && styles.item}`}>
-                                <div className={`bg-white rounded-full w-2 h-2`}></div>
-                            </button>
-                        </div>
-                        <div className={"md:order-2 order-1 mx-auto"}>
-                            <Image src={shirt_white} alt="Indomptable t-shirt"
-                                   className='w-96 sm:w-[26rem] transition transition-all duration-500'
-                                   style={{
-                                       opacity: `${whiteOptionsView.opacity}`
-                                   }}
-                            />
-                            <Image src={shirt_black} alt="Indomptable t-shirt"
-                                   className={`w-96 sm:w-[26rem] transition transition-all duration-500 mt-[-165%] z-0`}
-                                   style={{
-                                       opacity: `${blackOptionsView.opacity}`
-                                   }}
-                            />
-                        </div>
-                        <div className="text-white text-center md:text-left order-3 mb-4 ml-5">
-                            <div
-                                style={{
-                                    opacity: `${whiteOptionsView.opacity}`,
-                                    display: `${whiteOptionsView.display}`
-                                }}>
-                                <h1 className='text-8xl font-futura font-bold text-white mb-4 md:text-7xl lg:text-9xl block'>THE <br/> MBOA
-                                </h1>
-                                <h2 className='text-1xl font-space font-bold'>INDOMPTABLE THE WHITE TEE</h2>
-                                <p className={"font-space font-medium"}>Show them who you are with this vibrant colorful shirt. <br/>Soft cotton and a light
-                                    fabric keeps you comfortable day and night. <br/> Ethnical graphics walk you through
-                                    beauty, africanity and success.</p>
-                            </div>
-                            <div
-                                style={{
-                                    opacity: `${blackOptionsView.opacity}`,
-                                    display: `${blackOptionsView.display}`
-                                }}>
-                                <h1 className='text-8xl font-futura font-bold text-white mb-4 md:text-7xl lg:text-9xl'>THE <br/> HEMLE
-                                </h1>
-                                <h2 className='text-1xl font-space font-bold'>INDOMPTABLE THE BLACK TEE</h2>
-                                <p className={"font-space font-medium"}>We make our dreams come true, we write our story. <br/> HEMLE is the word of those
-                                    who make history. <br/> You can pull on this premium quality cotton tee <br/> with golden
-                                    graphics to remember what you capable of. Be limitless.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <Alert type={configAlert.status} visible={showAlert} setVisible={setShowAlert} title={configAlert.title}
+                       text={configAlert.text}/>
             </main>
         </div>
     )
