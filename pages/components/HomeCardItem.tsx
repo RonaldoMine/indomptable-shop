@@ -17,7 +17,7 @@ export default function HomeCardItem({src, alt, title, typeClass}: HomeCardItemP
     return (
         <div className={`item-card relative flex justify-center ${typeClass}`}>
             <Image className={"w-96 sm:w-[26rem] z-20"} src={src} alt={alt}/>
-            <span className={`${styles.title} w-auto absolute top-0 bottom-0 text-opacity-10 z-10 font-semibold`}>{title.toUpperCase()}</span>
+            <span className={`${styles.title} w-auto absolute top-0 bottom-0 z-10 font-semibold text-gradient opacity-70`}>{title.toUpperCase()}</span>
         </div>
     )
 }
