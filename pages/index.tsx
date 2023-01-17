@@ -6,8 +6,12 @@ import HomeCardItem, {HomeCardType} from "./components/HomeCardItem";
 import React from "react";
 import Contact from "./Contact";
 import People from './People';
+import {GetServerSideProps, InferGetServerSidePropsType} from 'next';
+import {sanityClient} from "../sanity";
+import {PeopleInterface} from "../typings";
 
-export default function Home() {
+
+export default function Home({peoples}: InferGetServerSidePropsType<typeof getServerSideProps>) {
     return (
         <div
             className={`w-screen md:h-screen h-full bg-cover bg-center overflow-x-hidden`}>
@@ -24,9 +28,35 @@ export default function Home() {
                     <HomeCardItem title={"black"} typeClass={HomeCardType.right} alt={"Black TeeShrit"}
                                   src={shirt_black}/>
                 </div>
-                <Contact />
-                <People />
+                <Contact/>
+                <People peoples={peoples}/>
+                {/*<div>
+                    {
+                        peoples.map((people, key) => {
+                            return <OnePeople onClick={() => {}} key={key}
+                                              img={urlFor(people.src).url()}
+                                              title={people.title}/>
+                        })
+                    }
+                </div>*/}
             </main>
         </div>
     )
 }
+
+export const getServerSideProps: GetServerSideProps = async () => {
+    const query = `*[_type == "people"]{
+    _id,
+    title,
+    src {
+      asset
+    }
+}`;
+    const peoples = await sanityClient.fetch(query);
+    return {
+        props: {
+            peoples
+        }
+    }
+}
+

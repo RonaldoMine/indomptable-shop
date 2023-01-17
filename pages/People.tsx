@@ -1,95 +1,89 @@
 import React, {Fragment, useState} from "react";
 import OnePeople from "./components/OnePeople";
-import people1 from "../public/assets/images/people/people1.jpg"
-import people2 from "../public/assets/images/people/people2.jpg"
-import people3 from "../public/assets/images/people/people3.jpg"
-import people4 from "../public/assets/images/people/people4.jpg"
-import people5 from "../public/assets/images/people/people5.jpg"
-import people6 from "../public/assets/images/people/people6.jpg"
-import people7 from "../public/assets/images/people/people7.jpg"
-import people8 from "../public/assets/images/people/people8.jpg"
-import people9 from "../public/assets/images/people/people9.jpg"
-import people10 from "../public/assets/images/people/people10.jpg"
 import {Dialog, Transition} from "@headlessui/react";
 import Image from "next/image";
-import {StaticImageData} from "next/dist/client/image";
+import {urlFor} from "../sanity";
+import {PeopleInterface} from "../typings";
 
-export default function People() {
+interface PeopleProps {
+    peoples: PeopleInterface[]
+}
+
+export default function People({peoples}: PeopleProps) {
     let [isOpen, setIsOpen] = useState(false)
-    let [currentImage, setCurrentImage] = useState({img: people1, title: "", index: 0})
+    let [currentImage, setCurrentImage] = useState({img: "", title: "", index: 0})
     const closeModal = () => {
         setIsOpen(false)
     }
 
-    const openModal = (img: StaticImageData, title: string, index: number) => {
+    const openModal = (img: string, title: string, index: number) => {
         setIsOpen(true);
         setCurrentImage({img: img, title: title, index: index})
     }
     const handlePreviousPage = () => {
-        let currentIndexitem = currentImage.index - 1;
-        const item = peoples.find((people, index) => index === currentIndexitem);
+        let currentIndexItem = currentImage.index - 1;
+        const item = peoples.find((people: PeopleInterface, index: number) => index === currentIndexItem);
         if (item) {
-            setCurrentImage({img: item.img, title: item.title, index: currentIndexitem})
+            setCurrentImage({img: urlFor(item.src).url(), title: item.title, index: currentIndexItem})
         }
     }
     const handleNextPage = () => {
-        let currentIndexitem = currentImage.index + 1;
-        const item = peoples.find((people, index) => index === currentIndexitem);
+        let currentIndexItem = currentImage.index + 1;
+        const item = peoples.find((people: PeopleInterface, index: number) => index === currentIndexItem);
         if (item) {
-            setCurrentImage({img: item.img, title: item.title, index: currentIndexitem})
+            setCurrentImage({img: urlFor(item.src).url(), title: item.title, index: currentIndexItem})
         }
     }
 
-
-    let peoples = [
-        {
-            title: "People 1",
-            img: people1
-        },
-        {
-            title: "People 2",
-            img: people2
-        },
-        {
-            title: "People 3",
-            img: people3
-        },
-        {
-            title: "People 4",
-            img: people4
-        },
-        {
-            title: "People 5",
-            img: people5
-        },
-        {
-            title: "People 6",
-            img: people6
-        },
-        {
-            title: "People 7",
-            img: people7
-        },
-        {
-            title: "People 8",
-            img: people8
-        },
-        {
-            title: "People 9",
-            img: people9
-        },
-        {
-            title: "People 10",
-            img: people10
-        }
-    ];
+    /* let peoples = [
+         {
+             title: "People 1",
+             img: people1
+         },
+         {
+             title: "People 2",
+             img: people2
+         },
+         {
+             title: "People 3",
+             img: people3
+         },
+         {
+             title: "People 4",
+             img: people4
+         },
+         {
+             title: "People 5",
+             img: people5
+         },
+         {
+             title: "People 6",
+             img: people6
+         },
+         {
+             title: "People 7",
+             img: people7
+         },
+         {
+             title: "People 8",
+             img: people8
+         },
+         {
+             title: "People 9",
+             img: people9
+         },
+         {
+             title: "People 10",
+             img: people10
+         }
+     ];*/
     return (
         <>
             <div
                 className="p-4 grid justify-items-center 2xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 sm:gap-4 grid-cols-1">
-                {peoples.map((people, key) => {
-                    return <OnePeople onClick={() => openModal(people.img, people.title, key)} key={key}
-                                      img={people.img}
+                {peoples.map((people: { src: any; title: string; }, key: number) => {
+                    return <OnePeople onClick={() => openModal(urlFor(people.src).url(), people.title, key)} key={key}
+                                      img={urlFor(people.src).url()}
                                       title={people.title}/>
                 })}
             </div>
@@ -121,7 +115,7 @@ export default function People() {
                             >
                                 <div>
                                     <div>
-                                        <Image src={currentImage.img} alt={currentImage.title}
+                                        <Image src={currentImage.img} alt={currentImage.title}  height={500} width={400}
                                                className={"h-[500px] w-[400px] object-cover rounded"}/>
                                     </div>
                                     <div className={"w-full flex justify-around sm:justify-between mt-2"}>
@@ -161,5 +155,4 @@ export default function People() {
         </>
 
     );
-
 }
