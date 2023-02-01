@@ -9,3 +9,9 @@ export interface PeopleInterface{
     title: string,
     src: ImageInterface
 }
+
+export interface OrderType{
+    productId: String,
+    productSize: String,
+    quantity: number
+}

@@ -30,15 +30,6 @@ export default function Home({peoples}: InferGetServerSidePropsType<typeof getSe
                 </div>
                 <Contact/>
                 <People peoples={peoples}/>
-                {/*<div>
-                    {
-                        peoples.map((people, key) => {
-                            return <OnePeople onClick={() => {}} key={key}
-                                              img={urlFor(people.src).url()}
-                                              title={people.title}/>
-                        })
-                    }
-                </div>*/}
             </main>
         </div>
     )

@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { RadioGroup } from '@headlessui/react'
 import shirt from '../public/assets/images/tshirt-black-desktop.png'
-import { useBasket } from '../src/hooks/useBasket'
+import { useBasket } from '../src/context/BasketContext'
 
 const SIZES = [
     { name: 'XXS', inStock: false },
@@ -25,7 +25,7 @@ export default function Home() {
 
     const [expanded, setExpanded] = useState({ one: false, two: false });
     const [selectedSize, setSelectedSize] = useState(SIZES[2]);
-    const { addProduct, removeProduct, order } = useBasket();
+    const { basket, dispatch } = useBasket();
 
 
     return (
@@ -121,12 +121,18 @@ export default function Home() {
                     </p>
                     <div className='mt-4 flex'>
                         <button className='bg-gradient-to-bl from-slate-700 to-slate-900 px-8 py-4 text-white font-space'
-                            onClick={() => addProduct(
-                                {
-                                    productId: 'BLVCKG1',
-                                    productSize: selectedSize.name,
-                                    quantity: 1
-                                })}
+                            onClick={() => {
+                                dispatch({
+                                    type: "ADD_PRODUCT", payload: {
+                                        sku: 'BLVCKG1',
+                                        qty: 1,
+                                        price: 8000,
+                                        size: selectedSize.name,
+                                        color: 'black'
+                                    }
+                                })
+                            }
+                            }
                         >Add to basket</button>
                         <button className='border-slate-700 border-2 px-8 py-4 font-space ml-5'>Favorite</button>
                     </div>
