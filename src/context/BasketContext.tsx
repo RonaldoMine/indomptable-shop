@@ -10,6 +10,7 @@ type BasketItem = {
   price: number;
   size: string;
   color: string;
+  img: string
 };
 
 type BasketAction = {
@@ -124,8 +125,6 @@ const useBasket = () => {
 //3. custom context provider and export it
 const BasketContextProvider = ({ children }: BasketContextProviderProps) => {
   let [basket, dispatch] = useReducer(basketReducer, initialState);
-  console.log("ok");
-
 
   useEffect(() => {
     localStorage.setItem('state_basket', 'DATA_BASKET_INIT')

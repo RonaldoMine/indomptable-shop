@@ -131,7 +131,8 @@ export default function SlugProduct({productData}: InferGetServerSidePropsType<t
                                         qty: 1,
                                         price: product?.price,
                                         size: selectedSize.name,
-                                        color: 'black'
+                                        color: 'black',
+                                        img: urlFor(product?.src).url()
                                     }
                                 })
                             }

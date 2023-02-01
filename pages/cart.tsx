@@ -4,6 +4,7 @@ import shirt from '../public/assets/images/tshirt-black-desktop.png'
 import { HiX } from "react-icons/hi";
 import Link from "next/link";
 import { useBasket } from "../src/context/BasketContext";
+import {urlFor} from "../sanity";
 
 function Cart() {
 
@@ -23,7 +24,7 @@ function Cart() {
                                         <div className="flex p-5 justify-between">
                                             <div className="flex">
                                                 <div className="h-64 flex-shrink-0 overflow-hidden">
-                                                    <Image className='h-full w-full object-cover object-center ' src={shirt} alt="Indomptable black tee" />
+                                                    <Image className='h-full w-full object-cover object-center' height={100} width={100} src={item.img} alt="Indomptable black tee" />
                                                 </div>
                                                 <div className="ml-4 flex flex-col justify-between">
                                                     <div>
