@@ -3,7 +3,7 @@ import {useState} from 'react'
 import {RadioGroup} from '@headlessui/react'
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {sanityClient, urlFor} from "../../../sanity";
-import {useBasket} from "../../hooks/BasketContext";
+import { useBasket } from '../../../src/context/BasketContext';
 
 function classNames(...classes: any[]) {
     return classes.filter(Boolean).join(' ')
@@ -14,7 +14,7 @@ export default function SlugProduct({productData}: InferGetServerSidePropsType<t
     const [expanded, setExpanded] = useState({one: false, two: false});
     const [selectedSize, setSelectedSize] = useState({name: "", materials: []});
     const [colors, setColors] = useState([]);
-    const {addProduct, removeProduct} = useBasket();
+    const { basket, dispatch } = useBasket();
     const product = productData[0].product;
     const sizes = product.sizes;
     const handleOnChangeSelect = (selected: any) => {
@@ -22,6 +22,7 @@ export default function SlugProduct({productData}: InferGetServerSidePropsType<t
         setSelectedSize(selected)
         setColors(colors)
     }
+
     return (
         <div className='w-full overflow-x-hidden dark:bg-neutral-800'>
             <div
@@ -122,17 +123,20 @@ export default function SlugProduct({productData}: InferGetServerSidePropsType<t
                         information
                     </p>
                     <div className='mt-4 flex'>
-                        <button
-                            className='bg-gradient-to-bl from-slate-700 to-slate-900 px-8 py-4 text-white font-space'
-                            onClick={() => addProduct(
-                                {
-                                    sku: 'BLVCKG1',
-                                    size: selectedSize.name,
-                                    qty: 1,
-                                    color: "red"
-                                })}
-                        >Add to basket
-                        </button>
+                        <button className='bg-gradient-to-bl from-slate-700 to-slate-900 px-8 py-4 text-white font-space'
+                            onClick={() => {
+                                dispatch({
+                                    type: "ADD_PRODUCT", payload: {
+                                        sku: product?.sku,
+                                        qty: 1,
+                                        price: product?.price,
+                                        size: selectedSize.name,
+                                        color: 'black'
+                                    }
+                                })
+                            }
+                            }
+                        >Add to basket</button>
                         <button className='border-slate-700 border-2 px-8 py-4 font-space ml-5'>Favorite</button>
                     </div>
                     <p className='mt-12'>

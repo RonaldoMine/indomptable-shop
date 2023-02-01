@@ -5,6 +5,8 @@ import dark_svg from '../../public/assets/images/icones/dark.svg'
 import Image from 'next/image'
 import Link from "next/link";
 import {useState} from "react";
+import { AiOutlineShopping } from "react-icons/ai";
+
 
 export default function Header() {
     const [theme, setTheme] = useState("light");
@@ -31,6 +33,7 @@ export default function Header() {
                     <a href="https://www.facebook.com/belefirst1" className='dark:text-white'>Facebook</a>
                     <a href="https://www.instagram.com/belefirst1" className='dark:text-white ml-8'>Instagram</a>
                 </div>
+                <Link href={"/cart"}><AiOutlineShopping /></Link>
                 <button onClick={handleChangeTheme}><Image src={theme_svg} alt="Theme"/></button>
             </div>
         </>

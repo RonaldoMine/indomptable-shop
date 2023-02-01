@@ -1,5 +1,3 @@
-import Head from 'next/head'
-import Header from "./components/Header";
 import shirt_black from '../public/assets/images/tshirt-black-desktop.png'
 import shirt_white from '../public/assets/images/tshirt-white-desktop.png'
 import HomeCardItem, {HomeCardType} from "./components/HomeCardItem";

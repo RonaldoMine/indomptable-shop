@@ -35,48 +35,6 @@ export default function People({peoples}: PeopleProps) {
         }
     }
 
-    /* let peoples = [
-         {
-             title: "People 1",
-             img: people1
-         },
-         {
-             title: "People 2",
-             img: people2
-         },
-         {
-             title: "People 3",
-             img: people3
-         },
-         {
-             title: "People 4",
-             img: people4
-         },
-         {
-             title: "People 5",
-             img: people5
-         },
-         {
-             title: "People 6",
-             img: people6
-         },
-         {
-             title: "People 7",
-             img: people7
-         },
-         {
-             title: "People 8",
-             img: people8
-         },
-         {
-             title: "People 9",
-             img: people9
-         },
-         {
-             title: "People 10",
-             img: people10
-         }
-     ];*/
     return (
         <>
             <div
