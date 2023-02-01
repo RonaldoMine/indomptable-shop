@@ -7,3 +7,9 @@
         left: auto;
     }
 }
+@media (max-width: 640px) {
+    .item-card.right button {
+        right: 15px;
+        left: auto;
+    }
+}

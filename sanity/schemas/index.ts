@@ -1,4 +1,8 @@
 import people from './people'
-import author from './creator'
+import category from './category'
+/*
+import model from './model'
+*/
+import product from "./product";
 
-export const schemaTypes = [people, author]
+export const schemaTypes = [people, category, product]

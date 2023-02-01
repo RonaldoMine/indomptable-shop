@@ -8,39 +8,19 @@ import Contact from "./Contact";
 import People from './People';
 import {GetServerSideProps, InferGetServerSidePropsType} from 'next';
 import {sanityClient} from "../sanity";
-import {PeopleInterface} from "../typings";
 
 
 export default function Home({peoples}: InferGetServerSidePropsType<typeof getServerSideProps>) {
-    return (
-        <div
-            className={`w-screen md:h-screen h-full bg-cover bg-center overflow-x-hidden`}>
-            <Head>
-                <title>Indomptable Shop</title>
-                <meta name="description" content="Boutique en ligne des indomptables"/>
-                <link rel="icon" href="/assets/images/logo.svg"/>
-            </Head>
-            <main>
-                <Header/>
-                <div className="relative grid sm:grid-cols-2 grid-cols-1">
-                    <HomeCardItem title={"white"} typeClass={HomeCardType.left} alt={"White TeeShrit"}
-                                  src={shirt_white}/>
-                    <HomeCardItem title={"black"} typeClass={HomeCardType.right} alt={"Black TeeShrit"}
-                                  src={shirt_black}/>
-                </div>
-                <Contact/>
-                <People peoples={peoples}/>
-                {/*<div>
-                    {
-                        peoples.map((people, key) => {
-                            return <OnePeople onClick={() => {}} key={key}
-                                              img={urlFor(people.src).url()}
-                                              title={people.title}/>
-                        })
-                    }
-                </div>*/}
-            </main>
-        </div>
+    return (<>
+            <div className="relative grid sm:grid-cols-2 grid-cols-1">
+                <HomeCardItem title={"white"} typeClass={HomeCardType.left} alt={"White TeeShrit"}
+                              src={shirt_white} typeCategory={"t-shirt"} slugProduct={"indomptable-the-mboa"}/>
+                <HomeCardItem title={"black"} typeClass={HomeCardType.right} alt={"Black TeeShrit"}
+                              src={shirt_black} typeCategory={"t-shirt"} slugProduct={"indomptable-the-hemle"}/>
+            </div>
+            <Contact/>
+            <People peoples={peoples}/>
+        </>
     )
 }
 

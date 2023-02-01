@@ -31,7 +31,7 @@ export default function Contact() {
     return (
         <>
             <div id="contact-us">
-                <div className={"md:w-2/6 sm:w-2/2 w-full mx-auto"}>
+                <div className={"lg:w-3/6 md:w-4/6 w-full p-4 mx-auto"}>
                     <h1 className={"text-center text-6xl font-bold mb-4 text-gradient"}>Contact us</h1>
                     <form onSubmit={handleSubmit(handleSubmitContactForm)} method={"post"}>
                         <input type="text" className={"ring:border-red-500"} placeholder={"Name"} {...register("name", {

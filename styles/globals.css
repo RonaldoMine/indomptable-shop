@@ -18,6 +18,7 @@
     --border-color-gray: #E9E9E9;
     --color-gray: #7C7C7CFF;
     --color-red: rgba(238, 20, 19, 1);
+    --color-orange: rgba(237, 114, 13, 1);
     --color-yellow: #ffc200;
     --gradient-color: linear-gradient(90deg, rgba(237, 114, 13, 1) 0%, rgba(238, 20, 19, 1) 53%, rgba(237, 114, 13, 1) 100%);
     font-family: 'Space Grostek', serif;
@@ -124,15 +125,34 @@
 
 .item-card.left span {
     transform: rotate(-90deg);
-    color: rgb(38 38 38 / 0.1);
     left: 2rem;
 }
 
 .item-card.right span {
     transform: rotate(90deg);
-    color: rgb(255 255 255 / 0.1);
     right: 2rem;
 }
+
+.item-card.left button {
+    right: 15px;
+    color: var(--color-orange);
+    background-color: rgba(237, 114, 13, .2);
+}
+
+.item-card.right button {
+    left: 15px;
+    color: var(--color-orange);
+    background-color: rgba(255, 255, 255, .2);
+}
+
+.item-card.left button:hover, .item-card.right button:hover {
+    color: #FFFFFF;
+    background: linear-gradient(90deg, var(--color-red), var(--color-orange), var(--color-red));
+    animation: shine 1s linear;
+    transition: ease-in 500ms;
+    background-size: 200% auto;
+}
+
 .text-gradient {
     background: linear-gradient(90deg, var(--color-yellow), var(--color-red), var(--color-yellow));
     background-clip: border-box;
@@ -142,8 +162,34 @@
     animation: shine 5s linear infinite;
     background-size: 200% auto;
 }
+
 @keyframes shine {
     100% {
         background-position: -200%;
     }
+}
+.preloader {
+    position: relative;
+    width:  48px;
+    height: 48px;
+    background: var(--color-orange);
+    transform: rotateX(65deg) rotate(45deg);
+    color: var(--color-red);
+    animation: layers1 1s linear infinite alternate;
+}
+.preloader:after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(238, 20, 19, 0.7);
+    animation: layerTr 1s linear infinite alternate;
+}
+
+@keyframes layers1 {
+    0% { box-shadow: 0 0 0 0  }
+    90% , 100% { box-shadow: 20px 20px 0 -4px  }
+}
+@keyframes layerTr {
+    0% { transform:  translate(0, 0) scale(1) }
+    100% {  transform: translate(-25px, -25px) scale(1) }
 }
