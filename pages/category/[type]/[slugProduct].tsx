@@ -14,9 +14,10 @@ export default function SlugProduct({productData}: InferGetServerSidePropsType<t
     const [expanded, setExpanded] = useState({one: false, two: false});
     const [selectedSize, setSelectedSize] = useState({name: "", materials: []});
     const [colors, setColors] = useState([]);
-    const { basket, dispatch } = useBasket();
+    const { dispatch } = useBasket();
     const product = productData[0].product;
     const sizes = product.sizes;
+    
     const handleOnChangeSelect = (selected: any) => {
         const colors = selected.materials;
         setSelectedSize(selected)
@@ -29,7 +30,7 @@ export default function SlugProduct({productData}: InferGetServerSidePropsType<t
                 className='min-h-screen max-w-[75rem] mx-auto px-10 sm:px-12 py-20 grid grid-cols-1 sm:grid-cols-3 sm:gap-6'>
                 <div id='left-pane' className='mb-10'>
                     <div id='image-wrapper'>
-                        <Image className='w-full' width={539} height={885} src={urlFor(product?.src).url()}
+                        <Image className='w-full' placeholder='blur' width={539} blurDataURL={urlFor(product?.blurry).url()} height={885} src={urlFor(product?.src).url()}
                                alt={product?.name}/>
                     </div>
                 </div>
@@ -50,7 +51,7 @@ export default function SlugProduct({productData}: InferGetServerSidePropsType<t
                         <RadioGroup value={selectedSize} onChange={(selected) => handleOnChangeSelect(selected)}
                                     className="mt-4">
                             <RadioGroup.Label className="sr-only"> Choose a size </RadioGroup.Label>
-                            <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
+                            <div className="grid grid-cols-4 gap-4">
                                 {sizes.map((size: any) => (
                                     <RadioGroup.Option
                                         key={size.name}
@@ -204,6 +205,12 @@ export const getServerSideProps: GetServerSideProps = async ({params}) => {
       sku,
       slug,
       src {
+        asset
+      },
+      thumbnail {
+        asset
+      },
+      blurry {
         asset
       },
       price,

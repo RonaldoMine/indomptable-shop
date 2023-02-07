@@ -54,6 +54,22 @@ export default defineType({
             },
         }),
         defineField({
+            name: 'thumbnail',
+            title: 'ThumbnailImage',
+            type: 'image',
+            options: {
+                hotspot: true,
+            },
+        }),
+        defineField({
+            name: 'blurry',
+            title: 'BlurryImage',
+            type: 'image',
+            options: {
+                hotspot: true,
+            },
+        }),
+        defineField({
             name: 'sizes',
             title: 'Sizes',
             type: 'array',
