@@ -1,11 +1,13 @@
 import '../styles/globals.css'
 import '../styles/responsive.css'
+import 'react-toastify/dist/ReactToastify.css';
 import type {AppProps} from 'next/app'
 import Head from "next/head";
 import React, {useState} from "react";
 import Header from "./components/Header";
 import {Loader} from "./components/Loader";
 import {BasketContextProvider} from "../src/context/BasketContext";
+import {ToastContainer} from "react-toastify";
 
 export default function App({Component, pageProps}: AppProps) {
     const [stateLoading, setStateLoading] = useState(false);
@@ -24,6 +26,7 @@ export default function App({Component, pageProps}: AppProps) {
                     {!stateLoading && <Component {...pageProps} />}
                 </div>
             </main>
+            <ToastContainer  />
         </div>
     </BasketContextProvider>;
 }
