@@ -1,10 +1,8 @@
 import React from "react";
 import Image from "next/image";
-import shirt from '../public/assets/images/tshirt-black-desktop.png'
 import { HiX } from "react-icons/hi";
 import Link from "next/link";
 import { useBasket } from "../src/context/BasketContext";
-import {urlFor} from "../sanity";
 
 function Cart() {
 
@@ -24,7 +22,7 @@ function Cart() {
                                         <div className="flex p-5 justify-between">
                                             <div className="flex">
                                                 <div className="h-64 flex-shrink-0 overflow-hidden">
-                                                    <Image className='h-full w-full object-cover object-center' height={100} width={100} src={item.img} alt="Indomptable black tee" />
+                                                    <Image src={item.img} className='h-full w-full object-cover' height={100} width={100}  alt="Indomptable black tee" priority />
                                                 </div>
                                                 <div className="ml-4 flex flex-col justify-between">
                                                     <div>
@@ -36,7 +34,7 @@ function Cart() {
                                                     </div>
                                                     <div className="flex">
                                                         <button className="bg-slate-700 text-white px-2 shadow-md mr-2" onClick={() => { dispatch({ type: 'SUBSTRACT_QUANTITY', payload: idx }) }}>-</button>
-                                                        <input name="quantity" defaultValue={item.qty} value={item.qty} maxLength={2} className="border-2 px-2 text-center border-slate-400 rounded-md w-10"/>
+                                                        <input readOnly value={item.qty} name="quantity"  maxLength={2} className="border-2 px-2 text-center border-slate-400 rounded-md w-10"/>
                                                         <button className="bg-slate-700 text-white px-2 shadow-md ml-2" onClick={() => { dispatch({ type: 'ADD_QUANTITY', payload: idx})}}>+</button>
                                                     </div>
                                                 </div>
