@@ -1,4 +1,4 @@
-import React, {MouseEventHandler} from "react";
+import React from "react";
 import {StaticImageData} from "next/dist/client/image";
 import Image from "next/image";
 
