@@ -51,6 +51,11 @@ function Cart() {
                     <div className="p-4 bg-slate-50">
                         <h2 className="mb-4 text-lg font-semibold">Order Summary</h2>
                         <div className="flex justify-between py-2">
+                            <span className="text-slate-600">Quantity</span>
+                            <span className="font-semibold">{basket.totalProduct}</span>
+                        </div>
+                        <hr />
+                        <div className="flex justify-between py-2">
                             <span className="text-slate-600">Subtotal</span>
                             <span className="font-semibold">XAF {basket.subTotal}</span>
                         </div>
