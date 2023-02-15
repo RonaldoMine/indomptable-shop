@@ -17,18 +17,23 @@
     "dotenv": "^16.0.3",
     "eslint": "8.28.0",
     "eslint-config-next": "13.0.5",
+    "i18next": "^22.4.9",
     "next": "13.0.5",
+    "next-i18next": "^13.1.5",
     "next-sanity": "^4.0.6",
     "nodemailer": "^6.8.0",
+    "nprogress": "^0.2.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.41.4",
+    "react-i18next": "^12.1.5",
     "react-icons": "^4.7.1",
     "react-toastify": "^9.1.1",
     "sanity": "^3.2.5",
     "typescript": "4.9.3"
   },
   "devDependencies": {
+    "@types/nprogress": "^0.2.0",
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.19",
     "tailwindcss": "^3.2.4"
