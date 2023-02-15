@@ -63,6 +63,17 @@
     background: var(--gradient-color);
 }
 
+.form-control{
+    height: 30px;
+    font-size: 14px;
+    border-radius: var(--input-border-radius);
+    border: 1px solid var(--border-color-gray);
+    padding: 20px 10px;
+    color: var(--color-gray);
+    width: 100%;
+    display: block;
+}
+
 .modal {
     background: rgb(107 114 128);
     opacity: 1;

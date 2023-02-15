@@ -51,7 +51,7 @@ function Cart() {
                     <div className="p-4 bg-slate-50">
                         <h2 className="mb-4 text-lg font-semibold">Order Summary</h2>
                         <div className="flex justify-between py-2">
-                            <span className="text-slate-600">Quantity</span>
+                            <span className="text-slate-600">Total Quantity</span>
                             <span className="font-semibold">{basket.totalProduct}</span>
                         </div>
                         <hr />
@@ -69,7 +69,7 @@ function Cart() {
                             <h2 className="font-semibold">Order total</h2>
                             <span className="font-semibold">XAF {basket.subTotal + 1000}</span>
                         </div>
-                        <button className='bg-gradient-to-bl from-slate-700 to-slate-900 px-8 py-4 text-white font-space mt-3'>Checkout</button>
+                        <Link href={"/checkout"}> <button className='bg-gradient-to-bl from-slate-700 to-slate-900 px-8 py-4 text-white font-space mt-3'>Checkout</button></Link>
                     </div>
                 </div>)}
             </div>

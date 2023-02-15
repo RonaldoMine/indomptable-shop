@@ -4,18 +4,6 @@ const TYPES = [
     {title: "T-Shirt", value: "t-shirt"}
 ]
 
-const SIZES = [
-    {title: "Size M", value: "M"},
-    {title: "Size L", value: "L"},
-    {title: "Size XL", value: "XL"},
-    {title: "Size XXl", value: "XXL"},
-]
-const COLORS = [
-    {title: "Color Rouge", value: "#EE1413FF"},
-    {title: "Color Orange", value: "#ED720DFF"},
-    {title: "Color White", value: "#FFF"},
-    {title: "Color Dark", value: "#000"},
-]
 export default defineType({
     name: 'categories',
     title: 'Categories',
