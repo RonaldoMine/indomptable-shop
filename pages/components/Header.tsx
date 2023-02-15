@@ -6,9 +6,11 @@ import Image from 'next/image'
 import Link from "next/link";
 import {useState} from "react";
 import { AiOutlineShopping } from "react-icons/ai";
+import {useBasket} from "../../src/context/BasketContext";
 
 
 export default function Header() {
+    const {basket} = useBasket();
     const [theme, setTheme] = useState("light");
     const [theme_svg, setSvgTheme] = useState(light_svg);
     const [logo_svg, setLogoSvg] = useState(logo_black);
@@ -33,8 +35,17 @@ export default function Header() {
                     <a href="https://www.facebook.com/belefirst1" className='dark:text-white'>Facebook</a>
                     <a href="https://www.instagram.com/belefirst1" className='dark:text-white ml-8'>Instagram</a>
                 </div>
-                <Link href={"/cart"}><AiOutlineShopping /></Link>
-                <button onClick={handleChangeTheme}><Image src={theme_svg} alt="Theme"/></button>
+                <div className="flex gap-4">
+                    <Link href={"/cart"} className={"flex items-center"}>
+                    <span className={"relative"}>
+                        {basket.items.length > 0 && (<span
+                            className={"absolute flex justify-center items-center top-[-0.5rem] left-3 bg-red-500 text-center rounded-full h-4 w-4 block text-white"}
+                            style={{fontSize: 8}}>{basket.totalProduct > 99 ? "99+" : basket.totalProduct}</span>)}
+                        <AiOutlineShopping />
+                    </span>
+                    </Link>
+                    <button onClick={handleChangeTheme}><Image src={theme_svg} alt="Theme"/></button>
+                </div>
             </div>
         </>
     )

@@ -10,6 +10,7 @@ import Link from "next/link";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
+import ToastProduct from "../../components/ToastProduct";
 
 function classNames(...classes: any[]) {
     return classes.filter(Boolean).join(' ')
@@ -23,8 +24,9 @@ export default function SlugProduct({productData}: InferGetServerSidePropsType<t
     const [expanded, setExpanded] = useState({one: false, two: false});
     const [selectedSize, setSelectedSize] = useState({name: "", materials: []});
     const [colors, setColors] = useState([]);
+    const [errorSizeUnselected, setErrorSizeUnselected] = useState("");
     const [onAddProduct, setOnAddProduct] = useState(false);
-    const {basket, dispatch} = useBasket();
+    const {dispatch} = useBasket();
     const product = productData[0].product;
     const sizes = product.sizes;
 
@@ -32,69 +34,37 @@ export default function SlugProduct({productData}: InferGetServerSidePropsType<t
         const colors = selected.materials;
         setSelectedSize(selected)
         setColors(colors)
+        setErrorSizeUnselected("")
     }
 
-    const ToastProduct = () => {
-        return <>
-            <div className="flex items-center mb-2">
-                <AiFillCheckCircle className={"fill-green-500 mr-3"}/>
-                <h3>Product add in cart</h3>
-            </div>
-            <div className="flex mb-6">
-                <img
-                    className="w-32 h-32 object-cover"
-                    src={urlFor(product?.thumbnail).url()}
-                    alt={product?.name}
-                />
-                <div className={"grid items-center"}>
-                    <p className={"font-bold text-slate-700"}>
-                        {product?.name}
-                    </p>
-                    <p>
-                        Size <span className={"text-neutral-700"}>{selectedSize.name}</span>
-                    </p>
-                    <p>
-                        XAF <span className={"text-neutral-700"}>{product?.price}</span>
-                    </p>
-                </div>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-                <Link href={"/cart"}>
-                    <button className={"border-gray-300 border w-full p-2 bg-white"}>
-                        View cart ({basket.items.length})
-                    </button>
-                </Link>
-                <Link href={"/checkout"}>
-                    <button className={"bg-gradient w-full p-2 text-white"}>
-                        Checkout
-                    </button>
-                </Link>
-            </div>
-        </>
+    const handleCloseToastProduct = ()=> {
+        setOnAddProduct(false)
     }
 
     const handleAddProductOnCart = () => {
-        dispatch({
-            type: "ADD_PRODUCT", payload: {
-                sku: product?.sku,
-                qty: 1,
-                price: product?.price,
-                size: selectedSize.name,
-                color: 'black',
-                img: urlFor(product?.src).url()
-            }
-        })
-        toast(<ToastProduct/>, {
-            autoClose: false,
-            className: "w-[450px]",
-            style: {
-                right: "9rem"
-            },
-            onClick: () => setOnAddProduct(false),
-            onClose: () => setOnAddProduct(false),
-            onOpen: () => setOnAddProduct(true)
-        });
-        setSelectedSize({name: "", materials: []});
+        if (selectedSize.name !== ""){
+            dispatch({
+                type: "ADD_PRODUCT", payload: {
+                    sku: product?.sku,
+                    qty: 1,
+                    price: product?.price,
+                    size: selectedSize.name,
+                    color: 'black',
+                    img: urlFor(product?.src).url()
+                }
+            })
+            toast(<ToastProduct product={product} onClose={handleCloseToastProduct} size={selectedSize.name}/>, {
+                autoClose: false,
+                className: "sm:w-[450px] w-full sm:right-[9rem]",
+                onClose: () => setOnAddProduct(false),
+                onOpen: () => setOnAddProduct(true),
+                closeButton: false,
+                closeOnClick: false
+            });
+            setSelectedSize({name: "", materials: []});
+        }else{
+            setErrorSizeUnselected("Please select a size")
+        }
     }
 
     return (
@@ -117,13 +87,6 @@ export default function SlugProduct({productData}: InferGetServerSidePropsType<t
                   alt={product?.name}
                 />
               </div>
-              <div className='flex gap-1.5 mt-3 justify-center'>
-                <div className='bg-slate-400 w-8 h-8 rounded-sm'></div>
-                <div className='bg-slate-400 w-8 h-8 rounded-sm'></div>
-                <div className='bg-slate-400 w-8 h-8 rounded-sm'></div>
-                <div className='bg-slate-400 w-8 h-8 rounded-sm'></div>
-                <div className='bg-slate-400 w-8 h-8 rounded-sm'></div>
-              </div>
             </div>
             <div id="right-pane" className="col-span-2">
               <h1
@@ -137,7 +100,11 @@ export default function SlugProduct({productData}: InferGetServerSidePropsType<t
               {/* <!-- Sizes --> */}
               <div className="mt-10">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-sm font-medium text-gray-900 dark:text-white">
+                  <h3
+                    className={`text-sm font-medium dark:text-white ${
+                      errorSizeUnselected ? "text-red-500" : "text-gray-900"
+                    }`}
+                  >
                     Size
                   </h3>
                   <a
@@ -150,13 +117,17 @@ export default function SlugProduct({productData}: InferGetServerSidePropsType<t
                 <RadioGroup
                   value={selectedSize}
                   onChange={(selected) => handleOnChangeSelect(selected)}
-                  className="mt-4"
+                  className={`mt-4 mb-2 ${
+                    errorSizeUnselected
+                      ? "border border-red-500 rounded-md"
+                      : ""
+                  }`}
                 >
                   <RadioGroup.Label className="sr-only">
                     {" "}
                     Choose a size{" "}
                   </RadioGroup.Label>
-                  <div className="grid grid-cols-4 gap-4">
+                  <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
                     {sizes.map((size: any) => (
                       <RadioGroup.Option
                         key={size.name}
@@ -215,6 +186,7 @@ export default function SlugProduct({productData}: InferGetServerSidePropsType<t
                     ))}
                   </div>
                 </RadioGroup>
+                <span className={"text-red-500"}>{errorSizeUnselected}</span>
                 {/*<RadioGroup>
                             <div className={"mt-5 flex"}>
                                 {colors.map((color: any) => (
@@ -246,11 +218,14 @@ export default function SlugProduct({productData}: InferGetServerSidePropsType<t
                 >
                   Add to basket
                 </button>
-                <button onClick={() => {
-                  router.push({ pathname, query }, asPath, {
-                    locale: 'fr',
-                  });
-                }} className="border-slate-700 border-2 px-8 py-4 font-space">
+                <button
+                  onClick={() => {
+                    router.push({ pathname, query }, asPath, {
+                      locale: "fr",
+                    });
+                  }}
+                  className="border-slate-700 border-2 px-8 py-4 font-space"
+                >
                   Favorite
                 </button>
               </div>

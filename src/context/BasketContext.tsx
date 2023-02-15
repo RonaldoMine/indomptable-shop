@@ -20,11 +20,12 @@ type BasketAction = {
 
 type Dispatch = (action: BasketAction) => void;
 
-type BasketState = { items: BasketItem[]; subTotal: number };
+type BasketState = { items: BasketItem[]; subTotal: number; totalProduct: number };
 
 const initialState = {
   items: [],
   subTotal: 0,
+  totalProduct: 0,
 };
 
 //1. create context and export it
@@ -35,6 +36,11 @@ const BasketContext = createContext<
 const updateSubTotal = (products: BasketItem[]): number => {
   let total = 0;
   products.map((item) => (total += item.qty * item.price));
+  return total;
+};
+const updateTotalProduct = (products: BasketItem[]): number => {
+  let total = 0;
+  products.map((item) => (total += item.qty));
   return total;
 };
 
@@ -53,7 +59,7 @@ const basketReducer = (
       } else {
         state.items = [];
       }
-      return { items: state.items, subTotal: updateSubTotal(state.items) };
+      return { items: state.items, subTotal: updateSubTotal(state.items), totalProduct: updateTotalProduct(state.items) };
 
     case "ADD_PRODUCT":
       let i = state.items.findIndex(
@@ -68,13 +74,14 @@ const basketReducer = (
         //add quantity
         newState[i] = { ...action.payload, qty: state.items[i].qty++ };
         //return the state and increment subTotal
-        return { items: newState, subTotal: updateSubTotal(newState) };
+        return { items: newState, subTotal: updateSubTotal(newState), totalProduct: updateTotalProduct(newState)  };
       } else {
         //Add product to the basket and increment the subtotal
         return {
           items: [...state.items, action.payload],
           subTotal: updateSubTotal([...state.items, action.payload]),
-        };
+          totalProduct: updateTotalProduct([...state.items, action.payload])
+      };
       }
 
     case "REMOVE_PRODUCT":
@@ -83,14 +90,14 @@ const basketReducer = (
         (_, index) => index !== action.payload
       );
       //return the basket's state and decrement the subtotal
-      return { items: filteredState, subTotal: updateSubTotal(filteredState) };
+      return { items: filteredState, subTotal: updateSubTotal(filteredState), totalProduct: updateTotalProduct(filteredState)  };
 
     case "ADD_QUANTITY":
       newState[action.payload] = {
         ...state.items[action.payload],
         qty: state.items[action.payload].qty++,
       };
-      return { items: newState, subTotal: updateSubTotal(newState) };
+      return { items: newState, subTotal: updateSubTotal(newState), totalProduct: updateTotalProduct(newState)  };
 
     case "SUBSTRACT_QUANTITY":
       if (state.items[action.payload].qty > 1) {
@@ -99,7 +106,7 @@ const basketReducer = (
           qty: state.items[action.payload].qty--,
         };
       }
-      return { items: newState, subTotal: updateSubTotal(newState) };
+      return { items: newState, subTotal: updateSubTotal(newState), totalProduct: updateTotalProduct(newState)  };
 
     default:
       return state;
