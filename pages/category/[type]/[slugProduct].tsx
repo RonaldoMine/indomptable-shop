@@ -55,7 +55,7 @@ export default function SlugProduct({productData}: InferGetServerSidePropsType<t
             })
             toast(<ToastProduct product={product} onClose={handleCloseToastProduct} size={selectedSize.name}/>, {
                 autoClose: false,
-                className: "sm:w-[450px] w-full sm:right-[9rem]",
+                className: "sm:w-[450px] w-full sm:right-[9rem] dark:bg-neutral-800",
                 onClose: () => setOnAddProduct(false),
                 onOpen: () => setOnAddProduct(true),
                 closeButton: false,
@@ -96,23 +96,23 @@ export default function SlugProduct({productData}: InferGetServerSidePropsType<t
                 {product?.name}
               </h1>
               <p className="mt-1">{}</p>
-              <p className="mt-5 dark:text-white">XAF {product?.price}</p>
+              <p className="mt-5 dark:text-neutral-300">XAF {product?.price}</p>
               {/* <!-- Sizes --> */}
               <div className="mt-10">
                 <div className="flex items-center justify-between">
                   <h3
-                    className={`text-sm font-medium dark:text-white ${
+                    className={`text-sm font-medium dark:text-neutral-400 ${
                       errorSizeUnselected ? "text-red-500" : "text-gray-900"
                     }`}
                   >
                     Size
                   </h3>
-                  <a
+                  {/* <a
                     href="pages/category/Product[slug]#[slugProduct].tsx"
                     className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
                   >
                     Size guide
-                  </a>
+                  </a> */}
                 </div>
                 <RadioGroup
                   value={selectedSize}
@@ -136,25 +136,25 @@ export default function SlugProduct({productData}: InferGetServerSidePropsType<t
                         className={({ active }) =>
                           classNames(
                             size.materials
-                              ? "bg-white shadow-sm text-gray-900 cursor-pointer"
-                              : "bg-gray-50 text-gray-200 cursor-not-allowed",
-                            active ? "ring-2 ring-slate-700" : "",
-                            "group relative border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6"
+                              ? "bg-white shadow-sm text-gray-900 cursor-pointer dark:bg-transparent dark:text-neutral-400 dark:border-neutral-400"
+                              : "bg-gray-50 text-gray-200 dark:bg-transparent dark:text-neutral-700 cursor-not-allowed",
+                            active
+                              ? "ring-2 ring-slate-700 dark:ring-slate-100"
+                              : "",
+                            "group relative border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 dark:hover:bg-neutral-700 focus:outline-none sm:flex-1 sm:py-6"
                           )
                         }
                       >
                         {({ active, checked }) => (
                           <>
-                            <RadioGroup.Label as="span">
+                            <RadioGroup.Label as="span" className={checked ? "dark:text-neutral-800 z-10" : "dark:text-neutral-400"}>
                               {size.name}
                             </RadioGroup.Label>
                             {size.materials ? (
                               <span
                                 className={classNames(
-                                  active ? "border" : "border-2",
-                                  checked
-                                    ? "border-slate-700"
-                                    : "border-transparent",
+                                  active ? "border" : "border-1",
+                                  checked ? "dark:bg-slate-100" : "",
                                   "pointer-events-none absolute -inset-px rounded-md"
                                 )}
                                 aria-hidden="true"
@@ -205,7 +205,7 @@ export default function SlugProduct({productData}: InferGetServerSidePropsType<t
                         </RadioGroup>*/}
               </div>
 
-              <p className="mt-6 text-slate-400">
+              <p className="mt-6 text-slate-400 dark:text-neutral-400">
                 {/* *Those tee are made on-demand, after placing your order we will send you an e-mail for
                             further
                             information */}
@@ -213,7 +213,7 @@ export default function SlugProduct({productData}: InferGetServerSidePropsType<t
               </p>
               <div className="mt-4 flex flex-wrap gap-5">
                 <button
-                  className="bg-gradient-to-bl from-slate-700 to-slate-900 px-8 py-4 text-white font-space"
+                  className="bg-gradient-to-bl from-slate-700 to-slate-900 px-8 py-4 text-white font-space  dark:text-black dark:from-slate-200 dark:to-slate-50 dark:bg-gradient-to-bl"
                   onClick={handleAddProductOnCart}
                 >
                   Add to basket
@@ -224,7 +224,7 @@ export default function SlugProduct({productData}: InferGetServerSidePropsType<t
                       locale: "fr",
                     });
                   }}
-                  className="border-slate-700 border-2 px-8 py-4 font-space"
+                  className="border-slate-700 border-2 px-8 py-4 font-space dark:border dark:border-neutral-600 dark:text-neutral-300"
                 >
                   Favorite
                 </button>
@@ -232,12 +232,14 @@ export default function SlugProduct({productData}: InferGetServerSidePropsType<t
               <p className="mt-12"></p>
               <div className="mt-12">
                 <ul className="list-disc ml-4">
-                  <li>Shown: Black</li>
-                  <li>{"Brand (Blank tee): Sol's"}</li>
+                  <li className="dark:text-neutral-400">Shown: Black</li>
+                  <li className="dark:text-neutral-400">
+                    {"Brand (Blank tee): Sol's"}
+                  </li>
                 </ul>
               </div>
               {/* Divider */}
-              <div className="h-[0.05rem] bg-slate-300 my-6"></div>
+              <div className="h-[0.05rem] bg-slate-300 my-6 dark:bg-neutral-600"></div>
 
               <div id="submenu-wrapper">
                 <div id="submenu">
@@ -247,24 +249,30 @@ export default function SlugProduct({productData}: InferGetServerSidePropsType<t
                       setExpanded({ ...expanded, one: !expanded.one });
                     }}
                   >
-                    <h3 className="text-xl">Size & Fit</h3>
-                    <span className="text-2xl">+</span>
+                    <h3 className="text-xl dark:text-neutral-300">
+                      Size & Fit
+                    </h3>
+                    <span className="text-2xl dark:text-neutral-300">+</span>
                   </div>
                   <ul
                     className={`list-disc mt-4 ml-4 ${
                       !expanded.one && "hidden"
                     }`}
                   >
-                    <li>{"model? is wearing size M and is 6'1/185cm"}</li>
-                    <li>
-                      Big & regular model? is wearing size 2XL and is 175cm
+                    <li className="dark:text-neutral-400">
+                      {"Model is wearing size M and is 6'1/185cm"}
                     </li>
-                    <li>Standard fit has a relaxed, easy feel</li>
+                    <li className="dark:text-neutral-400">
+                      Big & regular model is wearing size 2XL and is 175cm
+                    </li>
+                    <li className="dark:text-neutral-400">
+                      Standard fit has a relaxed, easy feel
+                    </li>
                   </ul>
                 </div>
 
                 {/* Divider */}
-                <div className="h-[0.05rem] bg-slate-300 my-6"></div>
+                <div className="h-[0.05rem] bg-slate-300 my-6  dark:bg-neutral-600"></div>
 
                 <div id="submenu">
                   <div
@@ -273,17 +281,23 @@ export default function SlugProduct({productData}: InferGetServerSidePropsType<t
                       setExpanded({ ...expanded, two: !expanded.two });
                     }}
                   >
-                    <h3 className="text-xl">Free Shipping & Returns</h3>
-                    <span className="text-2xl">+</span>
+                    <h3 className="text-xl dark:text-neutral-300">
+                      Free Shipping & Returns
+                    </h3>
+                    <span className="text-2xl dark:text-neutral-300">+</span>
                   </div>
-                  <p className={`mt-4 ${!expanded.two && "hidden"}`}>
+                  <p
+                    className={`mt-4 ${
+                      !expanded.two && "hidden"
+                    } dark:text-neutral-400`}
+                  >
                     Free standard shipping and free return for Douala V
                     dwellers.
                   </p>
                 </div>
 
                 {/* Divider */}
-                <div className="h-[0.05rem] bg-slate-300 my-6"></div>
+                <div className="h-[0.05rem] bg-slate-300 my-6  dark:bg-neutral-600"></div>
               </div>
             </div>
           </div>

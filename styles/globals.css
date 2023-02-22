@@ -28,7 +28,19 @@
 
 #contact-us {
     padding: 100px 10px;
-    border-top: 1px solid var(--border-color-gray);
+}
+
+#nprogress .bar{
+    background: var(--color-orange) !important; 
+}
+
+#nprogress .peg{
+    box-shadow: 0 0 10px var(--color-orange), 0 0 5px var(--color-orange) !important;
+}
+
+#nprogress .spinner-icon {
+    border-top-color: var(--color-orange) !important;
+    border-left-color: var(--color-orange) !important;
 }
 
 #contact-us input, #contact-us textarea {
@@ -37,7 +49,6 @@
     margin-bottom: 12px;
     border: 1px solid var(--border-color-gray);
     padding: 20px 10px;
-    color: var(--color-gray);
     width: 100%;
     display: block;
 }

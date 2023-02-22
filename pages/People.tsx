@@ -36,9 +36,9 @@ export default function People({peoples}: PeopleProps) {
     }
 
     return (
-        <>
+        <div className="dark:bg-neutral-800 ">
             <div
-                className="p-4 grid justify-items-center 2xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 sm:gap-4 grid-cols-1">
+                className="p-4 py-12 grid justify-items-center 2xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 sm:gap-4 grid-cols-1">
                 {peoples.map((people: { src: any; title: string; }, key: number) => {
                     return <OnePeople onClick={() => openModal(urlFor(people.src).url(), people.title, key)} key={key}
                                       img={urlFor(people.src).url()}
@@ -110,7 +110,7 @@ export default function People({peoples}: PeopleProps) {
                     </div>
                 </Dialog>
             </Transition>
-        </>
+        </div>
 
     );
 }
