@@ -1,8 +1,10 @@
 import {NextApiRequest, NextApiResponse} from "next";
+import {Transaction} from "@sanity/client";
+import {sanityClient} from "../../sanity";
 
-export default async function payment(req: NextApiRequest, res: NextApiResponse<any>) {
-    const firstname = req.body.firstname;
-    const lastname = req.body.lastname;
+export default async function payment(req: NextApiRequest, res: NextApiResponse) {
+    const firstName = req.body.firstname;
+    const lastName = req.body.lastname;
     const email = req.body.email;
     const phoneNumber = req.body.phoneNumber;
     const address = req.body.address;
@@ -14,13 +16,13 @@ export default async function payment(req: NextApiRequest, res: NextApiResponse<
     const regex_email = /^[A-Z\d._%+-]+@([A-Z\d-]+\.)+[A-Z]{2,4}$/i;
     console.log(req.body)
     try {
-
-        if (firstname && lastname && email && phoneNumber && address && amount && quantity) {
+        if (firstName && lastName && email && phoneNumber && address && amount && quantity) {
             if (regex_email.test(email)) {
                 if (regex_mtn.test(phoneNumber) || regex_orange.test(phoneNumber)) {
                     const API_KEY = process.env["payment-api-key"]
                     const SERVICE_KEY = process.env["payment-service-key"]
-                    const URL_PAYMENT = process.env["payment-url"] + "place-deposit"
+                    const URL_PAYMENT = process.env["payment-url"] + "place-deposit";
+                    const reference = "indomp" + Date.now().toString();
                     const options = {
                         method: 'POST',
                         headers: {
@@ -29,7 +31,7 @@ export default async function payment(req: NextApiRequest, res: NextApiResponse<
                         body: JSON.stringify({
                             api_key: API_KEY,
                             service_key: SERVICE_KEY,
-                            payment_ref: "indomp" + Date.now().toString(),
+                            payment_ref: reference,
                             number: phoneNumber,
                             amount: amount,
                             description: description,
@@ -39,6 +41,26 @@ export default async function payment(req: NextApiRequest, res: NextApiResponse<
                     const response = await fetch(URL_PAYMENT, options);
                     const result = response ? await response.json() : null
                     if (result && result.status === 'REQUEST_ACCEPTED') {
+                        const transaction = new Transaction();
+                        const products = req.body.basket.map((product: { qty: number, size: string, color: string, price: number, sku: string }) => {
+                            return {qty: product.qty, size: product.size, color: product.color, price: product.price, sku: product.sku};
+                        })
+                        transaction.create({
+                            _type: 'orders',
+                            reference: reference,
+                            paymentId: result.paymentId,
+                            products: products,
+                            totalProduct: req.body.totalProduct,
+                            amount: amount,
+                            firstName: firstName,
+                            lastName: lastName,
+                            phoneNumber: phoneNumber,
+                            address: address,
+                            email: email,
+                        });
+                        sanityClient.mutate(transaction, {
+                            autoGenerateArrayKeys: true
+                        })
                         res.status(200).json({
                             message: "Votre paiement vient d'être initié, consulter votre téléphone pour finaliser le paiement",
                             status: "PENDING",

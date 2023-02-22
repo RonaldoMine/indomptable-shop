@@ -34,13 +34,13 @@ export default function Contact() {
                 <div className={"lg:w-3/6 md:w-4/6 w-full p-4 mx-auto"}>
                     <h1 className={"text-center text-6xl font-bold mb-4 text-gradient"}>Contact us</h1>
                     <form onSubmit={handleSubmit(handleSubmitContactForm)} method={"post"}>
-                        <input type="text" className={"ring:border-red-500"} placeholder={"Name"} {...register("name", {
+                        <input defaultValue={"Ronaldo"} type="text" className={"ring:border-red-500"} placeholder={"Name"} {...register("name", {
                             required: true
                         })}/>
-                        <input type="email" placeholder={"Email"}  {...register("email", {
+                        <input defaultValue={"and@gmail.com"} type="email" placeholder={"Email"}  {...register("email", {
                             required: true
                         })}/>
-                        <textarea cols={50} placeholder={"Message"}
+                        <textarea defaultValue={"Hello World"} cols={50} placeholder={"Message"}
                                   className={"resize-none"}  {...register("message", {
                             required: true
                         })}>

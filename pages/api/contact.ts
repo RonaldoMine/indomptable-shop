@@ -1,4 +1,6 @@
 import {NextApiRequest, NextApiResponse} from "next";
+import {render} from '@react-email/render';
+import ContactMail from '../mail/ContactMail'
 
 type Result = {
     message: string
@@ -10,8 +12,8 @@ export default function contact(
     const email = req.body.email;
     const message = req.body.message;
     const regex_email = /^[A-Z\d._%+-]+@([A-Z\d-]+\.)+[A-Z]{2,4}$/i;
-    if (name && email && message){
-        if(regex_email.test(email)){
+    if (name && email && message) {
+        if (regex_email.test(email)) {
             require('dotenv').config();
             let nodemailer = require('nodemailer')
             const HOST = process.env["mail-host"]
@@ -27,26 +29,27 @@ export default function contact(
                 },
                 secure: false
             })
+            const html = render(ContactMail({message: message}));
             const body = {
-                from:USERNAME,
+                from: USERNAME,
                 to: "johnyourbest@gmail.com",
                 subject: `Message From ${email}`,
                 text: message,
-                html: `<p style='text-align: justify'>${message}</p>`
+                html: html
             }
-            transporter.sendMail(body, function (err: any, info: any){
-                if (err){
+            transporter.sendMail(body, function (err: any, info: any) {
+                if (err) {
                     console.log(err)
-                    res.status(500).json({message: "Votre requête n'a pas aboutie, bien vouloir recharger et la page, si le problème persiste veuillez réessayez plus tard'envoi de l'email"});
-                }else{
+                    res.status(500).json({message: "Votre requête n'a pas aboutie, bien vouloir recharger et la page, si le problème persiste veuillez réessayez plus tard"});
+                } else {
                     console.log(info)
                     res.status(200).json({message: "Merci de nous avoir contacté! Nous reviendrons vers vous d'ici peu."});
                 }
             })
-        }else{
+        } else {
             res.status(400).json({message: "L'adresse email saisie n'est pas une adresse email valide, bien vouloir la changer!"});
         }
-    }else{
+    } else {
         res.status(400).json({message: "Bien vouloir renseigner correctement tous les champs requis"});
     }
 }

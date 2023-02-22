@@ -1,18 +1,44 @@
 import {defineField, defineType} from 'sanity'
 
+const STATUS = [
+    {title: "SUCCESS", value: "SUCCESS"},
+    {title: "PENDING", value: "PENDING"},
+    {title: "CANCELLED", value: "CANCELLED"},
+    {title: "FAILED", value: "FAILED"},
+]
 export default defineType({
     name: 'orders',
     title: 'Orders',
     type: 'document',
     fields: [
         defineField({
-            name: 'name',
-            title: 'Name',
+            name: 'reference',
+            title: 'Référence',
             type: 'string',
         }),
         defineField({
-            name: 'reference',
-            title: 'Référence',
+            name: 'firstName',
+            title: 'First Name',
+            type: 'string',
+        }),
+        defineField({
+            name: 'lastName',
+            title: 'Last Name',
+            type: 'string',
+        }),
+        defineField({
+            name: 'phoneNumber',
+            title: 'Phone number',
+            type: 'string',
+        }),
+        defineField({
+            name: 'address',
+            title: 'Address',
+            type: 'string',
+        }),
+        defineField({
+            name: 'email',
+            title: 'Email',
             type: 'string',
         }),
         defineField({
@@ -36,7 +62,7 @@ export default defineType({
                         {
                             name: 'qty',
                             title: 'Quantity',
-                            type: 'string'
+                            type: 'number'
                         },
                         {
                             name: 'size',
@@ -44,9 +70,14 @@ export default defineType({
                             type: 'string'
                         },
                         {
+                            name: 'color',
+                            title: 'Color',
+                            type: 'string'
+                        },
+                        {
                             name: 'price',
                             title: 'Price',
-                            type: 'string'
+                            type: 'number'
                         }
                     ]
                 }
@@ -62,10 +93,29 @@ export default defineType({
             title: 'Amount paid',
             type: 'number',
         }),
+        defineField({
+            name: "status",
+            title: "Status",
+            type: "string",
+            options: {
+                layout: "dropdown",
+                list: STATUS
+            },
+        }),
     ],
     preview: {
         select: {
-            title: 'name',
+            title: 'reference',
+            firstName: 'firstName',
+            lastName: 'lastName',
+            status: 'status',
         },
+        prepare(selection) {
+            const {title, firstName, lastName, status} = selection
+            return {
+                title: " [" + status + "] " + title,
+                subtitle: firstName + " " + lastName,
+            }
+        }
     },
 })

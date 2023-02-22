@@ -7,10 +7,11 @@ const SIZES = [
     {title: "Size XXl", value: "XXL"},
 ]
 const COLORS = [
-    {title: "Color Rouge", value: "#EE1413FF"},
-    {title: "Color Orange", value: "#ED720DFF"},
-    {title: "Color White", value: "#FFF"},
-    {title: "Color Dark", value: "#000"},
+    {title: "Color Rouge", value: "red"},
+    {title: "Color Orange", value: "orange"},
+    {title: "Color White", value: "white"},
+    {title: "Color Black", value: "black"},
+    {title: "Color Green", value: "green"},
 ]
 export default defineType({
     name: 'products',
@@ -107,11 +108,39 @@ export default defineType({
                                             name: "quantity",
                                             title: "Quantity",
                                             type: "number",
+                                        },
+                                        {
+                                            name: 'src',
+                                            title: 'Image',
+                                            type: 'image',
+                                            options: {
+                                                hotspot: true,
+                                            },
+                                        },
+                                        {
+                                            name: 'thumbnail',
+                                            title: 'ThumbnailImage',
+                                            type: 'image',
+                                            options: {
+                                                hotspot: true,
+                                            },
+                                        },
+                                        {
+                                            name: 'blurry',
+                                            title: 'BlurryImage',
+                                            type: 'image',
+                                            options: {
+                                                hotspot: true,
+                                            },
                                         }
                                     ]
                                 }
                             ],
                         },
+                        {
+                            name: "quantity",
+                            type: "number"
+                        }
                     ],
                 }
             ],
