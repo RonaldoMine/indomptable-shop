@@ -49,7 +49,7 @@ export default function Header() {
               {basket.items.length > 0 && (
                 <span
                   className={
-                    "absolute flex justify-center items-center top-[-0.5rem] left-3 bg-red-500 text-center rounded-full h-4 w-4 block text-white"
+                    "absolute flex justify-center items-center top-[-0.5rem] left-3 bg-red-500 text-center rounded-full h-4 w-4 text-white"
                   }
                   style={{ fontSize: 8 }}
                 >
