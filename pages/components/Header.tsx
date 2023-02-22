@@ -4,32 +4,29 @@ import light_svg from '../../public/assets/images/icones/light.svg'
 import dark_svg from '../../public/assets/images/icones/dark.svg'
 import Image from 'next/image'
 import Link from "next/link";
-import {useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import { AiOutlineShopping } from "react-icons/ai";
 import {useBasket} from "../../src/context/BasketContext";
+import ThemeContext from '../../src/context/ThemeContext'
 
 
 export default function Header() {
     const {basket} = useBasket();
-    const [theme, setTheme] = useState("light");
+
+    const themeCtx: { isDarkMode?: boolean; toggleThemeHandler: () => void } = useContext(ThemeContext);
+
     const [theme_svg, setSvgTheme] = useState(light_svg);
-    const [logo_svg, setLogoSvg] = useState(logo_black);
-    const handleChangeTheme = () => {
-        if (theme == 'dark') {
-            setTheme("light");
-            setSvgTheme(light_svg);
-            setLogoSvg(logo_black);
-            document.documentElement.classList.remove('dark')
-        } else {
-            setTheme("dark");
-            setSvgTheme(dark_svg);
-            setLogoSvg(logo_white);
-            document.documentElement.classList.add('dark')
-        }
-    }
+    const [logo_svg, setLogoSvg] = useState(logo_white);
+
+    useEffect(() => {
+      console.log(themeCtx.isDarkMode)
+    
+    }, [themeCtx.isDarkMode]);
+    
+    
     return (
         <>
-            <div className="grid gap-2 sm:justify-items-end justify-items-center items-center mx-auto sm:flex px-10 py-3 relative border-b-2 border-b-neutral-100 dark:bg-neutral-800 dark:border-b-white">
+            <div className="grid gap-2 sm:justify-items-end justify-items-center items-center mx-auto sm:flex px-10 py-3 relative dark:bg-neutral-800 dark:border-b-neutral-500 dark:border-b shadow-md z-10">
                 <Link href={"/"}><Image className={"h-10"} src={logo_svg} alt="BeleFirst"/></Link>
                 <div className='flex w-full lg:justify-center sm:justify-end justify-center items-center'>
                     <a href="https://www.facebook.com/belefirst1" className='dark:text-white'>Facebook</a>
@@ -44,7 +41,7 @@ export default function Header() {
                         <AiOutlineShopping />
                     </span>
                     </Link>
-                    <button onClick={handleChangeTheme}><Image src={theme_svg} alt="Theme"/></button>
+                    <button onClick={themeCtx.toggleThemeHandler}><Image src={theme_svg} alt="Theme"/></button>
                 </div>
             </div>
         </>

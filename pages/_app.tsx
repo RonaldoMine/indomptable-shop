@@ -10,7 +10,12 @@ import { ToastContainer } from "react-toastify";
 import { appWithTranslation } from "next-i18next";
 import { Router } from "next/router";
 import Nprogress from "nprogress";
+import { ThemeContextProvider } from "../src/context/ThemeContext";
 
+//Disable the spinner at the top right
+Nprogress.configure({showSpinner: false})
+
+//Handle router event to add a progress bar at the top of the page
 // @refresh reset
 function App({ Component, pageProps }: AppProps) {
 
@@ -23,34 +28,32 @@ function App({ Component, pageProps }: AppProps) {
       Nprogress.done(false);
     });
 
-    // Router.events.on("routeChangeError", (url: URL) => {
-      
-    //   setIsLoading(false);
-    // });
   }, [Router]);
 
   return (
-    <BasketContextProvider>
-      <div
-        className={`w-screen md:h-screen h-full bg-cover bg-center overflow-x-hidden`}
-      >
-        <Head>
-          <title>Indomptable Shop</title>
-          <meta
-            name="description"
-            content="Boutique en ligne des indomptables"
-          />
-          <link rel="icon" href="/assets/images/logo.svg" />
-        </Head>
-        <main>
-          <Header />
-          <div className={"relative"}>
-            <Component {...pageProps} />
-          </div>
-        </main>
-        <ToastContainer />
-      </div>
-    </BasketContextProvider>
+    <ThemeContextProvider>
+      <BasketContextProvider>
+        <div
+          className={`w-screen md:h-screen h-full bg-cover bg-center overflow-x-hidden`}
+        >
+          <Head>
+            <title>Indomptable Shop</title>
+            <meta
+              name="description"
+              content="Boutique en ligne des indomptables"
+            />
+            <link rel="icon" href="/assets/images/logo.svg" />
+          </Head>
+          <main>
+            <Header />
+            <div className={"relative"}>
+              <Component {...pageProps} />
+            </div>
+          </main>
+          <ToastContainer />
+        </div>
+      </BasketContextProvider>
+    </ThemeContextProvider>
   );
 }
 
