@@ -10,7 +10,7 @@ import { ToastContainer } from "react-toastify";
 import { appWithTranslation } from "next-i18next";
 import { Router } from "next/router";
 import Nprogress from "nprogress";
-import { ThemeContextProvider } from "../src/context/ThemeContext";
+import { ThemeProvider } from "next-themes";
 
 //Disable the spinner at the top right
 Nprogress.configure({showSpinner: false})
@@ -31,7 +31,7 @@ function App({ Component, pageProps }: AppProps) {
   }, [Router]);
 
   return (
-    <ThemeContextProvider>
+    <ThemeProvider enableSystem={false} defaultTheme="light">
       <BasketContextProvider>
         <div
           className={`w-screen md:h-screen h-full bg-cover bg-center overflow-x-hidden`}
@@ -53,7 +53,7 @@ function App({ Component, pageProps }: AppProps) {
           <ToastContainer />
         </div>
       </BasketContextProvider>
-    </ThemeContextProvider>
+    </ThemeProvider>
   );
 }
 
