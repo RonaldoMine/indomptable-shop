@@ -1,6 +1,7 @@
 import {NextApiRequest, NextApiResponse} from "next";
 import {render} from '@react-email/render';
-import ContactMail from '../mail/ContactMail'
+import ContactMail from '../../src/emails/contact/ContactMail'
+import {TRANSPORTER} from "../../src/emails/mailer";
 
 type Result = {
     message: string
@@ -15,29 +16,16 @@ export default function contact(
     if (name && email && message) {
         if (regex_email.test(email)) {
             require('dotenv').config();
-            let nodemailer = require('nodemailer')
-            const HOST = process.env["mail-host"]
-            const PORT = process.env["mail-port"]
             const USERNAME = process.env["mail-username"]
-            const PASSWORD = process.env["mail-password"]
-            const transporter = nodemailer.createTransport({
-                port: PORT,
-                host: HOST,
-                auth: {
-                    user: USERNAME,
-                    pass: PASSWORD
-                },
-                secure: false
-            })
-            const html = render(ContactMail({message: message}));
+            const html = render(ContactMail({message: message, name: name, email: email}));
             const body = {
                 from: USERNAME,
-                to: "johnyourbest@gmail.com",
-                subject: `Message From ${email}`,
+                to: ["johnyourbest@gmail.com", "andremine98@gmail.com", "marcantoine826@gmail.com"],
+                subject: `[INDOMPTABLE] Message From ${email}`,
                 text: message,
                 html: html
             }
-            transporter.sendMail(body, function (err: any, info: any) {
+            TRANSPORTER.sendMail(body, function (err: any, info: any) {
                 if (err) {
                     console.log(err)
                     res.status(500).json({message: "Votre requête n'a pas aboutie, bien vouloir recharger et la page, si le problème persiste veuillez réessayez plus tard"});
