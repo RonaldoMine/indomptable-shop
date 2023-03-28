@@ -5,13 +5,21 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AiOutlineShopping } from "react-icons/ai";
 import { useBasket } from "../../src/context/BasketContext";
-import { HiOutlineMoon, HiOutlineSun } from "react-icons/hi";
+import {
+  HiOutlineMoon,
+  HiOutlineSun,
+  HiOutlineTranslate,
+} from "react-icons/hi";
 import { useTheme } from "next-themes";
+import { useRouter } from "next/router";
 
 export default function Header() {
   const { basket } = useBasket();
 
   const { theme, setTheme } = useTheme();
+  const router = useRouter();
+  const {locale: currentLocale} = useRouter();
+  const { pathname, asPath, query } = router;
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -44,6 +52,15 @@ export default function Header() {
           </a>
         </div>
         <div className="flex gap-4">
+          <button
+            onClick={() => {
+              router.push({ pathname, query }, asPath, {
+                locale: currentLocale === "en" ? "fr" : "en",
+              });
+            }}
+          >
+            <HiOutlineTranslate />
+          </button>
           <Link href={"/cart"} className={"flex items-center dark:text-white"}>
             <span className={"relative"}>
               {basket.items.length > 0 && (
@@ -62,11 +79,7 @@ export default function Header() {
           <button
             onClick={() => setTheme(theme === "light" ? "dark" : "light")}
           >
-            {theme === "light" ? (
-              <HiOutlineSun />
-            ) : (
-              <HiOutlineMoon color="white" />
-            )}
+            {theme === "light" ? <HiOutlineSun /> : <HiOutlineMoon />}
           </button>
         </div>
       </div>

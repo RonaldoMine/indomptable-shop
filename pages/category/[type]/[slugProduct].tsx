@@ -1,15 +1,12 @@
 import Image from 'next/image'
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {RadioGroup} from '@headlessui/react'
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {sanityClient, urlFor} from "../../../sanity";
 import {useBasket} from '../../../src/context/BasketContext';
 import {toast} from 'react-toastify';
-import {AiFillCheckCircle} from "react-icons/ai";
-import Link from "next/link";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
-import { useRouter } from "next/router";
 import ToastProduct from "../../components/ToastProduct";
 
 function classNames(...classes: any[]) {
@@ -18,9 +15,7 @@ function classNames(...classes: any[]) {
 
 export default function SlugProduct({productData}: InferGetServerSidePropsType<typeof getServerSideProps>) {
 
-    const {t} = useTranslation()
-    const router = useRouter();
-    const { pathname, asPath, query } = router;
+    const {t} = useTranslation("product-page")
     const [expanded, setExpanded] = useState({one: false, two: false});
     const [selectedSize, setSelectedSize] = useState({name: "", materials: []});
     const [colors, setColors] = useState([]);
@@ -29,6 +24,11 @@ export default function SlugProduct({productData}: InferGetServerSidePropsType<t
     const {dispatch} = useBasket();
     const product = productData[0].product;
     const sizes = product.sizes;
+
+    useEffect(() => {
+      console.log(sizes[0].materials);
+    }, []);
+    
 
     const handleOnChangeSelect = (selected: any) => {
         const colors = selected.materials;
@@ -105,7 +105,7 @@ export default function SlugProduct({productData}: InferGetServerSidePropsType<t
                       errorSizeUnselected ? "text-red-500" : "text-gray-900"
                     }`}
                   >
-                    Size
+                    {t("size")}
                   </h3>
                   {/* <a
                     href="pages/category/Product[slug]#[slugProduct].tsx"
@@ -147,7 +147,14 @@ export default function SlugProduct({productData}: InferGetServerSidePropsType<t
                       >
                         {({ active, checked }) => (
                           <>
-                            <RadioGroup.Label as="span" className={checked ? "dark:text-neutral-800 z-10" : "dark:text-neutral-400"}>
+                            <RadioGroup.Label
+                              as="span"
+                              className={
+                                checked
+                                  ? "dark:text-neutral-800 z-10"
+                                  : "dark:text-neutral-400"
+                              }
+                            >
                               {size.name}
                             </RadioGroup.Label>
                             {size.materials ? (
@@ -216,14 +223,9 @@ export default function SlugProduct({productData}: InferGetServerSidePropsType<t
                   className="bg-gradient-to-bl from-slate-700 to-slate-900 px-8 py-4 text-white font-space  dark:text-black dark:from-slate-200 dark:to-slate-50 dark:bg-gradient-to-bl"
                   onClick={handleAddProductOnCart}
                 >
-                  Add to basket
+                  {t("add-to-basket")}
                 </button>
                 <button
-                  onClick={() => {
-                    router.push({ pathname, query }, asPath, {
-                      locale: "fr",
-                    });
-                  }}
                   className="border-slate-700 border-2 px-8 py-4 font-space dark:border dark:border-neutral-600 dark:text-neutral-300"
                 >
                   Favorite
@@ -232,7 +234,7 @@ export default function SlugProduct({productData}: InferGetServerSidePropsType<t
               <p className="mt-12"></p>
               <div className="mt-12">
                 <ul className="list-disc ml-4">
-                  <li className="dark:text-neutral-400">Shown: Black</li>
+                  <li className="dark:text-neutral-400">{t("shown")}: Black</li>
                   <li className="dark:text-neutral-400">
                     {"Brand (Blank tee): Sol's"}
                   </li>
@@ -250,7 +252,7 @@ export default function SlugProduct({productData}: InferGetServerSidePropsType<t
                     }}
                   >
                     <h3 className="text-xl dark:text-neutral-300">
-                      Size & Fit
+                      {t("size-and-fit")}
                     </h3>
                     <span className="text-2xl dark:text-neutral-300">+</span>
                   </div>
@@ -282,7 +284,7 @@ export default function SlugProduct({productData}: InferGetServerSidePropsType<t
                     }}
                   >
                     <h3 className="text-xl dark:text-neutral-300">
-                      Free Shipping & Returns
+                      {t("delivery-and-return")}
                     </h3>
                     <span className="text-2xl dark:text-neutral-300">+</span>
                   </div>
@@ -291,8 +293,7 @@ export default function SlugProduct({productData}: InferGetServerSidePropsType<t
                       !expanded.two && "hidden"
                     } dark:text-neutral-400`}
                   >
-                    Free standard shipping and free return for Douala V
-                    dwellers.
+                    {t("delivery-and-return-note")}
                   </p>
                 </div>
 
@@ -333,7 +334,7 @@ export const getServerSideProps: GetServerSideProps = async ({params, locale}:an
     return {
       props: {
         productData,
-        ...(await serverSideTranslations(locale, ["common"])),
+        ...(await serverSideTranslations(locale, ["product-page"])),
       },
     };
 }
