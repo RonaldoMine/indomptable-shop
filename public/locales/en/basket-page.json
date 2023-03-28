@@ -1,0 +1,13 @@
+{
+    "h1": "Your basket",
+    "emptyBasket": {
+        "text": "No items in your basket",
+        "link": "Go to shopping"
+    },
+    "order-summary": "Order summary",
+    "total-quantity": "Total quantity",
+    "subtotal": "Subtotal",
+    "delivery-fees": "Delivery fees",
+    "order-total": "Order total",
+    "checkout": "Checkout"
+}

@@ -2,17 +2,21 @@ import React from "react";
 import Image from "next/image";
 import { HiX } from "react-icons/hi";
 import Link from "next/link";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useBasket } from "../src/context/BasketContext";
+import { useTranslation } from "react-i18next";
 
 function Cart() {
 
     const { basket, dispatch } = useBasket();
+    const {t} = useTranslation("basket-page")
 
     return (
       <div className="w-full overflow-x-hidden dark:bg-neutral-800">
         <main className="px-6 py-10 max-w-[75rem] mx-auto">
           <h1 className="text-3xl font-bold dark:text-neutral-100">
-            Your basket
+            {t("h1")}
           </h1>
           <hr className="my-6" />
           <div
@@ -100,9 +104,9 @@ function Cart() {
                   })
                 ) : (
                   <p>
-                    No items in your basket,{" "}
+                    {t("emptyBasket.text")},{" "}
                     <Link href={"/"} className="underline">
-                      Go to shopping
+                      {t("emptyBasket.link")}
                     </Link>
                   </p>
                 )}
@@ -112,11 +116,11 @@ function Cart() {
               <div id="right-pane" className="col-span-1">
                 <div className="p-4 bg-slate-50 dark:bg-transparent dark:border-neutral-600 dark:border">
                   <h2 className="mb-4 text-lg font-semibold dark:text-neutral-200">
-                    Order Summary
+                    {t("order-summary")}
                   </h2>
                   <div className="flex justify-between py-2">
                     <span className="text-slate-600 dark:text-neutral-400">
-                      Total Quantity
+                      {t("total-quantity")}
                     </span>
                     <span className="font-semibold dark:text-neutral-200">
                       {basket.totalProduct}
@@ -125,7 +129,7 @@ function Cart() {
                   <hr />
                   <div className="flex justify-between py-2">
                     <span className="text-slate-600 dark:text-neutral-400">
-                      Subtotal
+                      {t("subtotal")}
                     </span>
                     <span className="font-semibold dark:text-neutral-200">
                       XAF {basket.subTotal}
@@ -134,7 +138,7 @@ function Cart() {
                   <hr />
                   <div className="flex justify-between py-2">
                     <span className="text-slate-600 dark:text-neutral-400">
-                      Delivery Fees
+                      {t("delivery-fees")}
                     </span>
                     <span className="font-semibold dark:text-neutral-200">
                       XAF {1000}
@@ -143,7 +147,7 @@ function Cart() {
                   <hr />
                   <div className="flex justify-between py-2">
                     <h2 className="font-semibold dark:text-neutral-400">
-                      Order total
+                      {t("order-total")}
                     </h2>
                     <span className="font-semibold dark:text-neutral-200">
                       XAF {basket.subTotal + 1000}
@@ -165,3 +169,11 @@ function Cart() {
 }
 
 export default Cart;
+
+export const getServerSideProps: GetServerSideProps = async ({locale}:any) => {
+  return {
+      props: {
+        ...(await serverSideTranslations(locale, ["basket-page"])),
+      },
+    };
+}

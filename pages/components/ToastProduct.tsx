@@ -3,6 +3,7 @@ import {urlFor} from "../../sanity";
 import React from "react";
 import {useBasket} from "../../src/context/BasketContext";
 import {useRouter} from "next/router";
+import { useTranslation } from "react-i18next";
 
 export default function ToastProduct({
                                          product,
@@ -12,11 +13,12 @@ export default function ToastProduct({
                                      }: { product: any, size: string, onClose?: () => void, closeToast?: () => void }) {
     const {basket} = useBasket();
     const router = useRouter()
+    const {t} = useTranslation('product-page');
     return (
-      <div className="bg-neutral-800">
+      <div className="dark:bg-neutral-800">
         <div className="flex items-center justify-between mb-2">
           <AiFillCheckCircle className={"fill-green-500 mr-3"} />
-          <h3>Product add in cart</h3>
+          <h3>{t("toast-title")}</h3>
           <AiOutlineClose
             className={"fill-red-500 mr-3 hover:cursor-pointer"}
             onClick={() => {
@@ -36,7 +38,7 @@ export default function ToastProduct({
               {product?.name}
             </p>
             <p className="dark:text-neutral-400">
-              Size{" "}
+              {t("size")}{" "}
               <span className={"text-neutral-700 dark:text-neutral-300"}>
                 {size}
               </span>

@@ -1,0 +1,14 @@
+{
+    "h1": "Votre panier",
+    "emptyBasket": {
+        "text": "Votre panier est vide",
+        "link": "Aller à la boutique"
+    },
+    "order-summary": "Résumé de la commande",
+    "total-quantity": "Quantité totale",
+    "subtotal": "Total partiel",
+    "delivery-fees": "Frais de livraison",
+    "order-total": "Total",
+    "checkout": "Paiement"
+    
+}

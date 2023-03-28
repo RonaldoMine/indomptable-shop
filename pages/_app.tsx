@@ -3,7 +3,7 @@ import "../styles/responsive.css";
 import "react-toastify/dist/ReactToastify.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Header from "./components/Header";
 import { BasketContextProvider } from "../src/context/BasketContext";
 import { ToastContainer } from "react-toastify";
