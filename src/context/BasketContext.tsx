@@ -117,6 +117,13 @@ const basketReducer = (
                 };
             }
             return {items: newState, subTotal: updateSubTotal(newState), totalProduct: updateTotalProduct(newState)};
+        case "RESET_BASKET":
+            state.items = [];
+            return {
+                items: state.items,
+                subTotal: updateSubTotal(state.items),
+                totalProduct: updateTotalProduct(state.items)
+            };
 
         default:
             return state;

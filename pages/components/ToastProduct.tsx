@@ -13,7 +13,7 @@ export default function ToastProduct({
     const {basket} = useBasket();
     const router = useRouter()
     return (
-      <div className="bg-neutral-800">
+      <div>
         <div className="flex items-center justify-between mb-2">
           <AiFillCheckCircle className={"fill-green-500 mr-3"} />
           <h3>Product add in cart</h3>

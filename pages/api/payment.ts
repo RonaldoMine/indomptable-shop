@@ -8,7 +8,7 @@ export default async function payment(req: NextApiRequest, res: NextApiResponse)
     const email = req.body.email;
     const phoneNumber = req.body.phoneNumber;
     const address = req.body.address;
-    const amount = 10;
+    const amount = req.body.amount//10;
     const quantity = req.body.quantity;
     const description = "Tee-shirt";
     const regex_mtn = /^(237)?((65[0-4])|(67[0-9])|(68[0-9]))[0-9]{6}$/;
@@ -38,8 +38,8 @@ export default async function payment(req: NextApiRequest, res: NextApiResponse)
                             transactional: "yes"
                         }),
                     }
-                    const response = await fetch(URL_PAYMENT, options);
-                    const result = response ? await response.json() : null
+                    const response = ""//await fetch(URL_PAYMENT, options);
+                    const result = {status: "REQUEST_ACCEPTED", paymentId: "NXH-"+new Date().getTime()};//response ? await response.json() : null
                     if (result && result.status === 'REQUEST_ACCEPTED') {
                         const transaction = new Transaction();
                         const products = req.body.basket.map((product: { qty: number, size: string, color: string, price: number, sku: string }) => {
@@ -50,7 +50,7 @@ export default async function payment(req: NextApiRequest, res: NextApiResponse)
                             reference: reference,
                             paymentId: result.paymentId,
                             products: products,
-                            totalProduct: req.body.totalProduct,
+                            totalProduct: quantity,
                             amount: amount,
                             firstName: firstName,
                             lastName: lastName,
@@ -58,7 +58,7 @@ export default async function payment(req: NextApiRequest, res: NextApiResponse)
                             address: address,
                             email: email,
                         });
-                        sanityClient.mutate(transaction, {
+                        await sanityClient.mutate(transaction, {
                             autoGenerateArrayKeys: true
                         })
                         res.status(200).json({
@@ -80,6 +80,7 @@ export default async function payment(req: NextApiRequest, res: NextApiResponse)
         }
     }
     catch (e) {
+        console.log(e)
         res.status(500).json({message: "Les paiements sont indisponibles pour le moment, veuillez réessayer plus tard!"})
     }
 

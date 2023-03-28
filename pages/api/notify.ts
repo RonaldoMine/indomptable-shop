@@ -5,6 +5,7 @@ import {render} from '@react-email/render';
 import {TRANSPORTER} from "../../src/emails/mailer";
 import OrderMail from "../../src/emails/payment/OrderMail";
 import {OrderInterface} from "../../typings";
+import PDF from "html-pdf";
 
 export default async function notify(req: NextApiRequest, resp: NextApiResponse) {
     const {order_id, status} = req.body;
@@ -71,6 +72,9 @@ function sendNotifcation(datas: OrderInterface) {
     require('dotenv').config();
     const USERNAME = process.env["mail-username"]
     const html = render(OrderMail(datas));
+    PDF.create(html).toFile("./public/orders/orders.pdf", (err: any, res: any) => {
+        console.log(res);
+    });
     const body = {
         from: USERNAME,
         to: [datas.email, "andremine98@gmail.com", "marcantoine826@gmail.com"],

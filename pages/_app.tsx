@@ -31,7 +31,7 @@ function App({ Component, pageProps }: AppProps) {
   }, [Router]);
 
   return (
-    <ThemeProvider enableSystem={false} defaultTheme="light">
+    <ThemeProvider enableSystem={false} attribute={"class"} defaultTheme="light">
       <BasketContextProvider>
         <div
           className={`w-screen md:h-screen h-full bg-cover bg-center overflow-x-hidden`}
