@@ -196,7 +196,8 @@ export default function SlugProduct({
                   >
                     <div className="w-28 h-28 relative">
                       <Image
-                        src={urlFor(color.images[0].src).url()}
+                        src={urlFor(color.images[0].thumbnail).url()}
+                        blurDataURL={urlFor(color.images[0].blurry).url()}
                         alt={color.name}
                         fill={true}
                         className={"object-contain"}
