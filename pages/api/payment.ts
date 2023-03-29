@@ -3,8 +3,8 @@ import {Transaction} from "@sanity/client";
 import {sanityClient} from "../../sanity";
 
 export default async function payment(req: NextApiRequest, res: NextApiResponse) {
-    const firstName = req.body.firstname;
-    const lastName = req.body.lastname;
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
     const email = req.body.email;
     const phoneNumber = req.body.phoneNumber;
     const address = req.body.address;
@@ -14,7 +14,6 @@ export default async function payment(req: NextApiRequest, res: NextApiResponse)
     const regex_mtn = /^(237)?((65[0-4])|(67[0-9])|(68[0-9]))[0-9]{6}$/;
     const regex_orange = /^(237)?((65[5-9])|(69[0-9]))[0-9]{6}$/;
     const regex_email = /^[A-Z\d._%+-]+@([A-Z\d-]+\.)+[A-Z]{2,4}$/i;
-    console.log(req.body)
     try {
         if (firstName && lastName && email && phoneNumber && address && amount && quantity) {
             if (regex_email.test(email)) {

@@ -64,11 +64,11 @@ async function generatePDF(paymentId: string) {
         await sanityClient.fetch(`*[_type == 'products' && sku == $slugProduct]{
                         _id,
                         name,
-                        src,
-                      sizes[name match $sizeName][0]{
-                        _key,
-                        materials[color match $colorName][0]
-                      }
+                        coverImage,
+                        colors[name match $colorName][0]{
+                          _key,
+                          sizes[label match $sizeName][0]
+                        }
                     }`, {
             sizeName: products[productKey].size,
             slugProduct: products[productKey].sku,
@@ -76,11 +76,10 @@ async function generatePDF(paymentId: string) {
         }).then((response) => {
             if (response.length > 0) {
                 order.products[productKey].name = response[0].name
-                order.products[productKey].image = urlFor(response[0].src).url()
+                order.products[productKey].image = urlFor(response[0].coverImage).url()
             }
         });
     }
-    console.log(order)
     const html = render(OrderMail(order));
     let pdf_link = `orders/${order.reference}.pdf`
     PDF.create(html).toFile(`public/${pdf_link}`, (err: any, res) => {

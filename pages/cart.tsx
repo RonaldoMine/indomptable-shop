@@ -156,7 +156,7 @@ function Cart() {
                   <Link href={"/checkout"}>
                     {" "}
                     <button className="bg-gradient-to-bl from-slate-700 to-slate-900 px-8 py-4 text-white font-space mt-3 dark:text-black dark:from-slate-200 dark:to-slate-50">
-                      Checkout
+                        {t("checkout")}
                     </button>
                   </Link>
                 </div>

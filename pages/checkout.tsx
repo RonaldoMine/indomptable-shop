@@ -162,19 +162,19 @@ function Checkout() {
                                         <div className="grid md:grid-cols-2 grid-cols-1 md:gap-x-8 md:gap-y-8 gap-4">
                                             <div>
                                                 <input type="text"
-                                                       className={"form-control rounded dark:bg-transparent dark:text-white"} {...register("firstname", {
+                                                       className={"form-control rounded dark:bg-transparent dark:text-white"} {...register("firstName", {
                                                     required: true,
                                                 })} defaultValue={"Ronaldo"} placeholder="First Name *"/>
                                                 <span
-                                                    className={"text-red-500 text-sm "}>{errors.firstname && "Please enter your firstname"}</span>
+                                                    className={"text-red-500 text-sm "}>{errors.firstName && "Please enter your firstname"}</span>
                                             </div>
                                             <div>
                                                 <input type="text"
-                                                       className={"form-control rounded dark:bg-transparent dark:text-white"} {...register("lastname", {
+                                                       className={"form-control rounded dark:bg-transparent dark:text-white"} {...register("lastName", {
                                                     required: true,
                                                 })} defaultValue={"Mine"} placeholder="Last Name *"/>
                                                 <span
-                                                    className={"text-red-500 text-sm"}>{errors.lastname && "Please enter your lastname"}</span>
+                                                    className={"text-red-500 text-sm"}>{errors.lastName && "Please enter your lastname"}</span>
                                             </div>
                                             <div>
                                                 <input type="email"

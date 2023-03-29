@@ -35,22 +35,24 @@ export default async function notify(req: NextApiRequest, resp: NextApiResponse)
                 await sanityClient.fetch(`*[_type == 'products' && sku == $slugProduct]{
                         _id,
                         name,
-                        src,
-                      sizes[name match $sizeName][0]{
-                        _key,
-                        materials[color match $colorName][0]
-                      }
+                        coverImage,
+                        colors[name match $colorName][0]{
+                          _key,
+                          totalQuantity,
+                          sizes[label match $sizeName][0]
+                        }
                     }`, {
                     sizeName: products[productKey].size,
                     slugProduct: products[productKey].sku,
                     colorName: products[productKey].color
                 }).then((response) => {
                     if (response.length > 0) {
-                        const {quantity} = response[0].sizes.materials;
+                        const {quantity} = response[0].colors.sizes;
                         order[0].products[productKey].name = response[0].name
-                        order[0].products[productKey].image = urlFor(response[0].src).url()
+                        order[0].products[productKey].image = urlFor(response[0].coverImage).url()
                         let request: any = [];
-                        request[`sizes[name=="${products[productKey].size}"].materials[color=="${products[productKey].color}"].quantity`] = quantity - products[productKey].qty;
+                        request[`colors[name=="${products[productKey].color}"].sizes[label=="${products[productKey].size}"].quantity`] = quantity - products[productKey].qty;
+                        request[`colors[name=="${products[productKey].color}"].totalQuantity`] = response[0].colors.totalQuantity - products[productKey].qty;
                         const path = new Patch(response[0]._id).set({...request})
                         transaction.patch(path);
                         sanityClient.mutate(transaction)
@@ -61,14 +63,14 @@ export default async function notify(req: NextApiRequest, resp: NextApiResponse)
         const path = new Patch(order[0]._id).set({status: status})
         transaction.patch(path);
         sanityClient.mutate(transaction)
-        sendNotifcation(order[0]);
+        sendNotification(order[0]);
         return resp.status(200).json({status: 1})
     }
     return resp.status(200).json({status: 0})
 }
 
 
-function sendNotifcation(datas: OrderInterface) {
+function sendNotification(datas: OrderInterface) {
     require('dotenv').config();
     const USERNAME = process.env["mail-username"]
     const html = render(OrderMail(datas));
@@ -77,7 +79,8 @@ function sendNotifcation(datas: OrderInterface) {
     });
     const body = {
         from: USERNAME,
-        to: [datas.email, "andremine98@gmail.com", "marcantoine826@gmail.com"],
+        //to: [datas.email, "andremine98@gmail.com", "marcantoine826@gmail.com"],
+        to: [datas.email],
         subject: `[INDOMPTABLE] Votre commande a été reçue et validée`,
         text: "message",
         html: html
