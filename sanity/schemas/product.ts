@@ -59,7 +59,7 @@ export default defineType({
       type: 'image',
     }),
     defineField({
-      name: 'coverblurry',
+      name: 'coverBlurry',
       title: 'CoverBlurryImage',
       type: 'image',
     }),
