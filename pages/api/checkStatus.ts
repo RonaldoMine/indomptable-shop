@@ -8,6 +8,7 @@ import {Patch} from "@sanity/client";
 
 export default async function checkStatus(req: NextApiRequest, res: NextApiResponse<any>) {
     const paymentId = req.body.paymentId;
+    const lang = req.body.lang;
     if (paymentId) {
         const API_KEY = process.env["payment-api-key"]
         const URL_PAYMENT = process.env["payment-url"] + "check-payment"
@@ -23,10 +24,10 @@ export default async function checkStatus(req: NextApiRequest, res: NextApiRespo
         }
         const response = "" //await fetch(URL_PAYMENT, options);
         const result = {status: "SUCCESS"}//await response.json()
-        let message ;
+        let message;
         let order_pdf = "";
         if (result.status === 'SUCCESS') {
-            message = "Le paiement de votre commande a été validée avec succès! Vous allez recevoir un mail avec tous les détails!"
+            message = lang === "fr" ? "Le paiement de votre commande a été validée avec succès! Vous allez recevoir un mail avec tous les détails" : "The payment of your order has been successfully validated! You will receive an email with all the details!"
             await generatePDF(paymentId).then((result: any) => order_pdf = result);
         } else {
             message = "Le paiement de votre commande n'a pas abouti!"
@@ -61,7 +62,8 @@ async function generatePDF(paymentId: string) {
     });
     const products = order.products;
     for (const productKey in products) {
-        await sanityClient.fetch(`*[_type == 'products' && sku == $slugProduct]{
+        console.log(products[productKey])
+        /*await sanityClient.fetch(`*[_type == 'products' && sku == $slugProduct]{
                         _id,
                         name,
                         coverImage,
@@ -78,7 +80,7 @@ async function generatePDF(paymentId: string) {
                 order.products[productKey].name = response[0].name
                 order.products[productKey].image = urlFor(response[0].coverImage).url()
             }
-        });
+        });*/
     }
     const html = render(OrderMail(order));
     let pdf_link = `orders/${order.reference}.pdf`

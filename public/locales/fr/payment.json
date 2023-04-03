@@ -1,0 +1,10 @@
+{
+  "errors": {
+    "email": "L'adresse email saisie n'est pas une adresse email valide, bien vouloir la changer!",
+    "phone": "Le numéro que vous avez rensigné n'est pas correct!",
+    "empty_field": "Bien vouloir renseigner correctement tous les champs requis",
+    "general_error": "Les paiements sont indisponibles pour le moment, veuillez réessayer plus tard!",
+    "payment_error": "Votre paiement n'a pas pu être initié"
+  },
+  "payment_initiated": "Votre paiement vient d'être initié, consulter votre téléphone pour finaliser le paiement"
+}

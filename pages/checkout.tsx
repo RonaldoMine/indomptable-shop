@@ -8,6 +8,9 @@ import om from "../public/assets/images/om.svg"
 import momo from "../public/assets/images/mtn.svg"
 import Image from "next/image";
 import Link from "next/link";
+import {useTranslation} from "next-i18next";
+import {GetServerSideProps, InferGetServerSidePropsType} from "next";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 enum PaymentStatus {
     SUCCESS = "SUCCESS",
@@ -17,9 +20,10 @@ enum PaymentStatus {
     CANCELLED = "CANCELLED"
 }
 
-function Checkout() {
+function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProps>) {
     const {basket, dispatch} = useBasket();
-    const [paymentMessage, setPaymentMessage] = useState("La commande est en cours de traitement...")
+    const {t} = useTranslation("checkout-page");
+    const [paymentMessage, setPaymentMessage] = useState(`${t("init-payment-message")}`);
     const [paymentStatus, setPaymentStatus] = useState(PaymentStatus.CREATED)
     const [paymentPdfLink, setPaymentPdfLink] = useState("")
     let interval: string | number | NodeJS.Timer | undefined;
@@ -41,7 +45,8 @@ function Checkout() {
                 ...values,
                 quantity: basket.totalProduct,
                 amount: (basket.subTotal + 1000),
-                basket: basket.items
+                basket: basket.items,
+                lang: locale
             }),
         }
         const response = await fetch("/api/payment", options);
@@ -66,19 +71,19 @@ function Checkout() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({paymentId: paymentId}),
+            body: JSON.stringify({paymentId: paymentId, lang: locale}),
         }
         const response = await fetch("/api/checkStatus", options);
         const result = await response.json();
         const status = response.status
         if (status === 200) {
             if (result.status != PaymentStatus.PENDING && result.status != PaymentStatus.CREATED) {
-                if (result.status === PaymentStatus.SUCCESS) {
+                /*if (result.status === PaymentStatus.SUCCESS) {
                     dispatch({
                         type: "RESET_BASKET",
                         payload: {}
                     })
-                }
+                }*/
                 setPaymentMessage(result.message)
                 setPaymentStatus(result.status)
                 setPaymentPdfLink(result.pdf)
@@ -94,31 +99,31 @@ function Checkout() {
     return <>
         <div className='w-full overflow-x-hidden'>
             <div className="px-6 py-10 max-w-[75rem] mx-auto">
-                <h1 className="text-3xl font-bold">Checkout your command</h1>
+                <h1 className="text-3xl font-bold">{t("title")}</h1>
                 <hr className="my-6"/>
                 <div id="main-content-wrapper" className="grid grid-cols-1 gap-2 md:grid-cols-3">
                     {
                         (basket.totalProduct > 0 || paymentStatus === PaymentStatus.SUCCESS) ? <>
                                 {paymentStatus !== PaymentStatus.SUCCESS && (<div className="col-span-1">
                                     <div className="p-4 dark:bg-neutral-800 bg-slate-50">
-                                        <h2 className="mb-4 text-lg font-semibold">Order Summary</h2>
+                                        <h2 className="mb-4 text-lg font-semibold">{t("order-summary")}</h2>
                                         <div className="flex justify-between py-2">
-                                            <span className="text-slate-600 dark:text-slate-200">Total Quantity</span>
+                                            <span className="text-slate-600 dark:text-slate-200">{t("quantity")}</span>
                                             <span className="font-semibold">{basket.totalProduct}</span>
                                         </div>
                                         <hr/>
                                         <div className="flex justify-between py-2">
-                                            <span className="text-slate-600 dark:text-slate-200">Subtotal</span>
+                                            <span className="text-slate-600 dark:text-slate-200">{t("sub-total")}</span>
                                             <span className="font-semibold">XAF {basket.subTotal}</span>
                                         </div>
                                         <hr/>
                                         <div className="flex justify-between py-2">
-                                            <span className="text-slate-600 dark:text-slate-200">Delivery Fees</span>
+                                            <span className="text-slate-600 dark:text-slate-200">{t("delivery-fees")}</span>
                                             <span className="font-semibold">XAF {1000}</span>
                                         </div>
                                         <hr/>
                                         <div className="flex justify-between py-2">
-                                            <h2 className="font-semibold">Order total</h2>
+                                            <h2 className="font-semibold">{t("total")}</h2>
                                             <span className="font-semibold">XAF {basket.subTotal + 1000}</span>
                                         </div>
                                     </div>
@@ -147,51 +152,51 @@ function Checkout() {
                                                     className={"flex flex-col-reverse items-center justify-between w-full"}>
                                                     <Link href={"/"}
                                                           className={"underline mt-4 flex aligns-center font-bold"}>
-                                                        <BiArrowBack className={"mr-2"}/> <span>Retour à la boutique</span>
+                                                        <BiArrowBack className={"mr-2"}/> <span>{t("back-to-shop")}</span>
                                                     </Link>
                                                     {(paymentStatus === PaymentStatus.SUCCESS && paymentPdfLink !== "") && (
                                                         <a className={"text-gradient underline mt-4 flex aligns-center"}
-                                                           href={`/${paymentPdfLink}`} target="_blank">Télécharger Votre
-                                                            facture <AiOutlineFilePdf
-                                                                className={"text-red-500 ml-2"}/></a>)}
+                                                           href={`/${paymentPdfLink}`}
+                                                           target="_blank">{t("download-invoice")} <AiOutlineFilePdf
+                                                            className={"text-red-500 ml-2"}/></a>)}
                                                 </div>
                                             </div>
                                         </div>)}
-                                    <h2 className="text-2xl text-center mb-6 mt-4">Delivery options</h2>
+                                    <h2 className="text-2xl text-center mb-6 mt-4">{t("form.title")}</h2>
                                     <form onSubmit={handleSubmit(handleInitPayment)}>
                                         <div className="grid md:grid-cols-2 grid-cols-1 md:gap-x-8 md:gap-y-8 gap-4">
                                             <div>
                                                 <input type="text"
                                                        className={"form-control rounded dark:bg-transparent dark:text-white"} {...register("firstName", {
                                                     required: true,
-                                                })} defaultValue={"Ronaldo"} placeholder="First Name *"/>
+                                                })} defaultValue={"Ronaldo"} placeholder={`${t("form.first-name")} *`}/>
                                                 <span
-                                                    className={"text-red-500 text-sm "}>{errors.firstName && "Please enter your firstname"}</span>
+                                                    className={"text-red-500 text-sm "}>{errors.firstName && t("errors.first-name")}</span>
                                             </div>
                                             <div>
                                                 <input type="text"
                                                        className={"form-control rounded dark:bg-transparent dark:text-white"} {...register("lastName", {
                                                     required: true,
-                                                })} defaultValue={"Mine"} placeholder="Last Name *"/>
+                                                })} defaultValue={"Mine"} placeholder={`${t("form.last-name")} *`}/>
                                                 <span
-                                                    className={"text-red-500 text-sm"}>{errors.lastName && "Please enter your lastname"}</span>
+                                                    className={"text-red-500 text-sm"}>{errors.lastName && t("errors.last-name")}</span>
                                             </div>
                                             <div>
                                                 <input type="email"
                                                        className={"form-control rounded dark:bg-transparent dark:text-white"} {...register("email", {
                                                     required: true,
-                                                })} defaultValue={"and@gmail.com"} placeholder="Email *"/>
+                                                })} defaultValue={"and@gmail.com"} placeholder={`${t("form.email")} *`}/>
                                                 <span
-                                                    className={"text-red-500 text-sm "}>{errors.email && "Please enter your email"}</span>
+                                                    className={"text-red-500 text-sm "}>{errors.email && t("errors.email")}</span>
                                             </div>
                                             <div>
                                                 <input type="number" {...register("phoneNumber", {
                                                     required: true
                                                 })} defaultValue={"675710605"}
                                                        className={"form-control rounded dark:bg-transparent dark:text-white"}
-                                                       placeholder="Phone Number *"/>
+                                                       placeholder={`${t("form.phone")} *`}/>
                                                 <span
-                                                    className={"text-red-500 text-sm "}>{errors.phoneNumber && "Please enter your phone number"}</span>
+                                                    className={"text-red-500 text-sm "}>{errors.phoneNumber && t("errors.phone")}</span>
                                             </div>
                                         </div>
                                         <div className={"col-span-2 mt-4"}>
@@ -199,25 +204,26 @@ function Checkout() {
                                                 required: true
                                             })} defaultValue={"Immeuble Tecno, Boulevard de la Liberté, Akwa"}
                                                    className={"form-control rounded dark:bg-transparent dark:text-white"}
-                                                   placeholder="Address *"/>
+                                                   placeholder={`${t("form.address")} *`}/>
                                             <span
-                                                className={"text-red-500 text-sm "}>{errors.address && "Please enter your address line"}</span>
+                                                className={"text-red-500 text-sm "}>{errors.address && t("errors.address")}</span>
                                         </div>
                                         <div
                                             className={"md:flex grid md:justify-between justify-items-center items-center mt-4"}>
                                             <div className={"flex items-center"}>
-                                                Accepté ici
-                                                <Image src={om} alt="Orange Money" className={"h-20 w-20"}/>
+                                                {t("form.accept-here")}
+                                                <div className={"bg-white ml-2"}><Image src={om} alt="Orange Money" height={'40'} className={"h-15 w-20"}/></div>
                                                 <Image src={momo} alt="MTN Mobile Money" className={"h-20 w-20"}/>
                                             </div>
                                             <button className={"bg-gradient w-28 p-2 text-white"} type={"submit"}>
-                                                Pay
+                                                {t("form.button")}
                                             </button>
                                         </div>
                                     </form>
                                 </div>
                             </> :
-                            <p>No items in your basket, <Link href={"/"} className="underline">Go to shopping</Link></p>
+                            <p>{t("empty-basket")}, <Link href={"/"} className="underline">{t("back-to-shop")}</Link>
+                            </p>
                     }
                 </div>
             </div>
@@ -226,3 +232,13 @@ function Checkout() {
 }
 
 export default Checkout;
+
+
+export const getServerSideProps: GetServerSideProps = async ({locale}: any) => {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, ["checkout-page"])),
+            locale: locale
+        }
+    }
+}

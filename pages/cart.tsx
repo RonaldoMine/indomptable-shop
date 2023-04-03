@@ -5,7 +5,7 @@ import Link from "next/link";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useBasket } from "../src/context/BasketContext";
-import { useTranslation } from "react-i18next";
+import {useTranslation} from "next-i18next";
 
 function Cart() {
 
@@ -155,7 +155,7 @@ function Cart() {
                   </div>
                   <Link href={"/checkout"}>
                     {" "}
-                    <button className="bg-gradient-to-bl from-slate-700 to-slate-900 px-8 py-4 text-white font-space mt-3 dark:text-black dark:from-slate-200 dark:to-slate-50">
+                    <button className="bg-gradient px-8 py-4 text-white font-space mt-3">
                         {t("checkout")}
                     </button>
                   </Link>
