@@ -32,16 +32,17 @@ export default function SlugProduct({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { t } = useTranslation("product-page");
   const [expanded, setExpanded] = useState({ one: false, two: false });
-  const [selectedSize, setSelectedSize] = useState({ name: "" });
   const [errorSizeUnselected, setErrorSizeUnselected] = useState("");
   const [onAddProduct, setOnAddProduct] = useState(false);
   const { dispatch } = useBasket();
   const product = productData[0].product;
   const colors = product.colors;
   const [selectedColor, setSelectedColor] = useState(colors[0]);
-  const [selectedImage, setSelectedImage] = useState(selectedColor?.images[0]);
-  
-  const [availableSizes, setAvailableSizes] = useState<any>(selectedColor.sizes);
+
+  const [availableSizes, setAvailableSizes] = useState<any>(
+    selectedColor.sizes
+  );
+    const [selectedSize, setSelectedSize] = useState(availableSizes[0]);
   // useEffect(() => {
   //   console.log(selectedColor.sizes);
   // }, [selectedColor]);
@@ -61,14 +62,14 @@ export default function SlugProduct({
   };
 
   const handleAddProductOnCart = () => {
-    if (selectedSize.name !== "") {
+    if (selectedSize.label !== "") {
       dispatch({
         type: "ADD_PRODUCT",
         payload: {
           sku: product?.sku,
           qty: 1,
           price: product?.price,
-          size: selectedSize.name,
+          size: selectedSize.label,
           color: "black",
           img: urlFor(product?.coverImage).url(),
         },
@@ -77,7 +78,7 @@ export default function SlugProduct({
         <ToastProduct
           product={product}
           onClose={handleCloseToastProduct}
-          size={selectedSize.name}
+          size={selectedSize.label}
         />,
         {
           autoClose: false,
@@ -88,7 +89,7 @@ export default function SlugProduct({
           closeOnClick: false,
         }
       );
-      setSelectedSize({ name: "" });
+      // setSelectedSize(availableSizes[0]);
     } else {
       setErrorSizeUnselected("Please select a size");
     }
@@ -100,58 +101,40 @@ export default function SlugProduct({
         {onAddProduct && (
           <div className="transition-all fixed inset-0 bg-neutral-500 bg-opacity-70 z-10"></div>
         )}
-        <div className="min-h-screen max-w-[75rem] mx-auto px-8 sm:px-12 py-20 grid grid-cols-1 md:grid-cols-3 sm:gap-6">
-          <div id="left-pane" className="mb-10">
-            <div id="image-wrapper">
+        <div className="min-h-screen max-w-[75rem] mx-auto px-8 sm:px-12 py-20 grid grid-cols-1 md:grid-cols-6 sm:gap-10">
+          <div
+            id="left-pane"
+            className="mb-10 flex flex-wrap px-8 gap-4 col-span-4"
+          >
+            {/* <div id="image-wrapper">
               <Image
                 className="w-full h-auto"
                 placeholder="blur"
                 width={539}
                 priority
-                blurDataURL={urlFor(product?.coverBlurry).url()}
+                blurDataURL={urlFor(selectedColor?.images[0].blurry).url()}
                 height={885}
-                src={urlFor(product?.coverImage).url()}
+                src={urlFor(selectedColor?.images[0].src).url()}
                 alt={product?.name}
               />
-            </div>
-            {/* <RadioGroup
-              value={selectedImage}
-              onChange={(selectedImage: Color) => handleOnChangeColor(selected)}
-              className={"mt-4 flex items-center space-x-3"}
-            >
-              {colors.map((color: Color, index: number) => (
-                // <div className="w-28 h-28 relative">
-                //   <Image
-                //     src={urlFor(color.images[0].src).url()}
-                //     alt={color.name}
-                //     fill={true}
-                //     className={'object-contain'}
-                //   />
-                // </div>
-
-                <RadioGroup.Option
-                  key={index}
-                  value={color}
-                  className={({ active, checked }) =>
-                    classNames(
-                      "ring-gray-300",
-                      active && checked ? "ring ring-offset-1" : "",
-                      !active && checked ? "ring-2" : "",
-                      "cursor-pointer rounded-md w-min p-0.5 border-gray-200 border-2 focus:outline-none"
-                    )
-                  }
-                >
-                  <div className="w-28 h-28 relative">
+            </div> */}
+            {selectedColor.images.map((image: any, index: number) => {
+              return (
+                <div className="w-[48%]" key={index}>
+                  <div id="image-wrapper" className="w-full h-96 relative">
                     <Image
-                      src={urlFor(color.images[0].src).url()}
-                      alt={color.name}
+                      className="object-contain w-full max-w-full h-full"
+                      placeholder="blur"
                       fill={true}
-                      className={"object-contain"}
+                      priority
+                      blurDataURL={urlFor(image.blurry).url()}
+                      src={urlFor(image.src).url()}
+                      alt={'image '+index}
                     />
                   </div>
-                </RadioGroup.Option>
-              ))}
-            </RadioGroup> */}
+                </div>
+              );
+            })}
           </div>
           <div id="right-pane" className="col-span-2">
             <h1
@@ -170,18 +153,9 @@ export default function SlugProduct({
               <RadioGroup
                 value={selectedColor}
                 onChange={(selected: Color) => handleOnChangeColor(selected)}
-                className={"mt-4 flex items-center space-x-3"}
+                className={"mt-4 flex flex-wrap items-center gap-3"}
               >
                 {colors.map((color: Color, index: number) => (
-                  // <div className="w-28 h-28 relative">
-                  //   <Image
-                  //     src={urlFor(color.images[0].src).url()}
-                  //     alt={color.name}
-                  //     fill={true}
-                  //     className={'object-contain'}
-                  //   />
-                  // </div>
-
                   <RadioGroup.Option
                     key={index}
                     value={color}
@@ -194,7 +168,7 @@ export default function SlugProduct({
                       )
                     }
                   >
-                    <div className="w-28 h-28 relative">
+                    <div className="w-24 h-24 relative">
                       <Image
                         src={urlFor(color.images[0].thumbnail).url()}
                         blurDataURL={urlFor(color.images[0].blurry).url()}
@@ -236,7 +210,7 @@ export default function SlugProduct({
                   {" "}
                   Choose a size{" "}
                 </RadioGroup.Label>
-                <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
+                <div className="grid grid-cols-4 gap-3 sm:grid-cols-8 lg:grid-cols-4">
                   {availableSizes.map((availableSize: any) => (
                     <RadioGroup.Option
                       value={availableSize}
