@@ -351,7 +351,7 @@ export default function SlugProduct({
                             >
                                 {t("add-to-basket")}
                             </button>
-                            <button onClick={handleAddToFavorite}
+                            <button
                                 className="border-slate-700 border-2 px-8 py-4 font-space dark:border dark:border-neutral-600 dark:text-neutral-300">
                                 Favorite
                             </button>
