@@ -25,7 +25,8 @@ function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProp
     const {t} = useTranslation("checkout-page");
     const [paymentMessage, setPaymentMessage] = useState(`${t("init-payment-message")}`);
     const [paymentStatus, setPaymentStatus] = useState(PaymentStatus.CREATED)
-    const [paymentPdfLink, setPaymentPdfLink] = useState("")
+    const [paymentPdfLink, setPaymentPdfLink] = useState("");
+    const [checkPaymentOnLoad, setCheckPaymentOnLoad] = useState(false)
     let interval: string | number | NodeJS.Timer | undefined;
     const {
         handleSubmit, register, formState: {
@@ -57,7 +58,10 @@ function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProp
             setPaymentStatus(result.status)
             setPaymentMessage(result.message)
             interval = setInterval(() => {
-                checkPayment(result.paymentId)
+                if (!checkPaymentOnLoad) {
+                    setCheckPaymentOnLoad(true)
+                    checkPayment(result.paymentId)
+                }
             }, 5000)
         } else {
             toast.error(result.message)
@@ -77,6 +81,7 @@ function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProp
         const result = await response.json();
         const status = response.status
         if (status === 200) {
+            setCheckPaymentOnLoad(false)
             if (result.status != PaymentStatus.PENDING && result.status != PaymentStatus.CREATED) {
                 /*if (result.status === PaymentStatus.SUCCESS) {
                     dispatch({
@@ -140,7 +145,8 @@ function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProp
                                         </div>
                                     </div>)}
                                     {(paymentStatus !== PaymentStatus.PENDING && paymentStatus !== PaymentStatus.CREATED) && (
-                                        <div className="transition-all absolute w-full h-full bg-white z-10 p-4 shadow-md">
+                                        <div
+                                            className="transition-all absolute w-full h-full dark:bg-neutral-800 bg-white z-10 p-4 shadow-md">
                                             <div className="flex flex-col h-full justify-center items-center">
                                                 <div className="text-center">
                                                     {paymentStatus === PaymentStatus.SUCCESS ?
@@ -185,7 +191,7 @@ function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProp
                                                 <input type="email"
                                                        className={"form-control rounded dark:bg-transparent dark:text-white"} {...register("email", {
                                                     required: true,
-                                                })} defaultValue={"and@gmail.com"} placeholder={`${t("form.email")} *`}/>
+                                                })} defaultValue={"johnyourbest@gmail.com"} placeholder={`${t("form.email")} *`}/>
                                                 <span
                                                     className={"text-red-500 text-sm "}>{errors.email && t("errors.email")}</span>
                                             </div>
@@ -212,7 +218,9 @@ function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProp
                                             className={"md:flex grid md:justify-between justify-items-center items-center mt-4"}>
                                             <div className={"flex items-center"}>
                                                 {t("form.accept-here")}
-                                                <div className={"bg-white ml-2"}><Image src={om} alt="Orange Money" height={'40'} className={"h-15 w-20"}/></div>
+                                                <div className={"bg-white ml-2"}><Image src={om} alt="Orange Money"
+                                                                                        height={'40'}
+                                                                                        className={"h-15 w-20"}/></div>
                                                 <Image src={momo} alt="MTN Mobile Money" className={"h-20 w-20"}/>
                                             </div>
                                             <button className={"bg-gradient w-28 p-2 text-white"} type={"submit"}>

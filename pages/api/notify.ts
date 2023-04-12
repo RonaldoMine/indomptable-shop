@@ -23,7 +23,8 @@ export default async function notify(req: NextApiRequest, resp: NextApiResponse)
         products, 
         status,
         totalProduct,
-        amount
+        amount,
+        lang
     }`, {paymentId: order_id}).then(async (response) => {
         order = response;
     });
@@ -73,15 +74,16 @@ export default async function notify(req: NextApiRequest, resp: NextApiResponse)
 function sendNotification(datas: OrderInterface) {
     require('dotenv').config();
     const USERNAME = process.env["mail-username"]
-    const html = render(OrderMail(datas));
-    PDF.create(html).toFile("./public/orders/orders.pdf", (err: any, res: any) => {
+    const langMessages = require(`../../public/locales/${datas.lang}/payment.json`);
+    const html = render(OrderMail(datas, langMessages.order));
+    /*PDF.create(html).toFile("./public/orders/orders.pdf", (err: any, res: any) => {
         console.log(res);
-    });
+    });*/
     const body = {
         from: USERNAME,
         //to: [datas.email, "andremine98@gmail.com", "marcantoine826@gmail.com"],
         to: [datas.email],
-        subject: `[INDOMPTABLE] Votre commande a été reçue et validée`,
+        subject: langMessages.order.subjectMail,
         text: "message",
         html: html
     }

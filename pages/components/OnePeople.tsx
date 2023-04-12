@@ -10,7 +10,7 @@ interface OnePeopleProps {
 
 export default function OnePeople({img, title, onClick}: OnePeopleProps) {
     return (
-        <div className={"bg-[var(--color-orange)] mb-4 rounded hover:cursor-pointer"} onClick={onClick}>
+        <div className={"mb-4 rounded hover:cursor-pointer"} onClick={onClick}>
             <Image src={img} alt={title} height={0} width={768}
                    className={"h-auto w-full object-cover rounded transition-transform duration-100 hover:translate-x-[-10px] hover:translate-y-[-10px]"}></Image>
         </div>

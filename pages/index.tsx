@@ -3,7 +3,7 @@ import shirt_white from '../public/assets/images/tshirt-white-desktop.png'
 import HomeCardItem, {HomeCardType} from "./components/HomeCardItem";
 import React from "react";
 import Contact from "./components/Contact";
-import People from './People';
+import People from './components/People';
 import {GetServerSideProps, InferGetServerSidePropsType} from 'next';
 import {sanityClient} from "../sanity";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
@@ -35,7 +35,7 @@ export const getServerSideProps: GetServerSideProps = async ({locale}: any) => {
     return {
         props: {
             peoples,
-            ...(await serverSideTranslations(locale, ["contact"])),
+            ...(await serverSideTranslations(locale, ["contact", "people"])),
         }
     }
 }

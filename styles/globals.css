@@ -25,16 +25,19 @@
     --input-border-radius: .075rem;
     --button-border-radius: .075rem
 }
+.bg-gradient{
+    background: var(--gradient-color) !important;
+}
 
-#contact-us {
+#contact-us, #our-community {
     padding: 100px 10px;
 }
 
-#nprogress .bar{
-    background: var(--color-orange) !important; 
+#nprogress .bar {
+    background: var(--color-orange) !important;
 }
 
-#nprogress .peg{
+#nprogress .peg {
     box-shadow: 0 0 10px var(--color-orange), 0 0 5px var(--color-orange) !important;
 }
 
@@ -74,7 +77,7 @@
     background: var(--gradient-color);
 }
 
-.form-control{
+.form-control {
     height: 30px;
     font-size: 14px;
     border-radius: var(--input-border-radius);
@@ -190,15 +193,17 @@
         background-position: -200%;
     }
 }
+
 .preloader {
     position: relative;
-    width:  48px;
+    width: 48px;
     height: 48px;
     background: var(--color-orange);
     transform: rotateX(65deg) rotate(45deg);
     color: var(--color-red);
     animation: layers1 1s linear infinite alternate;
 }
+
 .preloader:after {
     content: '';
     position: absolute;
@@ -208,10 +213,19 @@
 }
 
 @keyframes layers1 {
-    0% { box-shadow: 0 0 0 0  }
-    90% , 100% { box-shadow: 20px 20px 0 -4px  }
+    0% {
+        box-shadow: 0 0 0 0
+    }
+    90%, 100% {
+        box-shadow: 20px 20px 0 -4px
+    }
 }
+
 @keyframes layerTr {
-    0% { transform:  translate(0, 0) scale(1) }
-    100% {  transform: translate(-25px, -25px) scale(1) }
+    0% {
+        transform: translate(0, 0) scale(1)
+    }
+    100% {
+        transform: translate(-25px, -25px) scale(1)
+    }
 }

@@ -9,6 +9,7 @@ import {Patch} from "@sanity/client";
 export default async function checkStatus(req: NextApiRequest, res: NextApiResponse<any>) {
     const paymentId = req.body.paymentId;
     const lang = req.body.lang;
+    const json_messages = require(`../../public/locales/${lang}/payment.json`);
     if (paymentId) {
         const API_KEY = process.env["payment-api-key"]
         const URL_PAYMENT = process.env["payment-url"] + "check-payment"
@@ -27,10 +28,10 @@ export default async function checkStatus(req: NextApiRequest, res: NextApiRespo
         let message;
         let order_pdf = "";
         if (result.status === 'SUCCESS') {
-            message = lang === "fr" ? "Le paiement de votre commande a été validée avec succès! Vous allez recevoir un mail avec tous les détails" : "The payment of your order has been successfully validated! You will receive an email with all the details!"
+            message = json_messages.payment_done;
             await generatePDF(paymentId).then((result: any) => order_pdf = result);
         } else {
-            message = "Le paiement de votre commande n'a pas abouti!"
+            message = json_messages.payment_failed
         }
         res.status(200).json({
             message: message,
@@ -38,7 +39,7 @@ export default async function checkStatus(req: NextApiRequest, res: NextApiRespo
             pdf: order_pdf
         })
     } else {
-        res.status(401).json({message: "Bien vouloir renseigner correctement tous les champs requis"})
+        res.status(401).json({message: json_messages.errors.empty_field})
     }
 }
 
@@ -56,14 +57,14 @@ async function generatePDF(paymentId: string) {
         products, 
         status,
         totalProduct,
-        amount
+        amount,
+        lang
     }`, {paymentId: paymentId}).then(async (response: any) => {
         order = response[0];
     });
     const products = order.products;
     for (const productKey in products) {
-        console.log(products[productKey])
-        /*await sanityClient.fetch(`*[_type == 'products' && sku == $slugProduct]{
+        await sanityClient.fetch(`*[_type == 'products' && sku == $slugProduct]{
                         _id,
                         name,
                         coverImage,
@@ -80,9 +81,10 @@ async function generatePDF(paymentId: string) {
                 order.products[productKey].name = response[0].name
                 order.products[productKey].image = urlFor(response[0].coverImage).url()
             }
-        });*/
+        });
     }
-    const html = render(OrderMail(order));
+    const langMessages = require(`../../public/locales/${order.lang}/payment.json`);
+    const html = render(OrderMail(order, langMessages.order));
     let pdf_link = `orders/${order.reference}.pdf`
     PDF.create(html).toFile(`public/${pdf_link}`, (err: any, res) => {
         pdf_link = !err ? pdf_link : "";

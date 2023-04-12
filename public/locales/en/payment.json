@@ -6,5 +6,23 @@
     "general_error": "Payments are unavailable at the moment, please try again later!",
     "payment_error": "Your payment could not be initiated"
   },
-  "payment_initiated": "Your payment has just been initiated, please check your phone to finalize the payment"
+  "payment_initiated": "Your payment has just been initiated, please check your phone to finalize the payment",
+  "payment_done": "The payment of your order has been successfully validated! You will receive an email with all the details!",
+  "payment_failed": "The order payment was canceled of failed!",
+  "order": {
+    "subjectMail": "[INDOMPTABLE] Order paid and validated",
+    "title": "A NEW INDOMITABLE ORDER",
+    "salutation": "Hello :lastName",
+    "description": "Your order <b>':reference'</b> has been paid and validated, find out all the details below",
+    "products": "Products",
+    "quantity": "Quantity",
+    "price": "Price",
+    "size": "Size",
+    "totalOfProducts": "Total of Products",
+    "amount": "Amount",
+    "delivery_fees": "Delivery Fees",
+    "totalAmount": "Total Amount",
+    "deliveryAddress": "Delivery Address",
+    "thank_you": "Thank you for your order"
+  }
 }
