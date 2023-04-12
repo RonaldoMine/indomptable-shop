@@ -82,7 +82,7 @@ export default function People({peoples}: PeopleProps) {
                                     <div>
                                         <div>
                                             <Image src={currentImage.img} alt={currentImage.title} height={500}
-                                                   width={400}
+                                                   width={400}  placeholder="blur"
                                                    className={"h-[500px] w-[400px] object-cover rounded"}/>
                                         </div>
                                         <div className={"w-full flex justify-around sm:justify-between mt-2"}>

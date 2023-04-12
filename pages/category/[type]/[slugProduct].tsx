@@ -8,7 +8,6 @@ import { toast } from "react-toastify";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import ToastProduct from "../../components/ToastProduct";
-import ToastAddProductToFavorite from "../../components/ToastAddProductToFavorite";
 
 type Color = {
     name: string;
@@ -63,14 +62,14 @@ export default function SlugProduct({
     };
 
     const handleAddProductOnCart = () => {
-        if (selectedSize.name !== "") {
+        if (selectedSize.label !== "") {
             dispatch({
                 type: "ADD_PRODUCT",
                 payload: {
                     sku: product?.sku,
                     qty: 1,
                     price: product?.price,
-                    size: selectedSize.name,
+                    size: selectedSize.label,
                     color: "black",
                     img: urlFor(product?.coverImage).url(),
                 },
@@ -79,7 +78,7 @@ export default function SlugProduct({
                 <ToastProduct
                     product={product}
                     onClose={handleCloseToastProduct}
-                    size={selectedSize.name}
+                    size={selectedSize.label}
                 />,
                 {
                     autoClose: false,
@@ -90,7 +89,7 @@ export default function SlugProduct({
                     closeOnClick: false,
                 }
             );
-            setSelectedSize({name: ""});
+            // setSelectedSize(availableSizes[0]);
         } else {
             setErrorSizeUnselected("Please select a size");
         }
@@ -102,10 +101,10 @@ export default function SlugProduct({
                 {onAddProduct && (
                     <div className="transition-all fixed inset-0 bg-neutral-500 bg-opacity-70 z-10"></div>
                 )}
-                <div className="min-h-screen max-w-[75rem] mx-auto px-8 sm:px-12 py-20 grid grid-cols-1 md:grid-cols-6 sm:gap-10">
+                <div className="min-h-screen max-w-[75rem] mx-auto px-8 sm:px-12 py-20 grid grid-cols-1 min-[960px]:grid-cols-6 sm:gap-14">
                     <div
                         id="left-pane"
-                        className="mb-10 flex flex-wrap px-8 gap-4 col-span-4"
+                        className="md:columns-2 columns-1 leading-none gap-x-4 min-[960px]:col-span-3 min-[1100px]:col-span-4"
                     >
                         {/* <div id="image-wrapper">
               <Image
@@ -121,23 +120,25 @@ export default function SlugProduct({
             </div> */}
                         {selectedColor.images.map((image: any, index: number) => {
                             return (
-                                <div className="w-[48%]" key={index}>
-                                    <div id="image-wrapper" className="w-full h-96 relative">
-                                        <Image
-                                            className="object-contain w-full max-w-full h-full"
-                                            placeholder="blur"
-                                            fill={true}
-                                            priority
-                                            blurDataURL={urlFor(image.blurry).url()}
-                                            src={urlFor(image.src).url()}
-                                            alt={'image '+index}
-                                        />
-                                    </div>
-                                </div>
+                                <Image
+                                    key={index}
+                                    className="object-contain w-full mb-4 max-w-full h-auto"
+                                    placeholder="blur"
+                                    // fill={true}
+                                    width={480}
+                                    height={480}
+                                    priority
+                                    blurDataURL={urlFor(image.blurry).url()}
+                                    src={urlFor(image.src).url()}
+                                    alt={"image " + index}
+                                />
                             );
                         })}
                     </div>
-                    <div id="right-pane" className="col-span-2">
+                    <div
+                        id="right-pane"
+                        className=" min-[960px]:col-span-3 min-[1100px]:col-span-2"
+                    >
                         <h1
                             style={{ fontFamily: "Helvetica" }}
                             className="text-3xl font-medium sm:text-left dark:text-white"
@@ -165,11 +166,11 @@ export default function SlugProduct({
                                                 "ring-gray-300",
                                                 active && checked ? "ring ring-offset-1" : "",
                                                 !active && checked ? "ring-2" : "",
-                                                "cursor-pointer rounded-md w-min p-0.5 border-gray-200 border-2 focus:outline-none"
+                                                "cursor-pointer rounded-md p-0.5 border-gray-200 border-2 focus:outline-none"
                                             )
                                         }
                                     >
-                                        <div className="w-24 h-24 relative">
+                                        <div className="w-24 h-24 lg:w-20 lg:h-20 relative">
                                             <Image
                                                 src={urlFor(color.images[0].thumbnail).url()}
                                                 blurDataURL={urlFor(color.images[0].blurry).url()}
@@ -346,13 +347,12 @@ export default function SlugProduct({
                         </p>
                         <div className="mt-4 flex flex-wrap gap-5">
                             <button
-                                className="bg-gradient-to-bl from-slate-700 to-slate-900 px-8 py-4 text-white font-space  dark:text-black dark:from-slate-200 dark:to-slate-50 dark:bg-gradient-to-bl"
+                                className="bg-gradient-to-bl from-slate-700 to-slate-900 w-full py-4 text-white font-space  dark:text-black dark:from-slate-200 dark:to-slate-50 dark:bg-gradient-to-bl"
                                 onClick={handleAddProductOnCart}
                             >
                                 {t("add-to-basket")}
                             </button>
-                            <button
-                                className="border-slate-700 border-2 px-8 py-4 font-space dark:border dark:border-neutral-600 dark:text-neutral-300">
+                            <button className="border-slate-700 border-2 w-full py-4 font-space dark:border dark:border-neutral-600 dark:text-neutral-300">
                                 Favorite
                             </button>
                         </div>
