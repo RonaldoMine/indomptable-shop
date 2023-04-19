@@ -2,10 +2,11 @@ import shirt_black from '../public/assets/images/tshirt-black-desktop.png'
 import shirt_white from '../public/assets/images/tshirt-white-desktop.png'
 import HomeCardItem, {HomeCardType} from "./components/HomeCardItem";
 import React from "react";
-import Contact from "./Contact";
-import People from './People';
+import Contact from "./components/Contact";
+import People from './components/People';
 import {GetServerSideProps, InferGetServerSidePropsType} from 'next';
 import {sanityClient} from "../sanity";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 
 export default function Home({peoples}: InferGetServerSidePropsType<typeof getServerSideProps>) {
@@ -22,7 +23,7 @@ export default function Home({peoples}: InferGetServerSidePropsType<typeof getSe
     )
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async ({locale}: any) => {
     const query = `*[_type == "people"]{
     _id,
     title,
@@ -33,7 +34,8 @@ export const getServerSideProps: GetServerSideProps = async () => {
     const peoples = await sanityClient.fetch(query);
     return {
         props: {
-            peoples
+            peoples,
+            ...(await serverSideTranslations(locale, ["contact", "people"])),
         }
     }
 }

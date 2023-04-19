@@ -102,6 +102,12 @@ export default defineType({
                 list: STATUS
             },
         }),
+        defineField({
+            name: "lang",
+            title: "Language",
+            type: "string",
+            initialValue: "fr"
+        }),
     ],
     preview: {
         select: {

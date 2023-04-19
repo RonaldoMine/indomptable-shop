@@ -1,12 +1,17 @@
 import React, {useState} from "react";
 import {useForm} from "react-hook-form";
-import Alert from "./components/Alert";
+import Alert from "./Alert";
+import {useTranslation} from "next-i18next";
+import {InferGetServerSidePropsType} from "next";
+import {getServerSideProps} from "../index";
 
-export default function Contact() {
+export default function Contact({}: InferGetServerSidePropsType<typeof getServerSideProps>) {
     const {register, reset, handleSubmit} = useForm();
     const [showAlert, setShowAlert] = useState(false);
     const [onLoading, setOnLoading] = useState(false);
-    const [configAlert, setConfigAlert] = useState({title: "", text: "", status: ""})
+    const [configAlert, setConfigAlert] = useState({title: "", text: "", status: ""});
+    const {t} = useTranslation("contact")
+
     const handleSubmitContactForm = async (data: any) => {
         setOnLoading(true);
         const options = {
@@ -28,6 +33,7 @@ export default function Contact() {
         setShowAlert(true);
         setOnLoading(false);
     }
+
     return (
         <>
             <div
@@ -36,7 +42,7 @@ export default function Contact() {
             >
                 <div className={"lg:w-3/6 md:w-4/6 w-full p-4 mx-auto"}>
                     <h1 className={"text-center text-6xl font-bold mb-4 text-gradient"}>
-                        Contact us
+                        {t("title")}
                     </h1>
                     <form
                         onSubmit={handleSubmit(handleSubmitContactForm)}
@@ -47,7 +53,7 @@ export default function Contact() {
                             className={
                                 "ring:border-red-500 dark:bg-transparent dark:text-white"
                             }
-                            placeholder={"Name"}
+                            placeholder={`${t("form.name")}`}
                             {...register("name", {
                                 required: true,
                             })}
@@ -55,14 +61,14 @@ export default function Contact() {
                         <input
                             type="email"
                             className=" dark:bg-transparent dark:text-white"
-                            placeholder={"Email"}
+                            placeholder={`${t("form.email")}`}
                             {...register("email", {
                                 required: true,
                             })}
                         />
                         <textarea
                             cols={50}
-                            placeholder={"Message"}
+                            placeholder={`${t("form.message")}`}
                             className={"resize-none dark:bg-transparent dark:text-white"}
                             {...register("message", {
                                 required: true,
@@ -77,7 +83,7 @@ export default function Contact() {
                                         "mx-auto px-10 py-3 hover:bg-opacity-20 text-white"
                                     }
                                 >
-                                    Send
+                                    {t("form.button")}
                                 </button>
                             )}
                         </div>

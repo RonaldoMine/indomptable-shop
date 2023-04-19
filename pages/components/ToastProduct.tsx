@@ -30,7 +30,7 @@ export default function ToastProduct({
         <div className="flex mb-6">
           <img
             className="w-32 h-32 object-cover"
-            src={urlFor(product?.thumbnail).url()}
+            src={urlFor(product?.coverThumbnail).url()}
             alt={product?.name}
           />
           <div className={"grid items-center"}>
