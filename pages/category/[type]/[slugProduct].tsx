@@ -7,7 +7,7 @@ import { useBasket } from "../../../src/context/BasketContext";
 import { toast } from "react-toastify";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
-import ToastProduct from "../../components/ToastProduct";
+import ToastProduct from "../../../src/components/ToastProduct";
 import useProductToFavorite from "../../../src/hooks/useProductToFavorite";
 
 type Color = {

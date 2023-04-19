@@ -4,14 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import {useEffect, useState} from "react";
 import {AiFillHeart, AiOutlineShopping} from "react-icons/ai";
-import {useBasket} from "../../src/context/BasketContext";
+import {useBasket} from "../context/BasketContext";
 import {
     HiOutlineMoon,
     HiOutlineSun,
 } from "react-icons/hi";
 import {useTheme} from "next-themes";
 import {useRouter} from "next/router";
-import useProductToFavorite from "../../src/hooks/useProductToFavorite";
+import useProductToFavorite from "../hooks/useProductToFavorite";
 
 export default function Header() {
     const {basket} = useBasket();

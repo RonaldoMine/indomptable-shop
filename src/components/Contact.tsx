@@ -3,7 +3,7 @@ import {useForm} from "react-hook-form";
 import Alert from "./Alert";
 import {useTranslation} from "next-i18next";
 import {InferGetServerSidePropsType} from "next";
-import {getServerSideProps} from "../index";
+import {getServerSideProps} from "../../pages";
 
 export default function Contact({}: InferGetServerSidePropsType<typeof getServerSideProps>) {
     const {register, reset, handleSubmit} = useForm();

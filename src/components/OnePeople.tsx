@@ -12,7 +12,7 @@ export default function OnePeople({ img, title, onClick }: OnePeopleProps) {
   return (
     <div
       className={
-        "md:w-72 w-full bg-[var(--color-orange)] mb-4 rounded hover:cursor-pointer"
+        "md:w-72 w-full mb-4 rounded hover:cursor-pointer"
       }
       onClick={onClick}
     >
@@ -23,7 +23,7 @@ export default function OnePeople({ img, title, onClick }: OnePeopleProps) {
         height={0}
         width={768}
         className={
-          "h-full object-cover rounded transition-transform duration-100 hover:translate-x-[-10px] hover:translate-y-[-10px]"
+          "h-full object-cover rounded duration-100"
         }
       ></Image>
     </div>

@@ -1,7 +1,7 @@
 import {AiFillCheckCircle, AiOutlineClose} from "react-icons/ai";
 import {urlFor} from "../../sanity";
 import React from "react";
-import {useBasket} from "../../src/context/BasketContext";
+import {useBasket} from "../context/BasketContext";
 import {useRouter} from "next/router";
 import { useTranslation } from "react-i18next";
 

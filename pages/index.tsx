@@ -1,9 +1,9 @@
 import shirt_black from '../public/assets/images/tshirt-black-desktop.png'
 import shirt_white from '../public/assets/images/tshirt-white-desktop.png'
-import HomeCardItem, {HomeCardType} from "./components/HomeCardItem";
+import HomeCardItem, {HomeCardType} from "../src/components/HomeCardItem";
 import React from "react";
-import Contact from "./components/Contact";
-import People from './components/People';
+import Contact from "../src/components/Contact";
+import People from '../src/components/People';
 import {GetServerSideProps, InferGetServerSidePropsType} from 'next';
 import {sanityClient} from "../sanity";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
