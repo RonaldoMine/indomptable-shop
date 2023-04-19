@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import {HiX} from "react-icons/hi";
+import {HiOutlineExternalLink, HiX} from "react-icons/hi";
 import Link from "next/link";
 import {GetServerSideProps} from "next";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
@@ -32,7 +32,13 @@ function Favorite() {
                                 >
                                     <div className="relative">
                                         <button onClick={() => removeProductToFavorite(favorite)}
-                                                className="p-2 rounded-full text-white bg-soft-orange mb-2 absolute top-2 right-2 remove">
+                                                className="p-2 rounded-full text-white bg-soft-orange mb-2 absolute top-2 left-2 checkout">
+                                            <Link href={`/category/${favorite.category}/${favorite.sku}`}>
+                                                <HiOutlineExternalLink/>
+                                            </Link>
+                                        </button>
+                                        <button onClick={() => removeProductToFavorite(favorite)}
+                                                className="p-2 rounded-full text-red mb-2 absolute top-2 right-2">
                                             <HiX/>
                                         </button>
                                         <Image
@@ -54,10 +60,6 @@ function Favorite() {
                                             </div>
                                         </div>
                                     </div>
-                                    <Link href={`/category/${favorite.category}/${favorite.sku}`}>
-                                        <button className={"p-4 w-full bg-gradient text-white"}>{t("show-product-detail")}
-                                        </button>
-                                    </Link>
                                 </div>
                             );
                         })
