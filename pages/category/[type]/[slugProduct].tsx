@@ -339,7 +339,9 @@ export default function SlugProduct({
                         </RadioGroup>*/}
             </div>
 
-            <p className="mt-6 text-slate-400 dark:text-neutral-400">
+            <p className="mt-8 dark:text-neutral-300">{product.description}</p>
+
+            <p className="mt-3 text-slate-400 dark:text-neutral-400 text-sm">
               {/* *Those tee are made on-demand, after placing your order we will send you an e-mail for
                             further
                             information */}
@@ -442,6 +444,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       _id,
       name,
       sku,
+      "description": description.${locale},
       slug,
       coverImage {
         asset

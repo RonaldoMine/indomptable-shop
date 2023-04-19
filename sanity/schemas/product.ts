@@ -1,4 +1,5 @@
 import {defineField, defineType} from 'sanity'
+// import { baseLanguage } from '../sanity.config'
 
 const SIZES = [
   {title: 'Size M', value: 'M'},
@@ -13,6 +14,7 @@ const COLORS = [
   {title: 'Color Black', value: 'black'},
   {title: 'Color Green', value: 'green'},
 ]
+
 export default defineType({
   name: 'products',
   title: 'Products',
@@ -42,6 +44,21 @@ export default defineType({
       name: 'sku',
       title: 'SKU',
       type: 'string',
+    }),
+    defineField({
+      name: 'subtitle',
+      title: 'Subtitle',
+      type: 'localeString',
+    }),
+    defineField({
+      name: 'description',
+      title: 'Description',
+      type: 'localeText',
+    }),
+    defineField({
+      name: 'sizeGuide',
+      title: 'Size guide',
+      type: 'localeString',
     }),
     defineField({
       name: 'price',

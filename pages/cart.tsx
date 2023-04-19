@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { HiX } from "react-icons/hi";
 import Link from "next/link";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { GetServerSideProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useBasket } from "../src/context/BasketContext";
 import { useTranslation } from "react-i18next";
