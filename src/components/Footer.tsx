@@ -16,7 +16,7 @@ export default function Footer() {
                     <Image
                         className={"h-10"}
                         src={theme === "dark" ? footer_logo_white : footer_logo_black}
-                        alt="Indomptable"
+                        alt="Indomptable Logo"
                     />
                 </Link>
                <p>A brand with a purpose, strong values <br/> drive with passion</p>
