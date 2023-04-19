@@ -7,6 +7,7 @@ import People from '../src/components/People';
 import {GetServerSideProps, InferGetServerSidePropsType} from 'next';
 import {sanityClient} from "../sanity";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import Newsletter from "../src/components/Newsletter";
 
 
 export default function Home({peoples}: InferGetServerSidePropsType<typeof getServerSideProps>) {
@@ -18,6 +19,7 @@ export default function Home({peoples}: InferGetServerSidePropsType<typeof getSe
                               src={shirt_black} typeCategory={"t-shirt"} slugProduct={"indomptable-the-hemle"}/>
             </div>
             <Contact/>
+            <Newsletter/>
             <People peoples={peoples}/>
         </>
     )
@@ -35,7 +37,7 @@ export const getServerSideProps: GetServerSideProps = async ({locale}: any) => {
     return {
         props: {
             peoples,
-            ...(await serverSideTranslations(locale, ["contact", "people"])),
+            ...(await serverSideTranslations(locale, ["contact", "people", "newsletter"])),
         }
     }
 }

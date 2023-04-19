@@ -12,6 +12,9 @@ import {Router} from "next/router";
 import Nprogress from "nprogress";
 import {ThemeProvider} from "next-themes";
 import {FavoriteContextProvider} from "../src/context/FavoriteContext";
+import Footer from "../src/components/Footer";
+//import {GetServerSideProps} from "next";
+//import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 //Disable the spinner at the top right
 Nprogress.configure({showSpinner: false})
@@ -51,6 +54,7 @@ function App({Component, pageProps}: AppProps) {
                             <div className={"relative"}>
                                 <Component {...pageProps} />
                             </div>
+                            <Footer/>
                         </main>
                         <ToastContainer/>
                     </div>
@@ -61,3 +65,9 @@ function App({Component, pageProps}: AppProps) {
 }
 
 export default appWithTranslation(App);
+
+/*export const getServerSideProps: GetServerSideProps = async ({locale}: any) => {
+    return {
+        props: await serverSideTranslations(locale, ["footer"])
+    }
+}*/

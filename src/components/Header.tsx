@@ -39,7 +39,7 @@ export default function Header() {
                         alt="BeleFirst"
                     />
                 </Link>
-                <div className="flex w-full lg:justify-center justify-center items-center">
+                <div className="flex w-full lg:justify-center justify-center items-center sm:mb-0 sm:mt-0 mb-2 mt-2">
                     <a
                         href="https://www.facebook.com/belefirst1"
                         className="dark:text-white"
