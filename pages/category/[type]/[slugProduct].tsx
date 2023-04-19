@@ -1,5 +1,5 @@
 import Image, { ImageProps } from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { RadioGroup } from "@headlessui/react";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { sanityClient, urlFor } from "../../../sanity";
@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import ToastProduct from "../../components/ToastProduct";
+import useProductToFavorite from "../../../src/hooks/useProductToFavorite";
 
 type Color = {
     name: string;
@@ -43,6 +44,7 @@ export default function SlugProduct({
         selectedColor.sizes
     );
     const [selectedSize, setSelectedSize] = useState(availableSizes[0]);
+    const {addProductToFavorite} = useProductToFavorite();
     // useEffect(() => {
     //   console.log(selectedColor.sizes);
     // }, [selectedColor]);
@@ -94,6 +96,9 @@ export default function SlugProduct({
             setErrorSizeUnselected("Please select a size");
         }
     };
+    const handleAddProductToFavorite = () => {
+        addProductToFavorite({...product, img: urlFor(product.coverImage).url()});
+    }
 
     return (
         <>
@@ -123,7 +128,7 @@ export default function SlugProduct({
                                 <Image
                                     key={index}
                                     className="object-contain w-full mb-4 max-w-full h-auto"
-                                    placeholder="blur"
+                                    //placeholder="blur"
                                     // fill={true}
                                     width={480}
                                     height={480}
@@ -352,8 +357,8 @@ export default function SlugProduct({
                             >
                                 {t("add-to-basket")}
                             </button>
-                            <button className="border-slate-700 border-2 w-full py-4 font-space dark:border dark:border-neutral-600 dark:text-neutral-300">
-                                Favorite
+                            <button onClick={handleAddProductToFavorite} className="border-slate-700 border-2 w-full py-4 font-space dark:border dark:border-neutral-600 dark:text-neutral-300">
+                                {t("add-to-favorite")}
                             </button>
                         </div>
                         <p className="mt-12"></p>
@@ -463,7 +468,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     return {
         props: {
             productData,
-            ...(await serverSideTranslations(locale, ["product-page"])),
+            ...(await serverSideTranslations(locale, ["product-page", "favorite"])),
         },
     };
 };

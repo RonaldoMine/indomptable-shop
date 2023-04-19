@@ -15,7 +15,7 @@ function Cart() {
     return (
       <div className="w-full overflow-x-hidden dark:bg-neutral-800">
         <main className="px-6 py-10 max-w-[75rem] mx-auto">
-          <h1 className="text-3xl font-bold dark:text-neutral-100">
+            <h1 className="text-3xl font-bold dark:text-neutral-100 text-center sm:text-left">
             {t("h1")}
           </h1>
           <hr className="my-6" />

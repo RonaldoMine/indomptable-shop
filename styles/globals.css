@@ -60,6 +60,14 @@ p, h1, h2, h3, h4, h5, h6 {
 .bg-gradient{
     background: var(--gradient-color) !important;
 }
+.bg-soft-orange{
+    color: var(--color-orange);
+    background-color: rgba(237, 114, 13, .2);
+}
+.bg-soft-white{
+    color: var(--color-orange);
+    background-color: rgba(255, 255, 255, .2);
+}
 
 #contact-us, #our-community {
     padding: 100px 10px;
@@ -202,7 +210,7 @@ p, h1, h2, h3, h4, h5, h6 {
     background-color: rgba(255, 255, 255, .2);
 }
 
-.item-card.left button:hover, .item-card.right button:hover {
+.item-card.left button:hover, .item-card.right button:hover,#favorite-content button:hover {
     color: #FFFFFF;
     background: linear-gradient(90deg, var(--color-red), var(--color-orange), var(--color-red));
     animation: shine 1s linear;

@@ -1,5 +1,10 @@
 {
+    "title": "Our favorites products 😍",
+    "empty-list": "Our favorite product list is empty",
+    "back-to-home": "Back to home",
+    "show-product-detail": "Show details of a product",
     "toast":  {
-        "title": "Product add to Favorite"
+        "product-exist": "You have already added this product in your favorites",
+        "product-added": "have been added in favorites"
     }
 }

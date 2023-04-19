@@ -3,18 +3,19 @@ import logo_black from "../../public/assets/images/logo-black.svg";
 import Image from "next/image";
 import Link from "next/link";
 import {useEffect, useState} from "react";
-import {AiOutlineShopping} from "react-icons/ai";
+import {AiFillHeart, AiOutlineShopping} from "react-icons/ai";
 import {useBasket} from "../../src/context/BasketContext";
 import {
     HiOutlineMoon,
     HiOutlineSun,
-    HiOutlineTranslate,
 } from "react-icons/hi";
 import {useTheme} from "next-themes";
 import {useRouter} from "next/router";
+import useProductToFavorite from "../../src/hooks/useProductToFavorite";
 
 export default function Header() {
     const {basket} = useBasket();
+    const {totalFavoriteProduct} = useProductToFavorite();
 
     const {theme, setTheme} = useTheme();
     const router = useRouter();
@@ -65,19 +66,34 @@ export default function Header() {
                     > {currentLocale}
                     </button>
                     <Link href={"/cart"} className={"flex items-center dark:text-white"}>
-            <span className={"relative"}>
-              {basket.items.length > 0 && (
-                  <span
-                      className={
-                          "absolute flex justify-center items-center top-[-0.5rem] left-3 bg-red-500 text-center rounded-full h-4 w-4 text-white"
-                      }
-                      style={{fontSize: 8}}
-                  >
-                  {basket.totalProduct > 99 ? "99+" : basket.totalProduct}
-                </span>
-              )}
-                <AiOutlineShopping/>
-            </span>
+                        <span className={"relative"}>
+                          {basket.items.length > 0 && (
+                              <span
+                                  className={
+                                      "absolute flex justify-center items-center top-[-0.5rem] left-3 bg-red-500 text-center rounded-full h-4 w-4 text-white"
+                                  }
+                                  style={{fontSize: 8}}
+                              >
+                              {basket.totalProduct > 99 ? "99+" : basket.totalProduct}
+                            </span>
+                          )}
+                            <AiOutlineShopping/>
+                        </span>
+                    </Link>
+                    <Link href={"/favorite"} className={"flex items-center dark:text-white"}>
+                        <span className={"relative"}>
+                          {totalFavoriteProduct > 0 && (
+                              <span
+                                  className={
+                                      "absolute flex justify-center items-center top-[-0.5rem] left-3 bg-red-500 text-center rounded-full h-4 w-4 text-white"
+                                  }
+                                  style={{fontSize: 8}}
+                              >
+                              {totalFavoriteProduct > 99 ? "99+" : totalFavoriteProduct}
+                            </span>
+                          )}
+                            <AiFillHeart/>
+                        </span>
                     </Link>
                     <button
                         onClick={() => setTheme(theme === "light" ? "dark" : "light")}
