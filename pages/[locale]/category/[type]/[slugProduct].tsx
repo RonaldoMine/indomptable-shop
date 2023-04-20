@@ -2,13 +2,13 @@ import Image, { ImageProps } from "next/image";
 import React, { useState } from "react";
 import { RadioGroup } from "@headlessui/react";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import { sanityClient, urlFor } from "../../../sanity";
-import { useBasket } from "../../../src/context/BasketContext";
+import { sanityClient, urlFor } from "../../../../sanity";
+import { useBasket } from "../../../../src/context/BasketContext";
 import { toast } from "react-toastify";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
-import ToastProduct from "../../../src/components/ToastProduct";
-import useProductToFavorite from "../../../src/hooks/useProductToFavorite";
+import ToastProduct from "../../../../src/components/ToastProduct";
+import useProductToFavorite from "../../../../src/hooks/useProductToFavorite";
 
 type Color = {
     name: string;
@@ -437,7 +437,7 @@ export default function SlugProduct({
     );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({
+const getServerSideProps: GetServerSideProps = async ({
                                                                  params,
                                                                  locale,
                                                              }: any) => {
