@@ -21,7 +21,7 @@ enum PaymentStatus {
 }
 
 function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProps>) {
-    /*const {basket, dispatch} = useBasket();
+    const {basket, dispatch} = useBasket();
     const {t} = useTranslation("checkout-page");
     const [paymentMessage, setPaymentMessage] = useState(`${t("init-payment-message")}`);
     const [paymentStatus, setPaymentStatus] = useState(PaymentStatus.CREATED)
@@ -83,12 +83,12 @@ function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProp
         if (status === 200) {
             setCheckPaymentOnLoad(false)
             if (result.status != PaymentStatus.PENDING && result.status != PaymentStatus.CREATED) {
-                /!*if (result.status === PaymentStatus.SUCCESS) {
+                /*if (result.status === PaymentStatus.SUCCESS) {
                     dispatch({
                         type: "RESET_BASKET",
                         payload: {}
                     })
-                }*!/
+                }*/
                 setPaymentMessage(result.message)
                 setPaymentStatus(result.status)
                 setPaymentPdfLink(result.pdf)
@@ -236,7 +236,7 @@ function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProp
                 </div>
             </div>
         </div>
-    </>*/
+    </>
 }
 
 export default Checkout;

@@ -8,7 +8,7 @@ import {useTranslation} from "next-i18next";
 import useProductToFavorite from "../../src/hooks/useProductToFavorite";
 
 function Favorite() {
-   /* const {favorites, removeProductToFavorite} = useProductToFavorite();
+    const {favorites, removeProductToFavorite} = useProductToFavorite();
     const {t} = useTranslation("favorite")
 
     return (
@@ -74,7 +74,7 @@ function Favorite() {
                 </div>
             </main>
         </div>
-    );*/
+    );
 }
 
 export default Favorite;
