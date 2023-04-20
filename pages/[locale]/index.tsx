@@ -8,8 +8,11 @@ import Newsletter from "../../src/components/Newsletter";
 import People from "../../src/components/People";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {sanityClient} from "../../sanity";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import Image from "next/image";
+import {makeStaticProps, getStaticPaths} from "../../lib/getStatic"
+
+const getStaticProps = makeStaticProps(["contact", "people", "newsletter"])
+export { getStaticPaths, getStaticProps }
 
 export default function Home({
                                  peoples,
@@ -74,8 +77,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     const peoples = await sanityClient.fetch(query);
     return {
         props: {
-            peoples,
-            ...(await serverSideTranslations(locale, ["contact", "people", "newsletter"])),
+            peoples
         },
     };
 };

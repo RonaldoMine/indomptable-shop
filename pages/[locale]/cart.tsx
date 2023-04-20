@@ -8,7 +8,7 @@ import { useBasket } from "../../src/context/BasketContext";
 import {useTranslation} from "next-i18next";
 
 function Cart() {
-
+/*
     const { basket, dispatch } = useBasket();
     const {t} = useTranslation("basket-page")
 
@@ -165,7 +165,7 @@ function Cart() {
           </div>
         </main>
       </div>
-    );
+    );*/
 }
 
 export default Cart;
