@@ -8,7 +8,7 @@ const nextConfig = {
   images: {
     domains: ['cdn.sanity.io'],
   },
-  i18n
+  //i18n
 }
 
 module.exports = nextConfig
