@@ -4,6 +4,7 @@ import React from "react";
 import {useBasket} from "../context/BasketContext";
 import {useRouter} from "next/router";
 import { useTranslation } from "react-i18next";
+import Image from "next/image"
 
 export default function ToastProduct({
                                          product,
@@ -28,8 +29,8 @@ export default function ToastProduct({
           />
         </div>
         <div className="flex mb-6">
-          <img
-            className="w-32 h-32 object-cover"
+          <Image
+              className="w-32 h-32 object-cover"
             src={urlFor(product?.coverThumbnail).url()}
             alt={product?.name}
           />

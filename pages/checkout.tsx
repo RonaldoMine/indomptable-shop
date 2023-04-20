@@ -163,7 +163,7 @@ function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProp
                                                     {(paymentStatus === PaymentStatus.SUCCESS && paymentPdfLink !== "") && (
                                                         <a className={"text-gradient underline mt-4 flex aligns-center"}
                                                            href={`/${paymentPdfLink}`}
-                                                           target="_blank">{t("download-invoice")} <AiOutlineFilePdf
+                                                           target="_blank" rel="noreferrer">{t("download-invoice")} <AiOutlineFilePdf
                                                             className={"text-red-500 ml-2"}/></a>)}
                                                 </div>
                                             </div>

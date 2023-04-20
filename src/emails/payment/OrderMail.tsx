@@ -3,6 +3,7 @@ import "../../../styles/globals.css";
 import {Html} from "@react-email/html";
 import {Head} from "@react-email/head";
 import {Font} from "@react-email/font";
+import Image from "next/image"
 
 export default function OrderMail({
                                       firstName,
@@ -146,7 +147,7 @@ export default function OrderMail({
                                                 <td valign="middle" width="85%"
                                                     style={{textAlign: "left", padding: "12px"}}>
                                                     <div style={styles.product.style}>
-                                                        <img
+                                                        <Image
                                                             alt={product.name}
                                                             src={product.image}
                                                             style={styles.product.img}/>
