@@ -79,7 +79,7 @@ const FavoriteContextProvider = ({children}: { children: React.ReactNode }) => {
         addProductToFavorite: addProductToFavorite,
         removeProductToFavorite: removeProductToFavorite,
         totalFavoriteProduct: favorites.length
-    }} children={children}></FavoriteContext.Provider>
+    }}>{children}</FavoriteContext.Provider>
 }
 
 export {FavoriteContext, FavoriteContextProvider}
