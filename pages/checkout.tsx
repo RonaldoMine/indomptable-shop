@@ -242,7 +242,7 @@ function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProp
 export default Checkout;
 
 
-const getServerSideProps: GetServerSideProps = async ({locale}: any) => {
+export const getServerSideProps: GetServerSideProps = async ({locale}: any) => {
     return {
         props: {
             ...(await serverSideTranslations(locale, ["checkout-page"])),

@@ -61,7 +61,7 @@ export default function Home({
     );
 }
 
-const getServerSideProps: GetServerSideProps = async ({
+export const getServerSideProps: GetServerSideProps = async ({
                                                                  locale,
                                                              }: any) => {
     const query = `*[_type == "people"]{

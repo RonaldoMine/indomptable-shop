@@ -170,7 +170,7 @@ function Cart() {
 
 export default Cart;
 
-const getServerSideProps: GetServerSideProps = async ({locale}:any) => {
+export const getServerSideProps: GetServerSideProps = async ({locale}:any) => {
   return {
       props: {
         ...(await serverSideTranslations(locale, ["basket-page"])),

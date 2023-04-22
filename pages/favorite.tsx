@@ -79,7 +79,7 @@ function Favorite() {
 
 export default Favorite;
 
-const getServerSideProps: GetServerSideProps = async ({locale}: any) => {
+export const getServerSideProps: GetServerSideProps = async ({locale}: any) => {
     return {
         props: {
             ...(await serverSideTranslations(locale, ["favorite"])),

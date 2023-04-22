@@ -437,7 +437,7 @@ export default function SlugProduct({
     );
 }
 
-const getServerSideProps: GetServerSideProps = async ({
+export const getServerSideProps: GetServerSideProps = async ({
                                                                  params,
                                                                  locale,
                                                              }: any) => {
