@@ -1,13 +1,13 @@
-import shirt_black from "../public/assets/images/tshirt-black-desktop.png";
-import shirt_white from "../public/assets/images/tshirt-white-desktop.png";
-import banner_photo from "../public/assets/images/closeup-eye.jpg";
-import HomeCardItem, {HomeCardType} from "../src/components/HomeCardItem";
+import shirt_black from "../../public/assets/images/tshirt-black-desktop.png";
+import shirt_white from "../../public/assets/images/tshirt-white-desktop.png";
+import banner_photo from "../../public/assets/images/closeup-eye.jpg";
+import HomeCardItem, {HomeCardType} from "../../src/components/HomeCardItem";
 import React from "react";
-import Contact from "../src/components/Contact";
-import Newsletter from "../src/components/Newsletter";
-import People from "../src/components/People";
+import Contact from "../../src/components/Contact";
+import Newsletter from "../../src/components/Newsletter";
+import People from "../../src/components/People";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
-import {sanityClient} from "../sanity";
+import {sanityClient} from "../../sanity";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import Image from "next/image";
 
