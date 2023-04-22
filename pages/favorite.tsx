@@ -5,7 +5,7 @@ import Link from "next/link";
 import {GetServerSideProps} from "next";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useTranslation} from "next-i18next";
-import useProductToFavorite from "../../src/hooks/useProductToFavorite";
+import useProductToFavorite from "../src/hooks/useProductToFavorite";
 
 function Favorite() {
     const {favorites, removeProductToFavorite} = useProductToFavorite();

@@ -4,7 +4,7 @@ import { HiX } from "react-icons/hi";
 import Link from "next/link";
 import { GetServerSideProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useBasket } from "../../src/context/BasketContext";
+import { useBasket } from "../src/context/BasketContext";
 import {useTranslation} from "next-i18next";
 
 function Cart() {

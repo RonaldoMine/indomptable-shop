@@ -1,11 +1,11 @@
 import React, {useState} from "react";
-import {useBasket} from "../../src/context/BasketContext";
+import {useBasket} from "../src/context/BasketContext";
 import {useForm} from "react-hook-form";
 import {toast} from "react-toastify";
 import {AiFillCheckCircle, AiOutlineCloseCircle, AiOutlineFilePdf} from "react-icons/ai";
 import {BiArrowBack} from "react-icons/bi";
-import om from "../../public/assets/images/om.svg"
-import momo from "../../public/assets/images/mtn.svg"
+import om from "../public/assets/images/om.svg"
+import momo from "../public/assets/images/mtn.svg"
 import Image from "next/image";
 import Link from "next/link";
 import {useTranslation} from "next-i18next";
