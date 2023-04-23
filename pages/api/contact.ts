@@ -13,6 +13,7 @@ export default function contact(
     const email = req.body.email;
     const message = req.body.message;
     const regex_email = /^[A-Z\d._%+-]+@([A-Z\d-]+\.)+[A-Z]{2,4}$/i;
+    const langMessages = require(`../../public/locales/${req.body.lang}/contact.json`);
     if (name && email && message) {
         if (regex_email.test(email)) {
             require('dotenv').config();
@@ -20,24 +21,24 @@ export default function contact(
             const html = render(ContactMail({message: message, name: name, email: email}));
             const body = {
                 from: USERNAME,
-                to: ["johnyourbest@gmail.com", "andremine98@gmail.com", "marcantoine826@gmail.com"],
-                subject: `[INDOMPTABLE] Message From ${email}`,
+                to: ["johnyourbest@gmail.com"],
+                subject: `${langMessages.api.subject_mail} ${email}`,
                 text: message,
                 html: html
             }
             TRANSPORTER.sendMail(body, function (err: any, info: any) {
                 if (err) {
-                    console.log(err)
-                    res.status(500).json({message: "Votre requête n'a pas aboutie, bien vouloir recharger et la page, si le problème persiste veuillez réessayez plus tard"});
+                    //console.log(err)
+                    res.status(500).json({message: langMessages.api.something_wrong});
                 } else {
-                    console.log(info)
-                    res.status(200).json({message: "Merci de nous avoir contacté! Nous reviendrons vers vous d'ici peu."});
+                    //console.log(info)
+                    res.status(200).json({message: langMessages.api.email_sent});
                 }
             })
         } else {
-            res.status(400).json({message: "L'adresse email saisie n'est pas une adresse email valide, bien vouloir la changer!"});
+            res.status(400).json({message: langMessages.api.invalid_email});
         }
     } else {
-        res.status(400).json({message: "Bien vouloir renseigner correctement tous les champs requis"});
+        res.status(400).json({message: langMessages.api.field_require});
     }
 }

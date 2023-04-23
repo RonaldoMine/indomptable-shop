@@ -1,22 +1,23 @@
 import shirt_black from "../public/assets/images/tshirt-black-desktop.png";
 import shirt_white from "../public/assets/images/tshirt-white-desktop.png";
-import banner_photo from "../public/assets/images/closeup-eye.jpg";
-import HomeCardItem, {HomeCardType} from "../src/components/HomeCardItem";
+import banner_photo from "../public/assets/images/banner-home.jpg";
 import React from "react";
+import {GetServerSideProps, InferGetServerSidePropsType} from "next";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import Image from "next/image";
+import {sanityClient} from "../sanity";
+import HomeCardItem, {HomeCardType} from "../src/components/HomeCardItem";
 import Contact from "../src/components/Contact";
 import Newsletter from "../src/components/Newsletter";
 import People from "../src/components/People";
-import {GetServerSideProps, InferGetServerSidePropsType} from "next";
-import {sanityClient} from "../sanity";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import Image from "next/image";
+import OurStory from "../src/components/OurStory";
 
 export default function Home({
                                  peoples,
                              }: InferGetServerSidePropsType<typeof getServerSideProps>) {
     return (
         <>
-            <div className="lg:max-w-[80%] md:my-14 w-full mx-auto h-[50vw] relative">
+            <div className="xl:max-w-[80%] xl:my-14 w-full mx-auto h-[50vw] relative">
                 <Image
                     src={banner_photo}
                     placeholder="blur"
@@ -29,10 +30,10 @@ export default function Home({
                     <p className="font-futura font-bold w-min text-white text-[3.5rem] md:text-[6rem] break-words text-center md:text-left leading-none ">
                         OVERCOMING THE ODDS
                     </p>
-                    <button
+                    {/*<button
                         className="bg-gradient-to-bl hidden sm:block from-slate-700 to-slate-900 md:self-start py-4 px-10 mt-6  text-white font-space  dark:text-black dark:from-slate-200 dark:to-slate-50 dark:bg-gradient-to-bl">
                         Shop now
-                    </button>
+                    </button>*/}
                 </div>
             </div>
             <div className="relative grid sm:grid-cols-2 grid-cols-1">
@@ -53,10 +54,10 @@ export default function Home({
                     slugProduct={"indomptable-the-hemle"}
                 />
             </div>
-            <Contact/>
-
+            <OurStory/>
             <Newsletter/>
             <People peoples={peoples}/>
+            <Contact/>
         </>
     );
 }
@@ -75,7 +76,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     return {
         props: {
             peoples,
-            ...(await serverSideTranslations(locale, ["contact", "people", "newsletter"])),
+            ...(await serverSideTranslations(locale, ["contact", "people", "newsletter", "our-story"])),
         },
     };
 };

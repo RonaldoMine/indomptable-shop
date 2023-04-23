@@ -8,7 +8,7 @@ export default function Contact() {
     const [showAlert, setShowAlert] = useState(false);
     const [onLoading, setOnLoading] = useState(false);
     const [configAlert, setConfigAlert] = useState({title: "", text: "", status: ""});
-    const {t} = useTranslation("contact")
+    const {t, i18n} = useTranslation("contact");
 
     const handleSubmitContactForm = async (data: any) => {
         setOnLoading(true);
@@ -17,7 +17,10 @@ export default function Contact() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify({
+                ...data,
+                lang: i18n.language
+            }),
         }
         const response = await fetch("/api/contact", options);
         const result = await response.json();
@@ -36,7 +39,7 @@ export default function Contact() {
         <>
             <div
                 id="contact-us"
-                className="dark:bg-neutral-800 border-b border-neutral-200 dark:border-b dark:border-neutral-600"
+                className="dark:bg-neutral-800 border-t border-neutral-200 dark:border-t dark:border-neutral-600"
             >
                 <div className={"lg:w-3/6 md:w-4/6 w-full p-4 mx-auto"}>
                     <h1 className={"text-center text-6xl font-bold mb-4 text-gradient"}>

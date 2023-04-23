@@ -57,22 +57,30 @@ p, h1, h2, h3, h4, h5, h6 {
     --input-border-radius: .075rem;
     --button-border-radius: .075rem
 }
-.text-red{
+
+.text-red {
     color: var(--color-red);
 }
-.bg-gradient{
+
+.text-orange {
+    color: var(--color-orange);
+}
+
+.bg-gradient {
     background: var(--gradient-color) !important;
 }
-.bg-soft-orange{
+
+.bg-soft-orange {
     color: var(--color-orange);
     background-color: rgba(237, 114, 13, .2);
 }
-.bg-soft-white{
+
+.bg-soft-white {
     color: var(--color-orange);
     background-color: rgba(255, 255, 255, .2);
 }
 
-#contact-us, #our-community, #newsletter {
+#contact-us, #our-community, #newsletter, #our-story {
     padding: 100px 10px;
 }
 
@@ -120,7 +128,7 @@ p, h1, h2, h3, h4, h5, h6 {
     background: var(--gradient-color);
 }
 
-#newsletter input{
+#newsletter input {
     font-size: 18px;
     border-radius: var(--input-border-radius);
     border: 1px solid var(--border-color-gray);
@@ -130,12 +138,18 @@ p, h1, h2, h3, h4, h5, h6 {
     height: 50px;
 }
 
-#newsletter button{
+#newsletter button {
     border-radius: 0 var(--input-border-radius) var(--input-border-radius) 0;
     padding: 0 20px;
     height: 50px;
 }
 
+#our-story .quotation-mark{
+    margin-top: -10px;
+    font-weight: bold;
+    font-size:100px;
+    font-family: "Times New Roman", Georgia, Serif, serif;
+}
 .form-control {
     height: 30px;
     font-size: 14px;
@@ -167,11 +181,11 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 .loader {
-    width: 48px;
-    height: 48px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     display: inline-block;
-    border-top: 4px solid #FFF;
+    border-top: 4px solid var(--color-red);
     border-right: 4px solid transparent;
     box-sizing: border-box;
     animation: rotation 1s linear infinite;
@@ -183,10 +197,10 @@ p, h1, h2, h3, h4, h5, h6 {
     position: absolute;
     left: 0;
     top: 0;
-    width: 48px;
-    height: 48px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    border-bottom: 4px solid var(--color-red);
+    border-bottom: 4px solid var(--color-orange);
     border-left: 4px solid transparent;
 }
 
@@ -229,7 +243,7 @@ p, h1, h2, h3, h4, h5, h6 {
     background-color: rgba(255, 255, 255, .2);
 }
 
-.item-card.left button:hover, .item-card.right button:hover,#favorite-content button.checkout:hover {
+.item-card.left button:hover, .item-card.right button:hover, #favorite-content button.checkout:hover {
     color: #FFFFFF;
     background: linear-gradient(90deg, var(--color-red), var(--color-orange), var(--color-red));
     animation: shine 1s linear;
@@ -293,6 +307,6 @@ p, h1, h2, h3, h4, h5, h6 {
     Footer
  */
 
-footer ul li{
+footer ul li {
     margin-bottom: 5px;
 }

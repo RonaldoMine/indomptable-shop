@@ -5,5 +5,12 @@
     "email": "Email",
     "message": "Message",
     "button": "Envoyer"
+  },
+  "api": {
+    "field_require": "Bien vouloir renseigner correctement tous les champs requis",
+    "invalid_email": "L'adresse email saisie n'est pas une adresse email valide, bien vouloir la changer!",
+    "email_sent": "Merci de nous avoir contacté! Nous reviendrons vers vous d'ici peu.",
+    "something_wrong": "Votre requête n'a pas aboutie, bien vouloir recharger et la page, si le problème persiste veuillez réessayez plus tard",
+    "subject_mail": "[INDOMPTABLE] Message de"
   }
 }

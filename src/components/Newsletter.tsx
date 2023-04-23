@@ -8,16 +8,19 @@ export default function Newsletter() {
     const [showAlert, setShowAlert] = useState(false);
     const [onLoading, setOnLoading] = useState(false);
     const [configAlert, setConfigAlert] = useState({title: "", text: "", status: ""});
-    const {t} = useTranslation("newsletter")
+    const {t, i18n} = useTranslation("newsletter")
 
-    const handleSubmitContactForm = async (data: any) => {
+    const handleSubmitNewsletterForm = async (data: any) => {
         setOnLoading(true);
         const options = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify({
+                ...data,
+                lang: i18n.language
+            }),
         }
         const response = await fetch("/api/newsletter", options);
         const result = await response.json();
@@ -36,19 +39,19 @@ export default function Newsletter() {
         <>
             <div
                 id="newsletter"
-                className="dark:bg-neutral-800 border-b border-neutral-200 dark:border-b dark:border-neutral-600"
+                className="dark:bg-neutral-800 border-b border-neutral-200 dark:border-b dark:border-neutral-600 bg-fixed"
             >
                 <div className={"lg:w-4/6 md:w-5/6 w-full p-4 mx-auto"}>
-                    <h1 className={"text-center text-6xl font-bold mb-2 text-gradient"}>
+                    <h1 className={"text-center text-4xl md:text-6xl font-bold mb-2 text-gradient"}>
                         {t("title")}
                     </h1>
                     <p className={"text-center dark:text-white mb-16"}>
                         {t("subtitle")}
                     </p>
                     <form
-                        onSubmit={handleSubmit(handleSubmitContactForm)}
+                        onSubmit={handleSubmit(handleSubmitNewsletterForm)}
                         method={"post"}
-                        className={'flex max-w-[500px] sm:w-3/4 w-ful mx-auto'}
+                        className={'flex items-center max-w-[500px] sm:w-3/4 w-ful mx-auto'}
                     >
                         <input
                             type="email"
@@ -58,10 +61,11 @@ export default function Newsletter() {
                             placeholder={`${t("form.email")}`}
                             {...register("email", {
                                 required: true,
+                                disabled: onLoading
                             })}
                         />
                         {onLoading ? (
-                            <div className={"ml-4"}><span className="loader"></span></div>
+                            <span className="loader ml-4"></span>
                         ) : (
                             <button
                                 className={

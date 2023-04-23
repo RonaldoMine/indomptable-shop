@@ -41,7 +41,7 @@ export default function People({peoples}: PeopleProps) {
     return (
         <div className="dark:bg-neutral-800" id="our-community">
             <div className="p-4">
-                <h1 className={"text-center text-6xl font-bold mb-8 text-gradient"}>
+                <h1 className={"text-center text-4xl md:text-6xl font-bold mb-8 text-gradient"}>
                     {t("title")}
                 </h1>
                 <div id="masonry-grid"

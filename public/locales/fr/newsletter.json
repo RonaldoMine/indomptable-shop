@@ -4,5 +4,11 @@
   "form": {
     "email": "Email",
     "button": "Souscrire"
+  },
+  "api": {
+    "field_require": "Bien vouloir renseigner correctement tous les champs requis",
+    "invalid_email": "L'adresse email saisie n'est pas une adresse email valide, bien vouloir la changer!",
+    "email_save": "Abonnement à la newsletter réussi! Nous vous enverons des email, consulter votre boîte mail régulièrement \uD83D\uDE09.",
+    "email_already_exist": "Votre abonnement a déjà été pris en compte, choississez une autre adresse email!"
   }
 }

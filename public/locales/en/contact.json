@@ -5,5 +5,12 @@
     "email": "Email",
     "message": "Message",
     "button": "Send"
+  },
+  "api": {
+    "field_require": "Please fill in all required fields correctly",
+    "invalid_email": "The email address entered is not a valid email address, please change it!",
+    "email_sent": "Thank you for contacting us! We will get back to you shortly.",
+    "something_wrong": "Your request was not successful, please reload and page, if the problem persists please try again later",
+    "subject_mail": "[INDOMPTABLE] Message From"
   }
 }
