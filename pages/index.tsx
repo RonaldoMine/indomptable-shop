@@ -62,8 +62,16 @@ export const getServerSideProps: GetServerSideProps = async ({
   const query = `*[_type == "people"]{
     _id,
     title,
-    src {
-      asset
+        "src": src.asset->{
+              url,
+        metadata{
+          dimensions{
+          width,
+            height,
+            aspectRatio
+          },
+        lqip
+        }
     }
 }`;
   const peoples = await sanityClient.fetch(query);

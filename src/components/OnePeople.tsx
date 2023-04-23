@@ -6,9 +6,12 @@ interface OnePeopleProps {
   img: string | StaticImageData;
   title: string;
   onClick: () => void;
+  blurUrl: string;
+  width:number;
+  height:number;
 }
 
-export default function OnePeople({ img, title, onClick }: OnePeopleProps) {
+export default function OnePeople({ img, title, onClick, blurUrl, width, height }: OnePeopleProps) {
   return (
     <div
       className={
@@ -19,9 +22,10 @@ export default function OnePeople({ img, title, onClick }: OnePeopleProps) {
       <Image
         src={img}
         alt={title}
-        // placeholder="blur"
-        height={0}
-        width={768}
+        placeholder="blur"
+        blurDataURL={blurUrl}
+        height={height}
+        width={width}
         className={
           "h-full object-cover rounded duration-100"
         }
