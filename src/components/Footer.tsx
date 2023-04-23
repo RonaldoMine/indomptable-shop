@@ -3,11 +3,9 @@ import {useTheme} from "next-themes";
 import footer_logo_white from "../../public/assets/images/logo.svg";
 import footer_logo_black from "../../public/assets/images/logo-black.svg";
 import Image from "next/image";
-/*import { useTranslation } from "next-i18next";*/
 
 export default function Footer() {
     const {theme} = useTheme();
-    /*const {t} = useTranslation("footer");*/
     return (
         <footer
             className="container grid gap-10 sm:justify-items-end justify-between items-center mx-auto sm:flex px-10 py-20 relative dark:bg-neutral-800 border-t shadow-md z-10 border-t-neutral-200">
