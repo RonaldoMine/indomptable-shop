@@ -1,7 +1,7 @@
 import React, {createContext, useEffect, useState} from "react";
 import {toast} from "react-toastify";
 import Image from "next/image";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 interface FavoriteProductDetail {
     sku: string,

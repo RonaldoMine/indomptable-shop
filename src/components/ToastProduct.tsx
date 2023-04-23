@@ -3,7 +3,7 @@ import {urlFor} from "../../sanity";
 import React from "react";
 import {useBasket} from "../context/BasketContext";
 import {useRouter} from "next/router";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import Image from "next/image"
 
 export default function ToastProduct({

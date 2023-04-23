@@ -1,9 +1,0 @@
-{
-  "title": "Contactez-nous",
-  "form": {
-    "name": "Nom",
-    "email": "Email",
-    "message": "Message",
-    "button": "Envoyer"
-  }
-}

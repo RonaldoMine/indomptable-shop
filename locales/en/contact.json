@@ -1,9 +1,0 @@
-{
-  "title": "Contact-us",
-  "form": {
-    "name": "Name",
-    "email": "Email",
-    "message": "Message",
-    "button": "Send"
-  }
-}

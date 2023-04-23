@@ -128,11 +128,11 @@ export default function SlugProduct({
                                 <Image
                                     key={index}
                                     className="object-contain w-full mb-4 max-w-full h-auto"
-                                    //placeholder="blur"
-                                    // fill={true}
+                                    placeholder="blur"
+                                    //fill={true}
                                     width={480}
                                     height={480}
-                                    priority
+                                    //priority
                                     blurDataURL={urlFor(image.blurry).url()}
                                     src={urlFor(image.src).url()}
                                     alt={"image " + index}
