@@ -371,6 +371,9 @@ export const getServerSideProps: GetServerSideProps = async ({
       coverImage {
         asset
       },
+      coverThumbnail {
+        asset
+      },
      "coverBlurry":coverBlurry.asset->{
           metadata{
             lqip

@@ -30,8 +30,8 @@ export default function ToastProduct({
             </div>
             <div className="flex mb-6">
                 <Image
-                    className="w-32 h-32 object-contain"
-                    src={urlFor(product?.coverImage).url()}
+                    className="w-32 h-32 object-contain mr-2"
+                    src={urlFor(product?.coverThumbnail).url()}
                     placeholder="blur"
                     blurDataURL={product?.coverBlurry.metadata.lqip}
                     alt={product?.name}
