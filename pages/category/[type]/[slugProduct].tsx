@@ -371,6 +371,11 @@ export const getServerSideProps: GetServerSideProps = async ({
       coverImage {
         asset
       },
+     "coverBlurry":coverBlurry.asset->{
+          metadata{
+            lqip
+          },
+      },
       price,
     colors[]{
     totalQuantity,
