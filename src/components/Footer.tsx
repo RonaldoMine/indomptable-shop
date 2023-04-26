@@ -8,7 +8,7 @@ export default function Footer() {
     const {theme} = useTheme();
     return (
         <footer
-            className="container grid gap-10 sm:justify-items-end justify-between items-center mx-auto sm:flex px-10 py-20 relative dark:bg-neutral-800 border-t shadow-md z-10 border-t-neutral-200">
+            className="container grid gap-10 sm:justify-items-end justify-between items-center mx-auto sm:flex px-10 py-20 relative dark:bg-neutral-800 border-t border-t-neutral-200">
             <div>
                 <Link href={"/"}>
                     <Image

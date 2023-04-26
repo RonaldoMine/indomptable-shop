@@ -58,7 +58,7 @@ export default defineType({
     defineField({
       name: 'sizeGuide',
       title: 'Size guide',
-      type: 'localeString',
+      type: 'localeText',
     }),
     defineField({
       name: 'price',
