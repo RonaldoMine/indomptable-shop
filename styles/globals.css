@@ -52,6 +52,7 @@ p, h1, h2, h3, h4, h5, h6 {
     --color-red: rgba(238, 20, 19, 1);
     --color-orange: rgba(237, 114, 13, 1);
     --color-yellow: #ffc200;
+    --color-white-orange: rgba(237, 114, 13, .2);
     --gradient-color: linear-gradient(90deg, rgba(237, 114, 13, 1) 0%, rgba(238, 20, 19, 1) 53%, rgba(237, 114, 13, 1) 100%);
     font-family: 'Space Grostek', serif;
     --input-border-radius: .075rem;
@@ -309,4 +310,51 @@ p, h1, h2, h3, h4, h5, h6 {
 
 footer ul li {
     margin-bottom: 5px;
+}
+
+.swiper-button-prev, .swiper-button-next{
+    position: absolute;
+    background: #FFFFFF;
+    border-radius: 100%;
+    width: 35px;
+    height: 35px;
+    top: calc(50% - 20px);
+    z-index: 2;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dark :is(.swiper-button-prev, .swiper-button-next){
+    background: #262626;
+    border-color: var(--color-orange);
+    border-width: 1px;
+}
+.swiper-button-prev{
+    left: 20px;
+}
+.swiper-button-next{
+    right: 20px;
+}
+
+.swiper-button-prev:before, .swiper-button-next:after{
+    border-style: solid;
+    border-width: 0.20em 0.20em 0 0;
+    border-color: var(--color-orange);
+    content: '';
+    display: inline-block;
+    height: 0.45em;
+    position: relative;
+    vertical-align: top;
+    width: 0.45em;
+}
+.dark .swiper-button-prev:before, .swiper-button-next:after{
+
+}
+.swiper-button-prev:before{
+    transform: rotate(-135deg);
+}
+.swiper-button-next:after{
+    transform: rotate(45deg);
 }

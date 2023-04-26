@@ -10,36 +10,40 @@ export default async function checkStatus(req: NextApiRequest, res: NextApiRespo
     const paymentId = req.body.paymentId;
     const lang = req.body.lang;
     const json_messages = require(`../../public/locales/${lang}/payment.json`);
-    if (paymentId) {
-        const API_KEY = process.env["payment-api-key"]
-        const URL_PAYMENT = process.env["payment-url"] + "check-payment"
-        const options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                api_key: API_KEY,
-                paymentId: paymentId
-            }),
-        }
-        const response = "" //await fetch(URL_PAYMENT, options);
-        const result = {status: "SUCCESS"}//await response.json()
-        let message;
-        let order_pdf = "";
-        if (result.status === 'SUCCESS') {
-            message = json_messages.payment_done;
-            await generatePDF(paymentId).then((result: any) => order_pdf = result);
+    try{
+        if (paymentId) {
+            const API_KEY = process.env["payment-api-key"]
+            const URL_PAYMENT = process.env["payment-url"] + "check-payment"
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    api_key: API_KEY,
+                    paymentId: paymentId
+                }),
+            }
+            const response = "" //await fetch(URL_PAYMENT, options);
+            const result = {status: "SUCCESS"}//await response.json()
+            let message;
+            let order_pdf = "";
+            if (result.status === 'SUCCESS') {
+                message = json_messages.payment_done;
+                await generatePDF(paymentId).then((result: any) => order_pdf = result);
+            } else {
+                message = json_messages.payment_failed
+            }
+            res.status(200).json({
+                message: message,
+                status: result.status,
+                pdf: order_pdf
+            })
         } else {
-            message = json_messages.payment_failed
+            res.status(401).json({message: json_messages.errors.empty_field})
         }
-        res.status(200).json({
-            message: message,
-            status: result.status,
-            pdf: order_pdf
-        })
-    } else {
-        res.status(401).json({message: json_messages.errors.empty_field})
+    }catch (e) {
+        res.status(500).json({message: json_messages.errors.general_error})
     }
 }
 

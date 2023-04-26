@@ -2,6 +2,8 @@ import React, {useState} from "react";
 import {useForm} from "react-hook-form";
 import Alert from "./Alert";
 import {useTranslation} from "next-i18next";
+import parallax_photo from "../../public/assets/images/parallax-home.webp";
+
 
 export default function Newsletter() {
     const {register, reset, handleSubmit} = useForm();
@@ -39,13 +41,14 @@ export default function Newsletter() {
         <>
             <div
                 id="newsletter"
-                className="dark:bg-neutral-800 border-b border-neutral-200 dark:border-b dark:border-neutral-600 bg-fixed"
+                className="dark:bg-neutral-800 border-b border-neutral-200 dark:border-b dark:border-neutral-600 bg-fixed bg-center"
+                style={{backgroundImage: `url('${parallax_photo.src}')`}}
             >
                 <div className={"lg:w-4/6 md:w-5/6 w-full p-4 mx-auto"}>
                     <h1 className={"text-center text-4xl md:text-6xl font-bold mb-2 text-gradient"}>
                         {t("title")}
                     </h1>
-                    <p className={"text-center dark:text-white mb-16"}>
+                    <p className={"text-center text-white mb-16"}>
                         {t("subtitle")}
                     </p>
                     <form

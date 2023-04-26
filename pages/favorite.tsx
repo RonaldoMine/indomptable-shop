@@ -6,6 +6,7 @@ import {GetServerSideProps} from "next";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useTranslation} from "next-i18next";
 import useProductToFavorite from "../src/hooks/useProductToFavorite";
+import PageHeader from "../src/components/PageHeader";
 
 function Favorite() {
     const {favorites, removeProductToFavorite} = useProductToFavorite();
@@ -14,10 +15,7 @@ function Favorite() {
     return (
         <div className="w-full overflow-x-hidden dark:bg-neutral-800">
             <main className="px-6 py-10 max-w-[75rem] mx-auto">
-                <h1 className="text-3xl font-bold dark:text-neutral-100 text-center sm:text-left">
-                    {t("title")}
-                </h1>
-                <hr className="my-6"/>
+                <PageHeader title={t("title")}/>
                 <div
                     id="favorite-content"
                     className="grid grid-cols-1 gap-4 md:grid-cols-4 sm:grid-cols-2"

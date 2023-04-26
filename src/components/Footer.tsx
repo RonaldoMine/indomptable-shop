@@ -24,10 +24,10 @@ export default function Footer() {
                 <div>
                     <ul>
                         <li>
-                            <Link href={"/"}>Gallery</Link>
+                            <Link href={"/gallery"}>Gallery</Link>
                         </li>
                         <li>
-                            <Link href={"/"}>About Us</Link>
+                            <Link href={"/#contact-us"}>About Us</Link>
                         </li>
                         <li>
                             <Link href={"/"}>Refund policy</Link>

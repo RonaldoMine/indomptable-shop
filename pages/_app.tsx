@@ -1,6 +1,9 @@
 import "../styles/globals.css";
 import "../styles/responsive.css";
 import "react-toastify/dist/ReactToastify.css";
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/pagination";
 import type {AppProps} from "next/app";
 import Head from "next/head";
 import React, {useEffect} from "react";

@@ -11,6 +11,12 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'onHomePage',
+      title: 'Active to view on home page',
+      type: 'boolean',
+      initialValue: false
+    }),
+    defineField({
       name: 'src',
       title: 'Main image',
       type: 'image',

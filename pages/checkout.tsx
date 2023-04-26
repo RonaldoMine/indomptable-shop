@@ -11,6 +11,7 @@ import Link from "next/link";
 import {useTranslation} from "next-i18next";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import PageHeader from "../src/components/PageHeader";
 
 enum PaymentStatus {
     SUCCESS = "SUCCESS",
@@ -104,8 +105,7 @@ function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProp
     return <>
         <div className='w-full overflow-x-hidden'>
             <div className="px-6 py-10 max-w-[75rem] mx-auto">
-                <h1 className="text-3xl font-bold">{t("title")}</h1>
-                <hr className="my-6"/>
+                <PageHeader title={t("title")}/>
                 <div id="main-content-wrapper" className="grid grid-cols-1 gap-2 md:grid-cols-3">
                     {
                         (basket.totalProduct > 0 || paymentStatus === PaymentStatus.SUCCESS) ? <>
@@ -163,8 +163,9 @@ function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProp
                                                     {(paymentStatus === PaymentStatus.SUCCESS && paymentPdfLink !== "") && (
                                                         <a className={"text-gradient underline mt-4 flex aligns-center"}
                                                            href={`/${paymentPdfLink}`}
-                                                           target="_blank" rel="noreferrer">{t("download-invoice")} <AiOutlineFilePdf
-                                                            className={"text-red-500 ml-2"}/></a>)}
+                                                           target="_blank" rel="noreferrer">{t("download-invoice")}
+                                                            <AiOutlineFilePdf
+                                                                className={"text-red-500 ml-2"}/></a>)}
                                                 </div>
                                             </div>
                                         </div>)}
@@ -175,7 +176,7 @@ function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProp
                                                 <input type="text"
                                                        className={"form-control rounded dark:bg-transparent dark:text-white"} {...register("firstName", {
                                                     required: true,
-                                                })} defaultValue={"Ronaldo"} placeholder={`${t("form.first-name")} *`}/>
+                                                })} placeholder={`${t("form.first-name")} *`}/>
                                                 <span
                                                     className={"text-red-500 text-sm "}>{errors.firstName && t("errors.first-name")}</span>
                                             </div>
@@ -183,7 +184,7 @@ function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProp
                                                 <input type="text"
                                                        className={"form-control rounded dark:bg-transparent dark:text-white"} {...register("lastName", {
                                                     required: true,
-                                                })} defaultValue={"Mine"} placeholder={`${t("form.last-name")} *`}/>
+                                                })} placeholder={`${t("form.last-name")} *`}/>
                                                 <span
                                                     className={"text-red-500 text-sm"}>{errors.lastName && t("errors.last-name")}</span>
                                             </div>
@@ -191,15 +192,14 @@ function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProp
                                                 <input type="email"
                                                        className={"form-control rounded dark:bg-transparent dark:text-white"} {...register("email", {
                                                     required: true,
-                                                })} defaultValue={"johnyourbest@gmail.com"} placeholder={`${t("form.email")} *`}/>
+                                                })} placeholder={`${t("form.email")} *`}/>
                                                 <span
                                                     className={"text-red-500 text-sm "}>{errors.email && t("errors.email")}</span>
                                             </div>
                                             <div>
                                                 <input type="number" {...register("phoneNumber", {
                                                     required: true
-                                                })} defaultValue={"675710605"}
-                                                       className={"form-control rounded dark:bg-transparent dark:text-white"}
+                                                })} className={"form-control rounded dark:bg-transparent dark:text-white"}
                                                        placeholder={`${t("form.phone")} *`}/>
                                                 <span
                                                     className={"text-red-500 text-sm "}>{errors.phoneNumber && t("errors.phone")}</span>
@@ -208,8 +208,7 @@ function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProp
                                         <div className={"col-span-2 mt-4"}>
                                             <input type="text" {...register("address", {
                                                 required: true
-                                            })} defaultValue={"Immeuble Tecno, Boulevard de la Liberté, Akwa"}
-                                                   className={"form-control rounded dark:bg-transparent dark:text-white"}
+                                            })} className={"form-control rounded dark:bg-transparent dark:text-white"}
                                                    placeholder={`${t("form.address")} *`}/>
                                             <span
                                                 className={"text-red-500 text-sm "}>{errors.address && t("errors.address")}</span>

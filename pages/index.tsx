@@ -11,10 +11,12 @@ import Contact from "../src/components/Contact";
 import Newsletter from "../src/components/Newsletter";
 import People from "../src/components/People";
 import OurStory from "../src/components/OurStory";
+import {useTranslation} from "next-i18next";
 
 export default function Home({
                                  peoples,
                              }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+    const {t} = useTranslation("home")
     return (
         <>
             <div className="xl:max-w-[80%] xl:my-14 w-full mx-auto h-[50vw] relative">
@@ -27,8 +29,8 @@ export default function Home({
                 />
                 <div
                     className="absolute flex flex-col md:px-[3vw] md:pb-[5vw] h-full w-full md:justify-end justify-center items-center md:items-start">
-                    <p className="font-futura font-bold w-min text-white text-[3.5rem] md:text-[6rem] break-words text-center md:text-left leading-none ">
-                        OVERCOMING THE ODDS
+                    <p className="font-futura font-bold sm:w-min text-white text-[3.25rem] md:text-[6rem] break-words text-center md:text-left leading-none ">
+                        {t('banner-title')}
                     </p>
                     {/*<button
                         className="bg-gradient-to-bl hidden sm:block from-slate-700 to-slate-900 md:self-start py-4 px-10 mt-6  text-white font-space  dark:text-black dark:from-slate-200 dark:to-slate-50 dark:bg-gradient-to-bl">
@@ -65,7 +67,7 @@ export default function Home({
 export const getServerSideProps: GetServerSideProps = async ({
                                                                  locale,
                                                              }: any) => {
-    const query = `*[_type == "people"]{
+    const query = `*[_type == "people" && onHomePage == true] | order(_id desc)[0..7]{
     _id,
     title,
         "src": src.asset->{
@@ -84,7 +86,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     return {
         props: {
             peoples,
-            ...(await serverSideTranslations(locale, ["contact", "people", "newsletter", "our-story"])),
+            ...(await serverSideTranslations(locale, ["contact", "gallery", "newsletter", "our-story", "home"])),
         },
     };
 };
