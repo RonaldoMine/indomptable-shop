@@ -104,10 +104,10 @@ export default function SlugProduct({
         {onAddProduct && (
           <div className="transition-all fixed inset-0 bg-neutral-500 bg-opacity-70 z-10"></div>
         )}
-        <div className="min-h-screen max-w-[75rem] mx-auto px-8 sm:px-12 py-20 grid grid-cols-1 min-[960px]:grid-cols-6 sm:gap-14">
+        <div className="min-h-full max-w-[75rem] mx-auto px-8 sm:px-12 py-20 grid grid-cols-1 min-[960px]:grid-cols-6 sm:gap-14">
           <div
             id="left-pane"
-            className="md:columns-2 columns-1 leading-none gap-x-4 min-[960px]:col-span-3 min-[1100px]:col-span-4"
+            className="md:columns-2 columns-1 leading-none gap-x-4 hidden min-[960px]:block min-[960px]:col-span-3 min-[1100px]:col-span-4"
           >
             {/* <div id="image-wrapper">
               <Image
@@ -121,7 +121,7 @@ export default function SlugProduct({
                 alt={product?.name}
               />
             </div> */}
-            {selectedColor.images.map((image: any, index: number) => {
+            {selectedColor?.images?.map((image: any, index: number) => {
               return (
                 <Image
                   key={index}
@@ -147,17 +147,56 @@ export default function SlugProduct({
             >
               {product?.name}
             </h1>
-            <p className="mt-1">{}</p>
+            <p className="mt-1">{product.subtitle}</p>
             <p className="mt-5 dark:text-neutral-300">XAF {product?.price}</p>
+            <div
+              id="left-pan"
+              className="sm:columns-2 hidden sm:block min-[960px]:hidden leading-none gap-x-4"
+            >
+              {selectedColor?.images?.map((image: any, index: number) => {
+                return (
+                  <Image
+                    key={index}
+                    className={`object-contain w-full mb-4 max-w-full h-auto aspect-ratio[${image.src.metadata.dimensions.aspectRatio}]`}
+                    placeholder="blur"
+                    // fill={true}
+                    width={image.src.metadata.dimensions.width}
+                    height={image.src.metadata.dimensions.height}
+                    blurDataURL={image.src.metadata.lqip}
+                    src={image.src.url}
+                    alt={"image " + index}
+                  />
+                );
+              })}
+            </div>
+
+            <div className="sm:hidden flex overflow-x-auto space-x-5 mt-5 snap-x snap-mandatory">
+              {selectedColor?.images?.map((image: any, index: number) => {
+                return (
+                  <Image
+                    key={index}
+                    className={`object-cover w-[48%] mb-4 max-w-full h-auto snap-center aspect-ratio[${image.src.metadata.dimensions.aspectRatio}]`}
+                    placeholder="blur"
+                    // fill={true}
+                    width={image.src.metadata.dimensions.width}
+                    height={image.src.metadata.dimensions.height}
+                    blurDataURL={image.src.metadata.lqip}
+                    src={image.src.url}
+                    alt={"image " + index}
+                  />
+                );
+              })}
+            </div>
+
             {/* <!-- Colors --> */}
             <div className="mt-8">
               <h3 className={`text-sm font-medium dark:text-neutral-400`}>
-                Colors
+                {t("colors")}
               </h3>
               <RadioGroup
                 value={selectedColor}
                 onChange={(selected: Color) => handleOnChangeColor(selected)}
-                className={"mt-4 flex flex-wrap items-center gap-3"}
+                className={"mt-4 flex sm:flex-wrap overflow-x-scroll sm:overflow-hidden p-2 items-center gap-3"}
               >
                 {colors.map((color: Color, index: number) => (
                   <RadioGroup.Option
@@ -282,12 +321,9 @@ export default function SlugProduct({
             </div>
             <p className="mt-12"></p>
             <div className="mt-12">
-              <ul className="list-disc ml-4">
-                <li className="dark:text-neutral-400">{t("shown")}: Black</li>
-                <li className="dark:text-neutral-400">
-                  {"Brand (Blank tee): Sol's"}
-                </li>
-              </ul>
+              <p className="dark:text-neutral-400 capitalize">
+                {t("shown")}: {selectedColor?.name}
+              </p>
             </div>
             {/* Divider */}
             <div className="h-[0.05rem] bg-slate-300 my-6 dark:bg-neutral-600"></div>
@@ -305,19 +341,9 @@ export default function SlugProduct({
                   </h3>
                   <span className="text-2xl dark:text-neutral-300">+</span>
                 </div>
-                <ul
-                  className={`list-disc mt-4 ml-4 ${!expanded.one && "hidden"}`}
-                >
-                  <li className="dark:text-neutral-400">
-                    {"Model is wearing size M and is 6'1/185cm"}
-                  </li>
-                  <li className="dark:text-neutral-400">
-                    Big & regular model is wearing size 2XL and is 175cm
-                  </li>
-                  <li className="dark:text-neutral-400">
-                    Standard fit has a relaxed, easy feel
-                  </li>
-                </ul>
+                <div className={`mt-4 ${!expanded.one && "hidden"}`}>
+                  {product.sizeGuide}
+                </div>
               </div>
 
               {/* Divider */}
@@ -366,6 +392,8 @@ export const getServerSideProps: GetServerSideProps = async ({
       _id,
       name,
       sku,
+      "subtitle": subtitle.${locale},
+      "sizeGuide": sizeGuide.${locale},
       "description": description.${locale},
       slug,
       coverImage {
@@ -413,7 +441,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   return {
     props: {
       productData,
-      ...(await serverSideTranslations(locale, ["product-page", "favorite"])),
+      ...(await serverSideTranslations(locale, ["product-page", "favorite", "common"])),
     },
   };
 };
