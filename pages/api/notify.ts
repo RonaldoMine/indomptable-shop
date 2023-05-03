@@ -56,14 +56,19 @@ export default async function notify(req: NextApiRequest, resp: NextApiResponse)
                         request[`colors[name=="${products[productKey].color}"].totalQuantity`] = response[0].colors.totalQuantity - products[productKey].qty;
                         //const path = new Patch(response[0]._id).set({...request})
                         //transaction.patch(path);
-                        sanityClient.patch(response[0]._id, {...request})
+                        sanityClient.patch(response[0]._id, {
+                            set: {
+                                ...request
+                            }
+                        })
                     }
                 });
             }
         }
-        const path = new Patch(order[0]._id).set({status: status})
+        //const path = new Patch(order[0]._id).set({status: status})
         //transaction.patch(path);
-        sanityClient.mutate(path)
+
+        sanityClient.patch(order[0]._id, {set: {status: status}})
         sendNotification(order[0]);
         return resp.status(200).json({status: 1})
     }
