@@ -58,7 +58,7 @@ function Gallery({peoples}: any) {
                     <PageHeader title={t("page-title")}/>
                     <div
                         id="masonry-grid"
-                        className="md:columns-3 lg:columns-4 2xl:columns-5 sm:columns-2 gap-10"
+                        className="md:columns-3 lg:columns-4 sm:columns-2 gap-10"
                     >
                         {peoples.map((people: { src: any; title: string }, key: number) => {
                             return (
@@ -133,7 +133,7 @@ function Gallery({peoples}: any) {
                                     </div>
                                     <div
                                         className={
-                                            "w-full flex justify-around sm:justify-evenly mt-2"
+                                            "w-full flex justify-center mt-2 gap-4"
                                         }
                                     >
                                         <button

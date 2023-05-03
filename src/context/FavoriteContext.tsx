@@ -15,13 +15,13 @@ const FavoriteContext = createContext<{
     favorites: FavoriteProductDetail[],
     addProductToFavorite: (elt: FavoriteProductDetail) => void,
     removeProductToFavorite: (elt: FavoriteProductDetail) => void,
+    checkIfProductIsInFavorite: (elt: any) => boolean,
     totalFavoriteProduct: number
 }>({
     favorites: [],
-    addProductToFavorite: (elt: FavoriteProductDetail) => {
-    },
-    removeProductToFavorite: (elt: FavoriteProductDetail) => {
-    },
+    addProductToFavorite: (elt: FavoriteProductDetail) => {},
+    removeProductToFavorite: (elt: FavoriteProductDetail) => {},
+    checkIfProductIsInFavorite: (elt: any) => false,
     totalFavoriteProduct: 0
 });
 
@@ -70,6 +70,11 @@ const FavoriteContextProvider = ({children}: { children: React.ReactNode }) => {
         setFavorites(newFavorites)
     }
 
+
+    const checkIfProductIsInFavorite = (product: any): boolean => {
+        return !!favorites.find((favorite: FavoriteProductDetail) => favorite.sku == product.sku);
+    }
+
     useEffect(() => {
         setFavorites(JSON.parse(localStorage.getItem("favorites") ?? '[]'));
     }, [])
@@ -78,7 +83,8 @@ const FavoriteContextProvider = ({children}: { children: React.ReactNode }) => {
         favorites: favorites,
         addProductToFavorite: addProductToFavorite,
         removeProductToFavorite: removeProductToFavorite,
-        totalFavoriteProduct: favorites.length
+        totalFavoriteProduct: favorites.length,
+        checkIfProductIsInFavorite: checkIfProductIsInFavorite
     }}>{children}</FavoriteContext.Provider>
 }
 

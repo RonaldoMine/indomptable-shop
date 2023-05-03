@@ -29,8 +29,7 @@ function Favorite() {
                                     className="border border-slate-200 dark:border-neutral-600 shadow-md"
                                 >
                                     <div className="relative">
-                                        <button onClick={() => removeProductToFavorite(favorite)}
-                                                className="p-2 rounded-full text-white bg-soft-orange mb-2 absolute top-2 left-2 checkout">
+                                        <button className="p-2 rounded-full text-white bg-soft-orange mb-2 absolute top-2 left-2 checkout">
                                             <Link href={`/category/${favorite.category}/${favorite.sku}`}>
                                                 <HiOutlineExternalLink/>
                                             </Link>

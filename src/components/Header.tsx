@@ -16,7 +16,6 @@ import useProductToFavorite from "../hooks/useProductToFavorite";
 export default function Header() {
     const {basket} = useBasket();
     const {totalFavoriteProduct} = useProductToFavorite();
-
     const {theme, setTheme} = useTheme();
     const router = useRouter();
     const {locale: currentLocale} = useRouter();
@@ -39,19 +38,25 @@ export default function Header() {
                         alt="BeleFirst"
                     />
                 </Link>
-                <div className="flex w-full lg:justify-center justify-center items-center sm:mb-0 sm:mt-0 mb-2 mt-2">
-                    <a
-                        href="https://www.facebook.com/belefirst1"
-                        className="dark:text-white"
+                <div className="flex gap-8 w-full lg:justify-center justify-center items-center sm:mb-0 sm:mt-0 mb-2 mt-2">
+                    <Link
+                        href="/shopping"
+                        className={`dark:text-white ${pathname === "/shopping" ? "border-b-2" : ""}`}
                     >
-                        Facebook
-                    </a>
-                    <a
-                        href="https://www.instagram.com/belefirst1"
-                        className="dark:text-white ml-8"
+                        Shop
+                    </Link>
+                    <Link
+                        href="/gallery"
+                        className={`dark:text-white ${pathname === "/gallery" ? "border-b-2" : ""}`}
                     >
-                        Instagram
-                    </a>
+                        Gallery
+                    </Link>
+                    <Link
+                        href="/"
+                        className={`dark:text-white ${pathname==="/contact-us"?"border-b":""}`}
+                    >
+                        About Us
+                    </Link>
                 </div>
                 <div className="flex gap-4">
                     <button className="border rounded-2xl w-10 px-2 gap-1 text-center"
