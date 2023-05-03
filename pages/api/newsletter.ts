@@ -22,13 +22,11 @@ export default async function contact(
                 emailExist = response;
             });
             if (emailExist.length === 0) {
-                const transaction = new Transaction();
-                transaction.create({
+                await sanityClient.create({
                     _type: 'newsletter',
                     email: email,
                     subscribeAt: moment().format("YYYY-MM-DD")
                 });
-                await sanityClient.mutate(transaction);
                 res.status(200).json({message: langMessages.api.email_save});
             } else {
                 res.status(400).json({message: langMessages.api.email_already_exist});

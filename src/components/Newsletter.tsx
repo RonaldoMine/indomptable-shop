@@ -59,7 +59,7 @@ export default function Newsletter() {
                         <input
                             type="email"
                             className={
-                                "ring:border-red-500 dark:text-white mb-0 bg-white "
+                                "ring:border-red-500 text-neutral-800 mb-0 bg-white "
                             }
                             placeholder={`${t("form.email")}`}
                             {...register("email", {
