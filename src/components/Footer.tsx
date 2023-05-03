@@ -40,10 +40,10 @@ export default function Footer() {
                 <div>
                     <ul>
                         <li>
-                            <Link href={"/"}>Facebook</Link>
+                            <Link href={"https://www.facebook.com/belefirst1"}>Facebook</Link>
                         </li>
                         <li>
-                            <Link href={"/"}>Instagram</Link>
+                            <Link href={"https://www.instagram.com/belefirst1"}>Instagram</Link>
                         </li>
                         <li>
                             <Link href={"/"}>TikTok</Link>
