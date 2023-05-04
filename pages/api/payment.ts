@@ -42,7 +42,7 @@ export default async function payment(req: NextApiRequest, res: NextApiResponse)
                     const response = ""//await fetch(URL_PAYMENT, options);
                     const result = {status: "REQUEST_ACCEPTED", paymentId: "NXH-" + new Date().getTime()};//response ? await response.json() : null
                     if (result && result.status === 'REQUEST_ACCEPTED') {
-                        const transaction = new Transaction();
+                        //const transaction = new Transaction();
                         const products = req.body.basket.map((product: { qty: number, size: string, color: string, price: number, sku: string }) => {
                             return {
                                 qty: product.qty,
@@ -52,7 +52,7 @@ export default async function payment(req: NextApiRequest, res: NextApiResponse)
                                 sku: product.sku
                             };
                         })
-                        transaction.create({
+                        /*transaction.create({
                             _type: 'orders',
                             reference: reference,
                             paymentId: result.paymentId,
@@ -65,8 +65,21 @@ export default async function payment(req: NextApiRequest, res: NextApiResponse)
                             address: address,
                             email: email,
                             lang: lang
-                        });
-                        await sanityClient.mutate(transaction, {
+                        });*/
+                        await sanityClient.create({
+                            _type: 'orders',
+                            reference: reference,
+                            paymentId: result.paymentId,
+                            products: products,
+                            totalProduct: quantity,
+                            amount: amount,
+                            firstName: firstName,
+                            lastName: lastName,
+                            phoneNumber: phoneNumber,
+                            address: address,
+                            email: email,
+                            lang: lang
+                        }, {
                             autoGenerateArrayKeys: true
                         })
                         res.status(200).json({
