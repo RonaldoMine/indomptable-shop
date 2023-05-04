@@ -20,9 +20,11 @@ export default async function order(req: NextApiRequest, resp: NextApiResponse) 
                 const {quantity} = response[0].sizes.materials;
                 let request: any = [];
                 request[`sizes[name=="${products[productKey].size}"].materials[color=="${products[productKey].color}"].quantity`] = quantity - products[productKey].qty;
-                const path = new Patch(response[0]._id).set({...request})
-                transaction.patch(path);
-                sanityClient.mutate(transaction)
+                //const path = new Patch(response[0]._id).set({...request})
+                //transaction.patch(path);
+                sanityClient.patch(response[0]._id, {
+                    set: {...request}
+                })
             }
         });
     }
@@ -40,15 +42,22 @@ export default async function order(req: NextApiRequest, resp: NextApiResponse) 
             'sizes[name=="L"].materials[color=="#FFF"].quantity': quantity - totalProduct
         }).commit();
     });*/
-    transaction.create({
+    /*transaction.create({
         _type: 'orders',
         reference: reference,
         paymentId: paymentId,
         products: products,
         totalProduct: totalProduct,
         amount: amount
-    });
-    sanityClient.mutate(transaction, {
+    });*/
+    sanityClient.create({
+        _type: 'orders',
+        reference: reference,
+        paymentId: paymentId,
+        products: products,
+        totalProduct: totalProduct,
+        amount: amount
+    }, {
         autoGenerateArrayKeys: true
     }).then(() => {
         resp.status(200).json({"message": "Success"});
