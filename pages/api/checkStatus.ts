@@ -43,6 +43,7 @@ export default async function checkStatus(req: NextApiRequest, res: NextApiRespo
             res.status(401).json({message: json_messages.errors.empty_field})
         }
     }catch (e) {
+        console.log(e)
         res.status(500).json({message: json_messages.errors.general_error})
     }
 }

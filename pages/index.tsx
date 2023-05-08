@@ -1,6 +1,6 @@
 import shirt_black from "../public/assets/images/tshirt-black-desktop.png";
 import shirt_white from "../public/assets/images/tshirt-white-desktop.png";
-import banner_photo from "../public/assets/images/banner-home.jpg";
+import banner_photo from "../public/assets/images/banner-home.webp";
 import React from "react";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";

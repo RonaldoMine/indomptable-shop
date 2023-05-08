@@ -38,6 +38,7 @@ function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProp
 
     const handleInitPayment = async (values: any) => {
         setOnLoad(true)
+        setPaymentMessage(`${t("init-payment-message")}`)
         const options = {
             method: 'POST',
             headers: {

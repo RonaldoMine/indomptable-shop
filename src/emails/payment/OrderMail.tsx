@@ -30,7 +30,7 @@ export default function OrderMail({
             img: {
                 width: "100px",
                 maxWidth: "600px",
-                height: "auto",
+                height: "auto !important",
                 display: "block",
                 objectFit: "contain"
             },
@@ -76,7 +76,7 @@ export default function OrderMail({
                     <table align="center" role="presentation" cellSpacing="0" cellPadding="0" style={styles.table}>
                         <tr>
                             <td valign="top" className="bg_white" style={{
-                                padding: "1em 2.5em 0 2.5em;",
+                                padding: "1em 2.5em 0 2.5em",
                                 color: "#FFF",
                                 background: "linear-gradient(90deg, rgb(255,194,0), rgb(238,20,19), rgb(255,194,0))"
                             }}>
@@ -147,7 +147,9 @@ export default function OrderMail({
                                                 <td valign="middle" width="85%"
                                                     style={{textAlign: "left", padding: "12px"}}>
                                                     <div style={styles.product.style}>
-                                                        <Image
+                                                        <img
+                                                            /*width={100}
+                                                            height={100}*/
                                                             alt={product.name}
                                                             src={product.image}
                                                             style={styles.product.img}/>

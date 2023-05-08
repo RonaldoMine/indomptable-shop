@@ -45,6 +45,11 @@ function Shopping({productsData}: InferGetServerSidePropsType<typeof getServerSi
                     alt="banner photo"
                     className="max-w-full h-auto object-cover"
                 />
+                <div
+                    className="w-full absolute font-bold text-white bottom-20 text-center">
+                    <h1 className={"w-3/4 mx-auto text-[2rem] md:text-[3rem] lg:text-[5rem] text-gradient"}>INDOMPTABLE</h1>
+                    <p className={"w-3/4 mx-auto text-[.75rem] md:text-[1.5rem] lg:text-[2.25rem]"}>Shop</p>
+                </div>
             </div>
             <main className="px-6 py-10 max-w-[75rem] mx-auto">
                 <div
@@ -163,9 +168,9 @@ export const getServerSideProps: GetServerSideProps = async ({locale}: any) => {
         locale: locale
     });
 
-   /* const categoriesData = datasSanity.map((data: any) => {
-        return {type: data.type, name: data.name};
-    })*/
+    /* const categoriesData = datasSanity.map((data: any) => {
+         return {type: data.type, name: data.name};
+     })*/
     let productsData: any = [];
     datasSanity.forEach((data: any) => {
         productsData.push(...data.products);
