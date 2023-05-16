@@ -15,22 +15,20 @@ export default function OnePeople({img, title, blurUrl, width, height = 100}: On
     return (
         <div
             className={
-                "md:w-72 w-full mb-4 rounded hover:cursor-pointer"
+                "md:w-60 lg:w-72 w-full mb-4 rounded"
             }
         >
-            <Link href={"/gallery"}>
-                <Image
-                    src={img}
-                    alt={title}
-                    placeholder="blur"
-                    blurDataURL={blurUrl}
-                    height={height}
-                    width={width}
-                    className={
-                        "h-[400px] sm:h-[300px] object-cover rounded duration-100"
-                    }
-                ></Image>
-            </Link>
+            <Image
+                src={img}
+                alt={title}
+                placeholder="blur"
+                blurDataURL={blurUrl}
+                height={height}
+                width={width}
+                className={
+                    "h-[400px] sm:h-[200px] md:h-[300px] object-cover rounded duration-100"
+                }
+            ></Image>
         </div>
     );
 }

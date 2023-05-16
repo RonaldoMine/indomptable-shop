@@ -41,7 +41,7 @@ export default function Newsletter() {
         <>
             <div
                 id="newsletter"
-                className="dark:bg-neutral-800 border-b border-neutral-200 dark:border-b dark:border-neutral-600 bg-fixed bg-center bg-cover"
+                className="dark:bg-neutral-800 border-b border-neutral-200 dark:border-b dark:border-neutral-600 bg-fixed bg-center sm:bg-cover"
                 style={{backgroundImage: `url('${parallax_photo.src}')`}}
             >
                 <div className={"lg:w-4/6 md:w-5/6 w-full p-4 mx-auto"}>

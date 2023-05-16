@@ -1,12 +1,22 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import OnePeople from "./OnePeople";
 import {useTranslation} from "next-i18next";
-import {FreeMode, Navigation} from "swiper";
+import {EffectCards, FreeMode, Navigation} from "swiper";
 import {Swiper, SwiperSlide} from "swiper/react";
 import Link from "next/link";
 
 export default function People({peoples}: any) {
     const {t} = useTranslation("gallery");
+    const [userDeviceIsPhone, setUserDeviceIsPhone] = useState(false);
+    const [loadSwiper, setLoaderSwiper] = useState(false);
+
+    useEffect(() => {
+        setUserDeviceIsPhone(window?.screen?.width < 600)
+    }, [])
+
+    useEffect(() => {
+        setLoaderSwiper(true);
+    }, [userDeviceIsPhone])
 
     return (
         <>
@@ -16,43 +26,49 @@ export default function People({peoples}: any) {
                     <h1 className={"text-center text-6xl font-bold mb-8 text-gradient"}>
                         {t("title")}
                     </h1>
-                    <Swiper
-                        slidesPerView={1}
-                        spaceBetween={10}
-                        modules={[FreeMode, Navigation]}
-                        className="relative"
-                        navigation={true}
-                        loop={true}
-                        breakpoints={
-                            {
-                                640: {
-                                    slidesPerView: 2,
-                                    spaceBetween: 20,
-                                },
-                                768: {
-                                    slidesPerView: 3,
-                                    spaceBetween: 40,
-                                },
-                                1024: {
-                                    slidesPerView: 4,
-                                    spaceBetween: 50,
-                                },
+                    {loadSwiper && (<Swiper
+                            effect={"cards"}
+                            slidesPerView={1}
+                            spaceBetween={10}
+                            modules={userDeviceIsPhone ? [FreeMode, EffectCards] : [FreeMode, Navigation]}
+                            className="relative"
+                            grabCursor={true}
+                            navigation={!userDeviceIsPhone}
+                            loop={true}
+                            freeMode={true}
+                            speed={userDeviceIsPhone ? 10 : 500}
+                            breakpoints={
+                                {
+                                    600: {
+                                        slidesPerView: 2,
+                                        spaceBetween: 20,
+                                    },
+                                    768: {
+                                        slidesPerView: 3,
+                                        spaceBetween: 40,
+                                    },
+                                    1024: {
+                                        slidesPerView: 4,
+                                        spaceBetween: 50,
+                                    },
+                                }
                             }
-                        }
-                    >{peoples.map((people: { src: any; title: string }, index: number) => {
-                        return <SwiperSlide key={index}>
-                            <OnePeople
-                                blurUrl={people.src.metadata.lqip}
-                                img={people.src.url}
-                                title={people.title}
-                                width={people.src.metadata.dimensions.width}
-                            />
-                        </SwiperSlide>;
-                    })}
-                    </Swiper>
+                        >
+                            {peoples.map((people: { src: any; title: string }, index: number) => {
+                                return <SwiperSlide key={index}>
+                                    <OnePeople
+                                        blurUrl={people.src.metadata.lqip}
+                                        img={people.src.url}
+                                        title={people.title}
+                                        width={people.src.metadata.dimensions.width}
+                                    />
+                                </SwiperSlide>;
+                            })}
+                        </Swiper>
+                    )}
 
                     <p className={"pt-5 sm:pt-10 text-center"}>
-                        <Link className={"text-orange"} href={"/gallery"} >{t("show-more")}</Link>
+                        <Link className={"text-orange"} href={"/gallery"}>{t("show-more")}</Link>
                     </p>
                 </div>
             </div>
