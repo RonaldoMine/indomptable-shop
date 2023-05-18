@@ -54,8 +54,8 @@ export default function Header({lang}: { lang: string }) {
                         {locales_messages.gallery}
                     </Link>
                     <Link
-                        href="/"
-                        className={`dark:text-white ${pathname === "/contact-us" ? "border-b" : ""}`}
+                        href="/about"
+                        className={`dark:text-white ${pathname === "/about" ? "border-b" : ""}`}
                     >
                         {locales_messages.about}
                     </Link>
