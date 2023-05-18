@@ -9,16 +9,16 @@ type Props = {};
 const About = () => {
     return (
         <div className="max-w-4xl mx-auto">
-            <ReactFullpage scrollingSpeed={1000} render={({state, fullpageApi}) => {
+            <ReactFullpage scrollingSpeed={1000} render={() => {
                 return (
                     <ReactFullpage.Wrapper>
-                        <section className="text-center py-60">
+                        <section className="section text-center py-60">
                             <h3 className="mb-6 text-neutral-400 text-sm font-bold">OUR MISSION</h3>
                             <p className="text-7xl font-bold text-fluid-headline ">
                                 Impact the youth to become the change she wants to see.
                             </p>
                         </section>
-                        <section id={"about-story"} className="text-center py-60">
+                        <section id={"about-story"} className="section text-center py-60">
                             <h3 className="mb-6 text-neutral-400 text-sm font-bold">OUR STORY</h3>
                             <Swiper effect={"cards"}
                                     slidesPerView={1}
@@ -53,7 +53,7 @@ const About = () => {
                                 </SwiperSlide>
                             </Swiper>
                         </section>
-                        <section className="text-center py-36">
+                        <section className="section text-center py-36">
                             <h3 className="mb-12 text-neutral-400 text-sm font-bold">OUR VALUES</h3>
                             <div className=" flex mx-auto gap-4 w-full">
                                 <div className="aspect-[0.82] w-1/3 bg-slate-300"></div>
@@ -61,7 +61,7 @@ const About = () => {
                                 <div className="aspect-[0.82] w-1/3 bg-slate-300"></div>
                             </div>
                         </section>
-                        <section className="text-center py-60 px-5">
+                        <section className="section text-center py-60 px-5">
                             <h3 className="mb-6 text-neutral-400 text-sm font-bold">OUR VISION</h3>
                             <p className="text-2xl text-fluid-copy leading-fluid-copy">
                                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
