@@ -7,6 +7,7 @@ import PageHeader from "../src/components/PageHeader";
 import Image from "next/image";
 import {Dialog, Transition} from "@headlessui/react";
 import {AiOutlineArrowLeft, AiOutlineArrowRight, AiOutlineClose} from "react-icons/ai";
+import {shuffleArray} from "../src/utils";
 
 function Gallery({peoples}: any) {
     let [isOpen, setIsOpen] = useState(false);
@@ -161,7 +162,8 @@ function Gallery({peoples}: any) {
                                                     : "invisible"
                                             }`}
                                         >
-                                            <AiOutlineArrowRight className={"mx-auto text-white dark:text-neutral-800"}/>
+                                            <AiOutlineArrowRight
+                                                className={"mx-auto text-white dark:text-neutral-800"}/>
                                         </button>
                                     </div>
                                 </div>
@@ -198,7 +200,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     const peoples = await sanityClient.fetch(query);
     return {
         props: {
-            peoples,
+            peoples: shuffleArray(peoples),
             ...(await serverSideTranslations(locale, ["gallery"])),
         },
     };

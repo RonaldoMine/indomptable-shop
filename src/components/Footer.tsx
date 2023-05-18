@@ -4,8 +4,10 @@ import footer_logo_white from "../../public/assets/images/logo.svg";
 import footer_logo_black from "../../public/assets/images/logo-black.svg";
 import Image from "next/image";
 
-export default function Footer() {
+export default function Footer({lang}: { lang: string }) {
     const {theme} = useTheme();
+    const locales_messages = require(`../../public/locales/${lang}/footer.json`);
+    const locales_messages_link = require(`../../public/locales/${lang}/link.json`);
     return (
         <footer
             className="grid gap-10 sm:justify-items-end justify-between items-center mx-auto sm:flex px-10 py-20 relative dark:bg-neutral-800 border-t border-t-neutral-200">
@@ -17,23 +19,23 @@ export default function Footer() {
                         alt="Indomptable Logo"
                     />
                 </Link>
-               <p>A brand with a purpose, strong values <br/> drive with passion</p>
+               <p dangerouslySetInnerHTML={{__html: locales_messages.subtitle}} />
             </div>
 
             <div className={"grid gap-4 grid-cols-2 sm:grid-cols-3"}>
                 <div>
                     <ul>
                         <li>
-                            <Link href={"/gallery"}>Gallery</Link>
+                            <Link href={"/gallery"}>{locales_messages_link.gallery}</Link>
                         </li>
                         <li>
-                            <Link href={"/#contact-us"}>About Us</Link>
+                            <Link href={"/about-us"}>{locales_messages_link.about}</Link>
                         </li>
                         <li>
-                            <Link href={"/"}>Refund policy</Link>
+                            <Link href={"/"}>{locales_messages_link.policy}</Link>
                         </li>
                         <li>
-                            <Link href={"/"}>Contact-us</Link>
+                            <Link href={"/contact-us"}>{locales_messages_link.contact}</Link>
                         </li>
                     </ul>
                 </div>
@@ -44,9 +46,6 @@ export default function Footer() {
                         </li>
                         <li>
                             <Link href={"https://www.instagram.com/belefirst1"}>Instagram</Link>
-                        </li>
-                        <li>
-                            <Link href={"/"}>TikTok</Link>
                         </li>
                     </ul>
                 </div>

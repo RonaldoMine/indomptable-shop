@@ -12,6 +12,7 @@ import Newsletter from "../src/components/Newsletter";
 import People from "../src/components/People";
 import OurStory from "../src/components/OurStory";
 import {useTranslation} from "next-i18next";
+import {shuffleArray} from "../src/utils";
 
 export default function Home({
                                  peoples,
@@ -19,7 +20,7 @@ export default function Home({
     const {t} = useTranslation("home")
     return (
         <>
-            <div className="xl:max-w-[80%] xl:my-14 w-full mx-auto h-[50vw] relative">
+            <div className="w-full mx-auto h-[50vw] relative">
                 <Image
                     src={banner_photo}
                     placeholder="blur"
@@ -64,21 +65,6 @@ export default function Home({
     );
 }
 
-function shuffle(array: any): any {
-    let currentIndex = array.length,  randomIndex;
-    // While there remain elements to shuffle.
-    while (currentIndex != 0) {
-        // Pick a remaining element.
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex--;
-        // And swap it with the current element.
-        [array[currentIndex], array[randomIndex]] = [
-            array[randomIndex], array[currentIndex]];
-    }
-
-    return array;
-}
-
 export const getServerSideProps: GetServerSideProps = async ({
                                                                  locale,
                                                              }: any) => {
@@ -100,7 +86,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     const peoples: any = await sanityClient.fetch(query);
     return {
         props: {
-            peoples: shuffle(peoples),
+            peoples: shuffleArray(peoples),
             ...(await serverSideTranslations(locale, ["contact", "gallery", "newsletter", "our-story", "home"])),
         },
     };

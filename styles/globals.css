@@ -261,6 +261,14 @@ p, h1, h2, h3, h4, h5, h6 {
     animation: shine 5s linear infinite;
     background-size: 200% auto;
 }
+.text-gradient-simple {
+    background: linear-gradient(90deg, var(--color-yellow), var(--color-red), var(--color-yellow));
+    background-clip: border-box;
+    word-wrap: break-word;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
+}
 
 @keyframes shine {
     100% {
@@ -311,6 +319,11 @@ p, h1, h2, h3, h4, h5, h6 {
 footer ul li {
     margin-bottom: 5px;
 }
+
+
+/*
+    Swiper
+ */
 
 .swiper-button-prev, .swiper-button-next{
     position: absolute;

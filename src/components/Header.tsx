@@ -13,7 +13,7 @@ import {useTheme} from "next-themes";
 import {useRouter} from "next/router";
 import useProductToFavorite from "../hooks/useProductToFavorite";
 
-export default function Header() {
+export default function Header({lang}: { lang: string }) {
     const {basket} = useBasket();
     const {totalFavoriteProduct} = useProductToFavorite();
     const {theme, setTheme} = useTheme();
@@ -21,6 +21,7 @@ export default function Header() {
     const {locale: currentLocale} = useRouter();
     const {pathname, asPath, query} = router;
     const [mounted, setMounted] = useState(false);
+    const locales_messages = require(`../../public/locales/${lang}/link.json`);
 
     useEffect(() => {
         setMounted(true);
@@ -38,24 +39,25 @@ export default function Header() {
                         alt="BeleFirst"
                     />
                 </Link>
-                <div className="flex gap-8 w-full lg:justify-center justify-center items-center sm:mb-0 sm:mt-0 mb-2 mt-2">
+                <div
+                    className="flex gap-8 w-full lg:justify-center justify-center items-center sm:mb-0 sm:mt-0 mb-2 mt-2">
                     <Link
                         href="/shopping"
                         className={`dark:text-white ${pathname === "/shopping" ? "border-b-2" : ""}`}
                     >
-                        Shop
+                        {locales_messages.shop}
                     </Link>
                     <Link
                         href="/gallery"
                         className={`dark:text-white ${pathname === "/gallery" ? "border-b-2" : ""}`}
                     >
-                        Gallery
+                        {locales_messages.gallery}
                     </Link>
                     <Link
                         href="/"
-                        className={`dark:text-white ${pathname==="/contact-us"?"border-b":""}`}
+                        className={`dark:text-white ${pathname === "/contact-us" ? "border-b" : ""}`}
                     >
-                        About Us
+                        {locales_messages.about}
                     </Link>
                 </div>
                 <div className="flex gap-4">

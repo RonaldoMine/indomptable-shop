@@ -1,24 +1,14 @@
-import React, {useState} from "react";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useTranslation} from "next-i18next";
-import banner_photo from "../public/assets/images/shopping-banner.webp";
+import shoppingImg from "../public/assets/images/shopping-img.jpg";
 import {sanityClient, urlFor} from "../sanity";
 
 function Shopping({productsData}: InferGetServerSidePropsType<typeof getServerSideProps>) {
     const {t} = useTranslation("shopping-page");
-    const [products, setProducts] = useState(productsData);
-    const handleHoverColorProduct = (productSku: string, image: any) => {
-        const newProducts = products.slice().map((product: any) => {
-            if (product.sku === productSku) {
-                return {...product, coverImage: image.src};
-            }
-            return {...product}
-        });
-        setProducts(newProducts)
-    }
 
     const getRgbColor = (color: string): string => {
         switch (color) {
@@ -37,33 +27,36 @@ function Shopping({productsData}: InferGetServerSidePropsType<typeof getServerSi
 
     return (
         <div className="w-full overflow-x-hidden dark:bg-neutral-800">
-            <div className="w-full mx-auto h-[50vw] relative">
-                <Image
-                    src={banner_photo}
-                    placeholder="blur"
-                    fill={true}
-                    alt="banner photo"
-                    className="max-w-full h-auto object-cover"
-                />
-                <div
-                    className="w-full absolute font-bold text-white bottom-20 text-center">
-                    <h1 className={"w-3/4 mx-auto text-[2rem] md:text-[3rem] lg:text-[5rem] text-gradient"}>INDOMPTABLE</h1>
-                    <p className={"w-3/4 mx-auto text-[.75rem] md:text-[1.5rem] lg:text-[2.25rem]"}>Shop</p>
+            <div className={"flex bg-white h-[40vw] relative border border-slate-200"}>
+                <div className="w-2/5 relative h-[40vw] flex items-center">
+                    <span
+                        className={"text-neutral-950 absolute text-xs bottom-4 left-6 font-futura invisible sm:visible sm:bottom-8 md:font-bold md:text-lg"}>{t('promo-text')}</span>
+
+                    <div
+                        className="-mr-12 ml-auto text-center px-2 py-4 w-auto bg-white md:w-[420px] md:px-10 md:py-16">
+                        <span
+                            className={"text-center text-2xl font-extrabold italic font-futura text-gradient-simple sm:text-4xl md:text-6xl"}
+                            dangerouslySetInnerHTML={{__html: t('discount')}}/>
+                    </div>
                 </div>
+                <div className={"w-3/5 h-full bg-cover"}
+                     style={{backgroundImage: `url('${shoppingImg.src}')`, backgroundPositionY: "-20px"}}/>
             </div>
             <main className="px-6 py-10 max-w-[75rem] mx-auto">
+                {/*
+                <PageHeader title={t("title")}/>
+*/}
                 <div
-                    id="favorite-content"
                     className="grid grid-cols-1 gap-4 md:grid-cols-4 sm:grid-cols-2"
                 >
-                    {products?.length > 0 ? (
-                        products.map((product: any) => {
+                    {productsData?.length > 0 ? (
+                        productsData.map((product: any) => {
                             return (
-                                <Link key={product.sku} href={`/category/${product.category}/${product.sku}`}>
-                                    <div
-                                        className="border border-slate-200 dark:border-neutral-600"
-                                    >
-                                        <div className="relative bg-gray-300 dark:bg-neutral-700">
+                                <div key={product.sku}
+                                     className="border border-slate-200 dark:border-neutral-600"
+                                >
+                                    <div className="relative bg-gray-300 dark:bg-neutral-700">
+                                        <Link key={product.sku} href={`/category/${product.category}/${product.sku}`}>
                                             <Image
                                                 src={urlFor(product.coverImage).url()}
                                                 className="h-[300px] w-full object-contain"
@@ -73,34 +66,36 @@ function Shopping({productsData}: InferGetServerSidePropsType<typeof getServerSi
                                                 alt={product.name}
                                                 priority
                                             />
+                                        </Link>
+                                    </div>
+                                    <div>
+                                        <div className={"flex items-center gap-2 px-4 py-2"}>
+                                            {product.colors.map((color: any, key: number) => {
+                                                return <button key={key}
+                                                               className={`rounded-full border border-slate-200 dark:border-neutral-600 object-cover h-4 w-4`}
+                                                               style={{backgroundColor: getRgbColor(color.name)}}></button>
+                                            })}
+                                            {
+                                                product.totalColor > 3 &&
+                                                <span className={"text-xs mt-1"}>+{product.totalColor - 3}</span>
+                                            }
                                         </div>
-                                        <div>
-                                            <div className={"flex items-center gap-2 px-4 py-2"}>
-                                                {product.colors.map((color: any, key: number) => {
-                                                    return <button key={key}
-                                                                   onMouseEnter={() => handleHoverColorProduct(product.sku, color.images[0])}
-                                                                   className={`rounded border border-slate-200 dark:border-neutral-600 object-cover h-7 w-8`}
-                                                                   style={{backgroundColor: getRgbColor(color.name)}}></button>
-                                                })}
-                                                {
-                                                    product.totalColor > 3 &&
-                                                    <span className={""}>+{product.totalColor - 3}</span>
-                                                }
-                                            </div>
-                                            <div className={"px-4 pb-4 pt-2"}>
-                                                <h4 className="text-sm dark:text-neutral-200 font-bold">
+                                        <div className={"px-4 pb-4 pt-2"}>
+                                            <h4 className="text-sm dark:text-neutral-200 font-bold">
+                                                <Link key={product.sku}
+                                                      href={`/category/${product.category}/${product.sku}`}>
                                                     {product.name}
-                                                </h4>
-                                                <p className="font-medium dark:text-neutral-300" style={{fontSize: 12}}>
-                                                    {product.subtitle}
-                                                </p>
-                                                <p className="font-medium dark:text-neutral-300" style={{fontSize: 12}}>
-                                                    XAF {product.price}
-                                                </p>
-                                            </div>
+                                                </Link>
+                                            </h4>
+                                            <p className="font-medium dark:text-neutral-300" style={{fontSize: 12}}>
+                                                {product.subtitle}
+                                            </p>
+                                            <p className="font-medium dark:text-neutral-300" style={{fontSize: 12}}>
+                                                XAF {product.price}
+                                            </p>
                                         </div>
                                     </div>
-                                </Link>
+                                </div>
                             );
                         })
                     ) : (

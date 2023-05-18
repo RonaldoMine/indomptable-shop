@@ -11,7 +11,7 @@ import React, {useEffect} from "react";
 import Header from "../src/components/Header";
 import {BasketContextProvider} from "../src/context/BasketContext";
 import {ToastContainer} from "react-toastify";
-import {appWithTranslation} from "next-i18next";
+import {appWithTranslation, useTranslation} from "next-i18next";
 import {Router} from "next/router";
 import Nprogress from "nprogress";
 import {ThemeProvider} from "next-themes";
@@ -24,7 +24,7 @@ Nprogress.configure({showSpinner: false})
 //Handle router event to add a progress bar at the top of the page
 // @refresh reset
 function App({Component, pageProps}: AppProps) {
-
+    const {i18n} = useTranslation();
     useEffect(() => {
         Router.events.on("routeChangeStart", (url: URL) => {
             Nprogress.start();
@@ -52,11 +52,11 @@ function App({Component, pageProps}: AppProps) {
                             <link rel="icon" href="/assets/images/logo.svg"/>
                         </Head>
                         <main>
-                            <Header/>
+                            <Header lang={i18n.language ?? "fr"}/>
                             <div className={"relative"}>
                                 <Component {...pageProps} />
                             </div>
-                            <Footer/>
+                            <Footer lang={i18n.language ?? "fr"}/>
                         </main>
                         <ToastContainer/>
                     </div>
