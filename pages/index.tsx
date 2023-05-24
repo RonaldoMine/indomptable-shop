@@ -68,7 +68,7 @@ export default function Home({
 export const getServerSideProps: GetServerSideProps = async ({
                                                                  locale,
                                                              }: any) => {
-    const query = `*[_type == "people" && onHomePage == true] | order(_id desc)[0..7]{
+    const query = `*[_type == "people" && onHomePage == true] | order(publishedAt desc)[0..9]{
     _id,
     title,
         "src": src.asset->{
