@@ -35,9 +35,8 @@ export default function People({peoples}: any) {
                             grabCursor={true}
                             navigation={!userDeviceIsPhone}
                             loop={true}
-                            freeMode={true}
-                            centeredSlides={true}
-                            speed={userDeviceIsPhone ? 10 : 500}
+                            centeredSlides={!userDeviceIsPhone}
+                            speed={userDeviceIsPhone ? 3000 : 500}
                             breakpoints={
                                 {
                                     600: {
