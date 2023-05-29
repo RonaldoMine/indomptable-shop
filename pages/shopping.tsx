@@ -6,6 +6,7 @@ import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useTranslation} from "next-i18next";
 import shoppingImg from "../public/assets/images/shopping-img.jpg";
 import {sanityClient, urlFor} from "../sanity";
+import {DISCOUNT_PERCENT} from "../src/utils";
 
 function Shopping({productsData}: InferGetServerSidePropsType<typeof getServerSideProps>) {
     const {t} = useTranslation("shopping-page");
@@ -28,15 +29,15 @@ function Shopping({productsData}: InferGetServerSidePropsType<typeof getServerSi
     return (
         <div className="w-full overflow-x-hidden dark:bg-neutral-800">
             <div className={"flex bg-white h-[40vw] relative border border-slate-200"}>
-                <div className="w-2/5 relative h-[40vw] flex items-center">
-                    <span
-                        className={"text-neutral-950 absolute text-xs bottom-4 left-6 font-futura invisible sm:visible sm:bottom-8 md:font-bold md:text-lg"}>{t('promo-text')}</span>
-
+                <div className="w-2/5 relative h-[40vw] flex items-center justify-center">
+                    {DISCOUNT_PERCENT > 0 && (<span
+                            className={"text-neutral-950 absolute text-sm bottom-4 left-6 font-futura invisible sm:visible sm:bottom-8 md:font-bold md:text-lg"}>{t('promo-text')}</span>
+                    )}
                     <div
-                        className="-mr-12 ml-auto text-center px-2 py-4 w-auto bg-white md:w-[420px] md:px-10 md:py-16">
-                        <span
-                            className={"text-center text-2xl font-extrabold italic font-futura text-gradient-simple sm:text-4xl md:text-6xl"}
-                            dangerouslySetInnerHTML={{__html: t('discount')}}/>
+                        className="text-center px-2 py-4 w-auto bg-white sm:-mr-12 sm:ml-auto  sm:px-6 sm:py-10 md:w-[420px] md:px-10 md:py-16">
+                        <h6
+                            className={"text-center text-2xl font-extrabold font-futura text-gradient-simple sm:text-4xl md:text-6xl"}
+                            dangerouslySetInnerHTML={{__html: DISCOUNT_PERCENT > 0 ? t("discount", {"percent": DISCOUNT_PERCENT}) : "Never Give UP"}}/>
                     </div>
                 </div>
                 <div className={"w-3/5 h-full bg-cover"}
@@ -71,9 +72,9 @@ function Shopping({productsData}: InferGetServerSidePropsType<typeof getServerSi
                                     <div>
                                         <div className={"flex items-center gap-2 px-4 py-2"}>
                                             {product.colors.map((color: any, key: number) => {
-                                                return <button key={key}
-                                                               className={`rounded-full border border-slate-200 dark:border-neutral-600 object-cover h-4 w-4`}
-                                                               style={{backgroundColor: getRgbColor(color.name)}}></button>
+                                                return <div key={key}
+                                                            className={`rounded-full border border-slate-200 dark:border-neutral-600 object-cover h-4 w-4`}
+                                                            style={{backgroundColor: getRgbColor(color.name)}}/>
                                             })}
                                             {
                                                 product.totalColor > 3 &&
@@ -87,11 +88,12 @@ function Shopping({productsData}: InferGetServerSidePropsType<typeof getServerSi
                                                     {product.name}
                                                 </Link>
                                             </h4>
-                                            <p className="font-medium dark:text-neutral-300" style={{fontSize: 12}}>
+                                            <p className="font-medium dark:text-neutral-300">
                                                 {product.subtitle}
                                             </p>
-                                            <p className="font-medium dark:text-neutral-300" style={{fontSize: 12}}>
-                                                XAF {product.price}
+                                            <p className="font-medium dark:text-neutral-300">
+                                                XAF <span className={"text-md mr-1 font-bold"}>{product?.pricePromo}</span>
+                                                <span className={`${product?.pricePromo != null ? "line-through text-sm" : ""} dark:text-neutral-300`}>{product?.price}</span>
                                             </p>
                                         </div>
                                     </div>
@@ -140,6 +142,7 @@ export const getServerSideProps: GetServerSideProps = async ({locale}: any) => {
           },
       },
       price,
+      pricePromo,
        "totalColor": count(colors),
     colors[0...3]{
     totalQuantity,

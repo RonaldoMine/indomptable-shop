@@ -48,10 +48,10 @@ export default function ToastProduct({
                 {size}
               </span>
                     </p>
-                    <p className="dark:text-neutral-400">
+                    <p className="dark:text-neutral-300">
                         XAF{" "}
                         <span className={"text-neutral-700 dark:text-neutral-300"}>
-                {product?.price}
+                {product?.pricePromo??product?.price}
               </span>
                     </p>
                 </div>

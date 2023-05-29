@@ -1,5 +1,5 @@
 {
-    "h1": "Votre panier 🛒",
+    "title": "Votre panier 🛒",
     "emptyBasket": {
         "text": "Votre panier est vide",
         "link": "Aller à la boutique"
