@@ -1,5 +1,5 @@
 {
     "title": "Welcome to Shop",
-    "discount": "15% DISCOUNT",
+    "discount": "{{percent}}% <br/> DISCOUNT",
     "promo-text": "SPECIAL PROMO"
 }

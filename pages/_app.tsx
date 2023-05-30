@@ -52,11 +52,11 @@ function App({Component, pageProps}: AppProps) {
                             <link rel="icon" href="/assets/images/logo.svg"/>
                         </Head>
                         <main>
-                            <Header lang={i18n.language ?? "fr"}/>
+                            <Header lang={i18n.language ?? "en"}/>
                             <div className={"relative"}>
                                 <Component {...pageProps} />
                             </div>
-                            <Footer lang={i18n.language ?? "fr"}/>
+                            <Footer lang={i18n.language ?? "en"}/>
                         </main>
                         <ToastContainer/>
                     </div>

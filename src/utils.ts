@@ -1,5 +1,5 @@
 export function shuffleArray(array: []): [] {
-    let currentIndex = array.length,  randomIndex;
+    let currentIndex = array.length, randomIndex;
     // While there remain elements to shuffle.
     while (currentIndex != 0) {
         // Pick a remaining element.
@@ -11,4 +11,6 @@ export function shuffleArray(array: []): [] {
     }
     return array;
 }
+
+export const DISCOUNT_PERCENT: number = 15
 

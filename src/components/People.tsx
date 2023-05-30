@@ -35,8 +35,8 @@ export default function People({peoples}: any) {
                             grabCursor={true}
                             navigation={!userDeviceIsPhone}
                             loop={true}
-                            freeMode={true}
-                            speed={userDeviceIsPhone ? 10 : 500}
+                            centeredSlides={!userDeviceIsPhone}
+                            speed={userDeviceIsPhone ? 3000 : 500}
                             breakpoints={
                                 {
                                     600: {
@@ -51,6 +51,10 @@ export default function People({peoples}: any) {
                                         slidesPerView: 4,
                                         spaceBetween: 50,
                                     },
+                                    1400: {
+                                        slidesPerView: 5,
+                                        spaceBetween: 50,
+                                    }
                                 }
                             }
                         >

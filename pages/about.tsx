@@ -3,6 +3,8 @@ import React from "react";
 import passion from "../public/assets/images/about/passion.png";
 import perseverance from "../public/assets/images/about/perseverance.png";
 import teamwork from "../public/assets/images/about/teamwork.png";
+import {Swiper, SwiperSlide} from "swiper/react";
+import {FreeMode, Navigation} from "swiper";
 
 type Props = {};
 
@@ -15,11 +17,39 @@ const About = () => {
           Impact the youth to become the change she wants to see.
         </p>
       </section>
-      {/* <div>
-        <h3>OUR STORY</h3>
-        
-      </div> */}
-      <section className="text-center py-36">
+      <section id={"about-story"} className="text-center py-40">
+        <h3 className="mb-6 text-neutral-400 text-sm font-bold">OUR STORY</h3>
+        <Swiper
+          effect={"cards"}
+          slidesPerView={1}
+          modules={[Navigation]}
+          className="relative"
+          navigation={true}
+          speed={500}
+          grabCursor={false}
+          loop={true}
+        >
+          <SwiperSlide className={"w-full"}>
+            <p className={"mx-auto text-center w-2/3 sm:w-2/3 text-2xl"}>
+              Lorem ipsum <br />
+              dolor sit amet, consectetur adipisicing elit. Asperiores beatae ea
+              ex illo itaque iure magnam nam omnis recusandae veritatis! Aliquam
+              consequatur cum distinctio doloremque quod vero voluptates? Earum,
+              magni?
+            </p>
+          </SwiperSlide>
+          <SwiperSlide className={"w-full"}>
+            <p className={"mx-auto text-center w-1/3 sm:w-2/3 text-2xl"}>
+              Lorem ipsum <br />
+              dolor sit amet, consectetur adipisicing elit. Asperiores beatae ea
+              ex illo itaque iure magnam nam omnis recusandae veritatis! Aliquam
+              consequatur cum distinctio doloremque quod vero voluptates? Earum,
+              magni?
+            </p>
+          </SwiperSlide>
+        </Swiper>
+      </section>
+      <section className="text-center py-40">
         <h3 className="mb-12 text-neutral-400 text-sm font-bold">OUR VALUES</h3>
 
         <div className=" flex mx-auto gap-x-2 md:gap-x-4 px-6 w-full">
@@ -37,11 +67,7 @@ const About = () => {
           </div>
 
           <div className="aspect-[0.82] w-1/3 bg-slate-300 relative overflow-hidden">
-            <Image
-              src={passion}
-              className="absolute"
-              alt="passion'sdw"
-            />
+            <Image src={passion} className="absolute" alt="passion'sdw" />
             <div className="absolute w-full h-full flex items-end">
               <div className="w-full h-max pb-6 pl-6 z-10">
                 <p className="font-futura text-4xl w-min text-white">PASSION</p>
@@ -52,11 +78,7 @@ const About = () => {
           </div>
 
           <div className="aspect-[0.82] w-1/3 bg-slate-300 relative overflow-hidden">
-            <Image
-              src={perseverance}
-              className="absolute"
-              alt="passion'swdf"
-            />
+            <Image src={perseverance} className="absolute" alt="passion'swdf" />
             <div className="absolute w-full h-full flex items-end">
               <div className="w-full h-max pb-6 pl-6 z-10">
                 <p className="font-futura text-4xl w-min text-white">

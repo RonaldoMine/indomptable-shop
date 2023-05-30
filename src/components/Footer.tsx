@@ -26,9 +26,6 @@ export default function Footer({lang}: { lang: string }) {
                 <div>
                     <ul>
                         <li>
-                            <Link href={"/gallery"}>{locales_messages_link.gallery}</Link>
-                        </li>
-                        <li>
                             <Link href={"/about-us"}>{locales_messages_link.about}</Link>
                         </li>
                         <li>
@@ -42,10 +39,13 @@ export default function Footer({lang}: { lang: string }) {
                 <div>
                     <ul>
                         <li>
-                            <Link href={"https://www.facebook.com/belefirst1"}>Facebook</Link>
+                            <Link href={"/gallery"}>{locales_messages_link.gallery}</Link>
                         </li>
                         <li>
-                            <Link href={"https://www.instagram.com/belefirst1"}>Instagram</Link>
+                            <Link href={"https://www.facebook.com/profile.php?id=100089070463423"} target={"_blank"}>Facebook</Link>
+                        </li>
+                        <li>
+                            <Link href={"https://www.instagram.com/_1ndomptable/"} target={"_blank"}>Instagram</Link>
                         </li>
                     </ul>
                 </div>

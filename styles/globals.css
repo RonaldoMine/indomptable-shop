@@ -145,12 +145,13 @@ p, h1, h2, h3, h4, h5, h6 {
     height: 50px;
 }
 
-#our-story .quotation-mark{
+#our-story .quotation-mark {
     margin-top: -10px;
     font-weight: bold;
-    font-size:100px;
+    font-size: 100px;
     font-family: "Times New Roman", Georgia, Serif, serif;
 }
+
 .form-control {
     height: 30px;
     font-size: 14px;
@@ -261,6 +262,7 @@ p, h1, h2, h3, h4, h5, h6 {
     animation: shine 5s linear infinite;
     background-size: 200% auto;
 }
+
 .text-gradient-simple {
     background: linear-gradient(90deg, var(--color-yellow), var(--color-red), var(--color-yellow));
     background-clip: border-box;
@@ -325,7 +327,7 @@ footer ul li {
     Swiper
  */
 
-.swiper-button-prev, .swiper-button-next{
+#our-community :is(.swiper-button-prev, .swiper-button-next) {
     position: absolute;
     background: #FFFFFF;
     border-radius: 100%;
@@ -339,19 +341,21 @@ footer ul li {
     justify-content: center;
 }
 
-.dark :is(.swiper-button-prev, .swiper-button-next){
+.dark #our-community :is(.swiper-button-prev, .swiper-button-next) {
     background: #262626;
     border-color: var(--color-orange);
     border-width: 1px;
 }
-.swiper-button-prev{
+
+#our-community .swiper-button-prev {
     left: 20px;
 }
-.swiper-button-next{
+
+#our-community .swiper-button-next {
     right: 20px;
 }
 
-.swiper-button-prev:before, .swiper-button-next:after{
+#our-community .swiper-button-prev:before, #our-community .swiper-button-next:after {
     border-style: solid;
     border-width: 0.20em 0.20em 0 0;
     border-color: var(--color-orange);
@@ -362,12 +366,60 @@ footer ul li {
     vertical-align: top;
     width: 0.45em;
 }
-.dark .swiper-button-prev:before, .swiper-button-next:after{
 
-}
-.swiper-button-prev:before{
+#our-community .swiper-button-prev:before {
     transform: rotate(-135deg);
 }
-.swiper-button-next:after{
+
+#our-community .swiper-button-next:after {
+    transform: rotate(45deg);
+}
+
+
+/*
+    Swiper in about Us
+ */
+#about-story :is(.swiper-button-prev, .swiper-button-next) {
+    position: absolute;
+    border-radius: 100%;
+    width: 35px;
+    height: 35px;
+    top: calc(50% - 20px);
+    z-index: 2;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#about-story .swiper-button-prev:before, #about-story .swiper-button-next:after {
+    border-style: solid;
+    border-width: 0.20em 0.20em 0 0;
+    border-color: #262626;
+    content: '';
+    display: inline-block;
+    height: 0.95em;
+    position: relative;
+    vertical-align: top;
+    width: 0.95em;
+}
+
+#about-story .swiper-button-prev {
+    left: 20px;
+}
+
+#about-story .swiper-button-next {
+    right: 20px;
+}
+
+.dark #about-story .swiper-button-prev:before, .dark #about-story .swiper-button-next:after {
+    border-color: #fff;
+}
+
+#about-story .swiper-button-prev:before {
+    transform: rotate(-135deg);
+}
+
+#about-story .swiper-button-next:after {
     transform: rotate(45deg);
 }
