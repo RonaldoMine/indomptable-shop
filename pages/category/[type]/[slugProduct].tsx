@@ -53,7 +53,7 @@ export default function SlugProduct({
     };
 
     const handleOnChangeColor = (selected: any) => {
-        //console.log(selected);
+        console.log(selected);
         setSelectedColor(selected);
         setAvailableSizes(selected.sizes);
     };
