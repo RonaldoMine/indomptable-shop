@@ -68,7 +68,7 @@ export default function SlugProduct({
                 payload: {
                     sku: product?.sku,
                     qty: 1,
-                    price: product?.pricePromo ?? product?.price,
+                    price: product?.pricePromo > 0 ? product?.pricePromo : product?.price,
                     size: selectedSize.label,
                     color: "black",
                     img: urlFor(product?.coverImage).url(),
@@ -443,6 +443,7 @@ export const getServerSideProps: GetServerSideProps = async ({
         type: params?.type,
         slugProduct: params?.slugProduct,
     });
+    console.log(productData)
     return {
         props: {
             productData,

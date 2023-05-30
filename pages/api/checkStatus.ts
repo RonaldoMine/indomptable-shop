@@ -2,9 +2,7 @@ import {NextApiRequest, NextApiResponse} from "next";
 import PDF from "html-pdf";
 import {render} from "@react-email/render";
 import OrderMail from "../../src/emails/payment/OrderMail";
-import {OrderInterface} from "../../typings";
 import {sanityClient, urlFor} from "../../sanity";
-import {Patch} from "@sanity/client";
 
 export default async function checkStatus(req: NextApiRequest, res: NextApiResponse<any>) {
     const paymentId = req.body.paymentId;
