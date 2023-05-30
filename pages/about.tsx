@@ -30,7 +30,7 @@ const About = () => {
           loop={true}
         >
           <SwiperSlide className={"w-full"}>
-            <p className={"mx-auto text-center w-2/3 sm:w-2/3 text-2xl"}>
+            <p className={"mx-auto text-center w-2/3 text-2xl"}>
               Lorem ipsum <br />
               dolor sit amet, consectetur adipisicing elit. Asperiores beatae ea
               ex illo itaque iure magnam nam omnis recusandae veritatis! Aliquam
