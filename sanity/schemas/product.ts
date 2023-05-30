@@ -66,6 +66,11 @@ export default defineType({
       type: 'number',
     }),
     defineField({
+      name: 'pricePromo',
+      title: 'Price Promo',
+      type: 'number',
+    }),
+    defineField({
       name: 'coverImage',
       title: 'Cover',
       type: 'image',
