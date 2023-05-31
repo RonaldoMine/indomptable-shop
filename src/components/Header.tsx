@@ -73,7 +73,7 @@ export default function Header({lang}: { lang: string }) {
                             }}
                     > {currentLocale}
                     </button>
-                    <Link href={"/cart"} className={"flex items-center dark:text-white"}>
+                    <Link href={"/cart"} className={`flex items-center dark:text-white ${pathname === "/cart" || pathname === "/checkout" ? "border-b" : ""}`}>
                         <span className={"relative"}>
                           {basket.items.length > 0 && (
                               <span
@@ -88,7 +88,7 @@ export default function Header({lang}: { lang: string }) {
                             <AiOutlineShopping/>
                         </span>
                     </Link>
-                    <Link href={"/favorite"} className={"flex items-center dark:text-white"}>
+                    <Link href={"/favorite"} className={`flex items-center dark:text-white ${pathname === "/favorite" ? "border-b" : ""}`}>
                         <span className={"relative"}>
                           {totalFavoriteProduct > 0 && (
                               <span
