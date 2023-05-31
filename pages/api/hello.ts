@@ -16,7 +16,7 @@ export default function handler(
     const name = new Date().getTime()
     //console.log(html)
     PDF.create(html).toFile(`./public/orders/${name}.pdf`, (err: any, res: any) => {
-        console.log(res);
+        //console.log(res);
     });
     //doc.save("./public/orders/orders.pdf");
     res.status(200).json({name: 'John Doe'})

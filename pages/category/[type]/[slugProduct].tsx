@@ -53,7 +53,6 @@ export default function SlugProduct({
     };
 
     const handleOnChangeColor = (selected: any) => {
-        console.log(selected);
         setSelectedColor(selected);
         setAvailableSizes(selected.sizes);
     };
@@ -444,7 +443,6 @@ export const getServerSideProps: GetServerSideProps = async ({
         type: params?.type,
         slugProduct: params?.slugProduct,
     });
-    console.log(productData)
     return {
         props: {
             productData,

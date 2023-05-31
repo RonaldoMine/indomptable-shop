@@ -161,12 +161,12 @@ function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProp
                                                           className={"underline mt-4 flex aligns-center font-bold"}>
                                                         <BiArrowBack className={"mr-2"}/> <span>{t("back-to-shop")}</span>
                                                     </Link>
-                                                    {(paymentStatus === PaymentStatus.SUCCESS && paymentPdfLink !== "") && (
+                                                    {/*{(paymentStatus === PaymentStatus.SUCCESS && paymentPdfLink !== "") && (
                                                         <a className={"text-gradient underline mt-4 flex aligns-center"}
                                                            href={`/${paymentPdfLink}`}
                                                            target="_blank" rel="noreferrer">{t("download-invoice")}
                                                             <AiOutlineFilePdf
-                                                                className={"text-red-500 ml-2"}/></a>)}
+                                                                className={"text-red-500 ml-2"}/></a>)}*/}
                                                 </div>
                                             </div>
                                         </div>)}

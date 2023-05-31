@@ -100,7 +100,6 @@ export default async function payment(req: NextApiRequest, res: NextApiResponse)
             res.status(401).json({message: json_messages.errors.empty_field})
         }
     } catch (e) {
-        console.log(e)
         res.status(500).json({message: json_messages.errors.general_error})
     }
 }

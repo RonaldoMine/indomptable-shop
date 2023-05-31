@@ -36,7 +36,7 @@ export default function Header({lang}: { lang: string }) {
                     <Image
                         className={"h-10"}
                         src={theme === "dark" ? logo_white : logo_black}
-                        alt="BeleFirst"
+                        alt="Indomptable"
                     />
                 </Link>
                 <div

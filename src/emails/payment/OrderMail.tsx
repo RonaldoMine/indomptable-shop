@@ -1,9 +1,6 @@
 import {OrderInterface} from "../../../typings";
-import "../../../styles/globals.css";
 import {Html} from "@react-email/html";
 import {Head} from "@react-email/head";
-import {Font} from "@react-email/font";
-import Image from "next/image"
 
 export default function OrderMail({
                                       firstName,
@@ -61,16 +58,10 @@ export default function OrderMail({
         <Html>
             <Head>
                 <title>Order</title>
-                <Font fontFamily={"Roboto"}
-                      webFont={{
-                          url: 'https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2',
-                          format: 'woff2',
-                      }}
-                      fontWeight={400}
-                      fontStyle="normal"
-                      fallbackFontFamily={"Arial"}/>
             </Head>
-            <body>
+            <body style={{
+                fontFamily: "Roboto, serif"
+            }}>
             <div style={{background: "#f1f1f1", fontSize: "14px", color: "#000"}}>
                 <div style={{maxWidth: "600px", margin: "0 auto", background: "#FFF"}} className="email-container">
                     <table align="center" role="presentation" cellSpacing="0" cellPadding="0" style={styles.table}>
@@ -91,7 +82,6 @@ export default function OrderMail({
                                                 lineHeight: "150%",
                                                 textAlign: "center",
                                                 color: "#FFF",
-                                                fontFamily: "'Space Grostek', serif"
                                             }}>{langMessages.title}</h1>
                                         </td>
                                     </tr>

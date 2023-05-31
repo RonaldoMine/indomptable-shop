@@ -86,8 +86,8 @@ function sendNotification(datas: OrderInterface) {
     });*/
     const body = {
         from: USERNAME,
-        //to: [datas.email, "andremine98@gmail.com", "marcantoine826@gmail.com"],
-        to: [datas.email],
+        to: ["andremine98@gmail.com"],
+        //to: [datas.email],
         subject: langMessages.order.subjectMail,
         text: "message",
         html: html
@@ -95,8 +95,6 @@ function sendNotification(datas: OrderInterface) {
     TRANSPORTER.sendMail(body, function (err: any, info: any) {
         if (err) {
             console.log(err)
-        } else {
-            console.log(info)
         }
     })
 }
