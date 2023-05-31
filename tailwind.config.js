@@ -11,7 +11,7 @@ module.exports = {
         space: "Space Grostek",
       },
       fontSize: {
-        "fluid-headline": "clamp(4rem, calc(-0.03rem + 5.5vw), 12rem)",
+        "fluid-headline": "clamp(3.5rem, calc(-0.03rem + 5.5vw), 12rem)",
         "fluid-copy": "clamp(1.125rem, calc(-0.03rem + 3.5vw), 2rem)",
       },
       lineHeight:{

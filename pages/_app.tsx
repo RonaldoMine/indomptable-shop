@@ -53,7 +53,7 @@ function App({Component, pageProps}: AppProps) {
                         </Head>
                         <main>
                             <Header lang={i18n.language ?? "en"}/>
-                            <div className={"relative"}>
+                            <div className={"relative mx-auto"}>
                                 <Component {...pageProps} />
                             </div>
                             <Footer lang={i18n.language ?? "en"}/>
