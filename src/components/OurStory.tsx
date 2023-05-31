@@ -34,7 +34,7 @@ export default function OurStory() {
                         </svg>
                     </div>
                     <p className={"pt-5 sm:pt-10"}>
-                        <Link className={"text-orange"} href={"/"} >{t("read-more")}</Link>
+                        <Link className={"text-orange"} href={"https://www.facebook.com/profile.php?id=100089070463423"} target={'_blank'}>{t("read-more")}</Link>
                     </p>
                 </blockquote>
             </div>

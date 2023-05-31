@@ -25,22 +25,22 @@ export default function Footer({lang}: { lang: string }) {
             <div className={"grid gap-4 grid-cols-2 sm:grid-cols-3"}>
                 <div>
                     <ul>
-                        <li>
+                       {/* <li>
                             <Link href={"/about-us"}>{locales_messages_link.about}</Link>
                         </li>
                         <li>
                             <Link href={"/"}>{locales_messages_link.policy}</Link>
+                        </li>*/}
+                        <li>
+                            <Link href={"/gallery"}>{locales_messages_link.gallery}</Link>
                         </li>
                         <li>
-                            <Link href={"/contact-us"}>{locales_messages_link.contact}</Link>
+                            <Link href={"/#contact-us"}>{locales_messages_link.contact}</Link>
                         </li>
                     </ul>
                 </div>
                 <div>
                     <ul>
-                        <li>
-                            <Link href={"/gallery"}>{locales_messages_link.gallery}</Link>
-                        </li>
                         <li>
                             <Link href={"https://www.facebook.com/profile.php?id=100089070463423"} target={"_blank"}>Facebook</Link>
                         </li>

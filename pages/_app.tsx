@@ -51,7 +51,7 @@ function App({Component, pageProps}: AppProps) {
                             />
                             <link rel="icon" href="/assets/images/logo.svg"/>
                         </Head>
-                        <main>
+                        <main className={"mx-auto max-w-screen-2xl"}>
                             <Header lang={i18n.language ?? "en"}/>
                             <div className={"relative mx-auto"}>
                                 <Component {...pageProps} />

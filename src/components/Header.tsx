@@ -53,12 +53,13 @@ export default function Header({lang}: { lang: string }) {
                     >
                         {locales_messages.gallery}
                     </Link>
-                    <Link
+                    {/*<Link
                         href="/about"
                         className={`dark:text-white ${pathname === "/about" ? "border-b" : ""}`}
                     >
                         {locales_messages.about}
-                    </Link>
+                    </Link>*/}
+                    <Link href={"/#contact-us"}>{locales_messages.contact}</Link>
                 </div>
                 <div className="flex gap-4">
                     <button className="border rounded-2xl w-10 px-2 gap-1 text-center"

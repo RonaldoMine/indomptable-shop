@@ -86,8 +86,8 @@ function sendNotification(datas: OrderInterface) {
     });*/
     const body = {
         from: USERNAME,
-        to: ["andremine98@gmail.com"],
-        //to: [datas.email],
+        //to: ["andremine98@gmail.com"],
+        to: [datas.email],
         subject: langMessages.order.subjectMail,
         text: "message",
         html: html

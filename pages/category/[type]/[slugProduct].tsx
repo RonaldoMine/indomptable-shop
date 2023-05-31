@@ -215,7 +215,7 @@ export default function SlugProduct({
                                             )
                                         }
                                     >
-                                        <div className="w-24 h-24 lg:w-20 lg:h-20 relative">
+                                        <div className="w-12 h-12 sm:w-16 sm:h-16 md:w-24 md:h-24 lg:w-20 lg:h-20 relative">
                                             <Image
                                                 src={urlFor(color.images[0].thumbnail).url()}
                                                 blurDataURL={urlFor(color.images[0].blurry).url()}
