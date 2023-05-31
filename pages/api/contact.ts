@@ -21,7 +21,7 @@ export default function contact(
             const html = render(ContactMail({message: message, name: name, email: email}));
             const body = {
                 from: USERNAME,
-                to: ["johnyourbest@gmail.com"],
+                to: ["andremine98@gmail.com"],
                 subject: `${langMessages.api.subject_mail} ${email}`,
                 text: message,
                 html: html
