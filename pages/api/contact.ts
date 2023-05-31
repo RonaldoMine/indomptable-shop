@@ -17,7 +17,7 @@ export default function contact(
     if (name && email && message) {
         if (regex_email.test(email)) {
             require('dotenv').config();
-            const USERNAME = process.env["mail-username"]
+            const USERNAME = process.env["MAIL_USERNAME"]
             const html = render(ContactMail({message: message, name: name, email: email}));
             const body = {
                 from: USERNAME,

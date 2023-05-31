@@ -78,7 +78,7 @@ export default async function notify(req: NextApiRequest, resp: NextApiResponse)
 
 function sendNotification(datas: OrderInterface) {
     require('dotenv').config();
-    const USERNAME = process.env["mail-username"]
+    const USERNAME = process.env["MAIL_USERNAME"]
     const langMessages = require(`../../public/locales/${datas.lang}/payment.json`);
     const html = render(OrderMail(datas, langMessages.order));
     /*PDF.create(html).toFile("./public/orders/orders.pdf", (err: any, res: any) => {

@@ -20,9 +20,9 @@ export default async function payment(req: NextApiRequest, res: NextApiResponse)
         if (firstName && lastName && email && phoneNumber && address && amount && quantity) {
             if (regex_email.test(email)) {
                 if (regex_mtn.test(phoneNumber) || regex_orange.test(phoneNumber)) {
-                    const API_KEY = process.env["payment-api-key"]
-                    const SERVICE_KEY = process.env["payment-service-key"]
-                    const URL_PAYMENT = process.env["payment-url"] + "place-deposit";
+                    const API_KEY = process.env["PAYMENT_API_KEY"]
+                    const SERVICE_KEY = process.env["PAYMENT_SERVICE_KEY"]
+                    const URL_PAYMENT = process.env["PAYMENT_URL"] + "place-deposit";
                     const reference = "indomp" + Date.now().toString();
                     const options = {
                         method: 'POST',

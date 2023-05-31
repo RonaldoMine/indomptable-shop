@@ -103,7 +103,7 @@ function Cart() {
                             ) : (
                                 <p>
                                     {t("emptyBasket.text")},{" "}
-                                    <Link href={"/"} className="underline">
+                                    <Link href={"/shopping"} className="underline">
                                         {t("emptyBasket.link")}
                                     </Link>
                                 </p>

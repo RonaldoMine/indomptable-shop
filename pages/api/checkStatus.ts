@@ -10,8 +10,8 @@ export default async function checkStatus(req: NextApiRequest, res: NextApiRespo
     const json_messages = require(`../../public/locales/${lang}/payment.json`);
     try{
         if (paymentId) {
-            const API_KEY = process.env["payment-api-key"]
-            const URL_PAYMENT = process.env["payment-url"] + "check-payment"
+            const API_KEY = process.env["PAYMENT_API_KEY"]
+            const URL_PAYMENT = process.env["PAYMENT_URL"] + "check-payment"
             const options = {
                 method: 'POST',
                 headers: {
