@@ -37,6 +37,11 @@ export default defineType({
             type: 'string',
         }),
         defineField({
+            name: 'town',
+            title: 'Town',
+            type: 'string',
+        }),
+        defineField({
             name: 'email',
             title: 'Email',
             type: 'string',

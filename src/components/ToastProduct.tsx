@@ -75,7 +75,7 @@ export default function ToastProduct({
                         router.push("/checkout");
                     }}
                 >
-                    Checkout
+                    {t("checkout")}
                 </button>
             </div>
         </div>

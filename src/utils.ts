@@ -14,3 +14,6 @@ export function shuffleArray(array: []): [] {
 
 export const DISCOUNT_PERCENT: number = 15
 
+export const formatNumber = (number: number) => {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+}

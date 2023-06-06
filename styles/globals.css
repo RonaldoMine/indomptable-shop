@@ -163,6 +163,17 @@ p, h1, h2, h3, h4, h5, h6 {
     display: block;
 }
 
+.select-control {
+    height: 42px;
+    font-size: 14px;
+    border-radius: var(--input-border-radius);
+    border: 1px solid var(--border-color-gray);
+    color: var(--color-gray);
+    padding: 0 10px;
+    width: 100%;
+    display: block;
+}
+
 .modal {
     background: rgb(107 114 128);
     opacity: 1;

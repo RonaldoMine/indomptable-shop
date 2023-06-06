@@ -46,7 +46,6 @@ export default function SlugProduct({
     const [selectedSize, setSelectedSize] = useState(availableSizes[0]);
     const {addProductToFavorite} = useProductToFavorite();
 
-
     const handleOnChangeSize = (selected: any) => {
         setSelectedSize(selected);
         setErrorSizeUnselected("");
@@ -55,6 +54,9 @@ export default function SlugProduct({
     const handleOnChangeColor = (selected: any) => {
         setSelectedColor(selected);
         setAvailableSizes(selected.sizes);
+        setSelectedSize(null);
+        setErrorSizeUnselected("");
+        console.log(selectedColor.images)
     };
 
     const handleCloseToastProduct = () => {
@@ -62,7 +64,7 @@ export default function SlugProduct({
     };
 
     const handleAddProductOnCart = () => {
-        if (selectedSize.label !== "") {
+        if (selectedSize != null && selectedSize?.label !== "") {
             dispatch({
                 type: "ADD_PRODUCT",
                 payload: {
@@ -70,13 +72,17 @@ export default function SlugProduct({
                     qty: 1,
                     price: product?.pricePromo > 0 ? product?.pricePromo : product?.price,
                     size: selectedSize.label,
-                    color: "black",
-                    img: urlFor(product?.coverImage).url(),
+                    color: selectedColor.name,
+                    img: selectedColor.images[0].src.url,
+                    name: product?.name
                 },
             });
             toast(
                 <ToastProduct
-                    product={product}
+                    product={{
+                        ...product,
+                        coverThumbnail: selectedColor.images[0].thumbnail
+                    }}
                     onClose={handleCloseToastProduct}
                     size={selectedSize.label}
                 />,
@@ -91,7 +97,7 @@ export default function SlugProduct({
             );
             // setSelectedSize(availableSizes[0]);
         } else {
-            setErrorSizeUnselected("Please select a size");
+            setErrorSizeUnselected(`${t("select-size")}`);
         }
     };
     const handleAddProductToFavorite = () => {

@@ -12,6 +12,7 @@
     "email": "Email",
     "phone": "Numéro de téléphone",
     "address": "Adresse du domicile",
+    "town": "Choisir la ville",
     "errors": "Entrer votre :value",
     "accept-here": "Accepté ici",
     "button": "Payer"
@@ -21,7 +22,8 @@
     "last-name": "Le prénom est requis",
     "email": "Le email est requis",
     "phone": "Le téléphone est requis",
-    "address": "L'adresse du domicile est requis"
+    "address": "L'adresse du domicile est requis",
+    "town": "La ville est requis"
   },
   "empty-basket": "Aucun produits dans le panier",
   "back-to-shop": "Retour vers la boutique",

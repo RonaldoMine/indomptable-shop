@@ -10,7 +10,8 @@ type BasketItem = {
     price: number;
     size: string;
     color: string;
-    img: string
+    img: string;
+    name: string;
 };
 
 type BasketAction = {

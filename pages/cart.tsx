@@ -7,6 +7,7 @@ import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useBasket} from "../src/context/BasketContext";
 import {useTranslation} from "next-i18next";
 import PageHeader from "../src/components/PageHeader";
+import {formatNumber} from "../src/utils";
 
 function Cart() {
     const {basket, dispatch} = useBasket();
@@ -45,14 +46,15 @@ function Cart() {
                                                     <div className="ml-4 flex flex-col justify-between">
                                                         <div>
                                                             <h2 className="text-lg dark:text-neutral-200">
-                                                                {item.sku}
+                                                                {item.name}
                                                             </h2>
                                                             <p className="text-slate-500 mt-1 dark:text-neutral-400">
-                                                                Black | {item.size}
+                                                                <span
+                                                                    style={{textTransform: "capitalize"}}>{item.color}</span> | {item.size}
                                                             </p>
                                                             <p className="font-medium">
                                                                 XAF <span
-                                                                className={"text-sm mr-1"}>{item.price}</span>
+                                                                className={"text-sm mr-1"}>{formatNumber(item.price)}</span>
                                                             </p>
                                                         </div>
                                                         <div className="flex">
@@ -121,7 +123,7 @@ function Cart() {
                       {t("total-quantity")}
                     </span>
                                     <span className="font-semibold dark:text-neutral-200">
-                      {basket.totalProduct}
+                      {formatNumber(basket.totalProduct)}
                     </span>
                                 </div>
                                 <hr/>
@@ -130,7 +132,7 @@ function Cart() {
                       {t("subtotal")}
                     </span>
                                     <span className="font-semibold dark:text-neutral-200">
-                      XAF {basket.subTotal}
+                      XAF {formatNumber(basket.subTotal)}
                     </span>
                                 </div>
                                 <hr/>
@@ -139,7 +141,7 @@ function Cart() {
                       {t("delivery-fees")}
                     </span>
                                     <span className="font-semibold dark:text-neutral-200">
-                      XAF {1000}
+                      XAF {"1 000"}
                     </span>
                                 </div>
                                 <hr/>
@@ -148,7 +150,7 @@ function Cart() {
                                         {t("order-total")}
                                     </h2>
                                     <span className="font-semibold dark:text-neutral-200">
-                      XAF {basket.subTotal + 1000}
+                      XAF {formatNumber(basket.subTotal + 1000)}
                     </span>
                                 </div>
                                 <Link href={"/checkout"}>

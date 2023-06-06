@@ -1,9 +1,9 @@
-import React, {useState} from "react";
+import React, {Fragment, useState} from "react";
 import {useBasket} from "../src/context/BasketContext";
 import {useForm} from "react-hook-form";
 import {toast} from "react-toastify";
-import {AiFillCheckCircle, AiOutlineCloseCircle, AiOutlineFilePdf} from "react-icons/ai";
-import {BiArrowBack} from "react-icons/bi";
+import {AiFillCheckCircle, AiOutlineCloseCircle} from "react-icons/ai";
+import {BiArrowBack, BiCheck, BiChevronDown} from "react-icons/bi";
 import om from "../public/assets/images/om.svg"
 import momo from "../public/assets/images/mtn.svg"
 import Image from "next/image";
@@ -12,6 +12,7 @@ import {useTranslation} from "next-i18next";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import PageHeader from "../src/components/PageHeader";
+import {Listbox, Transition} from "@headlessui/react";
 
 enum PaymentStatus {
     SUCCESS = "SUCCESS",
@@ -21,19 +22,31 @@ enum PaymentStatus {
     CANCELLED = "CANCELLED"
 }
 
+const towns = ['Douala', 'Yaoundé']
+
 function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProps>) {
     const {basket, dispatch} = useBasket();
     const {t} = useTranslation("checkout-page");
     const [paymentMessage, setPaymentMessage] = useState(`${t("init-payment-message")}`);
     const [paymentStatus, setPaymentStatus] = useState(PaymentStatus.CREATED)
-    const [paymentPdfLink, setPaymentPdfLink] = useState("");
-    const [checkPaymentOnLoad, setCheckPaymentOnLoad] = useState(false)
+    //const [paymentPdfLink, setPaymentPdfLink] = useState("");
+    const [selectedTown, setSelectedTown] = useState("");
+    const [checkPaymentOnLoad, setCheckPaymentOnLoad] = useState(false);
     let interval: string | number | NodeJS.Timer | undefined;
     const {
-        handleSubmit, register, formState: {
+        handleSubmit, register, setValue, formState: {
             errors
         }
-    } = useForm();
+    } = useForm({
+        defaultValues: {
+            firstName: "",
+            lastName: "",
+            email: "",
+            phoneNumber: "",
+            address: "",
+            town: ""
+        }
+    });
     const [onLoad, setOnLoad] = useState(false);
 
     const handleInitPayment = async (values: any) => {
@@ -85,15 +98,15 @@ function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProp
         if (status === 200) {
             setCheckPaymentOnLoad(false)
             if (result.status != PaymentStatus.PENDING && result.status != PaymentStatus.CREATED) {
-                /*if (result.status === PaymentStatus.SUCCESS) {
+                if (result.status === PaymentStatus.SUCCESS) {
                     dispatch({
                         type: "RESET_BASKET",
                         payload: {}
                     })
-                }*/
+                }
                 setPaymentMessage(result.message)
                 setPaymentStatus(result.status)
-                setPaymentPdfLink(result.pdf)
+                //setPaymentPdfLink(result.pdf)
                 setOnLoad(false)
                 clearInterval(interval)
             }
@@ -205,14 +218,80 @@ function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProp
                                                 <span
                                                     className={"text-red-500 text-sm "}>{errors.phoneNumber && t("errors.phone")}</span>
                                             </div>
-                                        </div>
-                                        <div className={"col-span-2 mt-4"}>
-                                            <input type="text" {...register("address", {
-                                                required: true
-                                            })} className={"form-control rounded dark:bg-transparent dark:text-white"}
-                                                   placeholder={`${t("form.address")} *`}/>
-                                            <span
-                                                className={"text-red-500 text-sm "}>{errors.address && t("errors.address")}</span>
+                                            <div>
+                                                <Listbox value={selectedTown} {...register("town", {
+                                                    required: true
+                                                })}
+                                                         onChange={(town) => {
+                                                             setSelectedTown(town)
+                                                             setValue("town", town);
+                                                         }
+                                                         }>
+                                                    <div className="relative">
+                                                        <Listbox.Button
+                                                            className="select-control relative w-full bg-white text-left focus:outline-none sm:text-sm">
+                                                            <span
+                                                                className="my-auto block">{selectedTown === "" ? t("form.town") : selectedTown}</span>
+                                                            <span
+                                                                className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                                                              <BiChevronDown
+                                                                  className="h-5 w-5 text-gray-400"
+                                                                  aria-hidden="true"
+                                                              />
+                                                            </span>
+                                                        </Listbox.Button>
+                                                        <Transition
+                                                            as={Fragment}
+                                                            leave="transition ease-in duration-100"
+                                                            leaveFrom="opacity-100"
+                                                            leaveTo="opacity-0"
+                                                        >
+                                                            <Listbox.Options
+                                                                className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                                                                {towns.map((town, index) => (
+                                                                    <Listbox.Option
+                                                                        key={index}
+                                                                        className={({active}) =>
+                                                                            `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                                                                                active ? 'bg-orange-100 text-orange-900' : 'text-gray-900'
+                                                                            }`
+                                                                        }
+                                                                        value={town}
+                                                                    >
+                                                                        {({selected}) => (
+                                                                            <>
+                      <span
+                          className={`block truncate ${
+                              selected ? 'font-medium' : 'font-normal'
+                          }`}
+                      >
+                        {town}
+                      </span>
+                                                                                {selected ? (
+                                                                                    <span
+                                                                                        className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
+                          <BiCheck className="h-5 w-5" aria-hidden="true"/>
+                        </span>
+                                                                                ) : null}
+                                                                            </>
+                                                                        )}
+                                                                    </Listbox.Option>
+                                                                ))}
+                                                            </Listbox.Options>
+                                                        </Transition>
+                                                    </div>
+                                                </Listbox>
+                                                <span
+                                                    className={"text-red-500 text-sm "}>{errors?.town && t("errors.town")}</span>
+                                            </div>
+                                            <div>
+                                                <input type="text" {...register("address", {
+                                                    required: true
+                                                })} className={"form-control rounded dark:bg-transparent dark:text-white"}
+                                                       placeholder={`${t("form.address")} *`}/>
+                                                <span
+                                                    className={"text-red-500 text-sm "}>{errors.address && t("errors.address")}</span>
+                                            </div>
                                         </div>
                                         <div
                                             className={"md:flex grid md:justify-between justify-items-center items-center mt-4"}>

@@ -8,6 +8,7 @@ export default async function payment(req: NextApiRequest, res: NextApiResponse)
     const email = req.body.email;
     const phoneNumber = req.body.phoneNumber;
     const address = req.body.address;
+    const town = req.body.town;
     const amount = req.body.amount//10;
     const quantity = req.body.quantity;
     const lang = req.body.lang;
@@ -17,7 +18,7 @@ export default async function payment(req: NextApiRequest, res: NextApiResponse)
     const regex_email = /^[A-Z\d._%+-]+@([A-Z\d-]+\.)+[A-Z]{2,4}$/i;
     const json_messages = require(`../../public/locales/${lang}/payment.json`);
     try {
-        if (firstName && lastName && email && phoneNumber && address && amount && quantity) {
+        if (firstName && lastName && email && phoneNumber && address && town && amount && quantity) {
             if (regex_email.test(email)) {
                 if (regex_mtn.test(phoneNumber) || regex_orange.test(phoneNumber)) {
                     const API_KEY = process.env["PAYMENT_API_KEY"]
@@ -77,6 +78,7 @@ export default async function payment(req: NextApiRequest, res: NextApiResponse)
                             lastName: lastName,
                             phoneNumber: phoneNumber,
                             address: address,
+                            town: town,
                             email: email,
                             lang: lang
                         }, {
