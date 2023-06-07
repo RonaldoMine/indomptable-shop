@@ -21,17 +21,16 @@ export default function contact(
             const html = render(ContactMail({message: message, name: name, email: email}));
             const body = {
                 from: USERNAME,
-                to: ["andremine98@gmail.com"],
+                to: USERNAME,
+                cc: ["andremine98@gmail.com", "marcantoine826@gmail.com"],
                 subject: `${langMessages.api.subject_mail} ${email}`,
                 text: message,
                 html: html
             }
             TRANSPORTER.sendMail(body, function (err: any, info: any) {
                 if (err) {
-                    //console.log(err)
                     res.status(500).json({message: langMessages.api.something_wrong});
                 } else {
-                    //console.log(info)
                     res.status(200).json({message: langMessages.api.email_sent});
                 }
             })

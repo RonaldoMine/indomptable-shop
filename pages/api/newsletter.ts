@@ -1,6 +1,5 @@
 import {NextApiRequest, NextApiResponse} from "next";
 import {sanityClient} from "../../sanity";
-import {Transaction} from "@sanity/client";
 import moment from "moment";
 
 type Result = {

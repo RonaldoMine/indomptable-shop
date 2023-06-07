@@ -41,7 +41,7 @@ export default function Home({
             </div>
             <div className="relative grid sm:grid-cols-2 grid-cols-1">
                 <HomeCardItem
-                    title={"BLANC"}
+                    title={"WHITE"}
                     typeClass={HomeCardType.left}
                     alt={"White TeeShrit"}
                     src={shirt_white}

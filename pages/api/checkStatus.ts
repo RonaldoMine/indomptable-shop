@@ -3,12 +3,13 @@ import PDF from "html-pdf";
 import {render} from "@react-email/render";
 import OrderMail from "../../src/emails/payment/OrderMail";
 import {sanityClient, urlFor} from "../../sanity";
+import path from "path";
 
-export default async function checkStatus(req: NextApiRequest, res: NextApiResponse<any>) {
+export default async function checkStatus(req: NextApiRequest, res: NextApiResponse) {
     const paymentId = req.body.paymentId;
     const lang = req.body.lang;
     const json_messages = require(`../../public/locales/${lang}/payment.json`);
-    try{
+    try {
         if (paymentId) {
             const API_KEY = process.env["PAYMENT_API_KEY"]
             const URL_PAYMENT = process.env["PAYMENT_URL"] + "check-payment"
@@ -22,8 +23,8 @@ export default async function checkStatus(req: NextApiRequest, res: NextApiRespo
                     paymentId: paymentId
                 }),
             }
-            const response = "" //await fetch(URL_PAYMENT, options);
-            const result = {status: "SUCCESS"}//await response.json()
+            const response = await fetch(URL_PAYMENT, options);
+            const result = await response.json()
             let message;
             let order_pdf = "";
             if (result.status === 'SUCCESS') {
@@ -40,7 +41,7 @@ export default async function checkStatus(req: NextApiRequest, res: NextApiRespo
         } else {
             res.status(401).json({message: json_messages.errors.empty_field})
         }
-    }catch (e) {
+    } catch (e) {
         res.status(500).json({message: json_messages.errors.general_error})
     }
 }
@@ -85,7 +86,7 @@ async function generatePDF(paymentId: string) {
             }
         });
     }
-    const langMessages = require(`../../public/locales/${order.lang}/payment.json`);
+    const langMessages = require(path.join(__dirname, `../../public/locales/${order.lang}/payment.json`));
     const html = render(OrderMail(order, langMessages.order));
     let pdf_link = `orders/${order.reference}.pdf`
     PDF.create(html).toFile(`public/${pdf_link}`, (err: any, res) => {

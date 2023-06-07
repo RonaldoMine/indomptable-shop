@@ -170,7 +170,7 @@ function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProp
                                                 <h3 className={"text-center mb-2"}>{paymentMessage}</h3>
                                                 <div
                                                     className={"flex flex-col-reverse items-center justify-between w-full"}>
-                                                    <Link href={"/"}
+                                                    <Link href={"/shopping"}
                                                           className={"underline mt-4 flex aligns-center font-bold"}>
                                                         <BiArrowBack className={"mr-2"}/> <span>{t("back-to-shop")}</span>
                                                     </Link>
@@ -229,7 +229,7 @@ function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProp
                                                          }>
                                                     <div className="relative">
                                                         <Listbox.Button
-                                                            className="select-control relative w-full bg-white text-left focus:outline-none sm:text-sm">
+                                                            className="select-control relative w-full bg-white text-left focus:outline-none sm:text-sm dark:bg-transparent">
                                                             <span
                                                                 className="my-auto block">{selectedTown === "" ? t("form.town") : selectedTown}</span>
                                                             <span
@@ -247,13 +247,13 @@ function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProp
                                                             leaveTo="opacity-0"
                                                         >
                                                             <Listbox.Options
-                                                                className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                                                                className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm dark:bg-neutral-800">
                                                                 {towns.map((town, index) => (
                                                                     <Listbox.Option
                                                                         key={index}
                                                                         className={({active}) =>
                                                                             `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                                                                                active ? 'bg-orange-100 text-orange-900' : 'text-gray-900'
+                                                                                active ? 'bg-orange-100 text-orange-900' : 'text-gray-900 dark:text-white'
                                                                             }`
                                                                         }
                                                                         value={town}
@@ -309,7 +309,7 @@ function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProp
                                     </form>
                                 </div>
                             </> :
-                            <p>{t("empty-basket")}, <Link href={"/"} className="underline">{t("back-to-shop")}</Link>
+                            <p>{t("empty-basket")}, <Link href={"/shopping"} className="underline">{t("back-to-shop")}</Link>
                             </p>
                     }
                 </div>

@@ -1,5 +1,4 @@
 import {NextApiRequest, NextApiResponse} from "next";
-import {Transaction} from "@sanity/client";
 import {sanityClient} from "../../sanity";
 
 export default async function payment(req: NextApiRequest, res: NextApiResponse) {
@@ -9,10 +8,10 @@ export default async function payment(req: NextApiRequest, res: NextApiResponse)
     const phoneNumber = req.body.phoneNumber;
     const address = req.body.address;
     const town = req.body.town;
-    const amount = req.body.amount//10;
+    const amount = 100//req.body.amount;
     const quantity = req.body.quantity;
     const lang = req.body.lang;
-    const description = "Tee-shirt";
+    const description = "Indomptable";
     const regex_mtn = /^(237)?((65[0-4])|(67[0-9])|(68[0-9]))[0-9]{6}$/;
     const regex_orange = /^(237)?((65[5-9])|(69[0-9]))[0-9]{6}$/;
     const regex_email = /^[A-Z\d._%+-]+@([A-Z\d-]+\.)+[A-Z]{2,4}$/i;
@@ -24,7 +23,7 @@ export default async function payment(req: NextApiRequest, res: NextApiResponse)
                     const API_KEY = process.env["PAYMENT_API_KEY"]
                     const SERVICE_KEY = process.env["PAYMENT_SERVICE_KEY"]
                     const URL_PAYMENT = process.env["PAYMENT_URL"] + "place-deposit";
-                    const reference = "indomp" + Date.now().toString();
+                    const reference = "INDMPTBL-" + Date.now().toString();
                     const options = {
                         method: 'POST',
                         headers: {
@@ -40,10 +39,9 @@ export default async function payment(req: NextApiRequest, res: NextApiResponse)
                             transactional: "yes"
                         }),
                     }
-                    const response = ""//await fetch(URL_PAYMENT, options);
-                    const result = {status: "REQUEST_ACCEPTED", paymentId: "NXH-" + new Date().getTime()};//response ? await response.json() : null
+                    const response = await fetch(URL_PAYMENT, options);
+                    const result = response ? await response.json() : null
                     if (result && result.status === 'REQUEST_ACCEPTED') {
-                        //const transaction = new Transaction();
                         const products = req.body.basket.map((product: { qty: number, size: string, color: string, price: number, sku: string }) => {
                             return {
                                 qty: product.qty,
@@ -53,20 +51,6 @@ export default async function payment(req: NextApiRequest, res: NextApiResponse)
                                 sku: product.sku
                             };
                         })
-                        /*transaction.create({
-                            _type: 'orders',
-                            reference: reference,
-                            paymentId: result.paymentId,
-                            products: products,
-                            totalProduct: quantity,
-                            amount: amount,
-                            firstName: firstName,
-                            lastName: lastName,
-                            phoneNumber: phoneNumber,
-                            address: address,
-                            email: email,
-                            lang: lang
-                        });*/
                         await sanityClient.create({
                             _type: 'orders',
                             reference: reference,

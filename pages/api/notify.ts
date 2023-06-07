@@ -5,11 +5,9 @@ import {render} from '@react-email/render';
 import {TRANSPORTER} from "../../src/emails/mailer";
 import OrderMail from "../../src/emails/payment/OrderMail";
 import {OrderInterface} from "../../typings";
-import PDF from "html-pdf";
 
 export default async function notify(req: NextApiRequest, resp: NextApiResponse) {
     const {order_id, status} = req.body;
-    const transaction = new Transaction();
     let order: any;
     await sanityClient.fetch(`*[_type == 'orders' && paymentId == $paymentId ]{
         _id,
@@ -31,6 +29,7 @@ export default async function notify(req: NextApiRequest, resp: NextApiResponse)
 
     if (order.length > 0) {
         const products = order[0].products
+        const status = 'SUCCESS';
         if (status === 'SUCCESS') {
             for (const productKey in products) {
                 await sanityClient.fetch(`*[_type == 'products' && sku == $slugProduct]{
@@ -54,8 +53,6 @@ export default async function notify(req: NextApiRequest, resp: NextApiResponse)
                         let request: any = [];
                         request[`colors[name=="${products[productKey].color}"].sizes[label=="${products[productKey].size}"].quantity`] = quantity - products[productKey].qty;
                         request[`colors[name=="${products[productKey].color}"].totalQuantity`] = response[0].colors.totalQuantity - products[productKey].qty;
-                        //const path = new Patch(response[0]._id).set({...request})
-                        //transaction.patch(path);
                         sanityClient.patch(response[0]._id, {
                             set: {
                                 ...request
@@ -65,9 +62,6 @@ export default async function notify(req: NextApiRequest, resp: NextApiResponse)
                 });
             }
         }
-        //const path = new Patch(order[0]._id).set({status: status})
-        //transaction.patch(path);
-
         sanityClient.patch(order[0]._id, {set: {status: status}})
         sendNotification(order[0]);
         return resp.status(200).json({status: 1})
@@ -81,12 +75,8 @@ function sendNotification(datas: OrderInterface) {
     const USERNAME = process.env["MAIL_USERNAME"]
     const langMessages = require(`../../public/locales/${datas.lang}/payment.json`);
     const html = render(OrderMail(datas, langMessages.order));
-    /*PDF.create(html).toFile("./public/orders/orders.pdf", (err: any, res: any) => {
-        console.log(res);
-    });*/
     const body = {
         from: USERNAME,
-        //to: ["andremine98@gmail.com"],
         to: [datas.email],
         subject: langMessages.order.subjectMail,
         text: "message",
