@@ -3,7 +3,6 @@ import PDF from "html-pdf";
 import {render} from "@react-email/render";
 import OrderMail from "../../src/emails/payment/OrderMail";
 import {sanityClient, urlFor} from "../../sanity";
-import path from "path";
 
 export default async function checkStatus(req: NextApiRequest, res: NextApiResponse) {
     const paymentId = req.body.paymentId;
@@ -29,7 +28,7 @@ export default async function checkStatus(req: NextApiRequest, res: NextApiRespo
             let order_pdf = "";
             if (result.status/* === 'SUCCESS'*/) {
                 message = json_messages.payment_done;
-                await generatePDF(paymentId).then((result: any) => order_pdf = result);
+                //await generatePDF(paymentId).then((result: any) => order_pdf = result);
             } else {
                 message = json_messages.payment_failed
             }
@@ -86,7 +85,7 @@ async function generatePDF(paymentId: string) {
             }
         });
     }
-    const langMessages = require(path.join(__dirname, `../../public/locales/${order.lang}/payment.json`));
+    const langMessages = require(`../../public/locales/${order.lang}/payment.json`);
     const html = render(OrderMail(order, langMessages.order));
     let pdf_link = `orders/${order.reference}.pdf`
     PDF.create(html).toFile(`public/${pdf_link}`, (err: any, res) => {
