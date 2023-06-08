@@ -18,6 +18,7 @@
     "quantity": "Quantity",
     "price": "Price",
     "size": "Size",
+    "color": "Color",
     "totalOfProducts": "Total of Products",
     "amount": "Amount",
     "delivery_fees": "Delivery Fees",

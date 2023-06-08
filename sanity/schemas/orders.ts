@@ -84,6 +84,12 @@ export default defineType({
                             name: 'price',
                             title: 'Price',
                             type: 'number'
+                        },
+                        {
+                            name: 'image',
+                            title: 'Url of the image',
+                            type: 'string',
+                            initialValue: ""
                         }
                     ]
                 }
@@ -107,6 +113,7 @@ export default defineType({
                 layout: "dropdown",
                 list: STATUS
             },
+            initialValue: "PENDING"
         }),
         defineField({
             name: "lang",

@@ -11,7 +11,8 @@ export default function OrderMail({
                                       amount,
                                       totalProduct,
                                       reference,
-                                      products
+                                      products,
+                                      town
                                   }: OrderInterface, langMessages: any) {
     const styles: any = {
         table: {
@@ -146,7 +147,9 @@ export default function OrderMail({
                                                         <div style={styles.product.text.style}>
                                                             <h4 style={styles.h3}>{product.name}</h4>
                                                             <p style={styles.product.text.p}>
-                                                                <b>{langMessages.size}</b>: {product.size}</p>
+                                                                <b>{langMessages.size}</b>: {product.size} <br/>
+                                                                <b>{langMessages.color}</b>: {product.color}
+                                                            </p>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -213,7 +216,7 @@ export default function OrderMail({
                                     fontStyle: "italic"
                                 }}>
                                     {lastName + " " + firstName} <br/>
-                                    {address} <br/>
+                                    {town + ", " + address} <br/>
                                     {phoneNumber} <br/>
                                     {email} <br/>
                                 </address>

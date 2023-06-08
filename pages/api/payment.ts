@@ -42,13 +42,14 @@ export default async function payment(req: NextApiRequest, res: NextApiResponse)
                     const response = await fetch(URL_PAYMENT, options);
                     const result = response ? await response.json() : null
                     if (result && result.status === 'REQUEST_ACCEPTED') {
-                        const products = req.body.basket.map((product: { qty: number, size: string, color: string, price: number, sku: string }) => {
+                        const products = req.body.basket.map((product: { qty: number, size: string, color: string, price: number, sku: string, img: string }) => {
                             return {
                                 qty: product.qty,
                                 size: product.size,
                                 color: product.color,
                                 price: product.price,
-                                sku: product.sku
+                                sku: product.sku,
+                                image: product.img
                             };
                         })
                         await sanityClient.create({

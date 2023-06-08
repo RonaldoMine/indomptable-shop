@@ -24,6 +24,7 @@ export default async function notify(req: NextApiRequest, resp: NextApiResponse)
         status,
         totalProduct,
         amount,
+        town,
         lang
     }`, {paymentId: order_id}).then(async (response) => {
         order = response;
@@ -31,7 +32,6 @@ export default async function notify(req: NextApiRequest, resp: NextApiResponse)
 
     if (order.length > 0) {
         const products = order[0].products
-        const status = 'SUCCESS';
         if (status === 'SUCCESS') {
             for (const productKey in products) {
                 await sanityClient.fetch(`*[_type == 'products' && sku == $slugProduct]{
@@ -51,7 +51,7 @@ export default async function notify(req: NextApiRequest, resp: NextApiResponse)
                     if (response.length > 0) {
                         const {quantity} = response[0].colors.sizes;
                         order[0].products[productKey].name = response[0].name
-                        order[0].products[productKey].image = urlFor(response[0].coverImage).url()
+                        //order[0].products[productKey].image = urlFor(response[0].coverImage).url()
                         let request: any = [];
                         request[`colors[name=="${products[productKey].color}"].sizes[label=="${products[productKey].size}"].quantity`] = quantity - products[productKey].qty;
                         request[`colors[name=="${products[productKey].color}"].totalQuantity`] = response[0].colors.totalQuantity - products[productKey].qty;

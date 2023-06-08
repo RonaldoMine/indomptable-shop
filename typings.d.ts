@@ -32,5 +32,6 @@ export interface OrderInterface {
     totalProduct: number,
     amount: string,
     status: string,
-    lang: string
+    lang: string,
+    town: string
 }
