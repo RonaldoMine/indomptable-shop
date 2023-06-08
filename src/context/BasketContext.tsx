@@ -69,7 +69,8 @@ const basketReducer = (
                 //compare the product reference to check if its already in the basket
                 (product) =>
                     product.sku == action.payload.sku &&
-                    product.size == action.payload.size
+                    product.size == action.payload.size &&
+                    product.color == action.payload.color
             );
 
             //If product is already in the basket

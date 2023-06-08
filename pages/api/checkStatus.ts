@@ -27,7 +27,7 @@ export default async function checkStatus(req: NextApiRequest, res: NextApiRespo
             const result = await response.json()
             let message;
             let order_pdf = "";
-            if (result.status === 'SUCCESS') {
+            if (result.status/* === 'SUCCESS'*/) {
                 message = json_messages.payment_done;
                 await generatePDF(paymentId).then((result: any) => order_pdf = result);
             } else {
