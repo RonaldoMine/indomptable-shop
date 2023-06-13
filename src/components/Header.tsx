@@ -1,5 +1,3 @@
-import logo_white from "../../public/assets/images/logo.svg";
-import logo_black from "../../public/assets/images/logo-black.svg";
 import Image from "next/image";
 import Link from "next/link";
 import {useEffect, useState} from "react";
@@ -11,6 +9,7 @@ import {
 } from "react-icons/hi";
 import {useTheme} from "next-themes";
 import {useRouter} from "next/router";
+import logo from "../../public/assets/images/logo.svg";
 import useProductToFavorite from "../hooks/useProductToFavorite";
 
 export default function Header({lang}: { lang: string }) {
@@ -34,8 +33,8 @@ export default function Header({lang}: { lang: string }) {
                 className="grid gap-2 sm:justify-items-end justify-items-center items-center mx-auto sm:flex px-10 py-3 relative dark:bg-neutral-800 dark:border-b-neutral-500 dark:border-b shadow-md z-10">
                 <Link href={"/"}>
                     <Image
-                        className={"h-10"}
-                        src={theme === "dark" ? logo_white : logo_black}
+                        className={"h-8"}
+                        src={logo}
                         alt="Indomptable"
                     />
                 </Link>
@@ -59,7 +58,17 @@ export default function Header({lang}: { lang: string }) {
                     >
                         {locales_messages.about}
                     </Link>*/}
-                    <Link href={"/#contact-us"}>{locales_messages.contact}</Link>
+                    <button onClick={() => {
+                        const contactUs = document.getElementById("contact-us");
+                        if (contactUs) {
+                            contactUs.scrollIntoView({behavior: "smooth", block: "center"});
+                        } else {
+                            router.push("/").then(() => {
+                                const contactUs = document.getElementById("contact-us");
+                                contactUs?.scrollIntoView({behavior: "auto", block: "center"});
+                            })
+                        }
+                    }}>{locales_messages.contact}</button>
                 </div>
                 <div className="flex gap-4">
                     <button className="border rounded-2xl w-10 px-2 gap-1 text-center"
@@ -73,7 +82,8 @@ export default function Header({lang}: { lang: string }) {
                             }}
                     > {currentLocale}
                     </button>
-                    <Link href={"/cart"} className={`flex items-center dark:text-white ${pathname === "/cart" || pathname === "/checkout" ? "border-b-2" : ""}`}>
+                    <Link href={"/cart"}
+                          className={`flex items-center dark:text-white ${pathname === "/cart" || pathname === "/checkout" ? "border-b-2" : ""}`}>
                         <span className={"relative"}>
                           {basket.items.length > 0 && (
                               <span
@@ -88,7 +98,8 @@ export default function Header({lang}: { lang: string }) {
                             <AiOutlineShopping/>
                         </span>
                     </Link>
-                    <Link href={"/favorite"} className={`flex items-center dark:text-white ${pathname === "/favorite" ? "border-b-2" : ""}`}>
+                    <Link href={"/favorite"}
+                          className={`flex items-center dark:text-white ${pathname === "/favorite" ? "border-b-2" : ""}`}>
                         <span className={"relative"}>
                           {totalFavoriteProduct > 0 && (
                               <span

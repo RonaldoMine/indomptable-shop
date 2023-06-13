@@ -1,11 +1,10 @@
 import Link from "next/link";
-import {useTheme} from "next-themes";
-import footer_logo_white from "../../public/assets/images/logo.svg";
-import footer_logo_black from "../../public/assets/images/logo-black.svg";
+import logo from "../../public/assets/images/logo.svg";
 import Image from "next/image";
+import {useRouter} from "next/router";
 
 export default function Footer({lang}: { lang: string }) {
-    const {theme} = useTheme();
+    const router = useRouter();
     const locales_messages = require(`../../public/locales/${lang}/footer.json`);
     const locales_messages_link = require(`../../public/locales/${lang}/link.json`);
     return (
@@ -15,17 +14,17 @@ export default function Footer({lang}: { lang: string }) {
                 <Link href={"/"}>
                     <Image
                         className={"h-10"}
-                        src={theme === "dark" ? footer_logo_white : footer_logo_black}
+                        src={logo}
                         alt="Indomptable Logo"
                     />
                 </Link>
-               <p dangerouslySetInnerHTML={{__html: locales_messages.subtitle}} />
+                <p dangerouslySetInnerHTML={{__html: locales_messages.subtitle}}/>
             </div>
 
             <div className={"grid gap-4 grid-cols-2 sm:grid-cols-3"}>
                 <div>
                     <ul>
-                       {/* <li>
+                        {/* <li>
                             <Link href={"/about-us"}>{locales_messages_link.about}</Link>
                         </li>
                         <li>
@@ -35,14 +34,25 @@ export default function Footer({lang}: { lang: string }) {
                             <Link href={"/gallery"}>{locales_messages_link.gallery}</Link>
                         </li>
                         <li>
-                            <Link href={"/#contact-us"}>{locales_messages_link.contact}</Link>
+                            <button onClick={() => {
+                                const contactUs = document.getElementById("contact-us");
+                                if (contactUs) {
+                                    contactUs.scrollIntoView({behavior: "smooth", block: "center"});
+                                } else {
+                                    router.push("/").then(() => {
+                                        const contactUs = document.getElementById("contact-us");
+                                        contactUs?.scrollIntoView({behavior: "auto", block: "center"});
+                                    })
+                                }
+                            }}>{locales_messages_link.contact}</button>
                         </li>
                     </ul>
                 </div>
                 <div>
                     <ul>
                         <li>
-                            <Link href={"https://www.facebook.com/profile.php?id=100089070463423"} target={"_blank"}>Facebook</Link>
+                            <Link href={"https://www.facebook.com/profile.php?id=100089070463423"}
+                                  target={"_blank"}>Facebook</Link>
                         </li>
                         <li>
                             <Link href={"https://www.instagram.com/_1ndomptable/"} target={"_blank"}>Instagram</Link>

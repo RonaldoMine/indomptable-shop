@@ -4,7 +4,7 @@ import Link from "next/link";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useTranslation} from "next-i18next";
-import shoppingImg from "../public/assets/images/shopping-img.jpg";
+import shoppingImg from "../public/assets/images/shopping-img.webp";
 import {sanityClient, urlFor} from "../sanity";
 import {DISCOUNT_PERCENT} from "../src/utils";
 

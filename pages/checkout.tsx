@@ -39,12 +39,12 @@ function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProp
         }
     } = useForm({
         defaultValues: {
-            firstName: "",
-            lastName: "",
-            email: "",
-            phoneNumber: "",
-            address: "",
-            town: ""
+            firstName: "Ronaldo",
+            lastName: "Mine",
+            email: "andremine98@gmail.com",
+            phoneNumber: "675710605",
+            address: "Cité sic",
+            town: "Douala"
         }
     });
     const [onLoad, setOnLoad] = useState(false);
@@ -98,12 +98,12 @@ function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProp
         if (status === 200) {
             setCheckPaymentOnLoad(false)
             if (result.status != PaymentStatus.PENDING && result.status != PaymentStatus.CREATED) {
-                if (result.status === PaymentStatus.SUCCESS) {
+                /*if (result.status === PaymentStatus.SUCCESS) {
                     dispatch({
                         type: "RESET_BASKET",
                         payload: {}
                     })
-                }
+                }*/
                 setPaymentMessage(result.message)
                 setPaymentStatus(result.status)
                 //setPaymentPdfLink(result.pdf)

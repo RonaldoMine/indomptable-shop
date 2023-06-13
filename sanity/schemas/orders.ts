@@ -4,6 +4,7 @@ const STATUS = [
     {title: "SUCCESS", value: "SUCCESS"},
     {title: "PENDING", value: "PENDING"},
     {title: "CANCELLED", value: "CANCELLED"},
+    {title: "CANCELED", value: "CANCELED"},
     {title: "FAILED", value: "FAILED"},
 ]
 export default defineType({
