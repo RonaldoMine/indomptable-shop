@@ -37,7 +37,7 @@ function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProp
         handleSubmit, register, setValue, formState: {
             errors
         }
-    } = useForm({
+    } = useForm(/*{
         defaultValues: {
             firstName: "Ronaldo",
             lastName: "Mine",
@@ -46,7 +46,7 @@ function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProp
             address: "Cité sic",
             town: "Douala"
         }
-    });
+    }*/);
     const [onLoad, setOnLoad] = useState(false);
 
     const handleInitPayment = async (values: any) => {
