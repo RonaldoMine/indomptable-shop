@@ -49,7 +49,7 @@ export default async function notify(req: NextApiRequest, resp: NextApiResponse)
                     sizeName: products[productKey].size,
                     slugProduct: products[productKey].sku,
                     colorName: products[productKey].color
-                }).then((response) => {
+                }).then(async (response) => {
                     if (response.length > 0) {
                         const {quantity} = response[0].colors.sizes;
                         order[0].products[productKey].name = response[0].name
@@ -57,8 +57,9 @@ export default async function notify(req: NextApiRequest, resp: NextApiResponse)
                         let request: any = [];
                         request[`colors[name=="${products[productKey].color}"].sizes[label=="${products[productKey].size}"].quantity`] = quantity - products[productKey].qty;
                         request[`colors[name=="${products[productKey].color}"].totalQuantity`] = response[0].colors.totalQuantity - products[productKey].qty;
-                        const path = new Patch(response[0]._id).set({...request})
-                        transaction.patch(path);
+                        //const path = new Patch(response[0]._id).set({...request})
+                        //transaction.patch(path);
+                        await sanityClient.patch(response[0]._id, {set: {...request}}).commit();
                         /*sanityClient.patch(response[0]._id, {
                             set: {
                                 ...request
