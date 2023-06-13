@@ -71,10 +71,11 @@ export default async function notify(req: NextApiRequest, resp: NextApiResponse)
         const path = new Patch(order[0]._id).set({status: status})
         transaction.patch(path);
 
+        await transaction.commit()
         //sanityClient.mutate(transaction);
-        await sanityClient.patch(order[0]._id, {set: {status: status}}).commit();
+        // await sanityClient.patch(order[0]._id, {set: {status: status}}).commit();
         sendNotification(order[0]);
-        return resp.status(200).json({status: 1, order: order})
+        return resp.status(200).json({status: 1})
     }
     return resp.status(200).json({status: 0})
 }
