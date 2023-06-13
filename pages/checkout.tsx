@@ -84,6 +84,12 @@ function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProp
         }
     }
 
+    const handleTryAgainPayment = () => {
+        setOnLoad(false)
+        setPaymentStatus(PaymentStatus.CREATED)
+        setPaymentMessage(`${t("init-payment-message")}`)
+    }
+
     const checkPayment = async (paymentId: string) => {
         const options = {
             method: 'POST',
@@ -98,12 +104,12 @@ function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProp
         if (status === 200) {
             setCheckPaymentOnLoad(false)
             if (result.status != PaymentStatus.PENDING && result.status != PaymentStatus.CREATED) {
-                /*if (result.status === PaymentStatus.SUCCESS) {
+                if (result.status === PaymentStatus.SUCCESS) {
                     dispatch({
                         type: "RESET_BASKET",
                         payload: {}
                     })
-                }*/
+                }
                 setPaymentMessage(result.message)
                 setPaymentStatus(result.status)
                 //setPaymentPdfLink(result.pdf)
@@ -173,7 +179,7 @@ function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProp
                                                     {paymentStatus === PaymentStatus.CANCELLED || PaymentStatus.FAILED ?
                                                         (
                                                             <button className={"bg-gradient p-2 text-white"}
-                                                                    type={"submit"}>
+                                                                    onClick={handleTryAgainPayment}>
                                                                 {t("form.try-again")}
                                                             </button>
                                                         ) :
