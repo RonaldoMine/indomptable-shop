@@ -8,7 +8,7 @@
   },
   "payment_initiated": "Your payment has just been initiated, please check your phone to finalize the payment",
   "payment_done": "The payment of your order has been successfully validated! You will receive an email with all the details!",
-  "payment_failed": "The order payment was canceled of failed!",
+  "payment_failed": "The order payment was canceled or failed!",
   "order": {
     "subjectMail": "[INDOMPTABLE] Order paid and validated",
     "title": "A NEW INDOMITABLE ORDER",

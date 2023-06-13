@@ -15,7 +15,8 @@
     "town": "Select the town",
     "errors": "Please enter your :value",
     "accept-here": "Accept here",
-    "button": "Pay"
+    "button": "Pay",
+    "try-again" : "Try again to pay your order"
   },
   "errors": {
     "first-name": "First name is required",

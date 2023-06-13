@@ -30,7 +30,7 @@ function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProp
     const [paymentMessage, setPaymentMessage] = useState(`${t("init-payment-message")}`);
     const [paymentStatus, setPaymentStatus] = useState(PaymentStatus.CREATED)
     //const [paymentPdfLink, setPaymentPdfLink] = useState("");
-    const [selectedTown, setSelectedTown] = useState("");
+    const [selectedTown, setSelectedTown] = useState("Douala");
     const [checkPaymentOnLoad, setCheckPaymentOnLoad] = useState(false);
     let interval: string | number | NodeJS.Timer | undefined;
     const {
@@ -170,10 +170,19 @@ function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProp
                                                 <h3 className={"text-center mb-2"}>{paymentMessage}</h3>
                                                 <div
                                                     className={"flex flex-col-reverse items-center justify-between w-full"}>
-                                                    <Link href={"/shopping"}
-                                                          className={"underline mt-4 flex aligns-center font-bold"}>
-                                                        <BiArrowBack className={"mr-2"}/> <span>{t("back-to-shop")}</span>
-                                                    </Link>
+                                                    {paymentStatus === PaymentStatus.CANCELLED || PaymentStatus.FAILED ?
+                                                        (
+                                                            <button className={"bg-gradient p-2 text-white"}
+                                                                    type={"submit"}>
+                                                                {t("form.try-again")}
+                                                            </button>
+                                                        ) :
+                                                        (<Link href={"/shopping"}
+                                                              className={"underline mt-4 flex aligns-center font-bold"}>
+                                                            <BiArrowBack className={"mr-2"}/>
+                                                            <span>{t("back-to-shop")}</span>
+                                                        </Link>)
+                                                    }
                                                     {/*{(paymentStatus === PaymentStatus.SUCCESS && paymentPdfLink !== "") && (
                                                         <a className={"text-gradient underline mt-4 flex aligns-center"}
                                                            href={`/${paymentPdfLink}`}
@@ -231,7 +240,7 @@ function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProp
                                                         <Listbox.Button
                                                             className="select-control relative w-full bg-white text-left focus:outline-none sm:text-sm dark:bg-transparent">
                                                             <span
-                                                                className="my-auto block">{selectedTown === "" ? t("form.town") : selectedTown}</span>
+                                                                className="my-auto block dark:text-white">{selectedTown === "" ? t("form.town") : selectedTown}</span>
                                                             <span
                                                                 className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                                                               <BiChevronDown
@@ -309,7 +318,8 @@ function Checkout({locale}: InferGetServerSidePropsType<typeof getServerSideProp
                                     </form>
                                 </div>
                             </> :
-                            <p>{t("empty-basket")}, <Link href={"/shopping"} className="underline">{t("back-to-shop")}</Link>
+                            <p>{t("empty-basket")}, <Link href={"/shopping"}
+                                                          className="underline">{t("back-to-shop")}</Link>
                             </p>
                     }
                 </div>

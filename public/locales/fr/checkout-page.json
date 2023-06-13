@@ -15,7 +15,8 @@
     "town": "Choisir la ville",
     "errors": "Entrer votre :value",
     "accept-here": "Accepté ici",
-    "button": "Payer"
+    "button": "Payer",
+    "try-again" : "Relancer le payment de votre commande"
   },
   "errors": {
     "first-name": "Le nom est requis",

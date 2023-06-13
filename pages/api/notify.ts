@@ -1,12 +1,14 @@
-import {NextApiRequest, NextApiResponse} from "next";
-import {sanityClient, urlFor} from "../../sanity";
+import {NextApiRequest, NextApiResponse, NextConfig} from "next";
+import {sanityClient} from "../../sanity";
 import {Transaction, Patch} from "@sanity/client";
 import {render} from '@react-email/render';
 import {TRANSPORTER} from "../../src/emails/mailer";
 import OrderMail from "../../src/emails/payment/OrderMail";
 import {OrderInterface} from "../../typings";
-import PDF from "html-pdf";
 
+export const config: NextFetchRequestConfig = {
+
+}
 export default async function notify(req: NextApiRequest, resp: NextApiResponse) {
     const {order_id, status} = req.body;
     const transaction = new Transaction();
@@ -69,7 +71,8 @@ export default async function notify(req: NextApiRequest, resp: NextApiResponse)
         const path = new Patch(order[0]._id).set({status: status})
         transaction.patch(path);
 
-        sanityClient.mutate(transaction);
+        //sanityClient.mutate(transaction);
+        sanityClient.patch(order[0]._id, {set: {status: status}})
         sendNotification(order[0]);
         return resp.status(200).json({status: 1})
     }

@@ -1,12 +1,5 @@
 import {defineField, defineType} from 'sanity'
 
-const STATUS = [
-    {title: "SUCCESS", value: "SUCCESS"},
-    {title: "PENDING", value: "PENDING"},
-    {title: "CANCELLED", value: "CANCELLED"},
-    {title: "CANCELED", value: "CANCELED"},
-    {title: "FAILED", value: "FAILED"},
-]
 export default defineType({
     name: 'orders',
     title: 'Orders',
@@ -110,10 +103,6 @@ export default defineType({
             name: "status",
             title: "Status",
             type: "string",
-            options: {
-                layout: "dropdown",
-                list: STATUS
-            },
             initialValue: "PENDING"
         }),
         defineField({
