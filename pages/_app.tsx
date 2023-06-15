@@ -41,8 +41,7 @@ function App({Component, pageProps}: AppProps) {
             <BasketContextProvider>
                 <FavoriteContextProvider>
                     <div
-                        className={`w-screen md:h-screen h-full bg-cover bg-center overflow-x-hidden`}
-                    >
+                        className={`w-screen md:h-screen h-full bg-cover bg-center overflow-x-hidden`}>
                         <Head>
                             <title>Indomptable Shop</title>
                             <meta
@@ -51,7 +50,7 @@ function App({Component, pageProps}: AppProps) {
                             />
                             <link rel="icon" href="/assets/images/logo.svg"/>
                         </Head>
-                        <main className={"mx-auto max-w-screen-2xl"}>
+                        <main className={"mx-auto"}>
                             <Header lang={i18n.language ?? "en"}/>
                             <div className={"relative mx-auto"}>
                                 <Component {...pageProps} />

@@ -1,0 +1,23 @@
+{
+    "our-mission": {
+        "title": "NOTRE MISSION",
+        "content":"Créer en vous l'envie de réaliser plus que ce qui est possible."
+    },
+    "our-story": {
+        "title": "NOTRE HISTOIRE",
+        "slide-one":"Au cœur du Cameroun, un groupe diversifié d'individus partageant une passion commune pour la mode et la culture s'est réuni. Ils rêvaient de créer une marque de vêtements de ville qui reflèterait leur héritage tout en adoptant un minimalisme contemporain. C'est ainsi que le voyage de \"INDOMPTABLE\" a commencé.",
+        "slide-two":"Unis par un fort esprit d'équipe, les fondateurs d'INDOMPTABLE se sont consacrés à la création de modèles uniques qui célébraient la riche tapisserie culturelle du Cameroun. Ils se sont inspirés des couleurs vives, des motifs et des symboles présents dans les communautés locales.",
+        "slide-three":"Grâce à d'innombrables heures de remue-méninges, de conception et de perfectionnement, ils ont donné naissance à une collection qui allie harmonieusement les traditions camerounaises à l'esthétique moderne du streetwear.",
+        "slide-four": "INDOMPTABLE n'est pas seulement une question de mode, c'est aussi un symbole de dépassement de soi. La marque encourage les individus à embrasser leurs racines, à trouver la force dans l'unité et à s'efforcer de s'épanouir. Chaque vêtement représente une histoire de résilience, rappelant à ceux qui le portent leur potentiel illimité."
+    },
+    "our-attitude": {
+        "title": "NOTRE ATTITUDE",
+        "content": "Nous sommes plus qu'une marque de vêtements. Nous sommes un mouvement. Un mouvement de personnes qui croient en elles-mêmes, en leur culture et en leur potentiel. Un mouvement de personnes qui n'ont pas peur de relever des défis, de surmonter des obstacles et d'atteindre leurs objectifs. Un mouvement de personnes qui portent leur fierté, leur passion et leur objectif sur leurs manches. Nous créons des vêtements qui vous incitent à donner le meilleur de vous-même. Des vêtements qui célèbrent votre identité, votre héritage et votre histoire. Des vêtements qui vous permettent de vous exprimer, de vous démarquer et de faire la différence. Des vêtements de qualité, confortables et élégants. Nous sommes ici pour écrire l'histoire. Nous sommes INDOMPTABLES."
+    },
+    "our-values": {
+        "title": "NOS VALEURS",
+        "card-one": "TRAVAIL D'ÉQUIPE",
+        "card-two": "PASSION",
+        "card-three": "PERSEVÉRANCE"
+    }
+}

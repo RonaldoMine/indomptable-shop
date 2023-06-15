@@ -3,22 +3,29 @@ import React from "react";
 import passion from "../public/assets/images/about/passion.png";
 import perseverance from "../public/assets/images/about/perseverance.png";
 import teamwork from "../public/assets/images/about/teamwork.png";
-import {Swiper, SwiperSlide} from "swiper/react";
-import {FreeMode, Navigation} from "swiper";
-
-type Props = {};
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper";
+import { useTranslation } from "next-i18next";
+import { GetServerSideProps } from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const About = () => {
+  const { t } = useTranslation("about");
+
   return (
     <div className="max-w-4xl mx-auto">
-      <section className="text-center py-60">
-        <h3 className="mb-6 text-neutral-400 text-sm font-bold">OUR MISSION</h3>
+      <section className="text-center py-60 px-5">
+        <h3 className="mb-6 text-neutral-400 text-sm font-bold">
+          {t("our-mission.title")}
+        </h3>
         <p className="text-7xl font-bold text-fluid-headline ">
-          Impact the youth to become the change she wants to see.
+          {t("our-mission.content")}
         </p>
       </section>
       <section id={"about-story"} className="text-center py-40">
-        <h3 className="mb-6 text-neutral-400 text-sm font-bold">OUR STORY</h3>
+        <h3 className="mb-6 text-neutral-400 text-sm font-bold">
+          {t("our-story.title")}
+        </h3>
         <Swiper
           effect={"cards"}
           slidesPerView={1}
@@ -31,26 +38,30 @@ const About = () => {
         >
           <SwiperSlide className={"w-full"}>
             <p className={"mx-auto text-center w-2/3 text-xl"}>
-              Lorem ipsum <br />
-              dolor sit amet, consectetur adipisicing elit. Asperiores beatae ea
-              ex illo itaque iure magnam nam omnis recusandae veritatis! Aliquam
-              consequatur cum distinctio doloremque quod vero voluptates? Earum,
-              magni?
+              {t("our-story.slide-one")}
             </p>
           </SwiperSlide>
           <SwiperSlide className={"w-full"}>
             <p className={"mx-auto text-center w-2/3 text-xl"}>
-              Lorem ipsum <br />
-              dolor sit amet, consectetur adipisicing elit. Asperiores beatae ea
-              ex illo itaque iure magnam nam omnis recusandae veritatis! Aliquam
-              consequatur cum distinctio doloremque quod vero voluptates? Earum,
-              magni?
+              {t("our-story.slide-two")}
+            </p>
+          </SwiperSlide>
+          <SwiperSlide className={"w-full"}>
+            <p className={"mx-auto text-center w-2/3 text-xl"}>
+              {t("our-story.slide-three")}
+            </p>
+          </SwiperSlide>
+          <SwiperSlide className={"w-full"}>
+            <p className={"mx-auto text-center w-2/3 text-xl"}>
+              {t("our-story.slide-four")}
             </p>
           </SwiperSlide>
         </Swiper>
       </section>
       <section className="text-center py-40">
-        <h3 className="mb-12 text-neutral-400 text-sm font-bold">OUR VALUES</h3>
+        <h3 className="mb-12 text-neutral-400 text-sm font-bold">
+          {t("our-values.title")}
+        </h3>
 
         <div className="flex flex-wrap sm:flex-nowrap gap-y-4 mx-auto sm:gap-x-2 md:gap-x-4 px-6 w-full">
           <div className="aspect-[0.82] w-full sm:w-1/3 bg-slate-300 relative overflow-hidden">
@@ -58,7 +69,7 @@ const About = () => {
             <div className="absolute w-full h-full flex items-end">
               <div className="w-full h-max pb-6 pl-6 z-10">
                 <p className="font-futura text-4xl sm:text-2xl lg:text-4xl w-min text-white">
-                  TEAMWORK
+                  {t("our-values.card-one")}
                 </p>
               </div>
 
@@ -71,7 +82,7 @@ const About = () => {
             <div className="absolute w-full h-full flex items-end">
               <div className="w-full h-max pb-6 pl-6 z-10">
                 <p className="font-futura text-4xl sm:text-2xl lg:text-4xl w-min text-white">
-                  PASSION
+                  {t("our-values.card-two")}
                 </p>
               </div>
 
@@ -84,7 +95,7 @@ const About = () => {
             <div className="absolute w-full h-full flex items-end">
               <div className="w-full h-max pb-6 pl-6 z-10">
                 <p className="font-futura text-4xl sm:text-2xl lg:text-4xl w-min text-white">
-                  PERSEVERANCE
+                  {t("our-values.card-three")}
                 </p>
               </div>
 
@@ -95,18 +106,25 @@ const About = () => {
       </section>
 
       <section className="text-center py-60 px-10 lg:px-4">
-        <h3 className="mb-6 text-neutral-400 text-sm font-bold">OUR VISION</h3>
+        <h3 className="mb-6 text-neutral-400 text-sm font-bold">
+          {t("our-attitude.title")}
+        </h3>
         <p className="text-2xl text-fluid-copy leading-fluid-copy">
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-          nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-          volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-          ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-          Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
-          molestie consequat, vel illum dolore eu feugiat nulla facilisis.
+          {t("our-attitude.content")}
         </p>
       </section>
     </div>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async ({
+  locale,
+}: any) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["about"])),
+    },
+  };
 };
 
 export default About;

@@ -1,0 +1,23 @@
+{
+    "our-mission": {
+        "title": "OUR MISSION",
+        "content":"Inspire people to achieve more than they think is possible."
+    },
+    "our-story": {
+        "title": "OUR STORY",
+        "slide-one":"In the heart of Cameroon, a diverse group of individuals with a shared passion for fashion and culture came together. They dreamed of creating a streetwear brand that would reflect their heritage while embracing contemporary minimalism. Thus, the journey of \"INDOMPTABLE\" began.",
+        "slide-two":"United by a strong sense of teamwork, the founders of INDOMPTABLE dedicated themselves to crafting unique designs that celebrated Cameroon's rich cultural tapestry. They drew inspiration from the vibrant colors, patterns, and symbols found in local communities.",
+        "slide-three":"Through countless hours of brainstorming, designing, and refining, they birthed a collection that seamlessly blended Cameroonian traditions with modern streetwear aesthetics.",
+        "slide-four": "But INDOMPTABLE was not just about fashion; it was a symbol of self-improvement. The brand encouraged individuals to embrace their roots, find strength in unity, and strive for personal growth. Each garment represented a story of resilience, reminding wearers of their limitless potential."
+    },
+    "our-attitude": {
+        "title": "OUR ATTITUDE",
+        "content": "We are more than a clothing brand. We are a movement. A movement of people who believe in themselves, their culture and their potential. A movement of people who are not afraid to face challenges, overcome obstacles, and achieve their goals. A movement of people who wear their pride, passion, and purpose on their sleeves. We create clothes that inspire you to be your best self. Clothes that celebrate your identity, your heritage, and your story. Clothes that empower you to express yourself, stand out, and make a difference. Clothes that are made with quality, comfort, and style. We are here to make history. We are INDOMPTABLE."
+    },
+    "our-values": {
+        "title": "OUR VALUES",
+        "card-one": "TEAMWORK",
+        "card-two": "PASSION",
+        "card-three": "PERSEVERANCE"
+    }
+}

@@ -52,12 +52,12 @@ export default function Header({lang}: { lang: string }) {
                     >
                         {locales_messages.gallery}
                     </Link>
-                    {/*<Link
+                    <Link
                         href="/about"
                         className={`dark:text-white ${pathname === "/about" ? "border-b" : ""}`}
                     >
                         {locales_messages.about}
-                    </Link>*/}
+                    </Link>
                     <button onClick={() => {
                         const contactUs = document.getElementById("contact-us");
                         if (contactUs) {
