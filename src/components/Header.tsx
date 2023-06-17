@@ -11,6 +11,7 @@ import {useTheme} from "next-themes";
 import {useRouter} from "next/router";
 import logo from "../../public/assets/images/logo.svg";
 import useProductToFavorite from "../hooks/useProductToFavorite";
+import HamburgerMenu from "./HamburgerMenu";
 
 export default function Header({lang}: { lang: string }) {
     const {basket} = useBasket();
@@ -22,6 +23,18 @@ export default function Header({lang}: { lang: string }) {
     const [mounted, setMounted] = useState(false);
     const locales_messages = require(`../../public/locales/${lang}/link.json`);
 
+    const handleGoToAboutUs = () => {
+        const contactUs = document.getElementById("contact-us");
+        if (contactUs) {
+            contactUs.scrollIntoView({behavior: "smooth", block: "center"});
+        } else {
+            router.push("/").then(() => {
+                const contactUs = document.getElementById("contact-us");
+                contactUs?.scrollIntoView({behavior: "auto", block: "center"});
+            })
+        }
+    }
+
     useEffect(() => {
         setMounted(true);
     }, []);
@@ -30,16 +43,19 @@ export default function Header({lang}: { lang: string }) {
     return (
         <>
             <div
-                className="grid gap-2 sm:justify-items-end justify-items-center items-center mx-auto sm:flex px-10 py-3 relative dark:bg-neutral-800 dark:border-b-neutral-500 dark:border-b shadow-md z-10">
-                <Link href={"/"}>
-                    <Image
-                        className={"h-8"}
-                        src={logo}
-                        alt="Indomptable"
-                    />
-                </Link>
+                className="grid gap-2 justify-items-center items-center mx-auto md:justify-items-end md:flex px-4 sm:px-10 py-3 relative dark:bg-neutral-800 dark:border-b-neutral-500 dark:border-b shadow-md z-10">
+                <div className="flex justify-between w-full md:w-auto items-center border-b border-gray-100 dark:border-gray-400 pb-2 sm:pb-0">
+                    <Link href={"/"}>
+                        <Image
+                            className={"h-8 w-24"}
+                            src={logo}
+                            alt="Indomptable"
+                        />
+                    </Link>
+                    <HamburgerMenu locales_messages={locales_messages}/>
+                </div>
                 <div
-                    className="flex gap-8 w-full lg:justify-center justify-center items-center sm:mb-0 sm:mt-0 mb-2 mt-2">
+                    className="hidden md:flex gap-8 w-full lg:justify-center justify-center items-center sm:mb-0 sm:mt-0 mb-2 mt-2">
                     <Link
                         href="/shopping"
                         className={`dark:text-white ${pathname === "/shopping" ? "border-b-2" : ""}`}
@@ -58,19 +74,9 @@ export default function Header({lang}: { lang: string }) {
                     >
                         {locales_messages.about}
                     </Link>
-                    <button onClick={() => {
-                        const contactUs = document.getElementById("contact-us");
-                        if (contactUs) {
-                            contactUs.scrollIntoView({behavior: "smooth", block: "center"});
-                        } else {
-                            router.push("/").then(() => {
-                                const contactUs = document.getElementById("contact-us");
-                                contactUs?.scrollIntoView({behavior: "auto", block: "center"});
-                            })
-                        }
-                    }}>{locales_messages.contact}</button>
+                    <button onClick={handleGoToAboutUs}>{locales_messages.contact}</button>
                 </div>
-                <div className="flex gap-4">
+                <div className="flex justify-between gap-4">
                     <button className="border rounded-2xl w-10 px-2 gap-1 text-center"
                             onClick={() => {
                                 router.push({pathname, query}, asPath, {
