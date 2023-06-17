@@ -1,8 +1,6 @@
 import "react-toastify/dist/ReactToastify.css";
 import "swiper/css";
-import "swiper/css/effect-cards";
 import "swiper/css/free-mode";
-
 import "../styles/globals.css";
 import "../styles/responsive.css";
 import type {AppProps} from "next/app";
@@ -17,6 +15,7 @@ import Nprogress from "nprogress";
 import {ThemeProvider} from "next-themes";
 import {FavoriteContextProvider} from "../src/context/FavoriteContext";
 import Footer from "../src/components/Footer";
+import { Analytics } from '@vercel/analytics/react';
 
 //Disable the spinner at the top right
 Nprogress.configure({showSpinner: false})
@@ -37,6 +36,7 @@ function App({Component, pageProps}: AppProps) {
     }, [Router]);
 
     return (
+        <>
         <ThemeProvider enableSystem={false} attribute={"class"} defaultTheme="light">
             <BasketContextProvider>
                 <FavoriteContextProvider>
@@ -62,6 +62,8 @@ function App({Component, pageProps}: AppProps) {
                 </FavoriteContextProvider>
             </BasketContextProvider>
         </ThemeProvider>
+            <Analytics />
+        </>
     );
 }
 
