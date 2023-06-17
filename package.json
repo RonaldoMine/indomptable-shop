@@ -1,5 +1,5 @@
 {
-  "name": "my-project",
+  "name": "indomptable",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -23,9 +23,7 @@
     "dotenv": "^16.0.3",
     "eslint": "8.28.0",
     "eslint-config-next": "13.0.5",
-    "html-pdf": "^3.0.1",
     "i18next": "^22.4.9",
-    "jspdf": "^2.5.1",
     "next": "13.0.5",
     "next-i18next": "^13.1.5",
     "next-sanity": "^4.0.6",
@@ -43,7 +41,6 @@
     "typescript": "4.9.3"
   },
   "devDependencies": {
-    "@types/html-pdf": "^3.0.0",
     "@types/nprogress": "^0.2.0",
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.19",
