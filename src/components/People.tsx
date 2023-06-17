@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import OnePeople from "./OnePeople";
 import {useTranslation} from "next-i18next";
-import {EffectCards, FreeMode, Navigation} from "swiper";
+import {FreeMode, Navigation} from "swiper";
 import {Swiper, SwiperSlide} from "swiper/react";
 import Link from "next/link";
 
@@ -11,7 +11,7 @@ export default function People({peoples}: any) {
     const [loadSwiper, setLoaderSwiper] = useState(false);
 
     useEffect(() => {
-        setUserDeviceIsPhone(window?.screen?.width < 600)
+        setUserDeviceIsPhone(window?.screen?.width < 500)
     }, [])
 
     useEffect(() => {
@@ -27,16 +27,15 @@ export default function People({peoples}: any) {
                         {t("title")}
                     </h1>
                     {loadSwiper && (<Swiper
-                            effect={"cards"}
                             slidesPerView={1}
                             spaceBetween={10}
-                            modules={userDeviceIsPhone ? [FreeMode, EffectCards] : [FreeMode, Navigation]}
+                            modules={[FreeMode, Navigation]}
                             className="relative"
                             grabCursor={true}
-                            navigation={!userDeviceIsPhone}
+                            navigation={true}
                             loop={true}
-                            centeredSlides={!userDeviceIsPhone}
-                            speed={userDeviceIsPhone ? 3000 : 500}
+                            centeredSlides={true}
+                            speed={500}
                             breakpoints={
                                 {
                                     600: {
