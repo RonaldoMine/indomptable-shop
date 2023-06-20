@@ -7,6 +7,18 @@ export default function Footer({lang}: { lang: string }) {
     const router = useRouter();
     const locales_messages = require(`../../public/locales/${lang}/footer.json`);
     const locales_messages_link = require(`../../public/locales/${lang}/link.json`);
+    const handleGoToAboutUs = () => {
+        const contactUs = document.getElementById("contact-us");
+        if (contactUs) {
+            contactUs.scrollIntoView({behavior: "smooth", block: "center"});
+        } else {
+            router.push("/").then(() => {
+                const contactUs = document.getElementById("contact-us");
+                contactUs?.scrollIntoView({behavior: "auto", block: "center"});
+            })
+        }
+    }
+
     return (
         <footer
             className="px-10 py-12 relative dark:bg-neutral-800 border-t border-t-neutral-200 dark:border-t-neutral-600">
@@ -37,23 +49,7 @@ export default function Footer({lang}: { lang: string }) {
                             <li>
                                 <button
                                     className="text-left"
-                                    onClick={() => {
-                                        const contactUs = document.getElementById("contact-us");
-                                        if (contactUs) {
-                                            contactUs.scrollIntoView({
-                                                behavior: "smooth",
-                                                block: "center",
-                                            });
-                                        } else {
-                                            router.push("/").then(() => {
-                                                const contactUs = document.getElementById("contact-us");
-                                                contactUs?.scrollIntoView({
-                                                    behavior: "auto",
-                                                    block: "center",
-                                                });
-                                            });
-                                        }
-                                    }}
+                                    onClick={handleGoToAboutUs}
                                 >
                                     {locales_messages_link.contact}
                                 </button>
