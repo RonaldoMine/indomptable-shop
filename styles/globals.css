@@ -59,6 +59,10 @@ p, h1, h2, h3, h4, h5, h6 {
     --button-border-radius: .075rem
 }
 
+.dark body {
+    background-color: rgb(38 38 38);
+}
+
 .text-red {
     color: var(--color-red);
 }
@@ -227,7 +231,7 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 .item-card.left {
-    background: rgb(255 255 255);
+    background: rgb(250, 249, 249);
 }
 
 .item-card.right {

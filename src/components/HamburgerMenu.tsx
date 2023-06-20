@@ -46,7 +46,7 @@ export default function HamburgerMenu({locales_messages}: { locales_messages: { 
             <Popover className="relative">
                 {({open, close}) => (
                     <>
-                        <Popover.Button
+                        <Popover.Button title={"Indomptable Menu"}
                             className={`
                 group inline-flex items-center rounded-md px-3 py-2 text-base font-medium hover:text-opacity-100 focus:outline-none`}
                         >

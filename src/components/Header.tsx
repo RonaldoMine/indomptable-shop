@@ -41,10 +41,11 @@ export default function Header({lang}: { lang: string }) {
     if (!mounted) return null;
 
     return (
-        <>
+        <header className={"dark:bg-neutral-800 dark:border-b-neutral-500 dark:border-b"}>
             <div
-                className="grid gap-2 justify-items-center items-center mx-auto md:justify-items-end md:flex px-4 sm:px-10 py-3 relative dark:bg-neutral-800 dark:border-b-neutral-500 dark:border-b shadow-md z-10">
-                <div className="flex justify-between w-full md:w-auto items-center border-b border-gray-100 md:border-0 dark:border-gray-400 pb-2 sm:pb-0">
+                className="max-w-5xl mx-auto grid gap-2 justify-items-center items-center mx-auto md:justify-items-end md:flex px-4 sm:px-10 py-3 relative shadow-md z-10">
+                <div
+                    className="flex justify-between w-full md:w-auto items-center border-b border-gray-100 md:border-0 dark:border-gray-400 pb-2 sm:pb-0">
                     <Link href={"/"}>
                         <Image
                             className={"h-8 w-24"}
@@ -56,28 +57,29 @@ export default function Header({lang}: { lang: string }) {
                 </div>
                 <div
                     className="hidden md:flex gap-8 w-full lg:justify-center justify-center items-center sm:mb-0 sm:mt-0 mb-2 mt-2">
-                    <Link
-                        href="/shopping"
-                        className={`dark:text-white ${pathname === "/shopping" ? "border-b-2" : ""}`}
+                    <Link title={locales_messages.shop}
+                          href="/shopping"
+                          className={`dark:text-white ${pathname === "/shopping" ? "border-b-2" : ""}`}
                     >
                         {locales_messages.shop}
                     </Link>
-                    <Link
-                        href="/gallery"
-                        className={`dark:text-white ${pathname === "/gallery" ? "border-b-2" : ""}`}
+                    <Link title={locales_messages.gallery}
+                          href="/gallery"
+                          className={`dark:text-white ${pathname === "/gallery" ? "border-b-2" : ""}`}
                     >
                         {locales_messages.gallery}
                     </Link>
-                    <Link
-                        href="/about"
-                        className={`dark:text-white ${pathname === "/about" ? "border-b" : ""}`}
+                    <Link title={locales_messages.about}
+                          href="/about"
+                          className={`dark:text-white ${pathname === "/about" ? "border-b" : ""}`}
                     >
                         {locales_messages.about}
                     </Link>
-                    <button onClick={handleGoToAboutUs}>{locales_messages.contact}</button>
+                    <button title={locales_messages.contact}
+                            onClick={handleGoToAboutUs}>{locales_messages.contact}</button>
                 </div>
                 <div className="flex justify-between gap-4">
-                    <button className="border rounded-2xl w-10 px-2 gap-1 text-center"
+                    <button title={currentLocale} className="border rounded-2xl w-10 px-2 gap-1 text-center"
                             onClick={() => {
                                 router.push({pathname, query}, asPath, {
                                     locale: currentLocale === "en" ? "fr" : "en",
@@ -88,7 +90,7 @@ export default function Header({lang}: { lang: string }) {
                             }}
                     > {currentLocale}
                     </button>
-                    <Link href={"/cart"}
+                    <Link href={"/cart"} title={"Checkout"}
                           className={`flex items-center dark:text-white ${pathname === "/cart" || pathname === "/checkout" ? "border-b-2" : ""}`}>
                         <span className={"relative"}>
                           {basket.items.length > 0 && (
@@ -104,7 +106,7 @@ export default function Header({lang}: { lang: string }) {
                             <AiOutlineShopping/>
                         </span>
                     </Link>
-                    <Link href={"/favorite"}
+                    <Link href={"/favorite"} title={"Favorite"}
                           className={`flex items-center dark:text-white ${pathname === "/favorite" ? "border-b-2" : ""}`}>
                         <span className={"relative"}>
                           {totalFavoriteProduct > 0 && (
@@ -120,13 +122,13 @@ export default function Header({lang}: { lang: string }) {
                             <AiFillHeart/>
                         </span>
                     </Link>
-                    <button
-                        onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+                    <button title={'Theme'}
+                            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
                     >
                         {theme === "light" ? <HiOutlineSun/> : <HiOutlineMoon/>}
                     </button>
                 </div>
             </div>
-        </>
+        </header>
     );
 }

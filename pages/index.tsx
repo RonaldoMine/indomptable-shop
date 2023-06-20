@@ -39,28 +39,32 @@ export default function Home({
                     </button>*/}
                 </div>
             </div>
-            <div className="relative grid sm:grid-cols-2 grid-cols-1">
-                <HomeCardItem
-                    title={"WHITE"}
-                    typeClass={HomeCardType.left}
-                    alt={"White TeeShrit"}
-                    src={shirt_white}
-                    typeCategory={"t-shirt"}
-                    slugProduct={"indomptable-the-mboa"}
-                />
-                <HomeCardItem
-                    title={"black"}
-                    typeClass={HomeCardType.right}
-                    alt={"Black TeeShrit"}
-                    src={shirt_black}
-                    typeCategory={"t-shirt"}
-                    slugProduct={"indomptable-the-hemle"}
-                />
+            <div className="container mx-auto">
+                <div className="relative grid sm:grid-cols-2 grid-cols-1">
+                    <HomeCardItem
+                        title={"WHITE"}
+                        typeClass={HomeCardType.left}
+                        alt={"White TeeShrit"}
+                        src={shirt_white}
+                        typeCategory={"t-shirt"}
+                        slugProduct={"indomptable-the-mboa"}
+                    />
+                    <HomeCardItem
+                        title={"black"}
+                        typeClass={HomeCardType.right}
+                        alt={"Black TeeShrit"}
+                        src={shirt_black}
+                        typeCategory={"t-shirt"}
+                        slugProduct={"indomptable-the-hemle"}
+                    />
+                </div>
+                <OurStory/>
             </div>
-            <OurStory/>
             <Newsletter/>
-            <People peoples={peoples}/>
-            <Contact/>
+            <div className="container mx-auto">
+                <People peoples={peoples}/>
+                <Contact/>
+            </div>
         </>
     );
 }

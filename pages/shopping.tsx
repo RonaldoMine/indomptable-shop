@@ -44,11 +44,8 @@ function Shopping({productsData}: InferGetServerSidePropsType<typeof getServerSi
                      style={{backgroundImage: `url('${shoppingImg.src}')`, backgroundPositionY: "-20px"}}/>
             </div>
             <main className="px-6 py-10 max-w-[75rem] mx-auto">
-                {/*
-                <PageHeader title={t("title")}/>
-*/}
                 <div
-                    className="grid grid-cols-1 gap-4 md:grid-cols-4 sm:grid-cols-2"
+                    className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
                 >
                     {productsData?.length > 0 ? (
                         productsData.map((product: any) => {
@@ -92,8 +89,10 @@ function Shopping({productsData}: InferGetServerSidePropsType<typeof getServerSi
                                                 {product.subtitle}
                                             </p>
                                             <p className="font-medium dark:text-neutral-300">
-                                                XAF <span className={"text-md mr-1 font-bold"}>{product?.pricePromo}</span>
-                                                <span className={`${product?.pricePromo != null ? "line-through text-sm" : ""} dark:text-neutral-300`}>{product?.price}</span>
+                                                XAF <span
+                                                className={"text-md mr-1 font-bold"}>{product?.pricePromo}</span>
+                                                <span
+                                                    className={`${product?.pricePromo != null ? "line-through text-sm" : ""} dark:text-neutral-300`}>{product?.price}</span>
                                             </p>
                                         </div>
                                     </div>
