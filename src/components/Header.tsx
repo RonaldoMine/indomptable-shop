@@ -41,9 +41,9 @@ export default function Header({lang}: { lang: string }) {
     if (!mounted) return null;
 
     return (
-        <header className={"dark:bg-neutral-800 dark:border-b-neutral-500 dark:border-b"}>
+        <header className={"dark:bg-neutral-800 dark:border-b-neutral-500 dark:border-b shadow-md"}>
             <div
-                className="max-w-5xl mx-auto grid gap-2 justify-items-center items-center mx-auto md:justify-items-end md:flex px-4 sm:px-10 py-3 relative shadow-md z-10">
+                className="max-w-5xl mx-auto grid gap-2 justify-items-center items-center mx-auto md:justify-items-end md:flex px-4 sm:px-10 py-3 relative z-10">
                 <div
                     className="flex justify-between w-full md:w-auto items-center border-b border-gray-100 md:border-0 dark:border-gray-400 pb-2 sm:pb-0">
                     <Link href={"/"}>

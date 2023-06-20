@@ -12,7 +12,7 @@ export default function Document() {
           referrerPolicy="no-referrer"
         />
       </Head>
-      <body>
+      <body className={"dark:bg-neutral-800"}>
         <Main />
         <NextScript />
       </body>
