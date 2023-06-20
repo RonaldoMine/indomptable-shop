@@ -10,7 +10,7 @@ export default function Footer({lang}: { lang: string }) {
     return (
         <footer
             className="px-10 py-12 relative dark:bg-neutral-800 border-t border-t-neutral-200 dark:border-t-neutral-600">
-            <div className="max-w-7xl mx-auto gap-10 md:flex">
+            <div className="max-w-7xl mx-auto gap-10 justify-between md:flex">
                 <div className="mb-12 md:mb-0">
                     <Link href={"/"}>
                         <Image
