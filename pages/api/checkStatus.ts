@@ -1,5 +1,4 @@
 import {NextApiRequest, NextApiResponse} from "next";
-import PDF from "html-pdf";
 import {render} from "@react-email/render";
 import OrderMail from "../../src/emails/payment/OrderMail";
 import {sanityClient, urlFor} from "../../sanity";
@@ -28,7 +27,6 @@ export default async function checkStatus(req: NextApiRequest, res: NextApiRespo
             let order_pdf = "";
             if (result.status === 'SUCCESS') {
                 message = json_messages.payment_done;
-                //await generatePDF(paymentId).then((result: any) => order_pdf = result);
             } else {
                 message = json_messages.payment_failed
             }
@@ -43,53 +41,4 @@ export default async function checkStatus(req: NextApiRequest, res: NextApiRespo
     } catch (e) {
         res.status(500).json({message: json_messages.errors.general_error})
     }
-}
-
-async function generatePDF(paymentId: string) {
-    let order: any;
-    await sanityClient.fetch(`*[_type == 'orders' && paymentId == $paymentId ]{
-        _id,
-        firstName,
-        lastName,
-        phoneNumber,
-        address,
-        email,
-        reference,
-        paymentId,
-        products, 
-        status,
-        totalProduct,
-        amount,
-        lang
-    }`, {paymentId: paymentId}).then(async (response: any) => {
-        order = response[0];
-    });
-    const products = order.products;
-    for (const productKey in products) {
-        await sanityClient.fetch(`*[_type == 'products' && sku == $slugProduct]{
-                        _id,
-                        name,
-                        coverImage,
-                        colors[name match $colorName][0]{
-                          _key,
-                          sizes[label match $sizeName][0]
-                        }
-                    }`, {
-            sizeName: products[productKey].size,
-            slugProduct: products[productKey].sku,
-            colorName: products[productKey].color
-        }).then((response) => {
-            if (response.length > 0) {
-                order.products[productKey].name = response[0].name
-                order.products[productKey].image = urlFor(response[0].coverImage).url()
-            }
-        });
-    }
-    const langMessages = require(`../../public/locales/${order.lang}/payment.json`);
-    const html = render(OrderMail(order, langMessages.order));
-    let pdf_link = `orders/${order.reference}.pdf`
-    PDF.create(html).toFile(`public/${pdf_link}`, (err: any, res) => {
-        pdf_link = !err ? pdf_link : "";
-    });
-    return pdf_link;
 }
