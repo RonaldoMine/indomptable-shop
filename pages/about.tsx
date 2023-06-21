@@ -37,22 +37,22 @@ const About = () => {
           loop={true}
         >
           <SwiperSlide className={"w-full"}>
-            <p className={"mx-auto text-center w-2/3 text-xl"}>
+            <p className={"mx-auto text-center w-2/3 text-xl leading-9"}>
               {t("our-story.slide-one")}
             </p>
           </SwiperSlide>
           <SwiperSlide className={"w-full"}>
-            <p className={"mx-auto text-center w-2/3 text-xl"}>
+            <p className={"mx-auto text-center w-2/3 text-xl leading-9"}>
               {t("our-story.slide-two")}
             </p>
           </SwiperSlide>
           <SwiperSlide className={"w-full"}>
-            <p className={"mx-auto text-center w-2/3 text-xl"}>
+            <p className={"mx-auto text-center w-2/3 text-xl leading-9"}>
               {t("our-story.slide-three")}
             </p>
           </SwiperSlide>
           <SwiperSlide className={"w-full"}>
-            <p className={"mx-auto text-center w-2/3 text-xl"}>
+            <p className={"mx-auto text-center w-2/3 text-xl leading-9"}>
               {t("our-story.slide-four")}
             </p>
           </SwiperSlide>
@@ -73,7 +73,7 @@ const About = () => {
                 </p>
               </div>
 
-              <div className="bg-gradient-to-t transition ease-in-out delay-50 duration-300 hover:opacity-100 from-orange-600 to-transparent w-full h-full opacity-30 absolute flex items-end"></div>
+              <div className="bg-gradient-to-t transition ease-in-out delay-50 duration-300 sm:hover:opacity-100 from-orange-600 to-transparent w-full h-full sm:opacity-30 absolute flex items-end"></div>
             </div>
           </div>
 
@@ -86,7 +86,7 @@ const About = () => {
                 </p>
               </div>
 
-              <div className="bg-gradient-to-t transition ease-in-out delay-50 duration-300 hover:opacity-100 from-orange-600 to-transparent w-full h-full opacity-30 absolute flex items-end"></div>
+              <div className="bg-gradient-to-t transition ease-in-out delay-50 duration-300 sm:hover:opacity-100 from-orange-600 to-transparent w-full h-full sm:opacity-30 absolute flex items-end"></div>
             </div>
           </div>
 
@@ -99,7 +99,7 @@ const About = () => {
                 </p>
               </div>
 
-              <div className="bg-gradient-to-t transition ease-in-out delay-50 duration-300 hover:opacity-100 from-orange-600 to-transparent w-full h-full opacity-30 absolute flex items-end"></div>
+              <div className="bg-gradient-to-t transition ease-in-out delay-50 duration-300 sm:hover:opacity-100 from-orange-600 to-transparent w-full h-full sm:opacity-30 absolute flex items-end"></div>
             </div>
           </div>
         </div>

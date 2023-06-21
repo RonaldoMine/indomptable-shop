@@ -2,37 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* *, *::before, *::after {
-  box-sizing: border-box;
-}
-
-* {
-  margin: 0;
-}
-
-html, body {
-  height: 100%;
-}
-
-body {
-    font-size: 16px;
-    font-family: 'Josefin Sans', sans-serif;
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-}
-
-img, picture, video, canvas, svg {
-  display: block;
-  max-width: 100%;
-}
-
-input, button, textarea, select {
-  font: inherit;
-}
-
-p, h1, h2, h3, h4, h5, h6 {
-  overflow-wrap: break-word;
-} */
 
 @layer base {
     @font-face {
@@ -46,14 +15,15 @@ p, h1, h2, h3, h4, h5, h6 {
         font-display: swap;
     }
 }
+
 :root {
-    --border-color-gray: #E9E9E9;
+    --border-color-gray: #d8d8d8;
     --color-gray: #7C7C7CFF;
     --color-red: rgba(238, 20, 19, 1);
     --color-orange: rgba(237, 114, 13, 1);
     --color-yellow: #ffc200;
     --color-white-orange: rgba(237, 114, 13, .2);
-    --gradient-color: linear-gradient(90deg, rgba(237, 114, 13, 1) 0%, rgba(238, 20, 19, 1) 53%, rgba(237, 114, 13, 1) 100%);
+    --gradient-color: linear-gradient(316deg, #f94327 0%, #ff7d14 74%);
     font-family: 'Space Grostek', serif;
     --input-border-radius: .075rem;
     --button-border-radius: .075rem

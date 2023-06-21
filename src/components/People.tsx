@@ -21,9 +21,9 @@ export default function People({peoples}: any) {
     return (
         <>
             <div id="our-community"
-                 className="dark:bg-neutral-800 border-b border-neutral-200 dark:border-b dark:border-neutral-600">
+                 className="dark:bg-neutral-800 border-b-neutral-200 dark:border-b-neutral-600">
                 <div className="p-4">
-                    <h1 className={"text-center text-6xl font-bold mb-8 text-gradient"}>
+                    <h1 className={"text-center text-6xl font-bold mb-8 text-gradient-simple"}>
                         {t("title")}
                     </h1>
                     {loadSwiper && (<Swiper
