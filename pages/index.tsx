@@ -39,7 +39,7 @@ export default function Home({
                     </button>*/}
                 </div>
             </div>
-            <div className="container mx-auto">
+            <div className="max-w-7xl mx-auto">
                 <div className="relative grid sm:grid-cols-2 grid-cols-1">
                     <HomeCardItem
                         title={"WHITE"}

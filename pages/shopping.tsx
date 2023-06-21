@@ -39,7 +39,7 @@ function Shopping({
               __html: t("discount", { percent: DISCOUNT_PERCENT }),
             }}
           />
-          <p>No code needed. Prices as marked.</p>
+          <p>{t("promo-text")}</p>
         </div>
       </div>
       <main className="px-6 py-20 max-w-[75rem] mx-auto">
