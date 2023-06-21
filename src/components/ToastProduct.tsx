@@ -35,8 +35,9 @@ export default function ToastProduct({
                     placeholder="blur"
                     blurDataURL={product?.coverBlurry.metadata.lqip}
                     alt={product?.name}
-                    width={32}
-                    height={32}
+                    width={64}
+                    height={64}
+                    quality={100}
                 />
                 <div className={"grid items-center"}>
                     <p className={"font-bold text-slate-700 dark:text-neutral-200"}>

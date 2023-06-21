@@ -41,11 +41,11 @@ export default function Newsletter() {
         <>
             <div
                 id="newsletter"
-                className="dark:bg-neutral-800 border-b border-neutral-200 dark:border-b dark:border-neutral-600 bg-fixed bg-center sm:bg-cover"
+                className="dark:bg-neutral-800 bg-fixed bg-center sm:bg-cover"
                 style={{backgroundImage: `url('${parallax_photo.src}')`}}
             >
                 <div className={"lg:w-4/6 md:w-5/6 w-full p-4 mx-auto"}>
-                    <h1 className={"text-center text-4xl md:text-6xl font-bold mb-2 text-gradient"}>
+                    <h1 className={"text-center text-4xl md:text-6xl font-bold mb-2 text-gradient-simple"}>
                         {t("title")}
                     </h1>
                     <p className={"text-center text-white mb-16"}>

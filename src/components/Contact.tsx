@@ -42,7 +42,7 @@ export default function Contact() {
                 className="dark:bg-neutral-800 border-t border-neutral-200 dark:border-t dark:border-neutral-600"
             >
                 <div className={"lg:w-3/6 md:w-4/6 w-full p-4 mx-auto"}>
-                    <h1 className={"text-center text-6xl font-bold mb-4 text-gradient"}>
+                    <h1 className={"text-center text-6xl font-bold mb-4 text-gradient-simple"}>
                         {t("title")}
                     </h1>
                     <form

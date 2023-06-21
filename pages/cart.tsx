@@ -37,8 +37,8 @@ function Cart() {
                                                         <Image
                                                             src={item.img}
                                                             className="h-full w-full object-cover"
-                                                            height={100}
-                                                            width={100}
+                                                            height={256}
+                                                            width={256}
                                                             alt="Indomptable black tee"
                                                             priority
                                                         />
