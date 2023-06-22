@@ -9,6 +9,7 @@ import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useTranslation} from "next-i18next";
 import ToastProduct from "../../../src/components/ToastProduct";
 import useProductToFavorite from "../../../src/hooks/useProductToFavorite";
+import {ButtonBorder, ButtonGradient} from "../../../src/components/Button";
 
 type Color = {
     name: string;
@@ -316,18 +317,17 @@ export default function SlugProduct({
                             {t("important-note")}
                         </p>
                         <div className="mt-4 flex flex-wrap gap-5">
-                            <button
-                                className="bg-gradient-to-bl from-slate-700 to-slate-900 w-full py-4 text-white font-space  dark:text-black dark:from-slate-200 dark:to-slate-50 dark:bg-gradient-to-bl"
+                            <ButtonGradient
+                                className={"w-full"}
                                 onClick={handleAddProductOnCart}
                             >
                                 {t("add-to-basket")}
-                            </button>
-                            <button
+                            </ButtonGradient>
+                            <ButtonBorder className={"w-full"}
                                 onClick={handleAddProductToFavorite}
-                                className="border-slate-700 border-2 w-full py-4 font-space dark:border dark:border-neutral-600 dark:text-neutral-300"
                             >
                                 {t("add-to-favorite")}
-                            </button>
+                            </ButtonBorder>
                         </div>
                         <p className="mt-12"></p>
                         <div className="mt-12">

@@ -10,5 +10,6 @@
     "toast-title": "Products in cart",
     "colors": "Colors",
     "select-size": "Please select a size",
-    "checkout": "Checkout"
+    "checkout": "Checkout",
+    "view-cart": "View cart"
 }

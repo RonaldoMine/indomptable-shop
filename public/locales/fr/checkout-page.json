@@ -16,7 +16,7 @@
     "errors": "Entrer votre :value",
     "accept-here": "Accepté ici",
     "button": "Payer",
-    "try-again" : "Relancer le payment de votre commande"
+    "try-again" : "Relancer le payment"
   },
   "errors": {
     "first-name": "Le nom est requis",

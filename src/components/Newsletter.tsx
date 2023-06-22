@@ -3,17 +3,19 @@ import {useForm} from "react-hook-form";
 import Alert from "./Alert";
 import {useTranslation} from "next-i18next";
 import parallax_photo from "../../public/assets/images/parallax-home.webp";
+import {ButtonGradient} from "./Button";
+import Loader from "./Loader";
 
 
 export default function Newsletter() {
     const {register, reset, handleSubmit} = useForm();
     const [showAlert, setShowAlert] = useState(false);
-    const [onLoading, setOnLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [configAlert, setConfigAlert] = useState({title: "", text: "", status: ""});
     const {t, i18n} = useTranslation("newsletter")
 
     const handleSubmitNewsletterForm = async (data: any) => {
-        setOnLoading(true);
+        setIsLoading(true);
         const options = {
             method: 'POST',
             headers: {
@@ -34,7 +36,7 @@ export default function Newsletter() {
             setConfigAlert({title: "Erreur", text: result.message, status: status === 400 ? "warning" : "danger"})
         }
         setShowAlert(true);
-        setOnLoading(false);
+        setIsLoading(false);
     }
 
     return (
@@ -64,19 +66,15 @@ export default function Newsletter() {
                             placeholder={`${t("form.email")}`}
                             {...register("email", {
                                 required: true,
-                                disabled: onLoading
+                                disabled: isLoading
                             })}
                         />
-                        {onLoading ? (
-                            <span className="loader ml-4"></span>
+                        {isLoading ? (
+                            <Loader className="ml-4"></Loader>
                         ) : (
-                            <button
-                                className={
-                                    "hover:bg-opacity-20 text-white bg-gradient"
-                                }
-                            >
+                            <ButtonGradient>
                                 {t("form.button")}
-                            </button>
+                            </ButtonGradient>
                         )}
                     </form>
                 </div>

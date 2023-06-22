@@ -8,7 +8,7 @@ export default async function payment(req: NextApiRequest, res: NextApiResponse)
     const phoneNumber = req.body.phoneNumber;
     const address = req.body.address;
     const town = req.body.town;
-    const amount = 100//req.body.amount;
+    const amount = req.body.amount;
     const quantity = req.body.quantity;
     const lang = req.body.lang;
     const description = "Indomptable";

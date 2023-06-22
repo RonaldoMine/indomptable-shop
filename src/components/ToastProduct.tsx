@@ -5,13 +5,20 @@ import {useBasket} from "../context/BasketContext";
 import {useRouter} from "next/router";
 import {useTranslation} from "next-i18next";
 import Image from "next/image"
+import {ButtonBorder, ButtonGradient} from "./Button";
 
+type ToastProductProps = {
+    product: any,
+    size: string,
+    onClose?: () => void,
+    closeToast?: () => void
+}
 export default function ToastProduct({
                                          product,
                                          size,
                                          onClose,
                                          closeToast
-                                     }: { product: any, size: string, onClose?: () => void, closeToast?: () => void }) {
+                                     }: ToastProductProps) {
     const {basket} = useBasket();
     const router = useRouter()
     const {t} = useTranslation('product-page');
@@ -58,18 +65,17 @@ export default function ToastProduct({
                 </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
-                <button
-                    className={"border-gray-300 border w-full p-2 bg-white"}
+                <ButtonBorder
+                    className={"w-full"}
                     onClick={() => {
                         router.push("/cart");
                         onClose && onClose();
                         closeToast && closeToast();
                     }}
                 >
-                    View cart ({basket.totalProduct})
-                </button>
-                <button
-                    className={"bg-gradient w-full p-2 text-white"}
+                    {t("view-cart")} ({basket.totalProduct})
+                </ButtonBorder>
+                <ButtonGradient
                     onClick={() => {
                         onClose && onClose();
                         closeToast && closeToast();
@@ -77,7 +83,7 @@ export default function ToastProduct({
                     }}
                 >
                     {t("checkout")}
-                </button>
+                </ButtonGradient>
             </div>
         </div>
     );

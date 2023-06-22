@@ -26,7 +26,7 @@
     --gradient-color: linear-gradient(316deg, #f94327 0%, #ff7d14 74%);
     font-family: 'Space Grostek', serif;
     --input-border-radius: .075rem;
-    --button-border-radius: .075rem
+    --button-border-radius: .075rem;
 }
 
 .text-red {
@@ -94,9 +94,8 @@
     display: block;
 }
 
-#contact-us button, button.bg-gradient {
+button.bg-gradient {
     border-radius: var(--button-border-radius);
-    background: var(--gradient-color);
 }
 
 #newsletter input {

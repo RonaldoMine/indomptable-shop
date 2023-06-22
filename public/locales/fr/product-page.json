@@ -10,5 +10,6 @@
     "toast-title": "Contenu du panier",
     "colors": "Couleurs",
     "select-size": "Selectionner une taille",
-    "checkout": "Commander"
+    "checkout": "Commander",
+    "view-cart": "Afficher le panier"
 }

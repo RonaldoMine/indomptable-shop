@@ -13,10 +13,9 @@
     "phone": "Phone Number",
     "address": "Home address",
     "town": "Select the town",
-    "errors": "Please enter your :value",
     "accept-here": "Accept here",
     "button": "Pay",
-    "try-again" : "Try again to pay your order"
+    "try-again" : "Restart payment"
   },
   "errors": {
     "first-name": "First name is required",
