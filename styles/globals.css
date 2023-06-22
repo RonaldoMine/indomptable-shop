@@ -100,7 +100,7 @@ button.bg-gradient {
 
 #newsletter input {
     font-size: 18px;
-    border-radius: var(--input-border-radius);
+    /* border-radius: var(--input-border-radius); */
     border: 1px solid var(--border-color-gray);
     padding: 20px 10px;
     width: 100%;
@@ -196,11 +196,11 @@ button.bg-gradient {
 }
 
 .item-card.left {
-    background: rgb(250, 249, 249);
+    background: rgb(255, 255, 255);
 }
 
 .item-card.right {
-    background: rgb(64 64 64);
+    background: rgb(38, 38, 38);
 }
 
 .item-card.left span {

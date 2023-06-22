@@ -41,7 +41,7 @@ export default function Header({lang}: { lang: string }) {
     if (!mounted) return null;
 
     return (
-        <header className={"dark:bg-neutral-800 dark:border-b-neutral-500 dark:border-b shadow-md"}>
+        <header className={"dark:bg-neutral-800 dark:border-b-neutral-600 dark:border-b shadow-md"}>
             <div
                 className="max-w-7xl mx-auto grid gap-2 justify-items-center items-center md:justify-items-end md:flex px-4 sm:px-10 py-3 relative z-10">
                 <div

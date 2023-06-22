@@ -30,9 +30,11 @@ function Shopping({
   return (
     <div className="w-full overflow-x-hidden dark:bg-neutral-800">
       <div
-        className={"flex py-10 px-6 bg-white relative border border-slate-200"}
+        className={
+          "flex py-10 px-6 dark:bg-neutral-800 border-b-neutral-200 dark:border-b-neutral-600 border-b"
+        }
       >
-        <div className="flex text-center px-4 flex-col gap-3 w-full max-w-6xl mx-auto py-10 bg-neutral-100">
+        <div className="flex text-center px-4 flex-col gap-3 w-full max-w-6xl mx-auto py-10 bg-neutral-100 dark:bg-neutral-700">
           <span
             className="font-futura text-4xl sm:text-6xl"
             dangerouslySetInnerHTML={{
