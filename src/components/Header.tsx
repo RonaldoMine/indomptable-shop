@@ -56,7 +56,7 @@ export default function Header({lang}: { lang: string }) {
                     <HamburgerMenu locales_messages={locales_messages}/>
                 </div>
                 <div
-                    className="hidden md:flex gap-8 w-full lg:justify-center justify-center items-center sm:mb-0 sm:mt-0 mb-2 mt-2">
+                    className="hidden md:flex gap-8 w-full lg:justify-center justify-center items-center">
                     <Link title={locales_messages.shop}
                           href="/shopping"
                           className={`dark:text-white ${pathname === "/shopping" ? "border-b-2" : ""}`}

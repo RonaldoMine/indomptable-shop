@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 
 @layer base {
     @font-face {
@@ -100,18 +106,22 @@ button.bg-gradient {
 
 #newsletter input {
     font-size: 18px;
-    /* border-radius: var(--input-border-radius); */
-    border: 1px solid var(--border-color-gray);
-    padding: 20px 10px;
+    padding: 10px 10px;
     width: 100%;
-    display: block;
     height: 50px;
+    display: block;
+}
+
+#newsletter input:-webkit-autofill,
+#newsletter input:-webkit-autofill:hover, 
+#newsletter input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #333;
+  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset;
 }
 
 #newsletter button {
     border-radius: 0 var(--input-border-radius) var(--input-border-radius) 0;
-    padding: 0 20px;
-    height: 50px;
+    padding: 0px 30px;
 }
 
 #our-story .quotation-mark {
@@ -250,6 +260,10 @@ button.bg-gradient {
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent;
     background-size: 200% auto;
+}
+
+.inline-block {
+    display: inline-block;
 }
 
 @keyframes shine {

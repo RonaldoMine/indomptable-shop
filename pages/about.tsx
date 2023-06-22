@@ -18,9 +18,10 @@ const About = () => {
         <h3 className="mb-6 text-neutral-400 text-sm font-bold">
           {t("our-mission.title")}
         </h3>
-        <p className="text-7xl font-bold text-fluid-headline ">
-          {t("our-mission.content")}
-        </p>
+        <p
+          dangerouslySetInnerHTML={{ __html: t("our-mission.content") }}
+          className="text-7xl font-bold text-fluid-headline "
+        />
       </section>
       <section id={"about-story"} className="text-center py-40">
         <h3 className="mb-6 text-neutral-400 text-sm font-bold">

@@ -1,7 +1,7 @@
 {
     "our-mission": {
         "title": "NOTRE MISSION",
-        "content":"Créer en vous l'envie de réaliser plus que ce qui est possible."
+        "content":"Créer en vous l'envie de réaliser plus que ce qui est <span class='text-gradient-simple inline-block'>possible</span>."
     },
     "our-story": {
         "title": "NOTRE HISTOIRE",

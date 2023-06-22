@@ -8,7 +8,7 @@ type ButtonProps =  {
 
 export function ButtonGradient({children, className, onClick}: ButtonProps) {
     return (<button type={"submit"} onClick={onClick}
-                    className={`font-space px-10 py-3 hover:bg-opacity-20 text-white bg-orange-gradient rounded-button ${className}`}>
+                    className={`font-space px-10 py-3 hover:bg-opacity-20 text-white bg-orange-gradient ${className}`}>
         {children}
     </button>);
 }
@@ -16,7 +16,7 @@ export function ButtonBorder({children, className, onClick}: ButtonProps){
     return (
         <button
             onClick={onClick}
-            className={`border-slate-700 border-2 px-10 py-3 font-space dark:border dark:border-neutral-600 dark:text-neutral-300 rounded-button ${className}`}
+            className={`border-slate-700 border-2 px-4 py-3 font-space dark:border dark:border-neutral-600 dark:text-neutral-300 rounded-button ${className}`}
         >
             {children}
         </button>

@@ -1,7 +1,7 @@
 {
     "our-mission": {
         "title": "OUR MISSION",
-        "content":"Inspire people to achieve more than they think is possible."
+        "content":"Inspire people to achieve more than they think is <span class='text-gradient-simple inline-block'>possible</span>."
     },
     "our-story": {
         "title": "OUR STORY",

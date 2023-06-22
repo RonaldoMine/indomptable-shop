@@ -7,7 +7,12 @@ import { ButtonGradient } from "./Button";
 import Loader from "./Loader";
 
 export default function Newsletter() {
-  const { register, reset, handleSubmit } = useForm();
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ mode: "onChange" });
   const [showAlert, setShowAlert] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [configAlert, setConfigAlert] = useState({
@@ -50,6 +55,8 @@ export default function Newsletter() {
     setIsLoading(false);
   };
 
+  console.log(errors)
+
   return (
     <>
       <div
@@ -69,14 +76,20 @@ export default function Newsletter() {
           <form
             onSubmit={handleSubmit(handleSubmitNewsletterForm)}
             method={"post"}
-            className={"flex items-center max-w-[500px] sm:w-3/4 w-ful mx-auto"}
+            className={"flex max-w-[500px] sm:w-3/4 w-full mx-auto"}
           >
             <input
               type="email"
-              className={"bg-neutral-50 focus:bg-white"}
+              id="email"
+              className={`outline-none bg-neutral-50 focus:bg-white ${
+                errors.email?.message
+                  ? "text-red-500 border-2 border-red-500"
+                  : "text-neutral-800 focus:border-2 focus:border-neutral-300 border-neutral-300"
+              }`}
               placeholder={`${t("form.email")}`}
               {...register("email", {
                 required: true,
+                pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
                 disabled: isLoading,
               })}
             />
