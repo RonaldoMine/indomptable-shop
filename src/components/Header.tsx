@@ -41,7 +41,7 @@ export default function Header({lang}: { lang: string }) {
     if (!mounted) return null;
 
     return (
-        <header className={"dark:bg-neutral-800 dark:border-b-neutral-600 dark:border-b shadow-md"}>
+        <header className={"dark:bg-neutral-800 dark:border-b-neutral-500 dark:border-b shadow-md"}>
             <div
                 className="max-w-7xl mx-auto grid gap-2 justify-items-center items-center md:justify-items-end md:flex px-4 sm:px-10 py-3 relative z-10">
                 <div
@@ -56,7 +56,7 @@ export default function Header({lang}: { lang: string }) {
                     <HamburgerMenu locales_messages={locales_messages}/>
                 </div>
                 <div
-                    className="hidden md:flex gap-8 w-full lg:justify-center justify-center items-center">
+                    className="hidden md:flex gap-8 w-full lg:justify-center justify-center items-center sm:mb-0 sm:mt-0 mb-2 mt-2">
                     <Link title={locales_messages.shop}
                           href="/shopping"
                           className={`dark:text-white ${pathname === "/shopping" ? "border-b-2" : ""}`}
