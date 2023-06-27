@@ -66,7 +66,7 @@ const About = () => {
 
         <div className="flex flex-wrap sm:flex-nowrap gap-y-4 mx-auto sm:gap-x-2 md:gap-x-4 px-6 w-full">
           <div className="aspect-[0.82] w-full sm:w-1/3 bg-slate-300 relative overflow-hidden">
-            <Image src={teamwork} className="absolute" alt="passion'sd" />
+            <Image src={teamwork} className="absolute" alt={t("our-values.card-one")} />
             <div className="absolute w-full h-full flex items-end">
               <div className="w-full h-max pb-6 pl-6 z-10">
                 <p className="font-futura text-4xl sm:text-2xl lg:text-4xl w-min text-white">
@@ -79,7 +79,7 @@ const About = () => {
           </div>
 
           <div className="aspect-[0.82] w-full sm:w-1/3 bg-slate-300 relative overflow-hidden">
-            <Image src={passion} className="absolute" alt="passion'sdw" />
+            <Image src={passion} className="absolute" alt={t("our-values.card-two")} />
             <div className="absolute w-full h-full flex items-end">
               <div className="w-full h-max pb-6 pl-6 z-10">
                 <p className="font-futura text-4xl sm:text-2xl lg:text-4xl w-min text-white">
@@ -92,7 +92,7 @@ const About = () => {
           </div>
 
           <div className="aspect-[0.82] w-full sm:w-1/3 bg-slate-300 relative overflow-hidden">
-            <Image src={perseverance} className="absolute" alt="passion'swdf" />
+            <Image src={perseverance} className="absolute" alt={t("our-values.card-three")} />
             <div className="absolute w-full h-full flex items-end">
               <div className="w-full h-max pb-6 pl-6 z-10">
                 <p className="font-futura text-4xl sm:text-2xl lg:text-4xl w-min text-white">

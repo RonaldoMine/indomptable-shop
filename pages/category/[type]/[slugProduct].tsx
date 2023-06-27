@@ -57,7 +57,6 @@ export default function SlugProduct({
         setAvailableSizes(selected.sizes);
         setSelectedSize(null);
         setErrorSizeUnselected("");
-        console.log(selectedColor.images)
     };
 
     const handleCloseToastProduct = () => {
@@ -246,12 +245,6 @@ export default function SlugProduct({
                                 >
                                     {t("size")}
                                 </h3>
-                                {/* <a
-                    href="pages/category/Product[slug]#[slugProduct].tsx"
-                    className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
-                  >
-                    Size guide
-                  </a> */}
                             </div>
                             <RadioGroup
                                 value={selectedSize}

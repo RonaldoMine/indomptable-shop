@@ -89,7 +89,7 @@ function Gallery({peoples}: any) {
                                         className={
                                             "h-full object-cover rounded duration-100"
                                         }
-                                    ></Image>
+                                    />
                                 </div>
                             );
                         })}
@@ -107,7 +107,7 @@ function Gallery({peoples}: any) {
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0"
                     >
-                        <div className="fixed inset-0 bg-gray-500 bg-opacity-80"></div>
+                        <div className="fixed inset-0 bg-gray-500 bg-opacity-80" onClick={() => alert("OK")}></div>
                     </Transition.Child>
                     <div className="fixed inset-0 overflow-y-auto">
                         <div className="flex min-h-full items-center justify-center p-4 text-center">
@@ -139,11 +139,11 @@ function Gallery({peoples}: any) {
                                     >
                                         <button
                                             onClick={handlePreviousPage}
-                                            className={`w-10 h-10 bg-white bg-opacity-0 hover:bg-opacity-20 focus:bg-opacity-20  transition ease-in-out duration-500 rounded-full z-[99999] ${
+                                            className={`w-10 h-10 bg-white bg-opacity-0 hover:bg-opacity-20 focus:bg-opacity-20 dark:bg-opacity-0 dark:bg-neutral-900 hover:dark:bg-opacity-70  transition ease-in-out duration-500 rounded-full z-[99999] ${
                                                 currentImage.index > 0 ? "visible" : "invisible"
                                             }`}
                                         >
-                                            <AiOutlineArrowLeft className={"mx-auto text-white dark:text-neutral-800"}/>
+                                            <AiOutlineArrowLeft className={"mx-auto text-white"}/>
                                         </button>
                                         <button
                                             onClick={closeModal}
@@ -152,18 +152,18 @@ function Gallery({peoples}: any) {
                                             }
                                         >
 
-                                            <AiOutlineClose className={"mx-auto text-white dark:text-neutral-800"}/>
+                                            <AiOutlineClose className={"mx-auto text-white"}/>
                                         </button>
                                         <button
                                             onClick={handleNextPage}
-                                            className={`w-10 h-10 bg-white bg-opacity-0 hover:bg-opacity-20 focus:bg-opacity-20 transition ease-in-out duration-500 rounded-full z-[99999] ${
+                                            className={`w-10 h-10 bg-white bg-opacity-0 hover:bg-opacity-20 focus:bg-opacity-20 dark:bg-opacity-0 dark:bg-neutral-900 hover:dark:bg-opacity-70  transition ease-in-out duration-500 rounded-full z-[99999] ${
                                                 currentImage.index < peoples.length - 1
                                                     ? "visible"
                                                     : "invisible"
                                             }`}
                                         >
                                             <AiOutlineArrowRight
-                                                className={"mx-auto text-white dark:text-neutral-800"}/>
+                                                className={"mx-auto text-white"}/>
                                         </button>
                                     </div>
                                 </div>
