@@ -32,18 +32,17 @@ function Cart() {
                     <div
                       key={idx}
                       id="card"
-                      className="border border-slate-200 dark:border-neutral-600"
+                      className="border border-slate-200 dark:border-neutral-600 relative"
                     >
-                      <div className="flex p-5 justify-between">
+                      <div className="flex p-6 justify-between">
                         <div className="flex">
                           <div className="h-32 sm:h-48 flex-shrink-0 overflow-hidden">
                             <Image
                               src={item.img}
-                              className="h-full w-full object-cover"
-                              height={256}
-                              width={256}
-                              alt="Indomptable black tee"
-                              priority
+                              className="h-full w-24 sm:w-48 object-contain"
+                              height={192}
+                              width={100}
+                              alt={item.name}
                             />
                           </div>
                           <div className="ml-4 flex flex-col justify-between">
@@ -51,7 +50,7 @@ function Cart() {
                               <h2 className="sm:text-lg dark:text-neutral-200">
                                 {item.name}
                               </h2>
-                              <p className="text-slate-500 mt-1 dark:text-neutral-400">
+                              <p className="text-slate-500 mt-1 mb-1 dark:text-neutral-400">
                                 <span style={{ textTransform: "capitalize" }}>
                                   {item.color}
                                 </span>{" "}
@@ -64,7 +63,7 @@ function Cart() {
                                 </span>
                               </p>
                             </div>
-                            <div className="flex">
+                            <div className="flex mt-4 sm:mt-0">
                               <button
                                 className="bg-slate-700 text-white px-2 shadow-md mr-2 dark:bg-slate-200 dark:text-neutral-700"
                                 onClick={() => {
@@ -98,7 +97,7 @@ function Cart() {
                           </div>
                         </div>
                         <div
-                          className="active:text-slate-400 dark:text-neutral-500 dark:hover:text-neutral-300 hover:cursor-pointer"
+                          className="active:text-slate-400 dark:text-neutral-500 dark:hover:text-neutral-300 hover:cursor-pointer text-red"
                           onClick={() =>
                             dispatch({ type: "REMOVE_PRODUCT", payload: idx })
                           }
@@ -148,7 +147,13 @@ function Cart() {
                 >
                   {t("checkout")}
                 </ButtonGradient>
-                <p className={"text-center text-[11px] text-slate-600 dark:text-neutral-400 mt-4"}>{t("delivery-fees")}</p>
+                <p
+                  className={
+                    "text-center text-[11px] text-slate-600 dark:text-neutral-400 mt-4"
+                  }
+                >
+                  {t("delivery-fees")}
+                </p>
               </div>
             </div>
           )}
