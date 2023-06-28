@@ -7,7 +7,7 @@
     "order-summary": "Order summary",
     "total-quantity": "Total quantity",
     "subtotal": "Subtotal",
-    "delivery-fees": "Shipping costs are calculated on the payment page.",
+    "delivery-fees": "Shipping costs are calculated at checkout.",
     "order-total": "Order total",
     "checkout": "Checkout"
 }

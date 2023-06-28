@@ -7,7 +7,7 @@
     "order-summary": "Résumé de la commande",
     "total-quantity": "Quantité totale",
     "subtotal": "Total partiel",
-    "delivery-fees": "Les frais de livraison sont calculés sur la page du paiement.",
+    "delivery-fees": "Les frais de livraison sont calculés au moment du paiement.",
     "order-total": "Total",
     "checkout": "Paiement"
 }
