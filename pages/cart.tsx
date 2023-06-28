@@ -36,7 +36,7 @@ function Cart() {
                     >
                       <div className="flex p-5 justify-between">
                         <div className="flex">
-                          <div className="h-64 flex-shrink-0 overflow-hidden">
+                          <div className="h-32 sm:h-48 flex-shrink-0 overflow-hidden">
                             <Image
                               src={item.img}
                               className="h-full w-full object-cover"
@@ -48,7 +48,7 @@ function Cart() {
                           </div>
                           <div className="ml-4 flex flex-col justify-between">
                             <div>
-                              <h2 className="text-lg dark:text-neutral-200">
+                              <h2 className="sm:text-lg dark:text-neutral-200">
                                 {item.name}
                               </h2>
                               <p className="text-slate-500 mt-1 dark:text-neutral-400">
