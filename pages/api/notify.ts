@@ -1,6 +1,5 @@
-import { NextApiRequest, NextApiResponse, NextConfig } from "next";
+import { NextApiRequest, NextApiResponse } from "next";
 import { sanityClient } from "../../sanity";
-import { Transaction } from "@sanity/client";
 import { render } from "@react-email/render";
 import { TRANSPORTER } from "../../src/emails/mailer";
 import OrderMail from "../../src/emails/payment/OrderMail";
@@ -12,7 +11,7 @@ export default async function notify(
   resp: NextApiResponse
 ) {
   const { order_id, status } = req.body;
-  const transaction = new Transaction();
+  //const transaction = new Transaction();
   let order: any;
   await sanityClient
     .fetch(
