@@ -55,8 +55,6 @@ export default function Newsletter() {
     setIsLoading(false);
   };
 
-  console.log(errors)
-
   return (
     <>
       <div

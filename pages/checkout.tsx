@@ -415,7 +415,7 @@ function Checkout({
                         "md:flex grid md:justify-between justify-items-center items-center mt-4"
                       }
                     >
-                      <div className={"flex items-center gap-4"}>
+                      <div className={"flex items-center gap-4 mb-4 sm:mb-0"}>
                         {t("form.accept-here")}
                         <div className={"bg-white ml-2"}>
                           <Image
