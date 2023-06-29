@@ -1,8 +1,8 @@
 import Image from "next/image";
 import React from "react";
-import passion from "../public/assets/images/about/passion.png";
-import perseverance from "../public/assets/images/about/perseverance.png";
-import teamwork from "../public/assets/images/about/teamwork.png";
+import passion from "../public/assets/images/about/passion.webp";
+import perseverance from "../public/assets/images/about/perseverance.webp";
+import teamwork from "../public/assets/images/about/teamwork.webp";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import { useTranslation } from "next-i18next";
@@ -66,11 +66,11 @@ const About = () => {
 
         <div className="flex flex-wrap sm:flex-nowrap gap-y-4 mx-auto sm:gap-x-2 md:gap-x-4 px-6 w-full">
           <div className="aspect-[0.82] w-full sm:w-1/3 bg-slate-300 relative overflow-hidden">
-            <Image src={teamwork} className="absolute" alt={t("our-values.card-one")} />
+            <Image src={passion} className="absolute" alt={t("our-values.card-two")} />
             <div className="absolute w-full h-full flex items-end">
               <div className="w-full h-max pb-6 pl-6 z-10">
                 <p className="font-futura text-4xl sm:text-2xl lg:text-4xl w-min text-white">
-                  {t("our-values.card-one")}
+                  {t("our-values.card-two")}
                 </p>
               </div>
 
@@ -79,11 +79,11 @@ const About = () => {
           </div>
 
           <div className="aspect-[0.82] w-full sm:w-1/3 bg-slate-300 relative overflow-hidden">
-            <Image src={passion} className="absolute" alt={t("our-values.card-two")} />
+            <Image src={teamwork} className="absolute" alt={t("our-values.card-one")} />
             <div className="absolute w-full h-full flex items-end">
               <div className="w-full h-max pb-6 pl-6 z-10">
                 <p className="font-futura text-4xl sm:text-2xl lg:text-4xl w-min text-white">
-                  {t("our-values.card-two")}
+                  {t("our-values.card-one")}
                 </p>
               </div>
 

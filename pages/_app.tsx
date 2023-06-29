@@ -41,7 +41,7 @@ function App({Component, pageProps}: AppProps) {
             <BasketContextProvider>
                 <FavoriteContextProvider>
                     <div
-                        className={`w-screen md:h-screen h-full bg-cover bg-center overflow-x-hidden`}>
+                        className={`w-full h-full bg-cover bg-center`}>
                         <Head>
                             <title>Indomptable Shop</title>
                             <meta

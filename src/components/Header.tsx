@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import logo from "../../public/assets/images/logo.svg";
 import useProductToFavorite from "../hooks/useProductToFavorite";
 import HamburgerMenu from "./HamburgerMenu";
+import { useHeaderVisible } from "../hooks/useHeaderVisible";
 
 export default function Header({ lang }: { lang: string }) {
   const { basket } = useBasket();
@@ -18,6 +19,7 @@ export default function Header({ lang }: { lang: string }) {
   const { locale: currentLocale } = useRouter();
   const { pathname, asPath, query } = router;
   const [mounted, setMounted] = useState(false);
+  const visible = useHeaderVisible();
   const locales_messages = require(`../../public/locales/${lang}/link.json`);
 
   const handleGoToAboutUs = () => {
@@ -40,7 +42,7 @@ export default function Header({ lang }: { lang: string }) {
   return (
     <header
       className={
-        "dark:bg-neutral-800 dark:border-b-neutral-500 dark:border-b shadow-md"
+        `sticky ${visible ? 'top-0' : '-top-20'} z-50 duration-150 transition-all dark:bg-neutral-800 dark:border-b-neutral-500 dark:border-b shadow-md`
       }
     >
       <div className="max-w-7xl mx-auto grid gap-2 justify-items-center items-center md:justify-items-end md:flex px-4 sm:px-10 py-3 relative z-10">
