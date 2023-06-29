@@ -11,8 +11,8 @@ export default function Newsletter() {
     register,
     reset,
     handleSubmit,
-    formState: { errors },
-  } = useForm({ mode: "onChange" });
+    formState: { errors, isDirty },
+  } = useForm({ mode: "onTouched", defaultValues: {email: ''}});
   const [showAlert, setShowAlert] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [configAlert, setConfigAlert] = useState({
@@ -21,6 +21,7 @@ export default function Newsletter() {
     status: "",
   });
   const { t, i18n } = useTranslation("newsletter");
+  console.log(errors)
 
   const handleSubmitNewsletterForm = async (data: any) => {
     setIsLoading(true);
@@ -80,14 +81,14 @@ export default function Newsletter() {
               type="email"
               id="email"
               className={`outline-none bg-neutral-50 focus:bg-white ${
-                errors.email?.message
+                errors.email?.message && isDirty
                   ? "text-red-500 border-2 border-red-500"
                   : "text-neutral-800 focus:border-2 focus:border-neutral-300 border-neutral-300"
               }`}
               placeholder={`${t("form.email")}`}
               {...register("email", {
-                required: true,
-                pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                required: {value: true, message: 'Enter a valid email'},
+                pattern: {value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, message: 'Not a valid email'},
                 disabled: isLoading,
               })}
             />
