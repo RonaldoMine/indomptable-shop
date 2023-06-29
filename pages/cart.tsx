@@ -149,7 +149,7 @@ function Cart() {
                 </ButtonGradient>
                 <p
                   className={
-                    "text-center text-[11px] text-slate-600 dark:text-neutral-400 mt-4"
+                    "text-center text-sm text-slate-600 dark:text-neutral-400 mt-4"
                   }
                 >
                   {t("delivery-fees")}
