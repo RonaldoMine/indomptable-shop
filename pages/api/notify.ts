@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse, NextConfig } from "next";
 import { sanityClient } from "../../sanity";
-import { Transaction, Patch } from "@sanity/client";
+import { Transaction } from "@sanity/client";
 import { render } from "@react-email/render";
 import { TRANSPORTER } from "../../src/emails/mailer";
 import OrderMail from "../../src/emails/payment/OrderMail";

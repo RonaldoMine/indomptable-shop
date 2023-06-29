@@ -32,7 +32,7 @@ function App({ Component, pageProps }: AppProps) {
     Router.events.on("routeChangeComplete", (url: URL) => {
       Nprogress.done(false);
     });
-  }, [Router]);
+  }, []); 
 
   return (
     <>
