@@ -15,8 +15,7 @@ type Color = {
   name: string;
   images: {
     src: ImageProps;
-    thumbnail: ImageProps;
-    blurry: ImageProps;
+    thumbnail: any;
   }[];
   sizes: {
     label: string;
@@ -120,25 +119,12 @@ export default function SlugProduct({
             id="left-pane"
             className="md:columns-2 columns-1 leading-none gap-x-4 hidden min-[960px]:block min-[960px]:col-span-3 min-[1100px]:col-span-4"
           >
-            {/* <div id="image-wrapper">
-              <Image
-                className="w-full h-auto"
-                placeholder="blur"
-                width={539}
-                priority
-                blurDataURL={urlFor(selectedColor?.images[0].blurry).url()}
-                height={885}
-                src={urlFor(selectedColor?.images[0].src).url()}
-                alt={product?.name}
-              />
-            </div> */}
             {selectedColor?.images?.map((image: any, index: number) => {
               return (
                 <Image
                   key={index}
                   className={`object-contain w-full mb-4 max-w-full h-auto aspect-ratio[${image.src.metadata.dimensions.aspectRatio}]`}
                   placeholder="blur"
-                  // fill={true}
                   width={image.src.metadata.dimensions.width}
                   height={image.src.metadata.dimensions.height}
                   blurDataURL={image.src.metadata.lqip}
@@ -182,7 +168,6 @@ export default function SlugProduct({
                     key={index}
                     className={`object-contain w-full mb-4 max-w-full h-auto aspect-ratio[${image.src.metadata.dimensions.aspectRatio}]`}
                     placeholder="blur"
-                    // fill={true}
                     width={image.src.metadata.dimensions.width}
                     height={image.src.metadata.dimensions.height}
                     blurDataURL={image.src.metadata.lqip}
@@ -238,9 +223,10 @@ export default function SlugProduct({
                   >
                     <div className="w-12 h-12 sm:w-16 sm:h-16 md:w-24 md:h-24 lg:w-20 lg:h-20 relative">
                       <Image
-                        src={urlFor(color.images[0].thumbnail).url()}
-                        blurDataURL={urlFor(color.images[0].blurry).url()}
+                        src={color.images[0].thumbnail.url}
+                        blurDataURL={color.images[0].thumbnail.metadata.lqip}
                         alt={color.name}
+                        quality={100}
                         fill={true}
                         className={"object-contain"}
                       />
@@ -421,11 +407,6 @@ export const getServerSideProps: GetServerSideProps = async ({
       coverThumbnail {
         asset
       },
-     "coverBlurry":coverBlurry.asset->{
-          metadata{
-            lqip
-          },
-      },
       price,
       pricePromo,
     colors[]{
@@ -433,11 +414,11 @@ export const getServerSideProps: GetServerSideProps = async ({
       sizes,
       name,
     images[]{
-        thumbnail{
-            asset
-        },
-        blurry{
-            asset
+        "thumbnail":thumbnail.asset->{
+            url,
+            metadata{
+              lqip
+            }
         },
       "src":src.asset->{
         url,

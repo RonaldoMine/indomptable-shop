@@ -21,7 +21,6 @@ export default function Newsletter() {
     status: "",
   });
   const { t, i18n } = useTranslation("newsletter");
-  console.log(errors)
 
   const handleSubmitNewsletterForm = async (data: any) => {
     setIsLoading(true);

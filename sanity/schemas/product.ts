@@ -119,12 +119,7 @@ export default defineType({
                       name: 'thumbnail',
                       title: 'ThumbnailImage',
                       type: 'image',
-                    },
-                    {
-                      name: 'blurry',
-                      title: 'BlurryImage',
-                      type: 'image',
-                    },
+                    }
                   ],
                 },
               ],
