@@ -58,15 +58,14 @@ function Gallery({peoples}: any) {
                 <div className="px-6 py-10 max-w-[75rem] mx-auto">
                     <PageHeader title={t("page-title")}/>
                     <div
-                        id="masonry-grid"
-                        className="md:columns-3 lg:columns-4 sm:columns-2 gap-10"
+                        className="md:columns-3 lg:columns-4 sm:columns-2 gap-5"
                     >
                         {peoples.map((people: { src: any; title: string }, key: number) => {
                             return (
                                 <div
                                     key={key}
                                     className={
-                                        "md:w-72 w-full mb-2 rounded hover:cursor-pointer"
+                                        "w-full mb-2 rounded hover:cursor-pointer"
                                     }
                                     onClick={() =>
                                         openModal(
