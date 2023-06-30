@@ -1,4 +1,4 @@
-import { createClient } from "next-sanity";
+import { createClient } from "@sanity/preview-kit/client";
 import createImageUrlBuilder from "@sanity/image-url";
 
 export const config = {
