@@ -331,7 +331,7 @@ function Checkout({
                             },
                             pattern: {
                               value:
-                                /^6((8|7)\d{7}|5[0-4]\d{6}|9\d{7}|5[5-9]\d{6})$/,
+                                /^(\+?237)?6((8|7|9)\d{7}|5([0-4]|[5-9])\d{6})$/,
                               message: "errors.phone.pattern",
                             },
                           })}
