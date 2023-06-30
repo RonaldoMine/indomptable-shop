@@ -18,12 +18,12 @@
     "try-again" : "Restart payment"
   },
   "errors": {
-    "first-name": "First name is required",
-    "last-name": "Last name is required",
-    "email": "Email is required",
-    "phone": "Phone number is required",
-    "address": "Address is required",
-    "town": "Town is required"
+    "first-name": {"required": "First name is required"},
+    "last-name": {"required":"Last name is required"},
+    "email": {"required":"Email is required", "pattern": "Enter a valid email"},
+    "phone": {"required":"Phone number is required", "pattern":"Enter a valid MTN/Orange phone number"},
+    "address": {"required":"Address is required"},
+    "town": {"required":"Town is required"}
   },
   "empty-basket": "No items in your basket",
   "back-to-shop": "Go to shopping",

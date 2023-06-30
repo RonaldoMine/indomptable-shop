@@ -19,12 +19,12 @@
     "try-again" : "Relancer le payment"
   },
   "errors": {
-    "first-name": "Le nom est requis",
-    "last-name": "Le prénom est requis",
-    "email": "Le email est requis",
-    "phone": "Le téléphone est requis",
-    "address": "L'adresse du domicile est requis",
-    "town": "La ville est requis"
+    "first-name": {"required":"Le nom est requis"},
+    "last-name": {"required":"Le prénom est requis"},
+    "email": {"required":"L'e-mail est requis", "pattern": "Entrez un e-mail valide"},
+    "phone": {"required":"Le téléphone est requis", "pattern": "Entrez un numéro MTN/Orange valide"},
+    "address": {"required":"L'adresse du domicile est requise"},
+    "town": {"required":"La ville est requise"}
   },
   "empty-basket": "Aucun produits dans le panier",
   "back-to-shop": "Retour vers la boutique",

@@ -44,7 +44,8 @@ function Checkout({
     register,
     setValue,
     formState: { errors },
-  } = useForm(/*{
+  } = useForm(
+    { mode: "onTouched" } /*{
         defaultValues: {
             firstName: "Ronaldo",
             lastName: "Mine",
@@ -53,7 +54,8 @@ function Checkout({
             address: "Cité sic",
             town: "Douala"
         }
-    }*/);
+    }*/
+  );
   const [onLoad, setOnLoad] = useState(false);
 
   const handleInitPayment = async (values: any) => {
@@ -266,12 +268,16 @@ function Checkout({
                             "form-control rounded dark:bg-transparent dark:text-white"
                           }
                           {...register("firstName", {
-                            required: true,
+                            required: {
+                              value: true,
+                              message: "errors.first-name.required",
+                            },
                           })}
                           placeholder={`${t("form.first-name")} *`}
                         />
                         <span className={"text-red-500 text-sm "}>
-                          {errors.firstName && t("errors.first-name")}
+                          {errors.firstName &&
+                            t(`${errors.firstName?.message}`)}
                         </span>
                       </div>
                       <div>
@@ -281,12 +287,15 @@ function Checkout({
                             "form-control rounded dark:bg-transparent dark:text-white"
                           }
                           {...register("lastName", {
-                            required: true,
+                            required: {
+                              value: true,
+                              message: "errors.last-name.required",
+                            },
                           })}
                           placeholder={`${t("form.last-name")} *`}
                         />
                         <span className={"text-red-500 text-sm"}>
-                          {errors.lastName && t("errors.last-name")}
+                          {errors.lastName && t(`${errors.lastName?.message}`)}
                         </span>
                       </div>
                       <div>
@@ -296,19 +305,35 @@ function Checkout({
                             "form-control rounded dark:bg-transparent dark:text-white"
                           }
                           {...register("email", {
-                            required: true,
+                            required: {
+                              value: true,
+                              message: "errors.email.required",
+                            },
+                            pattern: {
+                              value:
+                                /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                              message: "errors.email.pattern",
+                            },
                           })}
                           placeholder={`${t("form.email")} *`}
                         />
                         <span className={"text-red-500 text-sm "}>
-                          {errors.email && t("errors.email")}
+                          {errors.email && t(`${errors.email?.message}`)}
                         </span>
                       </div>
                       <div>
                         <input
                           type="number"
                           {...register("phoneNumber", {
-                            required: true,
+                            required: {
+                              value: true,
+                              message: "errors.phone.required",
+                            },
+                            pattern: {
+                              value:
+                                /^6((8|7)\d{7}|5[0-4]\d{6}|9\d{7}|5[5-9]\d{6})$/,
+                              message: "errors.phone.pattern",
+                            },
                           })}
                           className={
                             "form-control rounded dark:bg-transparent dark:text-white"
@@ -316,14 +341,18 @@ function Checkout({
                           placeholder={`${t("form.phone")} *`}
                         />
                         <span className={"text-red-500 text-sm "}>
-                          {errors.phoneNumber && t("errors.phone")}
+                          {errors.phoneNumber &&
+                            t(`${errors.phoneNumber?.message}`)}
                         </span>
                       </div>
                       <div>
                         <Listbox
                           value={selectedTown}
                           {...register("town", {
-                            required: true,
+                            required: {
+                              value: true,
+                              message: "errors.town.required",
+                            },
                           })}
                           onChange={(town) => {
                             setSelectedTown(town);
@@ -391,14 +420,17 @@ function Checkout({
                           </div>
                         </Listbox>
                         <span className={"text-red-500 text-sm "}>
-                          {errors?.town && t("errors.town")}
+                          {errors?.town && t(`${errors.town?.message}`)}
                         </span>
                       </div>
                       <div>
                         <input
                           type="text"
                           {...register("address", {
-                            required: true,
+                            required: {
+                              value: true,
+                              message: "errors.address.required",
+                            },
                           })}
                           className={
                             "form-control rounded dark:bg-transparent dark:text-white"
@@ -406,7 +438,7 @@ function Checkout({
                           placeholder={`${t("form.address")} *`}
                         />
                         <span className={"text-red-500 text-sm "}>
-                          {errors.address && t("errors.address")}
+                          {errors.address && t(`${errors.address?.message}`)}
                         </span>
                       </div>
                     </div>
@@ -421,20 +453,18 @@ function Checkout({
                           <Image
                             src={om}
                             alt="Orange Money"
-                            height={"40"}
-                            className={"h-16 w-20 object-cover"}
+                            width={96}
+                            quality={100}
                           />
                         </div>
                         <Image
                           src={momo}
                           alt="MTN Mobile Money"
-                          height={"40"}
-                          className={"h-16 w-20 object-cover"}
+                          width={96}
+                          quality={100}
                         />
                       </div>
-                      <ButtonGradient>
-                        {t("form.button")}
-                      </ButtonGradient>
+                      <ButtonGradient>{t("form.button")}</ButtonGradient>
                     </div>
                   </form>
                 </div>
