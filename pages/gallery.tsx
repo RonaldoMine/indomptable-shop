@@ -65,7 +65,7 @@ function Gallery({peoples}: any) {
                                 <div
                                     key={key}
                                     className={
-                                        "w-full mb-2 rounded hover:cursor-pointer"
+                                        "w-full mb-5 rounded hover:cursor-pointer"
                                     }
                                     onClick={() =>
                                         openModal(
