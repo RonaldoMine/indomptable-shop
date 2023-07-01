@@ -22,7 +22,7 @@ export default function HamburgerMenu({locales_messages}: { locales_messages: { 
     const menus = [
         {
             name: locales_messages.shop,
-            onClick: () => router.push("shopping"),
+            onClick: () => router.push("/shopping"),
             icon: <AiOutlineShop className={"fill-neutral-800 dark:fill-white"}/>
         },
         {

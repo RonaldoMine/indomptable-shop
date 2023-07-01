@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RadioGroup } from "@headlessui/react";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { sanityClient, urlFor } from "../../../sanity";
@@ -54,14 +54,14 @@ export default function SlugProduct({
 
   const handleOnChangeColor = (selected: any) => {
     setSelectedColor(selected);
-    setAvailableSizes(selected.sizes);
+    //setAvailableSizes(selected.sizes);
     setSelectedSize(null);
     setErrorSizeUnselected("");
   };
 
   const handleCloseToastProduct = () => {
-    setOnAddProduct(false);
     toast.dismiss(toastProductId);
+    setOnAddProduct(false);
   };
 
   const handleAddProductOnCart = () => {
@@ -104,6 +104,10 @@ export default function SlugProduct({
   const handleAddProductToFavorite = () => {
     addProductToFavorite({ ...product, img: urlFor(product.coverImage).url() });
   };
+
+  useEffect(() => {
+    setAvailableSizes(selectedColor.sizes);
+  }, [selectedColor]);
 
   return (
     <>
@@ -263,9 +267,10 @@ export default function SlugProduct({
                     <RadioGroup.Option
                       value={availableSize}
                       key={availableSize.label}
+                      disabled={availableSize.quantity <= 0}
                       className={({ active }) =>
                         classNames(
-                          availableSize.label
+                          availableSize.quantity > 0
                             ? "bg-white shadow-sm text-gray-900 cursor-pointer dark:bg-transparent dark:text-neutral-400 dark:border-neutral-400"
                             : "bg-gray-50 text-gray-200 dark:bg-transparent dark:text-neutral-700 cursor-not-allowed",
                           active
@@ -287,16 +292,38 @@ export default function SlugProduct({
                           >
                             {availableSize.label}
                           </RadioGroup.Label>
-                          <span
-                            className={classNames(
-                              active ? "border" : "border-1",
-                              checked
-                                ? "dark:bg-slate-100 ring-2 ring-slate-700"
-                                : "",
-                              "pointer-events-none absolute -inset-px rounded-md"
-                            )}
-                            aria-hidden="true"
-                          />
+                          {availableSize.quantity > 0 ? (
+                            <span
+                              className={classNames(
+                                active ? "border" : "",
+                                checked
+                                  ? "dark:bg-slate-100 ring-2 ring-slate-700"
+                                  : "",
+                                "pointer-events-none absolute -inset-px rounded-md"
+                              )}
+                              aria-hidden="true"
+                            />
+                          ) : (
+                            <span
+                              aria-hidden="true"
+                              className="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200 dark:border-gray-400"
+                            >
+                              <svg
+                                className="absolute inset-0 h-full w-full stroke-2 text-gray-200 dark:text-gray-400"
+                                viewBox="0 0 100 100"
+                                preserveAspectRatio="none"
+                                stroke="currentColor"
+                              >
+                                <line
+                                  x1={0}
+                                  y1={100}
+                                  x2={100}
+                                  y2={0}
+                                  vectorEffect="non-scaling-stroke"
+                                />
+                              </svg>
+                            </span>
+                          )}
                         </>
                       )}
                     </RadioGroup.Option>

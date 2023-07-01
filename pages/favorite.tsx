@@ -63,7 +63,7 @@ function Favorite() {
                     ) : (
                         <p className={"col-span-4"}>
                             {t("empty-list")},{" "}
-                            <Link href={"/"} className="underline">
+                            <Link href={"/shopping"} className="underline">
                                 {t("back-to-home")}
                             </Link>
                         </p>

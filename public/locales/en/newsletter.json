@@ -8,7 +8,7 @@
   "api": {
     "field_require": "Please fill in all required fields correctly",
     "invalid_email": "The email address entered is not a valid email address, please change it!",
-    "email_save": "Newsletter subscription successful! We will send you emails, please check your mailbox regularly",
+    "email_save": "Successful subscription! You'll be the first to know about promotions, new products and exclusive content \uD83D\uDE09.",
     "email_already_exist": "Your subscription has already been taken into account, choose another email address!"
   }
 }

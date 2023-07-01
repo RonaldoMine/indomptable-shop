@@ -1,7 +1,7 @@
 {
   "title": "Passez votre commande 💰📄",
   "order-summary": "Résumé de la commande",
-  "quantity": "Résumé total",
+  "quantity": "Quantité total",
   "sub-total": "Sous-total",
   "delivery-fees": "Frais de livraison",
   "total": "Total",
@@ -26,7 +26,7 @@
     "address": {"required":"L'adresse du domicile est requise"},
     "town": {"required":"La ville est requise"}
   },
-  "empty-basket": "Aucun produits dans le panier",
+  "empty-basket": "Aucun produit dans le panier",
   "back-to-shop": "Retour vers la boutique",
   "download-invoice": "Télécharger votre facture",
   "init-payment-message": "La commande est en cours de traitement..."

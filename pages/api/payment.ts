@@ -32,6 +32,28 @@ export default async function payment(
     ) {
       if (regex_email.test(email)) {
         if (regex_mtn.test(phoneNumber) || regex_orange.test(phoneNumber)) {
+          let amountToTopaid = 0;
+          const products = req.body.basket.map(
+            (product: {
+              qty: number;
+              size: string;
+              color: string;
+              price: number;
+              sku: string;
+              img: string;
+            }) => {
+              amountToTopaid += product.price * product.qty;
+              return {
+                qty: product.qty,
+                size: product.size,
+                color: product.color,
+                price: product.price,
+                sku: product.sku,
+                image: product.img,
+              };
+            }
+          );
+          amountToTopaid += 1000;
           const API_KEY = process.env["PAYMENT_API_KEY"];
           const SERVICE_KEY = process.env["PAYMENT_SERVICE_KEY"];
           const URL_PAYMENT = process.env["PAYMENT_URL"] + "place-deposit";
@@ -46,7 +68,7 @@ export default async function payment(
               service_key: SERVICE_KEY,
               payment_ref: reference,
               number: phoneNumber,
-              amount: amount,
+              amount: amountToTopaid,
               description: description,
               transactional: "yes",
             }),
@@ -54,25 +76,6 @@ export default async function payment(
           const response = await fetch(URL_PAYMENT, options);
           const result = response ? await response.json() : null;
           if (result && result.status === "REQUEST_ACCEPTED") {
-            const products = req.body.basket.map(
-              (product: {
-                qty: number;
-                size: string;
-                color: string;
-                price: number;
-                sku: string;
-                img: string;
-              }) => {
-                return {
-                  qty: product.qty,
-                  size: product.size,
-                  color: product.color,
-                  price: product.price,
-                  sku: product.sku,
-                  image: product.img,
-                };
-              }
-            );
             await sanityClient.create(
               {
                 _type: "orders",
@@ -80,7 +83,7 @@ export default async function payment(
                 paymentId: result.paymentId,
                 products: products,
                 totalProduct: quantity,
-                amount: amount,
+                amount: amountToTopaid,
                 firstName: firstName,
                 lastName: lastName,
                 phoneNumber: phoneNumber,
@@ -99,21 +102,20 @@ export default async function payment(
               paymentId: result.paymentId,
             });
           } else {
-            res
-              .status(500)
-              .json({
-                message: json_messages.errors.payment_error,
-                status: "FAILED",
-              });
+            res.status(500).json({
+              message: json_messages.errors.payment_error,
+              status: "FAILED",
+            });
           }
+          res.status(400).json({ message: json_messages.errors.phone });
         } else {
-          res.status(401).json({ message: json_messages.errors.phone });
+          res.status(400).json({ message: json_messages.errors.phone });
         }
       } else {
-        res.status(401).json({ message: json_messages.errors.email });
+        res.status(400).json({ message: json_messages.errors.email });
       }
     } else {
-      res.status(401).json({ message: json_messages.errors.empty_field });
+      res.status(400).json({ message: json_messages.errors.empty_field });
     }
   } catch (e) {
     res.status(500).json({ message: json_messages.errors.general_error });

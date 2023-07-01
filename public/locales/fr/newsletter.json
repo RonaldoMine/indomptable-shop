@@ -1,5 +1,5 @@
 {
-  "title": "Rejoingnez la [R]evolution",
+  "title": "Rejoignez la [R]evolution",
   "subtitle": "Souscrivez à la liste d'attente et soyez les premiers à accéder à des contenus exclusifs.",
   "form": {
     "email": "Email",
@@ -8,7 +8,7 @@
   "api": {
     "field_require": "Bien vouloir renseigner correctement tous les champs requis",
     "invalid_email": "L'adresse email saisie n'est pas une adresse email valide, bien vouloir la changer!",
-    "email_save": "Abonnement à la newsletter réussi! Nous vous enverons des email, consulter votre boîte mail régulièrement \uD83D\uDE09.",
+    "email_save": "Souscription réussi! Vous serez les premiers à être informés des promotions, des nouveautés et du contenus exclusfis \uD83D\uDE09.",
     "email_already_exist": "Votre abonnement a déjà été pris en compte, choississez une autre adresse email!"
   }
 }
