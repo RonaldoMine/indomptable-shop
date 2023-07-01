@@ -76,16 +76,6 @@ export default defineType({
       type: 'image',
     }),
     defineField({
-      name: 'coverThumbnail',
-      title: 'CoverThumbnailImage',
-      type: 'image',
-    }),
-    defineField({
-      name: 'coverBlurry',
-      title: 'CoverBlurryImage',
-      type: 'image',
-    }),
-    defineField({
       name: 'colors',
       title: 'Colors',
       type: 'array',
@@ -115,11 +105,6 @@ export default defineType({
                       title: 'Image',
                       type: 'image',
                     },
-                    {
-                      name: 'thumbnail',
-                      title: 'ThumbnailImage',
-                      type: 'image',
-                    }
                   ],
                 },
               ],

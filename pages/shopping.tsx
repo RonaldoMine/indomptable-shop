@@ -59,12 +59,14 @@ function Shopping({
                       href={`/category/${product.category}/${product.sku}`}
                     >
                       <Image
-                        src={urlFor(product.coverImage).url()}
+                        src={urlFor(product.coverImage).quality(100).url()}
                         className="h-[300px] w-full object-contain"
-                        height={100}
-                        width={100}
-                        quality={100}
-                        blurDataURL={product.coverBlurry.metadata.lqip}
+                        height={420}
+                        width={256}
+                        blurDataURL={urlFor(product.coverImage)
+                          .blur(70)
+                          .quality(30)
+                          .url()}
                         alt={product.name}
                         priority
                       />
@@ -154,32 +156,13 @@ export const getServerSideProps: GetServerSideProps = async ({
       coverImage {
         asset
       },
-      coverThumbnail {
-        asset
-      },
-     "coverBlurry":coverBlurry.asset->{
-          metadata{
-            lqip
-          },
-      },
       price,
       pricePromo,
        "totalColor": count(colors),
     colors[0...3]{
     totalQuantity,
       sizes,
-      name,
-    images[]{
-        thumbnail{
-            asset
-        },
-        blurry{
-            asset
-        },
-      src{
-        asset
-      }
-    }
+      name
   }
     }
 }`;

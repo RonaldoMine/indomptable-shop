@@ -1,5 +1,4 @@
 import { AiFillCheckCircle, AiOutlineClose } from "react-icons/ai";
-import { urlFor } from "../../sanity";
 import React from "react";
 import { useBasket } from "../context/BasketContext";
 import { useRouter } from "next/router";
@@ -35,12 +34,12 @@ export default function ToastProduct({
       <div className="flex mb-6">
         <Image
           className="w-32 h-32 object-contain mr-2"
-          src={urlFor(product?.coverThumbnail).url()}
+          src={product?.thumbnail}
           placeholder="blur"
-          blurDataURL={product?.coverBlurry.metadata.lqip}
+          blurDataURL={product?.thumbnail + '&blur=70'}
           alt={product?.name}
-          width={64}
-          height={64}
+          width={128}
+          height={211.2}
           quality={100}
         />
         <div className={"grid items-center"}>

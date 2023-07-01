@@ -1,4 +1,4 @@
-import Image, { ImageProps } from "next/image";
+import Image from "next/image";
 import React, { useState } from "react";
 import { RadioGroup } from "@headlessui/react";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
@@ -10,12 +10,12 @@ import { useTranslation } from "next-i18next";
 import ToastProduct from "../../../src/components/ToastProduct";
 import useProductToFavorite from "../../../src/hooks/useProductToFavorite";
 import { ButtonBorder, ButtonGradient } from "../../../src/components/Button";
+import { ImageAsset } from "sanity";
 
 type Color = {
   name: string;
   images: {
-    src: ImageProps;
-    thumbnail: any;
+    src: ImageAsset
   }[];
   sizes: {
     label: string;
@@ -82,7 +82,7 @@ export default function SlugProduct({
         <ToastProduct
           product={{
             ...product,
-            coverThumbnail: selectedColor.images[0].thumbnail,
+            thumbnail: selectedColor.images[0].src.url + '?w=128',
           }}
           onClose={handleCloseToastProduct}
           size={selectedSize.label}
@@ -223,8 +223,8 @@ export default function SlugProduct({
                   >
                     <div className="w-12 h-12 sm:w-16 sm:h-16 md:w-24 md:h-24 lg:w-20 lg:h-20 relative">
                       <Image
-                        src={color.images[0].thumbnail.url}
-                        blurDataURL={color.images[0].thumbnail.metadata.lqip}
+                        src={color.images[0].src.url+'?w=96'}
+                        blurDataURL={color.images[0].src.metadata.lqip}
                         alt={color.name}
                         quality={100}
                         fill={true}
@@ -404,9 +404,6 @@ export const getServerSideProps: GetServerSideProps = async ({
       coverImage {
         asset
       },
-      coverThumbnail {
-        asset
-      },
       price,
       pricePromo,
     colors[]{
@@ -414,12 +411,6 @@ export const getServerSideProps: GetServerSideProps = async ({
       sizes,
       name,
     images[]{
-        "thumbnail":thumbnail.asset->{
-            url,
-            metadata{
-              lqip
-            }
-        },
       "src":src.asset->{
         url,
         metadata{
