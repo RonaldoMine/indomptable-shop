@@ -85,10 +85,11 @@ function Cart() {
                               <button
                                 className="bg-slate-700 text-white px-2 shadow-md ml-2 dark:bg-slate-200 dark:text-neutral-700"
                                 onClick={() => {
-                                  dispatch({
+                                  /* dispatch({
                                     type: "ADD_QUANTITY",
                                     payload: idx,
-                                  });
+                                  }); */
+                                  alert("Ok")
                                 }}
                               >
                                 +
