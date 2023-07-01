@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useReducer } from "react";
+import { AiOutlineConsoleSql } from "react-icons/ai";
 
 type BasketContextProviderProps = {
   children: React.ReactNode;
@@ -111,11 +112,14 @@ const basketReducer = (
       };
 
     case "ADD_QUANTITY":
-        alert("ok here")
+      console.log(action.payload);
       newState[action.payload] = {
         ...state.items[action.payload],
         qty: state.items[action.payload].qty++,
       };
+      console.log(newState);
+      console.log(newState[action.payload]);
+
       return {
         items: newState,
         subTotal: updateSubTotal(newState),
