@@ -1,5 +1,5 @@
 import Image, { ImageProps } from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RadioGroup } from "@headlessui/react";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { sanityClient, urlFor } from "../../../sanity";
@@ -54,7 +54,7 @@ export default function SlugProduct({
 
   const handleOnChangeColor = (selected: any) => {
     setSelectedColor(selected);
-    setAvailableSizes(selected.sizes);
+    //setAvailableSizes(selected.sizes);
     setSelectedSize(null);
     setErrorSizeUnselected("");
   };
@@ -104,6 +104,10 @@ export default function SlugProduct({
   const handleAddProductToFavorite = () => {
     addProductToFavorite({ ...product, img: urlFor(product.coverImage).url() });
   };
+
+  useEffect(() => {
+    setAvailableSizes(selectedColor.sizes)
+  }, [selectedColor])
 
   return (
     <>
