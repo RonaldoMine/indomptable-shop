@@ -115,9 +115,10 @@ const basketReducer = (
       console.log(action.payload);
       newState[action.payload] = {
         ...state.items[action.payload],
-        qty: state.items[action.payload].qty++,
+        qty: state.items[action.payload].qty + 1,
       };
       console.log(newState);
+      console.log(state.items[action.payload].qty + 1)
       console.log(newState[action.payload]);
 
       return {
