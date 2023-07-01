@@ -92,7 +92,7 @@ export default function Newsletter() {
               })}
             />
             {isLoading ? (
-              <Loader className="ml-4"></Loader>
+              <Loader className="ml-4 mt-2"></Loader>
             ) : (
               <ButtonGradient>{t("form.button")}</ButtonGradient>
             )}

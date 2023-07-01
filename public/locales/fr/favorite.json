@@ -1,7 +1,7 @@
 {
     "title": "Vos produits favoris 😍",
     "empty-list": "La liste de vos produits favoris est vide",
-    "back-to-home": "Retour à l'accueil",
+    "back-to-home": "Retour vers la boutique",
     "show-product-detail": "Voir les détails du produit",
     "toast":  {
         "product-exist": "Vous avez déjà ajouté ce produit dans vos favoris",
