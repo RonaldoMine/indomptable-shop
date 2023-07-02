@@ -112,14 +112,10 @@ const basketReducer = (
       };
 
     case "ADD_QUANTITY":
-      console.log(action.payload);
       newState[action.payload] = {
         ...state.items[action.payload],
         qty: state.items[action.payload].qty + 1,
       };
-      console.log(newState);
-      console.log(state.items[action.payload].qty + 1)
-      console.log(newState[action.payload]);
 
       return {
         items: newState,
@@ -131,7 +127,7 @@ const basketReducer = (
       if (state.items[action.payload].qty > 1) {
         newState[action.payload] = {
           ...state.items[action.payload],
-          qty: state.items[action.payload].qty--,
+          qty: state.items[action.payload].qty - 1,
         };
       }
       return {
