@@ -20,7 +20,7 @@ export default function Home({
   const { t } = useTranslation("home");
   return (
     <>
-      <div className="w-full mx-auto h-[50vw] relative">
+      <div className="w-full mx-auto h-[50vw] relative overflow-hidden">
         <Image
           src={banner_photo}
           placeholder="blur"
@@ -29,7 +29,7 @@ export default function Home({
           className="max-w-full h-auto object-cover"
         />
         <div className="absolute flex flex-col md:px-[3vw] md:pb-[5vw] h-full w-full md:justify-end justify-center items-center md:items-start">
-          <p className="font-futura font-bold sm:w-min text-white text-[3.25rem] md:text-[6rem] break-words text-center md:text-left leading-none ">
+          <p className="font-futura sm:w-min text-white text-5xl md:text-[6rem] break-words text-center md:text-left leading-none ">
             {t("banner-title")}
           </p>
           {/*<button
