@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useEffect, useReducer } from "react";
-import { AiOutlineConsoleSql } from "react-icons/ai";
 
 type BasketContextProviderProps = {
   children: React.ReactNode;
