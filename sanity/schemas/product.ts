@@ -225,7 +225,6 @@ export default defineType({
     select: {
       media: 'coverImage',
       title: 'name',
-      model: 'model.name',
     },
   },
 })
