@@ -107,7 +107,6 @@ export default async function payment(
               status: "FAILED",
             });
           }
-          res.status(400).json({ message: json_messages.errors.phone });
         } else {
           res.status(400).json({ message: json_messages.errors.phone });
         }
