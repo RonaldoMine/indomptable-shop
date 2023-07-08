@@ -11,5 +11,13 @@
     "colors": "Colors",
     "select-size": "Please select a size",
     "checkout": "Checkout",
-    "view-cart": "View cart"
+    "view-cart": "View cart",
+    "modal": {
+        "title": "CREATE AN ALERT TO GET SIZE UPDATES",
+        "content": "Confirm and we'll send you an e-mail notification when your size is back in stock.",
+        "buttons": {
+            "confirm": "Confirm",
+            "cancel": "Cancel"
+        }
+    }
 }

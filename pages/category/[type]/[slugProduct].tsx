@@ -1,6 +1,6 @@
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import { RadioGroup } from "@headlessui/react";
+import React, { Fragment, useEffect, useMemo, useState } from "react";
+import { Dialog, Listbox, RadioGroup, Transition } from "@headlessui/react";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { sanityClient, urlFor } from "../../../sanity";
 import { useBasket } from "../../../src/context/BasketContext";
@@ -11,11 +11,12 @@ import ToastProduct from "../../../src/components/ToastProduct";
 import useProductToFavorite from "../../../src/hooks/useProductToFavorite";
 import { ButtonBorder, ButtonGradient } from "../../../src/components/Button";
 import { ImageAsset } from "sanity";
+import { LuBellRing, LuCheck, LuChevronsUpDown } from "react-icons/lu";
 
 type Color = {
   name: string;
   images: {
-    src: ImageAsset
+    src: ImageAsset;
   }[];
   sizes: {
     label: string;
@@ -39,11 +40,17 @@ export default function SlugProduct({
   const product = productData[0].product;
   const colors = product.colors;
   const [selectedColor, setSelectedColor] = useState(colors[0]);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const [availableSizes, setAvailableSizes] = useState<any>(
-    selectedColor.sizes
-  );
-  const [selectedSize, setSelectedSize] = useState(availableSizes[0]);
+  const [allSizes, setAllSizes] = useState<any>(selectedColor.sizes); //all color sizes
+  const unavailableSizes = useMemo(
+    () => allSizes.filter((size: any) => size.quantity == 0),
+    [allSizes]
+  ); //all unavailable sizes
+  const [unavailableSizeSelected, setUnavailableSizeSelected] = useState([
+    unavailableSizes[0],
+  ]); //unavailable size selected
+  const [selectedSize, setSelectedSize] = useState(allSizes[0]);
   const { addProductToFavorite } = useProductToFavorite();
   const [toastProductId, setToastProductId] = useState("0");
 
@@ -82,7 +89,7 @@ export default function SlugProduct({
         <ToastProduct
           product={{
             ...product,
-            thumbnail: selectedColor.images[0].src.url + '?w=128',
+            thumbnail: selectedColor.images[0].src.url + "?w=128",
           }}
           onClose={handleCloseToastProduct}
           size={selectedSize.label}
@@ -106,7 +113,8 @@ export default function SlugProduct({
   };
 
   useEffect(() => {
-    setAvailableSizes(selectedColor.sizes);
+    setAllSizes(selectedColor.sizes);
+    console.log(unavailableSizes);
   }, [selectedColor]);
 
   return (
@@ -227,7 +235,7 @@ export default function SlugProduct({
                   >
                     <div className="w-12 h-12 sm:w-16 sm:h-16 md:w-24 md:h-24 lg:w-20 lg:h-20 relative">
                       <Image
-                        src={color.images[0].src.url+'?w=96'}
+                        src={color.images[0].src.url + "?w=96"}
                         blurDataURL={color.images[0].src.metadata.lqip}
                         alt={color.name}
                         quality={100}
@@ -258,76 +266,74 @@ export default function SlugProduct({
                   errorSizeUnselected ? "border border-red-500 rounded-md" : ""
                 }`}
               >
-                <RadioGroup.Label className="sr-only">
-                  {" "}
-                  Choose a size{" "}
-                </RadioGroup.Label>
                 <div className="grid grid-cols-4 gap-3 sm:grid-cols-8 lg:grid-cols-4">
-                  {availableSizes.map((availableSize: any) => (
-                    <RadioGroup.Option
-                      value={availableSize}
-                      key={availableSize.label}
-                      disabled={availableSize.quantity <= 0}
-                      className={({ active }) =>
-                        classNames(
-                          availableSize.quantity > 0
-                            ? "bg-white shadow-sm text-gray-900 cursor-pointer dark:bg-transparent dark:text-neutral-400 dark:border-neutral-400"
-                            : "bg-gray-50 text-gray-200 dark:bg-transparent dark:text-neutral-700 cursor-not-allowed",
-                          active
-                            ? "ring-2 ring-slate-700 dark:ring-slate-100"
-                            : "",
-                          "group relative border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 dark:hover:bg-neutral-700 focus:outline-none sm:flex-1 sm:py-6"
-                        )
-                      }
-                    >
-                      {({ active, checked }) => (
-                        <>
-                          <RadioGroup.Label
-                            as="span"
-                            className={
-                              checked
-                                ? "dark:text-neutral-800 z-10"
-                                : "dark:text-neutral-400"
-                            }
-                          >
-                            {availableSize.label}
-                          </RadioGroup.Label>
-                          {availableSize.quantity > 0 ? (
-                            <span
-                              className={classNames(
-                                active ? "border" : "",
+                  {allSizes.map((size: any) => {
+                    return (
+                      <RadioGroup.Option
+                        value={size}
+                        key={size.label}
+                        disabled={size.quantity <= 0}
+                        className={({ active }) =>
+                          classNames(
+                            size.quantity > 0
+                              ? "bg-white shadow-sm text-gray-900 cursor-pointer dark:bg-transparent dark:text-neutral-400 dark:border-neutral-400"
+                              : "bg-gray-50 text-gray-300 dark:bg-transparent dark:text-neutral-700 cursor-not-allowed",
+                            active
+                              ? "ring-2 ring-slate-700 dark:ring-slate-100"
+                              : "",
+                            "group relative border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 dark:hover:bg-neutral-700 focus:outline-none sm:flex-1 sm:py-6"
+                          )
+                        }
+                      >
+                        {({ active, checked }) => (
+                          <>
+                            <RadioGroup.Label
+                              as="span"
+                              className={
                                 checked
-                                  ? "dark:bg-slate-100 ring-2 ring-slate-700"
-                                  : "",
-                                "pointer-events-none absolute -inset-px rounded-md"
-                              )}
-                              aria-hidden="true"
-                            />
-                          ) : (
-                            <span
-                              aria-hidden="true"
-                              className="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200 dark:border-gray-400"
+                                  ? "dark:text-neutral-800 z-10"
+                                  : "dark:text-neutral-400"
+                              }
                             >
-                              <svg
-                                className="absolute inset-0 h-full w-full stroke-2 text-gray-200 dark:text-gray-400"
-                                viewBox="0 0 100 100"
-                                preserveAspectRatio="none"
-                                stroke="currentColor"
+                              {size.label}
+                            </RadioGroup.Label>
+                            {size.quantity > 0 ? (
+                              <span
+                                className={classNames(
+                                  active ? "border" : "",
+                                  checked
+                                    ? "dark:bg-slate-100 ring-2 ring-slate-700"
+                                    : "",
+                                  "pointer-events-none absolute -inset-px rounded-md"
+                                )}
+                                aria-hidden="true"
+                              />
+                            ) : (
+                              <span
+                                aria-hidden="true"
+                                className="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200 dark:border-gray-400"
                               >
-                                <line
-                                  x1={0}
-                                  y1={100}
-                                  x2={100}
-                                  y2={0}
-                                  vectorEffect="non-scaling-stroke"
-                                />
-                              </svg>
-                            </span>
-                          )}
-                        </>
-                      )}
-                    </RadioGroup.Option>
-                  ))}
+                                <svg
+                                  className="absolute inset-0 h-full w-full stroke-2 text-gray-200 dark:text-gray-400"
+                                  viewBox="0 0 100 100"
+                                  preserveAspectRatio="none"
+                                  stroke="currentColor"
+                                >
+                                  <line
+                                    x1={0}
+                                    y1={100}
+                                    x2={100}
+                                    y2={0}
+                                    vectorEffect="non-scaling-stroke"
+                                  />
+                                </svg>
+                              </span>
+                            )}
+                          </>
+                        )}
+                      </RadioGroup.Option>
+                    );
+                  })}
                 </div>
               </RadioGroup>
             </div>
@@ -337,13 +343,131 @@ export default function SlugProduct({
             <p className="mt-3 text-slate-400 dark:text-neutral-400 text-sm">
               {t("important-note")}
             </p>
-            <div className="mt-4 flex flex-wrap gap-5">
+            <div className="mt-4 flex flex-wrap gap-4">
               <ButtonGradient
-                className={"w-full"}
+                className={"flex-grow-[2]"}
                 onClick={handleAddProductOnCart}
               >
                 {t("add-to-basket")}
               </ButtonGradient>
+              <ButtonBorder
+                className="disabled:text-neutral-300 disabled:border-neutral-300"
+                disabled={unavailableSizes.length === 0}
+                onClick={() => setIsOpen(true)}
+              >
+                <LuBellRing size={"1rem"} />
+              </ButtonBorder>
+              <Dialog
+                as={"div"}
+                open={isOpen}
+                onClose={() => setIsOpen(false)}
+                className="relative z-50"
+              >
+                {/* The backdrop, rendered as a fixed sibling to the panel container */}
+                <div
+                  className="fixed inset-0 bg-black/30 dark:bg-white/30"
+                  aria-hidden="true"
+                />
+
+                {/* Full-screen container to center the panel */}
+                <div className="fixed inset-0 flex items-center justify-center p-4">
+                  {/* The actual dialog panel  */}
+                  <Dialog.Panel className="mx-auto flex flex-col justify-between min-h-[22rem] max-w-md rounded bg-white dark:bg-neutral-800 p-6">
+                    <div aria-label="panel-wrapper">
+                      <div aria-label="dialog-header">
+                        <Dialog.Title className={"text-2xl font-bold mb-1"}>
+                          {t("modal.title")}
+                        </Dialog.Title>
+                        <Dialog.Description>
+                          <p>{t("modal.content")}</p>
+                        </Dialog.Description>
+                      </div>
+                      <div className="top-16 w-72 mt-8">
+                        <Listbox
+                          value={unavailableSizeSelected}
+                          onChange={setUnavailableSizeSelected}
+                          multiple
+                        >
+                          <div className="relative">
+                            <Listbox.Button
+                              className={
+                                "relative w-full cursor-default rounded-lg dark:bg-inherit bg-white py-2 pl-3 pr-10 text-left shadow-md border-2 border-neutral-100 focus:outline-none focus-visible:border-neutral-500 dark:focus-visible:border-neutral-200 focus-visible:ring-2 focus-visible:ring-white dark:focus-visible:ring-black focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
+                              }
+                            >
+                              {unavailableSizeSelected
+                                .map((size: any) => size.label)
+                                .join(", ")}
+                              <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                                <LuChevronsUpDown
+                                  className="h-5 w-5 text-gray-400"
+                                  aria-hidden="true"
+                                />
+                              </span>
+                            </Listbox.Button>
+                            <Transition
+                              as={Fragment}
+                              leave="transition ease-in duration-150"
+                              leaveFrom="opacity-100"
+                              leaveTo="opacity-0"
+                            >
+                              <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white dark:bg-neutral-600 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                                {unavailableSizes.map(
+                                  (unavailableSize: any) => (
+                                    <Listbox.Option
+                                      key={unavailableSize.label}
+                                      value={unavailableSize}
+                                      className={({ active }) =>
+                                        `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                                          active
+                                            ? "bg-neutral-100 dark:bg-neutral-400 dark:text-neutral-100 text-neutral-900"
+                                            : "text-gray-900 dark:text-neutral-100"
+                                        }`
+                                      }
+                                    >
+                                      {({ selected }) => (
+                                        <>
+                                          <span
+                                            className={`block truncate ${
+                                              selected
+                                                ? "font-medium"
+                                                : "font-normal"
+                                            }`}
+                                          >
+                                            {unavailableSize.label}
+                                          </span>
+                                          {selected ? (
+                                            <span className="absolute inset-y-0 left-0 flex items-center pl-3 dark:text-white text-neutral-600">
+                                              <LuCheck
+                                                className="h-5 w-5"
+                                                aria-hidden="true"
+                                              />
+                                            </span>
+                                          ) : null}
+                                        </>
+                                      )}
+                                    </Listbox.Option>
+                                  )
+                                )}
+                              </Listbox.Options>
+                            </Transition>
+                          </div>
+                        </Listbox>
+                      </div>
+                    </div>
+                    <div className="flex">
+                      <ButtonGradient
+                        className="mr-3"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        {t("modal.buttons.confirm")}
+                      </ButtonGradient>
+                      <ButtonBorder onClick={() => setIsOpen(false)}>
+                        {t("modal.buttons.cancel")}
+                      </ButtonBorder>
+                    </div>
+                  </Dialog.Panel>
+                </div>
+              </Dialog>
               <ButtonBorder
                 className={"w-full"}
                 onClick={handleAddProductToFavorite}

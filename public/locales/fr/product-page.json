@@ -11,5 +11,13 @@
     "colors": "Couleurs",
     "select-size": "Selectionner une taille",
     "checkout": "Commander",
-    "view-cart": "Afficher le panier"
+    "view-cart": "Afficher le panier",
+    "modal": {
+        "title": "CRÉER UNE ALERTE POUR RECEVOIR LES MISES À JOUR DES TAILLES",
+        "content": "Confirmez et nous vous enverrons une notification par e-mail si votre taille est à nouveau en stock.",
+        "buttons": {
+            "confirm": "Confirmer",
+            "cancel": "Annuler"
+        }
+    }
 }
