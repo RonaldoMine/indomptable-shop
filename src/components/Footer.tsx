@@ -37,7 +37,7 @@ export default function Footer({ lang }: { lang: string }) {
           <div>
             <ul>
               <li>
-                <Link href={"/about-us"}>{locales_messages_link.about}</Link>
+                <Link href={"/about"}>{locales_messages_link.about}</Link>
               </li>
               {/* <li>
                             <Link href={"/"}>{locales_messages_link.policy}</Link>
