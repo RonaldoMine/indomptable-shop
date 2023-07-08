@@ -13,6 +13,9 @@ import { ButtonBorder, ButtonGradient } from "../../../src/components/Button";
 import { ImageAsset } from "sanity";
 import { LuBellRing, LuCheck, LuChevronsUpDown } from "react-icons/lu";
 import Alert from "../../../src/components/Alert";
+import Loader from "../../../src/components/Loader";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
 
 type Color = {
   name: string;
@@ -34,6 +37,16 @@ export default function SlugProduct({
   productData,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { t, i18n } = useTranslation("product-page");
+  const {
+    register,
+    reset,
+    handleSubmit,
+    setValue,
+    formState: { errors, isDirty },
+  } = useForm({
+    mode: "onTouched",
+    defaultValues: { email: "", unavailableSizeSelected: [] },
+  });
   const [expanded, setExpanded] = useState({ one: false, two: false });
   const [errorSizeUnselected, setErrorSizeUnselected] = useState("");
   const [onAddProduct, setOnAddProduct] = useState(false);
@@ -48,9 +61,7 @@ export default function SlugProduct({
     () => allSizes.filter((size: any) => size.quantity == 0),
     [allSizes]
   ); //all unavailable sizes
-  const [unavailableSizeSelected, setUnavailableSizeSelected] = useState([
-    unavailableSizes[0],
-  ]); //unavailable size selected
+  const [unavailableSizeSelected, setUnavailableSizeSelected] = useState([]); //unavailable size selected
   const [selectedSize, setSelectedSize] = useState(allSizes[0]);
   const [isLoading, setIsLoading] = useState(false);
   const [configAlert, setConfigAlert] = useState({
@@ -59,7 +70,6 @@ export default function SlugProduct({
     status: "",
   });
   const [showAlert, setShowAlert] = useState(false);
-  const emailRef = useRef<HTMLInputElement>(null);
 
   const { addProductToFavorite } = useProductToFavorite();
   const [toastProductId, setToastProductId] = useState("0");
@@ -81,23 +91,22 @@ export default function SlugProduct({
     setOnAddProduct(false);
   };
 
-  const handleNotifySizeUpdate = async () => {
+  const handleNotifySizeUpdate = async (values: any) => {
     setIsLoading(true);
-    const sizes = unavailableSizeSelected.map((size:any) => size.label);
-    let email = emailRef.current!.value;
+    const sizes = values.unavailableSizeSelected.map((size: any) => size.label);
     const options = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email,
+        email: values.email,
         slug: product?.slug.current,
         sizes,
         lang: i18n.language,
       }),
     };
-    const response = await fetch("/api/product-waitlist", options);
+    const response = await fetch("/api/notify-size-update", options);
     const result = await response.json();
     const status = response.status;
     if (status == 200) {
@@ -157,6 +166,12 @@ export default function SlugProduct({
   };
   const handleAddProductToFavorite = () => {
     addProductToFavorite({ ...product, img: urlFor(product.coverImage).url() });
+  };
+
+  const handleOpenDialogNotifySizeUpdate = () => {
+    reset();
+    setUnavailableSizeSelected([]);
+    setIsOpen(true);
   };
 
   useEffect(() => {
@@ -399,7 +414,7 @@ export default function SlugProduct({
               <ButtonBorder
                 className="disabled:text-neutral-300 disabled:border-neutral-300"
                 disabled={unavailableSizes.length === 0}
-                onClick={() => setIsOpen(true)}
+                onClick={handleOpenDialogNotifySizeUpdate}
               >
                 <LuBellRing size={"1rem"} />
               </ButtonBorder>
@@ -419,107 +434,149 @@ export default function SlugProduct({
                 <div className="fixed inset-0 flex items-center justify-center p-4">
                   {/* The actual dialog panel  */}
                   <Dialog.Panel className="mx-auto flex flex-col justify-between min-h-[18rem] max-w-lg rounded bg-white dark:bg-neutral-800 p-6">
-                    <div aria-label="panel-wrapper">
-                      <div aria-label="dialog-header">
-                        <Dialog.Title className={"text-2xl font-bold mb-1"}>
-                          {t("modal.title")}
-                        </Dialog.Title>
-                        <Dialog.Description as={"div"}>
-                          <p>{t("modal.content")}</p>
-                        </Dialog.Description>
-                      </div>
-                      <div className="flex flex-col min-[560px]:flex-row gap-x-2 mt-6">
-                        <input
-                          className="w-full min-[560px]:px-3 min-[560px]:py-0 min-[560px]:mb-0 p-3 mb-3 border border-neutral-200"
-                          pattern="/^[A-Z\d._%+-]+@([A-Z\d-]+\.)+[A-Z]{2,4}$/i"
-                          type="email"
-                          placeholder="Enter your email"
-                          ref={emailRef}
-                        />
-                        <div className="top-16 w-full min-[560px]:w-52">
-                          <Listbox
-                            value={unavailableSizeSelected}
-                            onChange={setUnavailableSizeSelected}
-                            multiple
-                          >
-                            <div className="relative">
-                              <Listbox.Button
-                                className={
-                                  "relative w-full cursor-default rounded-lg dark:bg-inherit bg-white py-2 pl-3 pr-10 text-left shadow-md border-2 border-neutral-100 focus:outline-none focus-visible:border-neutral-500 dark:focus-visible:border-neutral-200 focus-visible:ring-2 focus-visible:ring-white dark:focus-visible:ring-black focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
-                                }
-                              >
-                                {unavailableSizeSelected
-                                  .map((size: any) => size.label)
-                                  .join(", ")}
-                                <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                                  <LuChevronsUpDown
-                                    className="h-5 w-5 text-gray-400"
-                                    aria-hidden="true"
-                                  />
-                                </span>
-                              </Listbox.Button>
-                              <Transition
-                                as={Fragment}
-                                leave="transition ease-in duration-150"
-                                leaveFrom="opacity-100"
-                                leaveTo="opacity-0"
-                              >
-                                <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white dark:bg-neutral-600 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                                  {unavailableSizes.map(
-                                    (unavailableSize: any) => (
-                                      <Listbox.Option
-                                        key={unavailableSize.label}
-                                        value={unavailableSize}
-                                        className={({ active }) =>
-                                          `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                                            active
-                                              ? "bg-neutral-100 dark:bg-neutral-400 dark:text-neutral-100 text-neutral-900"
-                                              : "text-gray-900 dark:text-neutral-100"
-                                          }`
-                                        }
-                                      >
-                                        {({ selected }) => (
-                                          <>
-                                            <span
-                                              className={`block truncate ${
-                                                selected
-                                                  ? "font-medium"
-                                                  : "font-normal"
-                                              }`}
-                                            >
-                                              {unavailableSize.label}
-                                            </span>
-                                            {selected ? (
-                                              <span className="absolute inset-y-0 left-0 flex items-center pl-3 dark:text-white text-neutral-600">
-                                                <LuCheck
-                                                  className="h-5 w-5"
-                                                  aria-hidden="true"
-                                                />
-                                              </span>
-                                            ) : null}
-                                          </>
-                                        )}
-                                      </Listbox.Option>
-                                    )
+                    <form onSubmit={handleSubmit(handleNotifySizeUpdate)}>
+                      <div aria-label="panel-wrapper">
+                        <div aria-label="dialog-header">
+                          <Dialog.Title className={"text-2xl font-bold mb-1"}>
+                            {t("modal.title")}
+                          </Dialog.Title>
+                          <Dialog.Description as={"div"}>
+                            <p>{t("modal.content")}</p>
+                          </Dialog.Description>
+                        </div>
+                        <div className="flex flex-col min-[560px]:flex-row gap-x-2 mt-6">
+                          <input
+                            className={`outline-none w-full min-[560px]:px-3 min-[560px]:py-0 min-[560px]:mb-0 p-3 mb-3 border border-neutral-200
+                            ${
+                              errors.email?.message && isDirty
+                                ? "border-2 border-red-500"
+                                : "focus:border-2 focus:border-neutral-300 border-neutral-300"
+                            }`}
+                            type="email"
+                            placeholder="Enter your email"
+                            {...register("email", {
+                              required: {
+                                value: true,
+                                message: "Enter a valid email",
+                              },
+                              pattern: {
+                                value:
+                                  /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                                message: "Not a valid email",
+                              },
+                              disabled: isLoading,
+                            })}
+                          />
+                          <div className="top-16 w-full min-[560px]:w-52">
+                            <Listbox
+                              value={unavailableSizeSelected}
+                              {...register("unavailableSizeSelected", {
+                                required: {
+                                  value: true,
+                                  message: "Select size",
+                                },
+                              })}
+                              onChange={(values) => {
+                                setUnavailableSizeSelected(values);
+                                setValue("unavailableSizeSelected", values);
+                              }}
+                              multiple
+                            >
+                              <div className="relative">
+                                <Listbox.Button
+                                  className={`min-h-[40px] relative w-full cursor-default rounded-lg dark:bg-inherit bg-white py-2 pl-3 pr-10 text-left shadow-md border-2 border-neutral-100 focus:outline-none focus-visible:border-neutral-500 dark:focus-visible:border-neutral-200 focus-visible:ring-2 focus-visible:ring-white dark:focus-visible:ring-black focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm
+                                    ${
+                                      unavailableSizeSelected.length === 0 &&
+                                      isDirty
+                                        ? "border-2 border-red-500"
+                                        : ""
+                                    }`}
+                                >
+                                  {unavailableSizeSelected
+                                    .map((size: any) => size.label)
+                                    .join(", ")}
+                                  <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                                    <LuChevronsUpDown
+                                      className="h-5 w-5 text-gray-400"
+                                      aria-hidden="true"
+                                    />
+                                  </span>
+                                  {unavailableSizeSelected.length === 0 && (
+                                    <span className="aboslute">
+                                      {t("sizes")}
+                                    </span>
                                   )}
-                                </Listbox.Options>
-                              </Transition>
-                            </div>
-                          </Listbox>
+                                </Listbox.Button>
+                                <Transition
+                                  as={Fragment}
+                                  leave="transition ease-in duration-150"
+                                  leaveFrom="opacity-100"
+                                  leaveTo="opacity-0"
+                                >
+                                  <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white dark:bg-neutral-600 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                                    {unavailableSizes.map(
+                                      (unavailableSize: any) => (
+                                        <Listbox.Option
+                                          key={unavailableSize.label}
+                                          value={unavailableSize}
+                                          className={({ active }) =>
+                                            `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                                              active
+                                                ? "bg-neutral-100 dark:bg-neutral-400 dark:text-neutral-100 text-neutral-900"
+                                                : "text-gray-900 dark:text-neutral-100"
+                                            }`
+                                          }
+                                        >
+                                          {({ selected }) => (
+                                            <>
+                                              <span
+                                                className={`block truncate ${
+                                                  selected
+                                                    ? "font-medium"
+                                                    : "font-normal"
+                                                }`}
+                                              >
+                                                {unavailableSize.label}
+                                              </span>
+                                              {selected ? (
+                                                <span className="absolute inset-y-0 left-0 flex items-center pl-3 dark:text-white text-neutral-600">
+                                                  <LuCheck
+                                                    className="h-5 w-5"
+                                                    aria-hidden="true"
+                                                  />
+                                                </span>
+                                              ) : null}
+                                            </>
+                                          )}
+                                        </Listbox.Option>
+                                      )
+                                    )}
+                                  </Listbox.Options>
+                                </Transition>
+                              </div>
+                            </Listbox>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="flex min-[560px]:mt-6 mt-14">
-                      <ButtonGradient
-                        className="mr-3"
-                        onClick={handleNotifySizeUpdate}
-                      >
-                        {t("modal.buttons.confirm")}
-                      </ButtonGradient>
-                      <ButtonBorder onClick={() => setIsOpen(false)}>
-                        {t("modal.buttons.cancel")}
-                      </ButtonBorder>
-                    </div>
+                      <div className="flex min-[560px]:mt-6 mt-14">
+                        {isLoading ? (
+                          <Loader className="mx-auto" />
+                        ) : (
+                          <>
+                            <ButtonGradient className="mr-3 disabled:opacity-30">
+                              {t("modal.buttons.confirm")}
+                            </ButtonGradient>
+                            <ButtonBorder
+                              onClick={() => {
+                                setIsOpen(false);
+                              }}
+                            >
+                              {t("modal.buttons.cancel")}
+                            </ButtonBorder>
+                          </>
+                        )}
+                      </div>
+                    </form>
                   </Dialog.Panel>
                 </div>
               </Dialog>
@@ -642,6 +699,14 @@ export const getServerSideProps: GetServerSideProps = async ({
     type: params?.type,
     slugProduct: params?.slugProduct,
   });
+  if (productData.length === 0 || productData[0].product == null) {
+    return {
+      redirect: {
+        destination: "/404",
+        permanent: false,
+      },
+    };
+  }
   return {
     props: {
       productData,
