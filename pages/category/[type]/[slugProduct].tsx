@@ -114,7 +114,6 @@ export default function SlugProduct({
 
   useEffect(() => {
     setAllSizes(selectedColor.sizes);
-    console.log(unavailableSizes);
   }, [selectedColor]);
 
   return (
