@@ -1,0 +1,8 @@
+{
+  "api": {
+    "field_require": "Please fill in all required fields correctly",
+    "invalid_email": "The email address entered is not a valid email address, please change it!",
+    "success": "You will be informed when these sizes are available again.",
+    "product_unavailable": "This product is unavailable!"
+  }
+}
