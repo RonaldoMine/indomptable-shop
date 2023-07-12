@@ -122,7 +122,8 @@ function sendAlertOrder(datas: OrderInterface) {
   const html = render(AlertOrderMail(datas));
   const body = {
     from: USERNAME,
-    to: ["andremine98@gmail.com"],
+    to: USERNAME,
+    cc: ["andremine98@gmail.com", "marcantoine826@gmail.com"],
     subject: "💥 ALERTE NOUVELLE COMMANDE VALIDEE 💥",
     text: "message",
     html: html,
