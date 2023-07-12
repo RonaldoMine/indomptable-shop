@@ -4,6 +4,7 @@ import { render } from "@react-email/render";
 import { TRANSPORTER } from "../../src/emails/mailer";
 import OrderMail from "../../src/emails/payment/OrderMail";
 import { OrderInterface } from "../../typings";
+import AlertOrderMail from "../../src/emails/payment/AlertOrderMail";
 
 export const config: NextFetchRequestConfig = {};
 export default async function notify(
@@ -11,7 +12,6 @@ export default async function notify(
   resp: NextApiResponse
 ) {
   const { order_id, status } = req.body;
-  //const transaction = new Transaction();
   let order: any;
   await sanityClient
     .fetch(
@@ -85,16 +85,13 @@ export default async function notify(
           });
       }
     }
-    //const path = new Patch(order[0]._id).set({status: status})
-    //transaction.patch(path);
-
-    //sanityClient.mutate(transaction);
     await sanityClient
       .patch(order[0]._id, { set: { status: status } })
       .commit();
 
     if (status === "SUCCESS") {
       sendNotification(order[0]);
+      sendAlertOrder(order[0]);
     }
     return resp.status(200).json({ status: 1 });
   }
@@ -106,13 +103,27 @@ function sendNotification(datas: OrderInterface) {
   const USERNAME = process.env["MAIL_USERNAME"];
   const langMessages = require(`../../public/locales/${datas.lang}/payment.json`);
   const html = render(OrderMail(datas, langMessages.order));
-  /*PDF.create(html).toFile("./public/orders/orders.pdf", (err: any, res: any) => {
-        console.log(res);
-    });*/
   const body = {
     from: USERNAME,
     to: [datas.email],
     subject: langMessages.order.subjectMail,
+    text: "message",
+    html: html,
+  };
+  TRANSPORTER.sendMail(body, function (err: any, info: any) {
+    if (err) {
+      console.log(err);
+    }
+  });
+}
+function sendAlertOrder(datas: OrderInterface) {
+  require("dotenv").config();
+  const USERNAME = process.env["MAIL_USERNAME"];
+  const html = render(AlertOrderMail(datas));
+  const body = {
+    from: USERNAME,
+    to: ["andremine98@gmail.com"],
+    subject: "💥 ALERTE NOUVELLE COMMANDE VALIDEE 💥",
     text: "message",
     html: html,
   };

@@ -13,7 +13,7 @@
     "subjectMail" : "[INDOMPTABLE] Commande payée et validée",
     "title": "UNE NOUVELLE COMMANDE INDOMPTABLE",
     "salutation": "Salut :lastName",
-    "description" : "Ta commande <b>':reference'</b> a été payéée et validée, découvre tous les détails en dessous.",
+    "description" : "Votre commande <b>':reference'</b> a été payéée et validée, découvrez tous les détails en dessous.",
     "products": "Produits",
     "quantity": "Quantité",
     "price": "Prix",
