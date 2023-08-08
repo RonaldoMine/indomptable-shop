@@ -1,0 +1,10 @@
+{
+  "api": {
+    "field_required": "Please fill in all required fields correctly",
+    "invalid_email": "The email address entered is not a valid email address, please change it!",
+    "success": "You will be informed when these sizes are available again.",
+    "product_unavailable": "This slug does not correspond to any product.",
+    "something_wrong": "Your request was not successful, please reload the page, if the problem persists please try again later",
+    "subject_mail": "[INDOMPTABLE] Notification when sizes are updated"
+  }
+}
