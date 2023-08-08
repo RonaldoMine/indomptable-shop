@@ -49,9 +49,8 @@ export default async function contact(
       );
       const body = {
         from: USERNAME,
-        to: "andremine98@gmail.com",
-        //to: USERNAME,
-        //cc: ["andremine98@gmail.com", "marcantoine826@gmail.com"],
+        to: USERNAME,
+        cc: ["andremine98@gmail.com", "marcantoine826@gmail.com"],
         subject: `${langMessages.api.subject_mail} from ${email}`,
         html: html,
       };
