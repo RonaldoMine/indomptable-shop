@@ -412,11 +412,11 @@ export default function SlugProduct({
                 {t("add-to-basket")}
               </ButtonGradient>
               <ButtonBorder
-                className="disabled:text-neutral-300 disabled:border-neutral-300 dark:border-neutral-700"
+                className="disabled:text-neutral-300 disabled:border-neutral-300 dark:border-neutral-600"
                 disabled={unavailableSizes.length === 0}
                 onClick={handleOpenDialogNotifySizeUpdate}
               >
-                <LuBellRing size={"1rem"} className="dark:text-neutral-700" />
+                <LuBellRing size={"1rem"} className="dark:text-neutral-600" />
               </ButtonBorder>
               <Dialog
                 as={"div"}
