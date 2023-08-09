@@ -1,5 +1,6 @@
 {
-    "title": "Boutique",
+    "heading": "Élevez votre style",
     "discount": "Jusqu'à {{percent}}% sur tout.",
-    "promo-text": "Aucun code requis. Prix tel qu'indiqué"
+    "promo-text": "Aucun code requis. Prix tel qu'indiqué",
+    "subheading": "Donnez du caractère à votre look avec des vêtements urbains uniques qui attisent la passion et enflamment votre volonté."
 }

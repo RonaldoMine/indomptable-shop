@@ -35,13 +35,16 @@ function Shopping({
         }
       >
         <div className="flex text-center px-4 flex-col gap-3 w-full max-w-6xl mx-auto py-10 bg-neutral-100 dark:bg-neutral-700">
-          <span
+          {/* <span
             className="font-futura text-4xl sm:text-6xl"
             dangerouslySetInnerHTML={{
               __html: t("discount", { percent: DISCOUNT_PERCENT }),
             }}
-          />
-          <p>{t("promo-text")}</p>
+          /> */}
+          <h2 className="font-futura text-4xl sm:text-6xl">
+            {t("heading")}
+          </h2>
+          <p>{t("subheading")}</p>
         </div>
       </div>
       <main className="px-6 py-20 max-w-[75rem] mx-auto">
