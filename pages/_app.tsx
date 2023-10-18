@@ -51,6 +51,7 @@ function App({ Component, pageProps }: AppProps) {
                   content="Boutique en ligne des indomptables"
                 />
                 <link rel="icon" href="/assets/images/logo.svg" />
+                <meta name="google-site-verification" content="3QbzuKhavdrXfgAfICg9ub0yWMmPxZH_GrOJX4ZTFpo" />
               </Head>
               <main className={"mx-auto"}>
                 <Header lang={i18n.language ?? "en"} />
