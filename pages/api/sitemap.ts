@@ -17,6 +17,9 @@ export default function sitemap(req: NextApiRequest, res: NextApiResponse) {
       <loc>https://indomptable-shop.vercel.app/gallery</loc>
   </url>
   <url>
+      <loc>https://indomptable-shop.vercel.app/shop</loc>
+  </url>
+  <url>
       <loc>https://indomptable-shop.vercel.app/about</loc>
   </url>
   <url>
