@@ -2,6 +2,7 @@ import { Html, Head, Main, NextScript } from "next/document";
 
 export default function Document() {
   const MainHead = Head as any;
+  const MainNextScript = NextScript as any;
   return (
     <Html>
       <MainHead>
@@ -15,7 +16,7 @@ export default function Document() {
       </MainHead>
       <body className={"dark:bg-neutral-800"}>
         <Main />
-        <NextScript />
+        <MainNextScript />
       </body>
     </Html>
   );
