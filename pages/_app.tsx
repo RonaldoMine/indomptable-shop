@@ -33,6 +33,7 @@ function App({ Component, pageProps }: AppProps) {
       Nprogress.done(false);
     });
   }, []); 
+  const MainComponent = Component as any;
 
   return (
     <>
@@ -56,7 +57,7 @@ function App({ Component, pageProps }: AppProps) {
               <main className={"mx-auto"}>
                 <Header lang={i18n.language ?? "en"} />
                 <div className={"relative mx-auto"}>
-                  <Component {...pageProps} />
+                  <MainComponent {...pageProps} />
                 </div>
                 <Footer lang={i18n.language ?? "en"} />
               </main>
