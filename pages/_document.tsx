@@ -1,9 +1,10 @@
 import { Html, Head, Main, NextScript } from "next/document";
 
 export default function Document() {
+  const MainHead = Head as any;
   return (
     <Html>
-      <Head>
+      <MainHead>
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css"
@@ -11,7 +12,7 @@ export default function Document() {
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
         />
-      </Head>
+      </MainHead>
       <body className={"dark:bg-neutral-800"}>
         <Main />
         <NextScript />
