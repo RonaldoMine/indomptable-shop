@@ -8,7 +8,15 @@ const nextConfig = {
   images: {
     domains: ['cdn.sanity.io'],
   },
-  i18n
+  i18n,
+  async rewrites() {
+    return [
+      {
+        source: '/sitemap.xml',
+        destination: '/api/sitemap',
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig
