@@ -14,14 +14,15 @@ import OurStory from "../src/components/OurStory";
 import { useTranslation } from "next-i18next";
 import { shuffleArray } from "../src/utils";
 import { Dialog, Transition } from "@headlessui/react";
-import blackFriday from "../public/assets/images/popup-black-friday.png";
+import blackFridayEn from "../public/assets/images/popup-black-friday-en.webp";
+import blackFridayFr from "../public/assets/images/popup-black-friday-fr.webp";
 import { AiOutlineClose } from "react-icons/ai";
 import { useRouter } from "next/router";
 
 export default function Home({
   peoples,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const { t } = useTranslation("home");
+  const { t, i18n } = useTranslation("home");
   const router = useRouter();
   const [popupVisibility, setPopupVisibility] = useState(false);
   const blackFridrayPopup = () => {
@@ -112,11 +113,12 @@ export default function Home({
                 leaveTo="opacity-0 scale-95"
               >
                 <div className="relative">
-                  <Image onClick={() => router.push("/shopping")}
-                    src={blackFriday}
+                  <Image
+                    onClick={() => router.push("/shopping")}
+                    src={i18n.language === "fr" ? blackFridayFr : blackFridayEn}
                     alt={"Black Friday - Banner"}
                     placeholder="blur"
-                    className={"md:max-h-[380px] w-full object-cover rounded"}
+                    className={"md:max-h-[380px] lg:max-h-[500] w-full object-cover rounded"}
                   />
                   <span
                     onClick={handleClosePopup}

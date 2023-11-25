@@ -15,7 +15,7 @@ import PageHeader from "../src/components/PageHeader";
 import { Listbox, Transition } from "@headlessui/react";
 import { ButtonGradient } from "../src/components/Button";
 import Loader from "../src/components/Loader";
-import bannerCardNewCollection from "../public/assets/images/banner-card-new-collection.png";
+import bannerCardNewCollection from "../public/assets/images/banner-card-new-collection.webp";
 
 enum PaymentStatus {
   SUCCESS = "SUCCESS",

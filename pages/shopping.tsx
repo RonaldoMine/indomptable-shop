@@ -5,12 +5,13 @@ import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import { sanityClient, urlFor } from "../sanity";
-import banner from "../public/assets/images/banner-shop-page.png";
+import bannerEn from "../public/assets/images/banner-shop-page-en.webp";
+import bannerFr from "../public/assets/images/banner-shop-page-fr.webp";
 
 function Shopping({
   productsData,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const { t } = useTranslation("shopping-page");
+  const { t, i18n } = useTranslation("shopping-page");
 
   const getRgbColor = (color: string): string => {
     switch (color) {
@@ -44,7 +45,11 @@ function Shopping({
           <p>{t("promo-text")}</p> 
         </div>*/}
 
-        <Image src={banner} alt="Banner Shop" className="w-full" />
+        <Image
+          src={i18n.language === "fr" ? bannerFr : bannerEn}
+          alt="Banner Shop"
+          className="w-full"
+        />
       </div>
       <main className="px-6 py-20 max-w-[75rem] mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
