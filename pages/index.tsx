@@ -118,17 +118,17 @@ export default function Home({
                     placeholder="blur"
                     className={"md:max-h-[380px] w-full object-cover rounded"}
                   />
-                  <button
+                  <span
                     onClick={handleClosePopup}
                     className={
-                      "w-6 h-6 rounded-full bg-opacity-20 bg-red hover:bg-opacity-100 absolute right-2 top-2 ring-0 focus:ring-0"
+                      "w-6 h-6 rounded-full bg-opacity-20 bg-red hover:bg-opacity-100 absolute right-2 top-2 flex items-center hover:cursor-pointer"
                     }
                   >
                     <AiOutlineClose
                       className={"mx-auto text-white"}
                       size={10}
                     />
-                  </button>
+                  </span>
                 </div>
               </Transition.Child>
             </div>

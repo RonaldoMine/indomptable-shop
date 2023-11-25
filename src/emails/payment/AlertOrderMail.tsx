@@ -295,9 +295,9 @@ export default function ContactMail({
                                   >
                                     Montant:
                                   </th>
-                                  <td>{parseInt(amount) - 1000} XAF</td>
+                                  <td>{parseInt(amount)} XAF</td>
                                 </tr>
-                                <tr
+                               {/*  <tr
                                   style={{ borderBottom: "1px solid #F1EFEF" }}
                                 >
                                   <th
@@ -310,7 +310,7 @@ export default function ContactMail({
                                     Frais de livraison:
                                   </th>
                                   <td>1000 XAF</td>
-                                </tr>
+                                </tr> */}
                                 <tr
                                   style={{ borderBottom: "1px solid #F1EFEF" }}
                                 >

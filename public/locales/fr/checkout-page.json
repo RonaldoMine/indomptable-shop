@@ -4,6 +4,8 @@
   "quantity": "Quantité total",
   "sub-total": "Sous-total",
   "delivery-fees": "Frais de livraison",
+  "free": "Gratuit",
+  "delivery-fees-advice": "Des frais supplémentaires (XAF 1000) pourraient être appliquées pour la livraison en fonction du quartier",
   "total": "Total",
   "form": {
     "title": "Détails de la livraison",

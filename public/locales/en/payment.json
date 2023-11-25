@@ -22,6 +22,7 @@
     "totalOfProducts": "Total of Products",
     "amount": "Amount",
     "delivery_fees": "Delivery Fees",
+    "delivery_fees_advice": "Additional fees (XAF 1000) could be applied for delivery depending on the neighborhood",
     "totalAmount": "Total Amount",
     "deliveryAddress": "Delivery Address",
     "thank_you": "Thank you for your order"

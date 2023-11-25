@@ -70,7 +70,7 @@ function Checkout({
       body: JSON.stringify({
         ...values,
         quantity: basket.totalProduct,
-        amount: basket.subTotal + 1000,
+        amount: basket.subTotal,
         basket: basket.items,
         lang: locale,
       }),
@@ -161,7 +161,10 @@ function Checkout({
                           {basket.totalProduct}{" "}
                           {basket.totalProduct >= 2 && (
                             <>
-                              <span className="text-gradient-simple">+ 1 Free</span>{" = "}
+                              <span className="text-gradient-simple">
+                                + 1 {t("free")}
+                              </span>
+                              {" = "}
                               {basket.totalProduct + 1}
                             </>
                           )}
@@ -181,20 +184,20 @@ function Checkout({
                         <span className="text-slate-600 dark:text-slate-200">
                           {t("delivery-fees")}
                         </span>
-                        <span className="font-semibold">XAF {1000}</span>
+                        <span className="text-red">*</span>
                       </div>
                       <hr />
                       <div className="flex justify-between py-2">
                         <h2 className="font-semibold">{t("total")}</h2>
                         <span className="font-semibold">
-                          XAF {basket.subTotal + 1000}
+                          XAF {basket.subTotal}
                         </span>
                       </div>
                     </div>
                     {basket.totalProduct >= 2 && (
                       <div className="py-2 mt-2 w-full relative text-right">
-                        <span className="bg-red p-1 font-bold text-[0.50rem] absolute right-0">
-                          FREE
+                        <span className="bg-red p-1 font-bold text-[0.50rem] absolute right-0 uppercase">
+                        {t("free")}
                         </span>
                         <Image
                           src={bannerCardNewCollection}
@@ -275,9 +278,12 @@ function Checkout({
                         </div>
                       </div>
                     )}
-                  <h2 className="text-2xl text-center mb-6 mt-4">
+                  <h2 className="text-2xl text-center my-4">
                     {t("form.title")}
                   </h2>
+                  <div className="col-span-2 text-xs text-slate-600 dark:text-neutral-400 text-right mb-2">
+                    <span className="text-red">*</span> {t("delivery-fees-advice")}
+                  </div>
                   <form onSubmit={handleSubmit(handleInitPayment)}>
                     <div className="grid md:grid-cols-2 grid-cols-1 md:gap-x-4 md:gap-y-8 gap-4">
                       <div>

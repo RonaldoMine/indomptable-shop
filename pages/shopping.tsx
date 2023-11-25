@@ -5,7 +5,6 @@ import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import { sanityClient, urlFor } from "../sanity";
-import { DISCOUNT_PERCENT } from "../src/utils";
 import banner from "../public/assets/images/banner-shop-page.png";
 
 function Shopping({
@@ -45,7 +44,7 @@ function Shopping({
           <p>{t("promo-text")}</p> 
         </div>*/}
 
-        <Image src={banner} alt="Banner Shop" className="w-full" />
+        <Image src={banner} alt="Banner Shop" className="w-full max-h-80" />
       </div>
       <main className="px-6 py-20 max-w-[75rem] mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
