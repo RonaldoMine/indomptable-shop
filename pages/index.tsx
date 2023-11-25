@@ -118,7 +118,7 @@ export default function Home({
                     src={i18n.language === "fr" ? blackFridayFr : blackFridayEn}
                     alt={"Black Friday - Banner"}
                     placeholder="blur"
-                    className={"md:max-h-[380px] lg:max-h-[500] w-full object-cover rounded"}
+                    className={"md:max-h-[380px] lg:max-h-[600px] w-full object-cover rounded"}
                   />
                   <span
                     onClick={handleClosePopup}
