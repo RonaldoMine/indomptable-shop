@@ -118,9 +118,8 @@ export default function Home({
                     src={i18n.language === "fr" ? blackFridayFr : blackFridayEn}
                     alt={"Black Friday - Banner"}
                     placeholder="blur"
-                    fill={true}
                     className={
-                      "md:max-h-[380px] lg:max-h-[600px] w-full object-cover rounded"
+                      "lg:max-h-[600px] w-full object-cover"
                     }
                   />
                   <span

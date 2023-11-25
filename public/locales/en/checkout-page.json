@@ -5,7 +5,7 @@
   "sub-total": "Sub Total",
   "delivery-fees": "Delivery Fees",
   "free": "Free",
-  "delivery-fees-advice": "Additional fees (XAF 1000) could be applied for delivery depending on the neighborhood",
+  "delivery-fees-advice": "Additional fees (from XAF 1000) could be applied for delivery depending on your location",
   "total": "Order Total",
   "form": {
     "title": "Delivery options",
@@ -15,7 +15,7 @@
     "phone": "Phone Number",
     "address": "Home address",
     "town": "Select the town",
-    "accept-here": "Accept here",
+    "accept-here": "Accepted here",
     "button": "Pay",
     "try-again" : "Restart payment"
   },
