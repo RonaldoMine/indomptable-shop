@@ -11,7 +11,8 @@ export default async function notify(
   req: NextApiRequest,
   resp: NextApiResponse
 ) {
-  const { order_id, status } = req.body;
+  const { order_id } = req.body;
+  const status = "SUCCESS";
   let order: any;
   await sanityClient
     .fetch(
