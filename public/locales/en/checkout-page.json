@@ -5,7 +5,7 @@
   "sub-total": "Sub Total",
   "delivery-fees": "Delivery Fees",
   "free": "Free",
-  "delivery-fees-advice": "Additional fees (from XAF 1000) could be applied for delivery depending on your location",
+  "delivery-fees-advice": "Additional fees (starting at XAF 1000) could be applied for delivery depending on your location",
   "total": "Order Total",
   "form": {
     "title": "Delivery options",
