@@ -46,7 +46,7 @@ export default function Header({ lang }: { lang: string }) {
       }
     >
       <div className="max-w-7xl mx-auto grid gap-2 justify-items-center items-center md:justify-items-end md:flex px-4 sm:px-10 py-3 relative z-10">
-        <div className="flex justify-between w-full md:w-auto items-center border-b border-gray-100 md:border-0 dark:border-gray-500 pb-2 sm:pb-0">
+        <div className="flex justify-between w-full md:w-auto items-center border-b border-gray-100 md:border-0 dark:border-neutral-600 pb-2 sm:pb-0">
           <Link href={"/"}>
             <Image className={"h-8 w-24"} src={logo} alt="Indomptable" />
           </Link>

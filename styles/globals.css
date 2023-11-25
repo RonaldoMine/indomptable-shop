@@ -46,6 +46,10 @@
 .bg-gradient {
     background: var(--gradient-color) !important;
 }
+.bg-red{
+    color: #FFF;
+    background-color: var(--color-red);
+}
 
 .bg-soft-orange {
     color: var(--color-orange);
@@ -55,6 +59,10 @@
 .bg-soft-white {
     color: var(--color-orange);
     background-color: rgba(255, 255, 255, .2);
+}
+.bg-soft-red{
+    color: var(--color-red);
+    background-color: rgba(238, 20, 19, .2);
 }
 
 #contact-us, #our-community, #newsletter, #our-story {

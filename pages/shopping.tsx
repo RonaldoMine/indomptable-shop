@@ -6,6 +6,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import { sanityClient, urlFor } from "../sanity";
 import { DISCOUNT_PERCENT } from "../src/utils";
+import banner from "../public/assets/images/banner-shop-page.png";
 
 function Shopping({
   productsData,
@@ -34,15 +35,17 @@ function Shopping({
           "flex py-10 px-6 dark:bg-neutral-800 border-b-neutral-200 dark:border-b-neutral-600 border-b"
         }
       >
-        <div className="flex text-center px-4 flex-col gap-3 w-full max-w-6xl mx-auto py-10 bg-neutral-100 dark:bg-neutral-700">
+        {/*<div className="flex text-center px-4 flex-col gap-3 w-full max-w-6xl mx-auto py-10 bg-neutral-100 dark:bg-neutral-700">
           <span
             className="font-futura text-4xl sm:text-6xl"
             dangerouslySetInnerHTML={{
               __html: t("discount", { percent: DISCOUNT_PERCENT }),
             }}
           />
-          <p>{t("promo-text")}</p>
-        </div>
+          <p>{t("promo-text")}</p> 
+        </div>*/}
+
+        <Image src={banner} alt="Banner Shop" className="w-full" />
       </div>
       <main className="px-6 py-20 max-w-[75rem] mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">

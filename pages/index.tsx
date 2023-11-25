@@ -1,7 +1,7 @@
 import shirt_black from "../public/assets/images/tshirt-black-desktop.png";
 import shirt_white from "../public/assets/images/tshirt-white-desktop.png";
 import banner_photo from "../public/assets/images/banner-home.webp";
-import React from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Image from "next/image";
@@ -13,11 +13,29 @@ import People from "../src/components/People";
 import OurStory from "../src/components/OurStory";
 import { useTranslation } from "next-i18next";
 import { shuffleArray } from "../src/utils";
+import { Dialog, Transition } from "@headlessui/react";
+import blackFriday from "../public/assets/images/black-friday.jpg";
+import { AiOutlineClose } from "react-icons/ai";
+import { useRouter } from "next/router";
 
 export default function Home({
   peoples,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { t } = useTranslation("home");
+  const router = useRouter();
+  const [popupVisibility, setPopupVisibility] = useState(false);
+  const blackFridrayPopup = () => {
+    setTimeout(() => {
+      setPopupVisibility(true);
+    }, 3000);
+  };
+  const handleClosePopup = () => {
+    setPopupVisibility(false);
+  };
+
+  useEffect(() => {
+    blackFridrayPopup();
+  }, []);
   return (
     <>
       <div className="w-full mx-auto h-[50vw] relative overflow-hidden">
@@ -64,6 +82,59 @@ export default function Home({
         <People peoples={peoples} />
         <Contact />
       </div>
+
+      <Transition appear show={popupVisibility} as={Fragment}>
+        <Dialog
+          as="div"
+          className="relative z-[9999]"
+          onClose={handleClosePopup}
+        >
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-gray-500 bg-opacity-80"></div>
+          </Transition.Child>
+          <div className="fixed inset-0 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
+                <div className="relative">
+                  <Image onClick={() => router.push("/shopping")}
+                    src={blackFriday}
+                    alt={"Black Friday - Banner"}
+                    placeholder="blur"
+                    className={"md:max-h-[380px] w-full object-cover rounded"}
+                  />
+                  <button
+                    onClick={handleClosePopup}
+                    className={
+                      "w-6 h-6 rounded-full bg-opacity-20 bg-red hover:bg-opacity-100 absolute right-2 top-2 ring-0 focus:ring-0"
+                    }
+                  >
+                    <AiOutlineClose
+                      className={"mx-auto text-white"}
+                      size={10}
+                    />
+                  </button>
+                </div>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
     </>
   );
 }
