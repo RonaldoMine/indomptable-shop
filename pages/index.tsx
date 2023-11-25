@@ -14,7 +14,7 @@ import OurStory from "../src/components/OurStory";
 import { useTranslation } from "next-i18next";
 import { shuffleArray } from "../src/utils";
 import { Dialog, Transition } from "@headlessui/react";
-import blackFriday from "../public/assets/images/black-friday.jpg";
+import blackFriday from "../public/assets/images/popup-black-friday.png";
 import { AiOutlineClose } from "react-icons/ai";
 import { useRouter } from "next/router";
 
