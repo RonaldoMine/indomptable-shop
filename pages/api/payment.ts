@@ -53,7 +53,7 @@ export default async function payment(
               };
             }
           );
-          amountToTopaid += 1000;
+          //amountToTopaid += 1000;
           const API_KEY = process.env["PAYMENT_API_KEY"];
           const SERVICE_KEY = process.env["PAYMENT_SERVICE_KEY"];
           const URL_PAYMENT = process.env["PAYMENT_URL"] + "place-deposit";
