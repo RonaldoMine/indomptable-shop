@@ -91,7 +91,7 @@ export default async function notify(
 
     if (status === "SUCCESS") {
       sendNotification(order[0]);
-      //sendAlertOrder(order[0]);
+      sendAlertOrder(order[0]);
     }
     return resp.status(200).json({ status: 1 });
   }
