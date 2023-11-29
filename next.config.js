@@ -9,14 +9,14 @@ const nextConfig = {
     domains: ['cdn.sanity.io'],
   },
   i18n,
-  async rewrites() {
+/*   async rewrites() {
     return [
       {
         source: '/sitemap.xml',
         destination: '/api/sitemap',
       },
     ]
-  },
+  }, */
 }
 
 module.exports = nextConfig

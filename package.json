@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "postbuild": "node ./scripts/generate-sitemap.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -23,6 +24,7 @@
     "dotenv": "^16.0.3",
     "eslint": "8.28.0",
     "eslint-config-next": "13.0.5",
+    "globby": "^14.0.0",
     "i18next": "^22.4.9",
     "next": "13.0.5",
     "next-i18next": "^13.1.5",
