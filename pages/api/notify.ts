@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { sanityClient } from "../../sanity";
+import { sanityClient, urlFor } from "../../sanity";
 import { render } from "@react-email/render";
 import { TRANSPORTER } from "../../src/emails/mailer";
 import OrderMail from "../../src/emails/payment/OrderMail";
@@ -63,7 +63,7 @@ export default async function notify(
             if (response.length > 0) {
               const { quantity } = response[0].colors.sizes;
               order[0].products[productKey].name = response[0].name;
-              //order[0].products[productKey].image = urlFor(response[0].coverImage).url()
+              order[0].products[productKey].image = urlFor(response[0].coverImage).url()
               let request: any = [];
               request[
                 `colors[name=="${products[productKey].color}"].sizes[label=="${products[productKey].size}"].quantity`

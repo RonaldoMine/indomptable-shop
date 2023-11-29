@@ -260,9 +260,7 @@ export default function OrderMail(
                         {langMessages.totalOfProducts}:
                       </th>
                       <td>
-                        {totalProduct >= 2 ? totalProduct + 1 : totalProduct}{" "}
-                        {totalProduct >= 2 &&
-                          "(+1 t-shirt de la nouvelle collection offert)"}
+                        {totalProduct} {totalProduct >= 2 && "(+1 free)"}
                       </td>
                     </tr>
                     <tr style={{ borderBottom: "1px solid #F1EFEF" }}>
@@ -281,7 +279,7 @@ export default function OrderMail(
                       >
                         {langMessages.delivery_fees}:
                       </th>
-                      <td>* {langMessages.delivery_fees_advice}</td>
+                      <td>*</td>
                     </tr>
                     <tr style={{ borderBottom: "1px solid #F1EFEF" }}>
                       <th
@@ -329,6 +327,7 @@ export default function OrderMail(
                 </td>
               </tr>
             </table>
+            <p>{langMessages.delivery_fees_advice}</p>
             <p style={{ padding: "20px 45px" }}>{langMessages.thank_you} 💖</p>
           </div>
         </div>
