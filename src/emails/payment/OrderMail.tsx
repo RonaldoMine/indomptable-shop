@@ -327,7 +327,7 @@ export default function OrderMail(
                 </td>
               </tr>
             </table>
-            <p>{langMessages.delivery_fees_advice}</p>
+            <p style={{ padding: "20px 45px" }}>{langMessages.delivery_fees_advice}</p>
             <p style={{ padding: "20px 45px" }}>{langMessages.thank_you} 💖</p>
           </div>
         </div>
