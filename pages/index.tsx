@@ -33,10 +33,10 @@ export default function Home({
   const handleClosePopup = () => {
     setPopupVisibility(false);
   };
-
+/* 
   useEffect(() => {
     blackFridrayPopup();
-  }, []);
+  }, []); */
   return (
     <>
       <div className="w-full mx-auto h-[50vw] relative overflow-hidden">

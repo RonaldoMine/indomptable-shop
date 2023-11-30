@@ -15,8 +15,8 @@ import PageHeader from "../src/components/PageHeader";
 import { Listbox, Transition } from "@headlessui/react";
 import { ButtonGradient } from "../src/components/Button";
 import Loader from "../src/components/Loader";
-import bannerCardNewCollection from "../public/assets/images/banner-card-new-collection.webp";
-
+/* import bannerCardNewCollection from "../public/assets/images/banner-card-new-collection.webp";
+ */
 enum PaymentStatus {
   SUCCESS = "SUCCESS",
   PENDING = "PENDING",
@@ -159,7 +159,7 @@ function Checkout({
                         </span>
                         <span className="font-semibold">
                           {basket.totalProduct}{" "}
-                          {basket.totalProduct >= 2 && (
+                          {/* {basket.totalProduct >= 2 && (
                             <>
                               <span className="text-gradient-simple">
                                 + 1 {t("free")}
@@ -167,7 +167,7 @@ function Checkout({
                               {" = "}
                               {basket.totalProduct + 1}
                             </>
-                          )}
+                          )} */}
                         </span>
                       </div>
                       <hr />
@@ -194,7 +194,7 @@ function Checkout({
                         </span>
                       </div>
                     </div>
-                    {basket.totalProduct >= 2 && (
+                   {/*  {basket.totalProduct >= 2 && (
                       <div className="py-2 mt-2 w-full relative text-right">
                         <span className="bg-red p-1 font-bold text-[0.50rem] absolute right-0 uppercase">
                         {t("free")}
@@ -205,7 +205,7 @@ function Checkout({
                           className="mx-auto md:h-62 md:object-contain"
                         />
                       </div>
-                    )}
+                    )} */}
                   </div>
                 )}
                 <div

@@ -260,7 +260,7 @@ export default function OrderMail(
                         {langMessages.totalOfProducts}:
                       </th>
                       <td>
-                        {totalProduct} {totalProduct >= 2 && "(+1 free)"}
+                        {totalProduct}
                       </td>
                     </tr>
                     <tr style={{ borderBottom: "1px solid #F1EFEF" }}>
