@@ -32,7 +32,7 @@ function App({ Component, pageProps }: AppProps) {
     Router.events.on("routeChangeComplete", (url: URL) => {
       Nprogress.done(false);
     });
-  }, []); 
+  }, []);
   const MainComponent = Component as any;
 
   return (
@@ -49,10 +49,23 @@ function App({ Component, pageProps }: AppProps) {
                 <title>Indomptable Shop</title>
                 <meta
                   name="description"
-                  content="Boutique en ligne des indomptables"
+                  content="Boutique en ligne de la marque de vêtements INDOMPTABLE"
                 />
+                <meta name="og:title" content="INDOMPTABLE SHOP" />
+                <meta name="og:img" content="/assets/images/logo.svg" />
+                <meta
+                  name="og:description"
+                  content="Boutique en ligne de la marque de vêtements INDOMPTABLE"
+                />
+                <meta property="og:locale" content="en_GB" />
+                <meta property="og:locale:alternate" content="fr_FR" />
+                <meta property="og:type" content="website" />
+                <meta property="og:site_name" content="indomptable-shop" />
                 <link rel="icon" href="/assets/images/logo.svg" />
-                <meta name="google-site-verification" content="3QbzuKhavdrXfgAfICg9ub0yWMmPxZH_GrOJX4ZTFpo" />
+                <meta
+                  name="google-site-verification"
+                  content="3QbzuKhavdrXfgAfICg9ub0yWMmPxZH_GrOJX4ZTFpo"
+                />
               </Head>
               <main className={"mx-auto"}>
                 <Header lang={i18n.language ?? "en"} />
