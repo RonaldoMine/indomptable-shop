@@ -16,7 +16,7 @@ import { ThemeProvider } from "next-themes";
 import { FavoriteContextProvider } from "../src/context/FavoriteContext";
 import Footer from "../src/components/Footer";
 import { Analytics } from "@vercel/analytics/react";
-import logo from "../public/assets/images/logo.svg"
+import logo from "../public/assets/images/logo.svg";
 
 //Disable the spinner at the top right
 Nprogress.configure({ showSpinner: false });
@@ -63,7 +63,12 @@ function App({ Component, pageProps }: AppProps) {
                 <meta property="og:locale:alternate" content="fr_FR" />
                 <meta property="og:type" content="website" />
                 <meta property="og:site_name" content="indomptable-shop" />
-                <meta property="og:url" content={router.pathname} />
+                <meta
+                  property="og:url"
+                  content={
+                    "https://indomptable-shop.vercel.app" + router.pathname
+                  }
+                />
                 <link rel="icon" href={logo.src} />
                 <meta
                   name="google-site-verification"
