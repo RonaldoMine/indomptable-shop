@@ -53,7 +53,7 @@ function App({ Component, pageProps }: AppProps) {
                   content="Boutique en ligne de la marque de vêtements INDOMPTABLE"
                 />
                 <meta name="og:title" content="INDOMPTABLE SHOP" />
-                <meta name="og:img" content={logo} />
+                <meta name="og:image" content={logo} />
                 <meta
                   name="og:description"
                   content="Boutique en ligne de la marque de vêtements INDOMPTABLE"
