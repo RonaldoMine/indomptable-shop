@@ -54,7 +54,7 @@ function App({ Component, pageProps }: AppProps) {
                   content="Boutique en ligne de la marque de vêtements INDOMPTABLE"
                 />
                 <meta name="og:title" content="INDOMPTABLE SHOP" />
-                <meta name="og:image" content={logo} />
+                <meta name="og:image" content={"/assets/images/logo.svg"} />
                 <meta
                   name="og:description"
                   content="Boutique en ligne de la marque de vêtements INDOMPTABLE"
@@ -64,7 +64,7 @@ function App({ Component, pageProps }: AppProps) {
                 <meta property="og:type" content="website" />
                 <meta property="og:site_name" content="indomptable-shop" />
                 <meta property="og:url" content={router.pathname} />
-                <link rel="icon" href={logo} />
+                <link rel="icon" href={"/assets/images/logo.svg"} />
                 <meta
                   name="google-site-verification"
                   content="3QbzuKhavdrXfgAfICg9ub0yWMmPxZH_GrOJX4ZTFpo"
