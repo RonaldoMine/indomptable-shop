@@ -10,7 +10,7 @@ import Header from "../src/components/Header";
 import { BasketContextProvider } from "../src/context/BasketContext";
 import { ToastContainer } from "react-toastify";
 import { appWithTranslation, useTranslation } from "next-i18next";
-import { Router } from "next/router";
+import { Router, useRouter } from "next/router";
 import Nprogress from "nprogress";
 import { ThemeProvider } from "next-themes";
 import { FavoriteContextProvider } from "../src/context/FavoriteContext";
@@ -25,6 +25,7 @@ Nprogress.configure({ showSpinner: false });
 // @refresh reset
 function App({ Component, pageProps }: AppProps) {
   const { i18n } = useTranslation();
+  const router = useRouter();
   useEffect(() => {
     Router.events.on("routeChangeStart", (url: URL) => {
       Nprogress.start();
@@ -62,6 +63,7 @@ function App({ Component, pageProps }: AppProps) {
                 <meta property="og:locale:alternate" content="fr_FR" />
                 <meta property="og:type" content="website" />
                 <meta property="og:site_name" content="indomptable-shop" />
+                <meta property="og:url" content={router.pathname} />
                 <link rel="icon" href={logo} />
                 <meta
                   name="google-site-verification"
