@@ -16,6 +16,7 @@ import { ThemeProvider } from "next-themes";
 import { FavoriteContextProvider } from "../src/context/FavoriteContext";
 import Footer from "../src/components/Footer";
 import { Analytics } from "@vercel/analytics/react";
+import logo from "../public/assets/images/logo.svg"
 
 //Disable the spinner at the top right
 Nprogress.configure({ showSpinner: false });
@@ -52,7 +53,7 @@ function App({ Component, pageProps }: AppProps) {
                   content="Boutique en ligne de la marque de vêtements INDOMPTABLE"
                 />
                 <meta name="og:title" content="INDOMPTABLE SHOP" />
-                <meta name="og:img" content="/assets/images/logo.svg" />
+                <meta name="og:img" content={logo} />
                 <meta
                   name="og:description"
                   content="Boutique en ligne de la marque de vêtements INDOMPTABLE"
@@ -61,7 +62,7 @@ function App({ Component, pageProps }: AppProps) {
                 <meta property="og:locale:alternate" content="fr_FR" />
                 <meta property="og:type" content="website" />
                 <meta property="og:site_name" content="indomptable-shop" />
-                <link rel="icon" href="/assets/images/logo.svg" />
+                <link rel="icon" href={logo} />
                 <meta
                   name="google-site-verification"
                   content="3QbzuKhavdrXfgAfICg9ub0yWMmPxZH_GrOJX4ZTFpo"
