@@ -54,13 +54,14 @@ function App({ Component, pageProps }: AppProps) {
                   content="Boutique en ligne de la marque de vêtements INDOMPTABLE"
                 />
                 <meta name="og:title" content="INDOMPTABLE SHOP" />
-                <meta name="og:image" content={logo.src} />
                 <meta
                   name="og:description"
                   content="Boutique en ligne de la marque de vêtements INDOMPTABLE"
                 />
-                <meta property="og:locale" content="en_GB" />
-                <meta property="og:locale:alternate" content="fr_FR" />
+                <meta
+                  name="og:image"
+                  content={"https://indomptable-shop.vercel.app/" + logo.src}
+                />
                 <meta property="og:type" content="website" />
                 <meta property="og:site_name" content="indomptable-shop" />
                 <meta
@@ -69,6 +70,16 @@ function App({ Component, pageProps }: AppProps) {
                     "https://indomptable-shop.vercel.app" + router.pathname
                   }
                 />
+                <meta name="twitter:title" content="INDOMPTABLE SHOP"></meta>
+                <meta
+                  name="twitter:description"
+                  content="Boutique en ligne de la marque de vêtements INDOMPTABLE"
+                />
+                <meta
+                  name="twitter:image"
+                  content={"https://indomptable-shop.vercel.app/" + logo.src}
+                />
+                <meta name="twitter:card" content="summary_large_image"></meta>
                 <link rel="icon" href={logo.src} />
                 <meta
                   name="google-site-verification"
