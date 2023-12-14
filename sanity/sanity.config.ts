@@ -24,16 +24,16 @@ const localeString = {
     {
       title: 'Translations',
       name: 'translations',
-      options: { collapsible: true }
-    }
+      options: {collapsible: true},
+    },
   ],
   // Dynamically define one field per language
-  fields: supportedLanguages.map(lang => ({
+  fields: supportedLanguages.map((lang) => ({
     title: lang.title,
     name: lang.id,
     type: 'string',
-    fieldset: lang.isDefault ? null : 'translations'
-  }))
+    fieldset: lang.isDefault ? null : 'translations',
+  })),
 }
 
 const localeText = {
@@ -47,24 +47,23 @@ const localeText = {
     {
       title: 'Translations',
       name: 'translations',
-      options: { collapsible: true }
-    }
+      options: {collapsible: true},
+    },
   ],
   // Dynamically define one field per language
-  fields: supportedLanguages.map(lang => ({
+  fields: supportedLanguages.map((lang) => ({
     title: lang.title,
     name: lang.id,
     type: 'text',
-    fieldset: lang.isDefault ? null : 'translations'
-  }))
+    fieldset: lang.isDefault ? null : 'translations',
+  })),
 }
-
 export default defineConfig({
   name: 'default',
   title: 'IndomptableShop',
 
   projectId: '0vvlpszg',
-  dataset: 'production',
+  dataset: 'development',
 
   plugins: [deskTool(), visionTool()],
 
