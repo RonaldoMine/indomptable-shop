@@ -2,6 +2,7 @@ import {defineField, defineType} from 'sanity'
 // import { baseLanguage } from '../sanity.config'
 
 const SIZES = [
+  {title: 'Size S', value: 'S'},
   {title: 'Size M', value: 'M'},
   {title: 'Size L', value: 'L'},
   {title: 'Size XL', value: 'XL'},
@@ -13,6 +14,8 @@ const COLORS = [
   {title: 'Color White', value: 'white'},
   {title: 'Color Black', value: 'black'},
   {title: 'Color Green', value: 'green'},
+  {title: 'Color Pink', value: 'pink'},
+  {title: 'Color Blue', value: 'blue'},
 ]
 
 export default defineType({
@@ -73,6 +76,11 @@ export default defineType({
     defineField({
       name: 'coverImage',
       title: 'Cover',
+      type: 'image',
+    }),
+    defineField({
+      name: 'plainImage',
+      title: 'Plain Image',
       type: 'image',
     }),
     defineField({

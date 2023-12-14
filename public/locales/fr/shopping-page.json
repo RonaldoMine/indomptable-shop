@@ -1,5 +1,10 @@
 {
     "title": "Boutique",
     "discount": "Boutique Indomptable",
-    "promo-text": "Rehaussez votre style avec la marque Indomptable, achetez maintenant !"
+    "promo-text": "Rehaussez votre style avec la marque Indomptable, achetez maintenant !",
+    "filter": {
+        "all": "Tous",
+        "new" : "Nouveaux",
+        "bundle": "Packages"
+    }
 }

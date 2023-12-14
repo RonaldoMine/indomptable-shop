@@ -1,5 +1,10 @@
 {
     "title": "Shop",
     "discount": "Indomptable Shop.",
-    "promo-text": "Elevate your style with Indomptable brand, Shop now!"
+    "promo-text": "Elevate your style with Indomptable brand, Shop now!",
+    "filter": {
+        "all": "All",
+        "new" : "New",
+        "bundle": "Packages"
+    }
 }

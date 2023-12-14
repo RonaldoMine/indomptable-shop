@@ -7,6 +7,7 @@ import { useTranslation } from "next-i18next";
 import { sanityClient, urlFor } from "../sanity";
 import bannerEn from "../public/assets/images/banner-shop-page-en.webp";
 import bannerFr from "../public/assets/images/banner-shop-page-fr.webp";
+import InputRadio from "../src/components/InputRadio";
 
 function Shopping({
   productsData,
@@ -21,6 +22,10 @@ function Shopping({
         return "rgb(239, 115, 22)";
       case "green":
         return "rgb(34, 197, 94)";
+      case "blue":
+        return "rgb(50, 130, 246)";
+      case "pink":
+        return "rgb(236, 72, 153)";
       case "red":
         return "rgb(239, 68, 68)";
       default:
@@ -42,17 +47,27 @@ function Shopping({
               __html: t("discount"),
             }}
           />
-          <p>{t("promo-text")}</p> 
+          <p>{t("promo-text")}</p>
         </div>
 
-    {/*     <Image
+        {/*     <Image
           src={i18n.language === "fr" ? bannerFr : bannerEn}
           alt="Banner Shop"
           className="w-full"
         /> */}
       </div>
-      <main className="px-6 py-20 max-w-[75rem] mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <main className="sm:px-24 px-8 pt-10 pb-20 max-w-[75rem] mx-auto">
+        <div className="flex gap-4 px-2 py-1 mb-4">
+          <InputRadio
+            label={t("filter.all")}
+            name="filter"
+            defaultChecked={true}
+            id="all"
+          />
+          <InputRadio label={t("filter.new")} name="filter" id="new" />
+          <InputRadio label={t("filter.bundle")} name="filter" id="bundle" />
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {productsData?.length > 0 ? (
             productsData.map((product: any) => {
               return (
@@ -60,17 +75,17 @@ function Shopping({
                   key={product.sku}
                   className="border border-slate-200 dark:border-neutral-600"
                 >
-                  <div className="relative bg-gray-300 dark:bg-neutral-700">
+                  <div className="relative">
                     <Link
                       key={product.sku}
                       href={`/category/${product.category}/${product.sku}`}
                     >
                       <Image
-                        src={urlFor(product.coverImage).quality(100).url()}
-                        className="h-[300px] w-full object-contain"
-                        height={420}
+                        src={urlFor(product.plainImage).quality(100).url()}
+                        className="w-full aspect-square"
+                        height={0}
                         width={256}
-                        blurDataURL={urlFor(product.coverImage)
+                        blurDataURL={urlFor(product.plainImage)
                           .blur(70)
                           .quality(30)
                           .url()}
@@ -160,7 +175,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       "sizeGuide": sizeGuide.${locale},
       "description": description.${locale},
       slug,
-      coverImage {
+      plainImage {
         asset
       },
       price,
