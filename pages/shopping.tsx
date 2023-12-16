@@ -5,8 +5,8 @@ import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import { sanityClient, urlFor } from "../sanity";
-import bannerEn from "../public/assets/images/banner-shop-page-en.webp";
-import bannerFr from "../public/assets/images/banner-shop-page-fr.webp";
+// import bannerEn from "../public/assets/images/banner-shop-page-en.webp";
+// import bannerFr from "../public/assets/images/banner-shop-page-fr.webp";
 import InputRadio from "../src/components/InputRadio";
 
 function Shopping({
@@ -42,7 +42,7 @@ function Shopping({
       >
         <div className="flex text-center px-4 flex-col gap-3 w-full max-w-6xl mx-auto py-10 bg-neutral-100 dark:bg-neutral-700">
           <span
-            className="font-futura text-4xl sm:text-6xl"
+            className="font-title text-4xl sm:text-6xl"
             dangerouslySetInnerHTML={{
               __html: t("discount"),
             }}
@@ -81,11 +81,11 @@ function Shopping({
                       href={`/category/${product.category}/${product.sku}`}
                     >
                       <Image
-                        src={urlFor(product.plainImage).quality(100).url()}
+                        src={urlFor(product.coverImage).quality(100).url()}
                         className="w-full aspect-square"
-                        height={0}
-                        width={256}
-                        blurDataURL={urlFor(product.plainImage)
+                        height={300}
+                        width={300}
+                        blurDataURL={urlFor(product.coverImage)
                           .blur(70)
                           .quality(30)
                           .url()}
@@ -175,7 +175,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       "sizeGuide": sizeGuide.${locale},
       "description": description.${locale},
       slug,
-      plainImage {
+      coverImage {
         asset
       },
       price,

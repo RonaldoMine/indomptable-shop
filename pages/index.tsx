@@ -24,22 +24,23 @@ export default function Home({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { t, i18n } = useTranslation("home");
   const router = useRouter();
-  const [popupVisibility, setPopupVisibility] = useState(false);
-  const blackFridrayPopup = () => {
-    setTimeout(() => {
-      setPopupVisibility(true);
-    }, 3000);
-  };
-  const handleClosePopup = () => {
-    setPopupVisibility(false);
-  };
+  // const [popupVisibility, setPopupVisibility] = useState(false);
+  // const blackFridrayPopup = () => {
+  //   setTimeout(() => {
+  //     setPopupVisibility(true);
+  //   }, 3000);
+  // };
+  // const handleClosePopup = () => {
+  //   setPopupVisibility(false);
+  // };
 /* 
   useEffect(() => {
     blackFridrayPopup();
   }, []); */
+  // console.log(peoples)
   return (
     <>
-      <div className="w-full mx-auto h-[50vw] relative overflow-hidden">
+      <div className="w-full mx-auto h-[40vw] relative overflow-hidden">
         <Image
           src={banner_photo}
           placeholder="blur"
@@ -48,7 +49,7 @@ export default function Home({
           className="max-w-full h-auto object-cover"
         />
         <div className="absolute flex flex-col md:px-[3vw] md:pb-[5vw] h-full w-full md:justify-end justify-center items-center md:items-start">
-          <p className="font-futura sm:w-min text-white text-5xl md:text-[6rem] break-words text-center md:text-left leading-none ">
+          <p className="font-title sm:w-min text-white text-5xl md:text-[6rem] break-words text-center md:text-left leading-none ">
             {t("banner-title")}
           </p>
           {/*<button
@@ -58,7 +59,7 @@ export default function Home({
         </div>
       </div>
       <div className="max-w-screen-2xl mx-auto">
-        <div className="relative grid sm:grid-cols-2 grid-cols-1">
+        {/* <div className="relative grid sm:grid-cols-2 grid-cols-1">
           <HomeCardItem
             title={"WHITE"}
             typeClass={HomeCardType.left}
@@ -75,7 +76,7 @@ export default function Home({
             typeCategory={"t-shirt"}
             slugProduct={"indomptable-the-hemle"}
           />
-        </div>
+        </div> */}
         <OurStory />
       </div>
       <Newsletter />
@@ -84,7 +85,7 @@ export default function Home({
         <Contact />
       </div>
 
-      <Transition appear show={popupVisibility} as={Fragment}>
+      {/* <Transition appear show={popupVisibility} as={Fragment}>
         <Dialog
           as="div"
           className="relative z-[9999]"
@@ -138,7 +139,7 @@ export default function Home({
             </div>
           </div>
         </Dialog>
-      </Transition>
+      </Transition> */}
     </>
   );
 }

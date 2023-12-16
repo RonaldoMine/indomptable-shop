@@ -25,7 +25,7 @@ export default function Footer({ lang }: { lang: string }) {
         <div className="mb-12 md:mb-0">
           <Link href={"/"}>
             <Image
-              className={"h-16 w-24 pb-3"}
+              className={"w-14 pb-3"}
               src={logo}
               alt="Indomptable Logo"
             />

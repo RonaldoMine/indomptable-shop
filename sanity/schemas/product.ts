@@ -79,11 +79,6 @@ export default defineType({
       type: 'image',
     }),
     defineField({
-      name: 'plainImage',
-      title: 'Plain Image',
-      type: 'image',
-    }),
-    defineField({
       name: 'colors',
       title: 'Colors',
       type: 'array',

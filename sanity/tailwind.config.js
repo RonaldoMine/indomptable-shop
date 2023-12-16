@@ -7,8 +7,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        futura: 'Futura',
-        space: 'Space Grostek',
+        title: 'League Gothic',
+        copy: 'Inter',
       }
     },
   },

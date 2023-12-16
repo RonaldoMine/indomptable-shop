@@ -8,7 +8,7 @@ export default function OurStory() {
     <>
       <div id="our-story" className="dark:bg-neutral-800">
         <blockquote
-          className={"lg:w-3/6 md:w-4/6 w-full p-4 mx-auto text-center"}
+          className={"lg:w-3/6 md:w-4/6 w-full mx-auto text-center"}
         >
           <h1
             className={
@@ -17,9 +17,9 @@ export default function OurStory() {
           >
             {t("title")}
           </h1>
-          <div className={"relative mt-10"}>
+          <div className={"relative mt-8"}>
             <svg
-              className="absolute top-0 left-[12%] md:left-0 sm:transform sm:-translate-x-6 sm:-translate-y-8 h-8 w-8 sm:h-16 sm:w-16 text-gray-200 dark:text-neutral-500"
+              className="absolute top-0 left-[12%] md:left-0 sm:transform sm:-translate-x-6 sm:-translate-y-8 h-10 w-10 sm:h-16 sm:w-16 text-gray-200 dark:text-neutral-500"
               width="16"
               height="16"
               viewBox="0 0 16 16"
@@ -33,11 +33,11 @@ export default function OurStory() {
               />
             </svg>
             <p
-              className={"md:text-3xl sm:text-2xl text-1xl pt-10 pb-10"}
+              className={"md:text-3xl md:leading-10 text-2xl pt-10 pb-10"}
               dangerouslySetInnerHTML={{ __html: t("description") }}
             />
             <svg
-              className="absolute bottom-0 right-[12%] md:right-0 rotate-180 sm:transform sm:translate-x-6 sm:translate-y-8 h-8 w-8 sm:h-16 sm:w-16 text-gray-200 dark:text-neutral-500"
+              className="absolute bottom-0 right-[12%] md:right-0 rotate-180 sm:transform sm:translate-x-6 sm:translate-y-8 h-10 w-10 sm:h-16 sm:w-16 text-gray-200 dark:text-neutral-500"
               width="16"
               height="16"
               viewBox="0 0 16 16"

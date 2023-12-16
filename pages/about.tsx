@@ -20,7 +20,7 @@ const About = () => {
         </h3>
         <p
           dangerouslySetInnerHTML={{ __html: t("our-mission.content") }}
-          className="text-7xl font-bold text-fluid-headline "
+          className="text-7xl font-bold leading-tight text-fluid-headline"
         />
       </section>
       <section id={"about-story"} className="text-center py-40">
@@ -69,7 +69,7 @@ const About = () => {
             <Image src={passion} className="absolute" alt={t("our-values.card-two")} />
             <div className="absolute w-full h-full flex items-end">
               <div className="w-full h-max pb-6 pl-6 z-10">
-                <p className="font-futura text-4xl sm:text-2xl lg:text-4xl w-min text-white">
+                <p className="font-title text-4xl min-[354px]:text-6xl sm:text-4xl w-min text-white">
                   {t("our-values.card-two")}
                 </p>
               </div>
@@ -82,7 +82,7 @@ const About = () => {
             <Image src={teamwork} className="absolute" alt={t("our-values.card-one")} />
             <div className="absolute w-full h-full flex items-end">
               <div className="w-full h-max pb-6 pl-6 z-10">
-                <p className="font-futura text-4xl sm:text-2xl lg:text-4xl w-min text-white">
+                <p className="font-title text-4xl min-[354px]:text-6xl sm:text-4xl w-min text-white">
                   {t("our-values.card-one")}
                 </p>
               </div>
@@ -95,7 +95,7 @@ const About = () => {
             <Image src={perseverance} className="absolute" alt={t("our-values.card-three")} />
             <div className="absolute w-full h-full flex items-end">
               <div className="w-full h-max pb-6 pl-6 z-10">
-                <p className="font-futura text-4xl sm:text-2xl lg:text-4xl w-min text-white">
+                <p className="font-title text-4xl min-[354px]:text-6xl sm:text-4xl w-min text-white">
                   {t("our-values.card-three")}
                 </p>
               </div>

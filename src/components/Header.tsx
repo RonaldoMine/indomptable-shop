@@ -22,17 +22,17 @@ export default function Header({ lang }: { lang: string }) {
   const visible = useHeaderVisible();
   const locales_messages = require(`../../public/locales/${lang}/link.json`);
 
-  const handleGoToAboutUs = () => {
-    const contactUs = document.getElementById("contact-us");
-    if (contactUs) {
-      contactUs.scrollIntoView({ behavior: "smooth", block: "center" });
-    } else {
-      router.push("/").then(() => {
-        const contactUs = document.getElementById("contact-us");
-        contactUs?.scrollIntoView({ behavior: "auto", block: "center" });
-      });
-    }
-  };
+  // const handleGoToAboutUs = () => {
+  //   const contactUs = document.getElementById("contact-us");
+  //   if (contactUs) {
+  //     contactUs.scrollIntoView({ behavior: "smooth", block: "center" });
+  //   } else {
+  //     router.push("/").then(() => {
+  //       const contactUs = document.getElementById("contact-us");
+  //       contactUs?.scrollIntoView({ behavior: "auto", block: "center" });
+  //     });
+  //   }
+  // };
 
   useEffect(() => {
     setMounted(true);
@@ -41,50 +41,54 @@ export default function Header({ lang }: { lang: string }) {
 
   return (
     <header
-      className={
-        `sticky ${visible ? 'top-0' : '-top-32 md:-top-20'} z-50 duration-150 transition-[top] delay-300 bg-white dark:bg-neutral-800 dark:border-b-neutral-500 dark:border-b shadow-md`
-      }
+      className={`sticky ${
+        visible ? "top-0" : "-top-32 md:-top-20"
+      } z-50 duration-150 transition-[top] delay-300 bg-white dark:bg-neutral-800 dark:border-b-neutral-500 dark:border-b shadow-md`}
     >
-      <div className="max-w-7xl mx-auto grid gap-2 justify-items-center items-center md:justify-items-end md:flex px-4 sm:px-10 py-3 relative z-10">
-        <div className="flex justify-between w-full md:w-auto items-center border-b border-gray-100 md:border-0 dark:border-neutral-600 pb-2 sm:pb-0">
-          <Link href={"/"}>
+      <div className="max-w-7xl mx-auto grid gap-2 justify-items-center md:justify-items-end md:flex px-4 sm:px-10  relative z-10">
+        <div className="flex justify-between w-full md:w-auto border-b border-gray-100 md:border-0 dark:border-neutral-600 pb-2 sm:pb-0">
+          <Link href={"/"} className="py-3">
             <Image className={"h-8 w-24"} src={logo} alt="Indomptable" />
           </Link>
           <HamburgerMenu locales_messages={locales_messages} />
         </div>
-        <div className="hidden md:flex gap-8 w-full lg:justify-center justify-center items-center sm:mb-0 sm:mt-0 mb-2 mt-2">
+        <div className="hidden md:flex gap-8 w-full justify-center sm:mb-0 sm:mt-0">
           <Link
-            title={locales_messages.shop}
+            // title={locales_messages.shop}
             href="/shopping"
-            className={`dark:text-white ${
-              pathname === "/shopping" ? "border-b-2" : ""
+            className={`dark:text-white dark:border-neutral-400 pt-3.5 ${
+              pathname === "/shopping" ? "border-b-2 border-neutral-600" : ""
             }`}
           >
             {locales_messages.shop}
           </Link>
           <Link
-            title={locales_messages.gallery}
+            // title={locales_messages.gallery}
             href="/gallery"
-            className={`dark:text-white ${
-              pathname === "/gallery" ? "border-b-2" : ""
+            className={`dark:text-white dark:border-neutral-400 pt-3.5 ${
+              pathname === "/gallery" ? "border-b-2 border-neutral-600" : ""
             }`}
           >
             {locales_messages.gallery}
           </Link>
           <Link
-            title={locales_messages.about}
+            // title={locales_messages.about}
             href="/about"
-            className={`dark:text-white ${
-              pathname === "/about" ? "border-b" : ""
+            className={`dark:text-white dark:border-neutral-400 pt-3.5 ${
+              pathname === "/about" ? "border-b-2 border-neutral-600" : ""
             }`}
           >
             {locales_messages.about}
           </Link>
-          <button title={locales_messages.contact} onClick={handleGoToAboutUs}>
+          <Link
+            href={"/#contact-us"}
+            className="pt-3.5"
+            title={locales_messages.contact}
+          >
             {locales_messages.contact}
-          </button>
+          </Link>
         </div>
-        <div className="flex justify-between gap-4">
+        <div className="flex justify-between items-center gap-4 mb-2">
           <button
             title={currentLocale}
             className="border rounded-2xl w-10 px-2 gap-1 text-center"

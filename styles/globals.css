@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
 /*
   1. Use a more-intuitive box-sizing model.
 */
@@ -11,13 +13,8 @@
 
 @layer base {
     @font-face {
-        font-family: 'Futura';
-        src: url('../public/assets/fonts/Futura.woff2') format('woff2');
-        font-display: swap;
-    }
-    @font-face {
-        font-family: 'Space Grostek';
-        src: url('../public/assets/fonts/Space Grostek.ttf') format('truetype');
+        font-family: 'League Gothic';
+        src: url('../public/assets/fonts/LeagueGothic-Regular.ttf') format('ttf');
         font-display: swap;
     }
 }
@@ -30,9 +27,13 @@
     --color-yellow: #ffc200;
     --color-white-orange: rgba(237, 114, 13, .2);
     --gradient-color: linear-gradient(316deg, #f94327 0%, #ff7d14 74%);
-    font-family: 'Space Grostek', serif;
+    font-family: 'Inter', sans-serif;
     --input-border-radius: .075rem;
     --button-border-radius: .075rem;
+}
+
+h1, h2, h3{
+    line-height: 1.15 !important;
 }
 
 .text-red {
@@ -66,7 +67,7 @@
 }
 
 #contact-us, #our-community, #newsletter, #our-story {
-    padding: 100px 10px;
+    padding: 5rem 0.825rem;
 }
 
 #nprogress .bar {
@@ -270,9 +271,9 @@ button.bg-gradient {
     background-size: 200% auto;
 }
 
-.inline-block {
+/* .inline-block {
     display: inline-block;
-}
+} */
 
 @keyframes shine {
     100% {
