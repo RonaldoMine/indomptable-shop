@@ -33,14 +33,14 @@ export default function Home({
   // const handleClosePopup = () => {
   //   setPopupVisibility(false);
   // };
-/* 
+  /* 
   useEffect(() => {
     blackFridrayPopup();
   }, []); */
   // console.log(peoples)
   return (
     <>
-      <div className="w-full mx-auto h-[40vw] relative overflow-hidden">
+      <div className="w-full mx-auto h-[40vw] relative overflow-hidden max-w-screen-lg mt-5 sm:mt-10">
         <Image
           src={banner_photo}
           placeholder="blur"
@@ -48,14 +48,13 @@ export default function Home({
           alt="banner photo"
           className="max-w-full h-auto object-cover"
         />
-        <div className="absolute flex flex-col md:px-[3vw] md:pb-[5vw] h-full w-full md:justify-end justify-center items-center md:items-start">
+        <div className="absolute flex flex-col pt-[6vw] md:px-[3vw] md:pb-[5vw] h-full w-full md:justify-between justify-center items-center md:items-start">
           <p className="font-title sm:w-min text-white text-5xl md:text-[6rem] break-words text-center md:text-left leading-none ">
             {t("banner-title")}
           </p>
-          {/*<button
-                        className="bg-gradient-to-bl hidden sm:block from-slate-700 to-slate-900 md:self-start py-4 px-10 mt-6  text-white font-space  dark:text-black dark:from-slate-200 dark:to-slate-50 dark:bg-gradient-to-bl">
-                        Shop now
-                    </button>*/}
+          <button className="bg-gradient hidden sm:block md:self-start py-4 px-10 mt-6  text-white font-space  dark:text-black dark:from-slate-200 dark:to-slate-50 dark:bg-gradient-to-bl">
+            Shop now
+          </button>
         </div>
       </div>
       <div className="max-w-screen-2xl mx-auto">
