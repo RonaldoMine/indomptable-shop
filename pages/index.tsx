@@ -1,23 +1,19 @@
-import shirt_black from "../public/assets/images/tshirt-black-desktop.png";
-import shirt_white from "../public/assets/images/tshirt-white-desktop.png";
 import banner_photo from "../public/assets/images/banner-home.webp";
-import React, { useEffect, useState, Fragment } from "react";
+import React from "react";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Image from "next/image";
 import { sanityClient } from "../sanity";
-import HomeCardItem, { HomeCardType } from "../src/components/HomeCardItem";
 import Contact from "../src/components/Contact";
 import Newsletter from "../src/components/Newsletter";
 import People from "../src/components/People";
 import OurStory from "../src/components/OurStory";
 import { useTranslation } from "next-i18next";
 import { shuffleArray } from "../src/utils";
-import { Dialog, Transition } from "@headlessui/react";
-import blackFridayEn from "../public/assets/images/popup-black-friday-en.webp";
-import blackFridayFr from "../public/assets/images/popup-black-friday-fr.webp";
-import { AiOutlineClose } from "react-icons/ai";
 import { useRouter } from "next/router";
+import Link from "next/link";
+import { ButtonBorder, ButtonGradient } from "../src/components/Button";
+import { BsFacebook, BsInstagram } from "react-icons/bs";
 
 export default function Home({
   peoples,
@@ -40,21 +36,69 @@ export default function Home({
   // console.log(peoples)
   return (
     <>
-      <div className="w-full mx-auto h-[40vw] relative overflow-hidden max-w-screen-lg mt-5 sm:mt-10">
-        <Image
-          src={banner_photo}
-          placeholder="blur"
-          fill={true}
-          alt="banner photo"
-          className="max-w-full h-auto object-cover"
-        />
-        <div className="absolute flex flex-col pt-[6vw] md:px-[3vw] md:pb-[5vw] h-full w-full md:justify-between justify-center items-center md:items-start">
-          <p className="font-title sm:w-min text-white text-5xl md:text-[6rem] break-words text-center md:text-left leading-none ">
-            {t("banner-title")}
-          </p>
-          <button className="bg-gradient hidden sm:block md:self-start py-4 px-10 mt-6  text-white font-space  dark:text-black dark:from-slate-200 dark:to-slate-50 dark:bg-gradient-to-bl">
-            Shop now
-          </button>
+      <div className="overflow-hidden max-w-6xl mx-auto">
+        <div className="w-full mx-auto h-[60vw] md:h-[50vw] lg:h-[40vw] max-h-[600px] relative px-2 py-2">
+          <Image
+            src={banner_photo}
+            placeholder="blur"
+            fill={true}
+            alt="banner photo"
+            className="max-w-full h-auto object-cover"
+          />
+          <div className="absolute flex flex-col md:px-[3vw] h-full w-full justify-center items-start">
+            <p className="font-title w-min text-white text-6xl md:text-[6rem] break-words text-left leading-none ">
+              {t("banner-title")}
+            </p>
+          </div>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 mt-4 gap-4">
+          <div className="h-[50vw] max-h-[400px] bg-gray-200 flex flex-col justify-between py-6 px-4 md:px-10">
+            <h1 className="font-title font-extrabold text-4xl md:text-6xl">
+              GIFT IDEAS
+            </h1>
+            <ButtonGradient
+              onClick={() => router.push("/shopping")}
+              className="w-40"
+            >
+              Shop now
+            </ButtonGradient>
+          </div>
+          <div className="grid gap-4">
+            <div className="bg-gray-200 flex flex-col justify-between gap-4 px-4 py-6 md:px-10">
+              <h1 className="font-title font-extrabold text-4xl">
+                Explore what&apos;s new here
+              </h1>
+              <Link
+                href={"/shopping?badge=new"}
+                className="border-slate-700 border-2 px-4 py-3 font-copy dark:border dark:border-neutral-600 dark:text-neutral-300 rounded-button w-32"
+              >
+                Shop now
+              </Link>
+            </div>
+            <div className="bg-gray-200 flex flex-col justify-between gap-4 py-6 px-4 md:px-10">
+              <h1 className="font-title font-extrabold text-2xl md:text-4xl">
+                JOIN US
+              </h1>
+              <div className="flex gap-2">
+                <Link
+                  className="text-4xl"
+                  href={
+                    "https://www.facebook.com/profile.php?id=100089070463423"
+                  }
+                >
+                  <BsFacebook />
+                </Link>
+                <Link
+                  className="text-4xl"
+                  href={
+                    "https://www.facebook.com/profile.php?id=100089070463423"
+                  }
+                >
+                  <BsInstagram />
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div className="max-w-screen-2xl mx-auto">
