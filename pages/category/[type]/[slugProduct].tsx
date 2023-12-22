@@ -16,6 +16,9 @@ import Alert from "../../../src/components/Alert";
 import Loader from "../../../src/components/Loader";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
+import Link from "next/link";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { FreeMode, Navigation } from "swiper";
 
 type Color = {
   name: string;
@@ -35,6 +38,7 @@ function classNames(...classes: any[]) {
 
 export default function SlugProduct({
   productData,
+  similaryProductsData,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { t, i18n } = useTranslation("product-page");
   const {
@@ -52,6 +56,7 @@ export default function SlugProduct({
   const [onAddProduct, setOnAddProduct] = useState(false);
   const { dispatch } = useBasket();
   const product = productData[0].product;
+  const similaryProducts = similaryProductsData[0].products;
   const colors = product.colors;
   const [selectedColor, setSelectedColor] = useState(colors[0]);
   const [isOpen, setIsOpen] = useState(false);
@@ -196,7 +201,7 @@ export default function SlugProduct({
               return (
                 <Image
                   key={index}
-                  className={`object-contain w-full mb-4 max-w-full h-auto aspect-ratio[${image.src.metadata.dimensions.aspectRatio}]`}
+                  className={`object-cover w-full mb-4 max-w-full h-auto aspect-[2/3]`}
                   placeholder="blur"
                   width={image.src.metadata.dimensions.width}
                   height={image.src.metadata.dimensions.height}
@@ -239,7 +244,7 @@ export default function SlugProduct({
                 return (
                   <Image
                     key={index}
-                    className={`object-contain w-full mb-4 max-w-full h-auto aspect-ratio[${image.src.metadata.dimensions.aspectRatio}]`}
+                    className={`object-contain w-full mb-4 max-w-full h-auto aspect-square`}
                     placeholder="blur"
                     width={image.src.metadata.dimensions.width}
                     height={image.src.metadata.dimensions.height}
@@ -256,7 +261,7 @@ export default function SlugProduct({
                 return (
                   <Image
                     key={index}
-                    className={`object-cover w-[48%] mb-4 max-w-full h-auto snap-center aspect-ratio[${image.src.metadata.dimensions.aspectRatio}]`}
+                    className={`object-cover w-[48%] mb-4 max-w-full h-auto snap-center aspect-square`}
                     placeholder="blur"
                     // fill={true}
                     width={image.src.metadata.dimensions.width}
@@ -642,6 +647,88 @@ export default function SlugProduct({
             </div>
           </div>
         </div>
+
+        <div className="p-4">
+          <h1 className={"text-xl sm:text-2xl mb-10"}>{t("product-may-like")}</h1>
+          <Swiper
+            slidesPerView={1.5}
+            spaceBetween={10}
+            modules={[FreeMode, Navigation]}
+            className="relative"
+            grabCursor={true}
+            navigation={true}
+            loop={true}
+            /* centeredSlides={true} */
+            speed={500}
+            breakpoints={{
+              600: {
+                slidesPerView: 2.10,
+                spaceBetween: 10,
+              },
+              768: {
+                slidesPerView: 2.5,
+                spaceBetween: 20,
+              },
+              1024: {
+                slidesPerView: 2.9,
+                spaceBetween: 10,
+              },
+            }}
+          >
+            {similaryProducts.map((product: any, index: number) => {
+              return (
+                <SwiperSlide key={index}>
+                  <div className="cursor-pointer"
+                    onClick={() =>
+                      window.location.assign(
+                        `/category/${product.category}/${product.sku}`
+                      )
+                    }
+                  >
+                    <Image
+                      src={urlFor(product.coverImage).quality(100).url()}
+                      alt={product.title}
+                      placeholder="blur"
+                      blurDataURL={urlFor(product.coverImage)
+                        .blur(70)
+                        .quality(30)
+                        .url()}
+                      height={0}
+                      width={500}
+                      className={
+                        "aspect-[1.1] w-full  object-cover rounded mb-4"
+                      }
+                    />
+                    <div className="py-2 px-2">
+                      <h4 className="dark:text-neutral-200 font-bold">
+                        {product.name}
+                      </h4>
+                      <p className="font-medium dark:text-neutral-300 text-neutral-950 text-opacity-30 mb-2">
+                        {product.subtitle}
+                      </p>
+
+                      <p className="font-medium dark:text-neutral-300">
+                        XAF{" "}
+                        <span className={"text-md mr-1 font-bold"}>
+                          {product?.pricePromo}
+                        </span>
+                        <span
+                          className={`${
+                            product?.pricePromo != null
+                              ? "line-through text-sm"
+                              : ""
+                          } dark:text-neutral-300`}
+                        >
+                          {product?.price}
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
+        </div>
       </div>
       <Alert
         type={configAlert.status}
@@ -658,7 +745,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   params,
   locale,
 }: any) => {
-  const query = `*[_type == "categories" && type == $type]{
+  const querySinglePorudct = `*[_type == "categories" && type == $type]{
     _id,
     type,
     name,
@@ -695,7 +782,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   }
     }
 }`;
-  const productData = await sanityClient.fetch(query, {
+  const productData = await sanityClient.fetch(querySinglePorudct, {
     type: params?.type,
     slugProduct: params?.slugProduct,
   });
@@ -707,9 +794,30 @@ export const getServerSideProps: GetServerSideProps = async ({
       },
     };
   }
+
+  const querySimilarProducts = `*[_type == "categories"]{
+    "products": *[_type == "products" && slug.current != $slugProduct] | order(_createdAt desc){
+      _id,
+      name,
+      sku,
+      "category": ^.type,
+      "subtitle": subtitle.${locale},
+      slug,
+      coverImage {
+        asset
+      },
+      price,
+      pricePromo,
+  }
+}`;
+  const similaryProductsData = await sanityClient.fetch(querySimilarProducts, {
+    type: params?.type,
+    slugProduct: params?.slugProduct,
+  });
   return {
     props: {
       productData,
+      similaryProductsData,
       ...(await serverSideTranslations(locale, [
         "product-page",
         "favorite",

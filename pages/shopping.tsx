@@ -8,11 +8,14 @@ import { sanityClient, urlFor } from "../sanity";
 // import bannerEn from "../public/assets/images/banner-shop-page-en.webp";
 // import bannerFr from "../public/assets/images/banner-shop-page-fr.webp";
 import InputRadio from "../src/components/InputRadio";
+import { useRouter } from "next/router";
 
 function Shopping({
   productsData,
+  badgeParam,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { t, i18n } = useTranslation("shopping-page");
+  const router = useRouter();
 
   const getRgbColor = (color: string): string => {
     switch (color) {
@@ -31,6 +34,14 @@ function Shopping({
       default:
         return "rgb(0,0, 0)";
     }
+  };
+
+  const handleFilter = () => {
+    router.push("?badge=new");
+  };
+
+  const handleResetFilter = () => {
+    router.push("");
   };
 
   return (
@@ -61,11 +72,17 @@ function Shopping({
           <InputRadio
             label={t("filter.all")}
             name="filter"
-            defaultChecked={true}
+            defaultChecked={!badgeParam}
             id="all"
+            onClick={handleResetFilter}
           />
-          <InputRadio label={t("filter.new")} name="filter" id="new" />
-          <InputRadio label={t("filter.bundle")} name="filter" id="bundle" />
+          <InputRadio
+            label={t("filter.new")}
+            name="filter"
+            id="new"
+            onClick={handleFilter}
+            defaultChecked={badgeParam && badgeParam === "new"}
+          />
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {productsData?.length > 0 ? (
@@ -75,14 +92,26 @@ function Shopping({
                   key={product.sku}
                   className="border border-slate-200 dark:border-neutral-600"
                 >
-                  <div className="relative">
+                  <div className="relative group">
                     <Link
                       key={product.sku}
                       href={`/category/${product.category}/${product.sku}`}
                     >
                       <Image
+                        src={urlFor(product.colors[0].images[1]).quality(100).url()}
+                        className="w-full aspect-square object-cover group-hover:block hidden"
+                        height={300}
+                        width={300}
+                        blurDataURL={urlFor(product.colors[0].images[1])
+                          .blur(70)
+                          .quality(30)
+                          .url()}
+                        alt={product.name}
+                        priority
+                      />
+                      <Image
                         src={urlFor(product.coverImage).quality(100).url()}
-                        className="w-full aspect-square"
+                        className="w-full aspect-square object-cover group-hover:hidden block"
                         height={300}
                         width={300}
                         blurDataURL={urlFor(product.coverImage)
@@ -161,12 +190,17 @@ export default Shopping;
 
 export const getServerSideProps: GetServerSideProps = async ({
   locale,
+  query,
 }: any) => {
-  const query = `*[_type == "categories"]{
+  const badge = query?.badge ?? null;
+
+  const sanityQuery = `*[_type == "categories"]{
     _id,
     type,
     name,
-    "products": *[_type == "products"]{
+    "products": *[_type == "products" ${
+      badge ? "&& '" + badge + "' in badges" : ""
+    }] | order(_createdAt desc){
       _id,
       name,
       sku,
@@ -182,16 +216,18 @@ export const getServerSideProps: GetServerSideProps = async ({
       pricePromo,
        "totalColor": count(colors),
     colors[0...3]{
-    totalQuantity,
+      totalQuantity,
       sizes,
-      name
-  }
+      name, 
+      images[]{
+      "asset":src.asset
+      }
     }
+  }
 }`;
-  const datasSanity = await sanityClient.fetch(query, {
+  const datasSanity = await sanityClient.fetch(sanityQuery, {
     locale: locale,
   });
-
   /* const categoriesData = datasSanity.map((data: any) => {
          return {type: data.type, name: data.name};
      })*/
@@ -203,6 +239,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     props: {
       //categoriesData,
       productsData,
+      badgeParam: badge,
       ...(await serverSideTranslations(locale, ["shopping-page", "favorite"])),
     },
   };

@@ -8,7 +8,7 @@ type ButtonProps =  React.ButtonHTMLAttributes<HTMLButtonElement> & {
 
 export function ButtonGradient({children, className, onClick, ...rest}: ButtonProps) {
     return (<button type={"submit"} onClick={onClick}
-                    className={`font-copy px-10 py-3 hover:bg-opacity-20 text-white bg-orange-gradient ${className}`} {...rest}>
+                    className={`font-copy px-4 py-3 hover:bg-opacity-20 text-white bg-orange-gradient ${className}`} {...rest}>
         {children}
     </button>);
 }

@@ -17,6 +17,7 @@ const COLORS = [
   {title: 'Color Pink', value: 'pink'},
   {title: 'Color Blue', value: 'blue'},
 ]
+const BADGES = [{title: 'NEW PRODUCT', value: 'new'}]
 
 export default defineType({
   name: 'products',
@@ -147,82 +148,20 @@ export default defineType({
         },
       ],
     }),
-    // defineField({
-    //     name: 'sizes',
-    //     title: 'Sizes',
-    //     type: 'array',
-    //     of: [
-    //         {
-    //             type: 'object',
-    //             fields: [
-    //                 {
-    //                     name: "name",
-    //                     title: "Name",
-    //                     type: "string",
-    //                     options: {
-    //                         layout: "dropdown",
-    //                         list: SIZES
-    //                     },
-    //                 },
-    //                 {
-    //                     name: "materials",
-    //                     title: "Materials",
-    //                     type: "array",
-    //                     of: [
-    //                         {
-    //                             type: "object",
-    //                             fields: [
-    //                                 {
-    //                                     name: "color",
-    //                                     title: "Color",
-    //                                     type: "string",
-    //                                     options: {
-    //                                         layout: "dropdown",
-    //                                         list: COLORS
-    //                                     },
-    //                                 },
-    //                                 {
-    //                                     name: "quantity",
-    //                                     title: "Quantity",
-    //                                     type: "number",
-    //                                 },
-    //                                 {
-    //                                     name: 'src',
-    //                                     title: 'Image',
-    //                                     type: 'image',
-    //                                     options: {
-    //                                         hotspot: true,
-    //                                     },
-    //                                 },
-    //                                 {
-    //                                     name: 'thumbnail',
-    //                                     title: 'ThumbnailImage',
-    //                                     type: 'image',
-    //                                     options: {
-    //                                         hotspot: true,
-    //                                     },
-    //                                 },
-    //                                 {
-    //                                     name: 'blurry',
-    //                                     title: 'BlurryImage',
-    //                                     type: 'image',
-    //                                     options: {
-    //                                         hotspot: true,
-    //                                     },
-    //                                 }
-    //                             ]
-    //                         }
-    //                     ],
-    //                 },
-    //                 {
-    //                     name: "quantity",
-    //                     type: "number"
-    //                 }
-    //             ],
-    //         }
-    //     ],
-    //     group: "attribute"
-    // }),
+    defineField({
+      name: 'badges',
+      title: 'Badges of product',
+      type: 'array',
+      of: [
+        {
+          type: 'string',
+          options: {
+            list: BADGES,
+            layout: 'tags',
+          },
+        },
+      ],
+    }),
   ],
   preview: {
     select: {
