@@ -657,7 +657,6 @@ export default function SlugProduct({
             className="relative"
             grabCursor={true}
             navigation={true}
-            loop={true}
             /* centeredSlides={true} */
             speed={500}
             breakpoints={{
