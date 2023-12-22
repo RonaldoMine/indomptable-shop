@@ -306,7 +306,7 @@ export default function SlugProduct({
                         alt={color.name}
                         quality={100}
                         fill={true}
-                        className={"object-contain"}
+                        className={"object-cover aspect-square w-full"}
                       />
                     </div>
                   </RadioGroup.Option>
@@ -693,10 +693,10 @@ export default function SlugProduct({
                         .blur(70)
                         .quality(30)
                         .url()}
-                      height={0}
+                      height={100}
                       width={500}
                       className={
-                        "aspect-[1.1] w-full  object-cover rounded mb-4"
+                        "aspect-[0.9] w-full  object-cover rounded mb-4"
                       }
                     />
                     <div className="py-2 px-2">

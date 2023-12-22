@@ -6,7 +6,7 @@ const SIZES = [
   {title: 'Size M', value: 'M'},
   {title: 'Size L', value: 'L'},
   {title: 'Size XL', value: 'XL'},
-  {title: 'Size XXl', value: 'XXL'},
+  {title: 'Size XXL', value: 'XXL'},
 ]
 const COLORS = [
   {title: 'Color Rouge', value: 'red'},

@@ -63,7 +63,7 @@ export default defineConfig({
   title: 'IndomptableShop',
 
   projectId: '0vvlpszg',
-  dataset: 'development',
+  dataset: 'production',
 
   plugins: [deskTool(), visionTool()],
 
