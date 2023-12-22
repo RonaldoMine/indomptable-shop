@@ -648,7 +648,7 @@ export default function SlugProduct({
           </div>
         </div>
 
-        <div className="p-4">
+        <div className="p-4 max-w-screen-2xl mx-auto">
           <h1 className={"text-xl sm:text-2xl mb-10"}>{t("product-may-like")}</h1>
           <Swiper
             slidesPerView={1.5}
