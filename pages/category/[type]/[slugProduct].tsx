@@ -261,7 +261,7 @@ export default function SlugProduct({
                 return (
                   <Image
                     key={index}
-                    className={`object-cover w-[48%] mb-4 max-w-full h-auto snap-center aspect-square`}
+                    className={`object-cover w-[48%] mb-4 max-w-full h-auto snap-center aspect-[2/3]`}
                     placeholder="blur"
                     // fill={true}
                     width={image.src.metadata.dimensions.width}
