@@ -3,19 +3,17 @@ import { useTranslation } from "next-i18next";
 import Link from "next/link";
 
 export default function OurStory() {
-  const { t } = useTranslation("our-story");
+  const { t } = useTranslation("home");
   return (
     <>
       <div id="our-story" className="dark:bg-neutral-800">
-        <blockquote
-          className={"lg:w-3/6 md:w-4/6 w-full mx-auto text-center"}
-        >
+        <blockquote className={"lg:w-3/6 md:w-4/6 w-full mx-auto text-center"}>
           <h1
             className={
               "text-center text-4xl md:text-6xl font-bold text-gradient-simple"
             }
           >
-            {t("title")}
+            {t("our-story.title")}
           </h1>
           <div className={"relative mt-8"}>
             <svg
@@ -34,7 +32,7 @@ export default function OurStory() {
             </svg>
             <p
               className={"md:text-3xl md:leading-10 text-2xl pt-10 pb-10"}
-              dangerouslySetInnerHTML={{ __html: t("description") }}
+              dangerouslySetInnerHTML={{ __html: t("our-story.description") }}
             />
             <svg
               className="absolute bottom-0 right-[12%] md:right-0 rotate-180 sm:transform sm:translate-x-6 sm:translate-y-8 h-10 w-10 sm:h-16 sm:w-16 text-gray-200 dark:text-neutral-500"
@@ -53,7 +51,7 @@ export default function OurStory() {
           </div>
           <p className={"pt-5 sm:pt-10"}>
             <Link className={"text-orange"} href={"/about"}>
-              {t("read-more")}
+              {t("our-story.read-more")}
             </Link>
           </p>
         </blockquote>

@@ -48,23 +48,18 @@ export default function Home({
             alt="main banner photo"
             className="max-w-full h-auto object-cover"
           />
-          <div className="absolute flex flex-col md:px-[3vw] h-full w-full justify-center items-start">
-            {/* <p className="font-title w-min text-white text-6xl md:text-[6rem] break-words text-left leading-none ">
-              {t("banner-title")}
-            </p> */}
-          </div>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 mt-3 gap-4 mx-3 md:mt-8 md:mx-8 min-[1200px]:mx-0">
+        <div className="grid grid-cols-1 sm:grid-cols-2 mt-3 gap-4 mx-3 md:mt-8 mb-20 md:mx-8 min-[1200px]:mx-0">
           <div className="h-[50vw] max-h-[400px] relative bg-gray-200">
             <div className="absolute left-4 top-2  md:top-4 md:left-6 z-20 text-white">
               <h1 className="font-title text-4xl md:text-6xl mb-2">
-                GIFT IDEAS
+                {t("tiles.long-tile.text")}
               </h1>
               <ButtonGradient
                 onClick={() => router.push("/shopping")}
                 className=""
               >
-                Shop now
+                {t("tiles.long-tile.link")}
               </ButtonGradient>
             </div>
             <Image
@@ -80,10 +75,10 @@ export default function Home({
             <div className="bg-gray-200 max-h-[200px] relative">
               <div className="absolute z-20 text-white bottom-4 left-4">
                 <h1 className="font-title text-2xl md:text-4xl">
-                  Explore what&apos;s new here
+                  {t("tiles.large-tiles.new.text")}
                 </h1>
                 <Link className="underline" href={"/shopping?badge=new"}>
-                  Shop now
+                  {t("tiles.large-tiles.new.link")}
                 </Link>
               </div>
               <Image
@@ -98,7 +93,7 @@ export default function Home({
             <div className="bg-gray-200 relative max-h-[200px]">
               <div className="absolute z-20 text-white bottom-4 left-4">
                 <h1 className="hidden min-[400px]:block font-title text-2xl md:text-4xl mb-2">
-                  JOIN US
+                  {t("tiles.large-tiles.join-us")}
                 </h1>
                 <div className="flex gap-2">
                   <Link
@@ -131,24 +126,6 @@ export default function Home({
         </div>
       </div>
       <div className="max-w-screen-2xl mx-auto">
-        {/* <div className="relative grid sm:grid-cols-2 grid-cols-1">
-          <HomeCardItem
-            title={"WHITE"}
-            typeClass={HomeCardType.left}
-            alt={"White TeeShrit"}
-            src={shirt_white}
-            typeCategory={"t-shirt"}
-            slugProduct={"indomptable-the-mboa"}
-          />
-          <HomeCardItem
-            title={"black"}
-            typeClass={HomeCardType.right}
-            alt={"Black TeeShrit"}
-            src={shirt_black}
-            typeCategory={"t-shirt"}
-            slugProduct={"indomptable-the-hemle"}
-          />
-        </div> */}
         <OurStory />
       </div>
       <Newsletter />
@@ -156,62 +133,6 @@ export default function Home({
         <People peoples={peoples} />
         <Contact />
       </div>
-
-      {/* <Transition appear show={popupVisibility} as={Fragment}>
-        <Dialog
-          as="div"
-          className="relative z-[9999]"
-          onClose={handleClosePopup}
-        >
-          <Transition.Child
-            as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            <div className="fixed inset-0 bg-gray-500 bg-opacity-80"></div>
-          </Transition.Child>
-          <div className="fixed inset-0 overflow-y-auto">
-            <div className="flex min-h-full items-center justify-center p-4 text-center">
-              <Transition.Child
-                as={Fragment}
-                enter="ease-out duration-300"
-                enterFrom="opacity-0 scale-95"
-                enterTo="opacity-100 scale-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
-              >
-                <div className="relative">
-                  <Image
-                    onClick={() => router.push("/shopping")}
-                    src={i18n.language === "fr" ? blackFridayFr : blackFridayEn}
-                    alt={"Black Friday - Banner"}
-                    placeholder="blur"
-                    className={
-                      "lg:max-h-[600px] w-full object-cover"
-                    }
-                  />
-                  <span
-                    onClick={handleClosePopup}
-                    className={
-                      "w-6 h-6 rounded-full bg-opacity-20 bg-red hover:bg-opacity-100 absolute right-2 top-2 flex items-center hover:cursor-pointer"
-                    }
-                  >
-                    <AiOutlineClose
-                      className={"mx-auto text-white"}
-                      size={10}
-                    />
-                  </span>
-                </div>
-              </Transition.Child>
-            </div>
-          </div>
-        </Dialog>
-      </Transition> */}
     </>
   );
 }
@@ -242,7 +163,6 @@ export const getServerSideProps: GetServerSideProps = async ({
         "contact",
         "gallery",
         "newsletter",
-        "our-story",
         "home",
       ])),
     },

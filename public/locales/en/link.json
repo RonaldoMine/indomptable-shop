@@ -3,5 +3,9 @@
   "about": "About Us",
   "policy": "Refund policy",
   "contact": "Contact us",
-  "shop": "Shop"
+  "shop": "Shop",
+  "orange-banner": {
+      "text":"Special offer available",
+      "link": "Shop now"
+    }
 }
