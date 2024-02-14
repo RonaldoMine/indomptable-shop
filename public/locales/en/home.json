@@ -1,3 +1,20 @@
 {
-  "banner-title": "HOLIDAY SPECIAL"
+  "our-story": {
+    "title": "Our Story",
+  "description": "Based in Cameroon, <br/> <b>Indomptable</b> began with a simple idea:<br/> create clothing brand for <br/><b>uncommon thinkers</b> ",
+  "read-more": "Read more"
+},
+  "tiles": {
+    "long-tile": {
+        "text": "Gift ideas",
+        "link":"Shop now"
+    },
+    "large-tiles": {
+    "new": {
+        "text": "Explore what's new here",
+        "link":"Shop now"
+    },
+    "join-us": "Join us"
+    }
+  }
 }

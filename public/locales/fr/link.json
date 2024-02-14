@@ -3,5 +3,9 @@
   "about" : "À propos",
   "policy" : "Politique de remboursement",
   "contact" : "Contactez-nous",
-  "shop": "Boutique"
+  "shop": "Boutique",
+  "orange-banner": {
+      "text":"Offre spéciale disponible",
+      "link": "Achetez maintenant"
+    }
 }

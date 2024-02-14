@@ -22,18 +22,6 @@ export default function Header({ lang }: { lang: string }) {
   const visible = useHeaderVisible();
   const locales_messages = require(`../../public/locales/${lang}/link.json`);
 
-  // const handleGoToAboutUs = () => {
-  //   const contactUs = document.getElementById("contact-us");
-  //   if (contactUs) {
-  //     contactUs.scrollIntoView({ behavior: "smooth", block: "center" });
-  //   } else {
-  //     router.push("/").then(() => {
-  //       const contactUs = document.getElementById("contact-us");
-  //       contactUs?.scrollIntoView({ behavior: "auto", block: "center" });
-  //     });
-  //   }
-  // };
-
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -55,7 +43,6 @@ export default function Header({ lang }: { lang: string }) {
           </div>
           <div className="hidden md:flex gap-8 w-full justify-center sm:mb-0 sm:mt-0">
             <Link
-              // title={locales_messages.shop}
               href="/shopping"
               className={`dark:text-white dark:border-neutral-400 pt-3.5 ${
                 pathname === "/shopping" ? "border-b-2 border-neutral-600" : ""
@@ -64,7 +51,6 @@ export default function Header({ lang }: { lang: string }) {
               {locales_messages.shop}
             </Link>
             <Link
-              // title={locales_messages.gallery}
               href="/gallery"
               className={`dark:text-white dark:border-neutral-400 pt-3.5 ${
                 pathname === "/gallery" ? "border-b-2 border-neutral-600" : ""
@@ -73,7 +59,6 @@ export default function Header({ lang }: { lang: string }) {
               {locales_messages.gallery}
             </Link>
             <Link
-              // title={locales_messages.about}
               href="/about"
               className={`dark:text-white dark:border-neutral-400 pt-3.5 ${
                 pathname === "/about" ? "border-b-2 border-neutral-600" : ""
@@ -158,13 +143,12 @@ export default function Header({ lang }: { lang: string }) {
           </div>
         </div>
       </header>
-      <p
-        className={`p-3 bg-orange text-center text-xs z-50`}
-      >
-        Specail offer available,{" "}
+      <p className={`p-3 bg-orange text-center text-xs z-50`}>
+        {locales_messages["orange-banner"].text},{" "}
         <Link href="/shopping" className="underline">
-          Shop now
+          {locales_messages["orange-banner"].link}
         </Link>
+        .
       </p>
     </>
   );

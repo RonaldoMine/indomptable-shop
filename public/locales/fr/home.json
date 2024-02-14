@@ -1,3 +1,20 @@
 {
-  "banner-title": "SPECIALES FËTES"
+  "our-story": {
+    "title": "Notre Histoire",
+    "description": "Basée au Cameroun, <b>Indomptable</b> est née d'une idée simple :<br/>créer une marque de vêtements pour les<br/><b>personnes d'impact</b> ",
+    "read-more": "En savoir plus"
+},
+  "tiles": {
+    "long-tile": {
+        "text": "Idées de cadeaux",
+        "link":"Achetez maintenant"
+    },
+    "large-tiles": {
+      "new": {
+        "text": "Découvrez les nouveautés",
+        "link":"Achetez maintenant"
+    },
+      "join-us": "Rejoignez nous"
+    }
+  }
 }
