@@ -74,7 +74,7 @@ export default function Footer({ lang }: { lang: string }) {
               </li>
             </ul>
           </div>
-          <div className={"col-span-2 sm:col-span-1"}>@ 2024, Indomptable</div>
+          <div className={"col-span-2 sm:col-span-1"}>@ {new Date().getFullYear()}, Indomptable</div>
         </div>
       </div>
     </footer>
