@@ -13,6 +13,9 @@ export default function Document() {
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
         />
+      <head>
+        <meta name="google-adsense-account" content="ca-pub-3027446474364676" />
+      </head>
       </MainHead>
       <body className={"dark:bg-neutral-800"}>
         <Main />
